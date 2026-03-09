@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leeo — 리이오의 공간</title>
-<meta name="description" data-i18n-content="meta.desc" content="리이오의 서재, 생각, 아카데미, 도구모음. 10년차 iOS 개발자 Leeo와 함께 성장하세요.">
-<meta property="og:title" content="Leeo — 리이오의 공간">
-<meta property="og:description" data-i18n-content="meta.og.desc" content="서재 · 생각 · 아카데미 · 도구모음 — 리이오와 함께 배우고 성장합니다.">
+<title>리이오의 연습장</title>
+<meta name="description" data-i18n-content="meta.desc" content="리이오의 연습장 — 배우고 기록하고 나누는 공간. iOS 개발자 Leeo의 서재, 생각, 아카데미, 도구모음.">
+<meta property="og:title" content="리이오의 연습장">
+<meta property="og:description" data-i18n-content="meta.og.desc" content="배우면 기록하고, 기록하면 나눕니다. 서재 · 생각 · 아카데미 · 도구모음.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -117,6 +117,24 @@
   .btn--primary:hover { background: #e0b564; transform: translateY(-2px); }
   .btn--outline { border: 1px solid var(--border); color: var(--text-secondary); }
   .btn--outline:hover { border-color: var(--accent-gold); color: var(--text-primary); }
+
+  /* ===== SECTION NAV ===== */
+  .section-nav { padding: 5rem 0; }
+  .section-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .section-nav-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+    padding: 2rem 1.5rem; text-decoration: none; color: inherit;
+    transition: all 0.3s ease; display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .section-nav-card:hover { background: var(--bg-card-hover); border-color: var(--accent-gold); transform: translateY(-6px); }
+  .section-nav-icon { font-size: 2rem; }
+  .section-nav-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+  .section-nav-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+  .section-nav-desc { font-size: 0.78rem; color: var(--text-secondary); font-weight: 300; line-height: 1.5; flex: 1; }
+  .section-nav-arrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem; }
+  .section-nav-card:hover .section-nav-arrow { color: var(--accent-gold); }
+  @media (max-width: 768px) { .section-nav-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .section-nav-grid { grid-template-columns: 1fr; } }
 
   /* ===== NUMBERS ===== */
   .numbers { padding: 4rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -263,7 +281,7 @@
 <!-- NAV -->
 <nav>
   <div class="container">
-    <a href="#" class="nav-logo">Leeo</a>
+    <a href="#" class="nav-logo">리이오의 연습장</a>
     <div style="display:flex;align-items:center;gap:1.5rem;">
       <div class="nav-links">
         <a href="#library" data-i18n="nav.library">서재</a>
@@ -281,15 +299,22 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-content">
-    <p class="hero-label">iOS Developer · Educator · Community Builder</p>
-    <h1 class="hero-name"><span>Leeo</span></h1>
+    <p class="hero-label">iOS Developer · Educator · Builder</p>
+    <h1 class="hero-name"><span data-i18n="hero.title">리이오의 연습장</span></h1>
     <p class="hero-desc" data-i18n-html="hero.desc">
-      앱을 만들고, 가르치고, 함께 성장합니다.<br>
-      10년간 쌓은 iOS 개발 경험을 서재, 강의, 도구로 나누는 1인 개발자입니다.
+      배우면 기록하고, 기록하면 나눕니다.<br>
+      이 공간은 10년의 개발 경험을 정리하며<br>
+      다음 사람의 길을 조금 쉽게 만들려는 연습장입니다.
     </p>
+    <div class="hero-philosophy" style="margin-top:2rem;padding:1.5rem 2rem;border-left:3px solid var(--accent-gold);background:var(--bg-card);border-radius:0 12px 12px 0;max-width:580px;opacity:0;animation:fadeUp 0.8s ease forwards 0.9s;">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--text-secondary);line-height:1.7;" data-i18n-html="hero.quote">
+        "완성된 것을 보여주는 것보다,<br>
+        만들어가는 과정을 나누는 것이 더 솔직한 배움이라고 믿습니다."
+      </p>
+    </div>
     <div class="hero-cta">
-      <a href="https://www.youtube.com/@Leeo25" target="_blank" class="btn btn--primary" data-i18n="hero.cta.youtube">YouTube 개발자리 →</a>
-      <a href="mailto:leeo@kakao.com" class="btn btn--outline">leeo@kakao.com</a>
+      <a href="#library" class="btn btn--primary" data-i18n="hero.cta.explore">서재 둘러보기 →</a>
+      <a href="https://www.youtube.com/@Leeo25" target="_blank" class="btn btn--outline" data-i18n="hero.cta.youtube">YouTube 개발자리</a>
     </div>
   </div>
 </section>
@@ -302,6 +327,42 @@
       <div><div class="number-item-value">20+</div><div class="number-item-label">Apps on Store</div></div>
       <div><div class="number-item-value">15+</div><div class="number-item-label">Conference Talks</div></div>
       <div><div class="number-item-value">8K+</div><div class="number-item-label">Students</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION NAV ===== -->
+<section class="section-nav animate-on-scroll">
+  <div class="container">
+    <div class="section-nav-grid">
+      <a class="section-nav-card" href="#library">
+        <div class="section-nav-icon">📚</div>
+        <div class="section-nav-label">Library</div>
+        <div class="section-nav-title" data-i18n="nav.library.title">리이오의 서재</div>
+        <div class="section-nav-desc" data-i18n="nav.library.desc">직접 쓰고 만든 가이드, 레퍼런스, 블로그, 그리고 책들.</div>
+        <div class="section-nav-arrow">↓ 서재 가기</div>
+      </a>
+      <a class="section-nav-card" href="#thoughts">
+        <div class="section-nav-icon">💬</div>
+        <div class="section-nav-label">Thoughts</div>
+        <div class="section-nav-title" data-i18n="nav.thoughts.title">리이오의 생각</div>
+        <div class="section-nav-desc" data-i18n="nav.thoughts.desc">컨퍼런스 발표, 강연, 생각의 기록들.</div>
+        <div class="section-nav-arrow">↓ 생각 보기</div>
+      </a>
+      <a class="section-nav-card" href="#academy">
+        <div class="section-nav-icon">🎓</div>
+        <div class="section-nav-label">Academy</div>
+        <div class="section-nav-title" data-i18n="nav.academy.title">리이오 아카데미</div>
+        <div class="section-nav-desc" data-i18n="nav.academy.desc">인프런, 패스트캠퍼스, YouTube 강의 전체 목록.</div>
+        <div class="section-nav-arrow">↓ 강의 보기</div>
+      </a>
+      <a class="section-nav-card" href="#tools">
+        <div class="section-nav-icon">🛠️</div>
+        <div class="section-nav-label">Toolkit</div>
+        <div class="section-nav-title" data-i18n="nav.tools.title">리이오의 도구모음</div>
+        <div class="section-nav-desc" data-i18n="nav.tools.desc">직접 만든 웹 도구, iOS 앱, macOS 앱들.</div>
+        <div class="section-nav-arrow">↓ 도구 보기</div>
+      </a>
     </div>
   </div>
 </section>
@@ -693,11 +754,18 @@
 <script>
   const TRANSLATIONS = {
     ko: {
-      'meta.desc': '리이오의 서재, 생각, 아카데미, 도구모음. 10년차 iOS 개발자 Leeo와 함께 성장하세요.',
-      'meta.og.desc': '서재 · 생각 · 아카데미 · 도구모음 — 리이오와 함께 배우고 성장합니다.',
-      'hero.desc': '앱을 만들고, 가르치고, 함께 성장합니다.<br>10년간 쌓은 iOS 개발 경험을 서재, 강의, 도구로 나누는 1인 개발자입니다.',
-      'hero.cta.youtube': 'YouTube 개발자리 →',
+      'meta.desc': '리이오의 연습장 — 배우고 기록하고 나누는 공간. iOS 개발자 Leeo의 서재, 생각, 아카데미, 도구모음.',
+      'meta.og.desc': '배우면 기록하고, 기록하면 나눕니다. 서재 · 생각 · 아카데미 · 도구모음.',
+      'hero.title': '리이오의 연습장',
+      'hero.desc': '배우면 기록하고, 기록하면 나눕니다.<br>이 공간은 10년의 개발 경험을 정리하며<br>다음 사람의 길을 조금 쉽게 만들려는 연습장입니다.',
+      'hero.quote': '"완성된 것을 보여주는 것보다,<br>만들어가는 과정을 나누는 것이 더 솔직한 배움이라고 믿습니다."',
+      'hero.cta.explore': '서재 둘러보기 →',
+      'hero.cta.youtube': 'YouTube 개발자리',
       'nav.library': '서재', 'nav.thoughts': '생각', 'nav.academy': '아카데미', 'nav.tools': '도구모음', 'nav.contact': 'Contact',
+      'nav.library.title': '리이오의 서재', 'nav.library.desc': '직접 쓰고 만든 가이드, 레퍼런스, 블로그, 그리고 책들.',
+      'nav.thoughts.title': '리이오의 생각', 'nav.thoughts.desc': '컨퍼런스 발표, 강연, 생각의 기록들.',
+      'nav.academy.title': '리이오 아카데미', 'nav.academy.desc': '인프런, 패스트캠퍼스, YouTube 강의 전체 목록.',
+      'nav.tools.title': '리이오의 도구모음', 'nav.tools.desc': '직접 만든 웹 도구, iOS 앱, macOS 앱들.',
       'library.label': 'Library', 'library.title': '리이오의 서재',
       'library.desc': '직접 쓰고 만든 가이드, 레퍼런스, 그리고 생각을 담은 글들입니다.',
       'library.guides': '가이드 & 레퍼런스', 'library.blog': '블로그', 'library.books': 'Books',
@@ -731,11 +799,18 @@
       'support.desc': '콘텐츠가 도움이 됐다면 커피 한 잔으로 응원해 주세요!',
     },
     en: {
-      'meta.desc': "Leeo's Library, Thoughts, Academy, and Toolkit. Grow together with 10-year iOS developer Leeo.",
-      'meta.og.desc': 'Library · Thoughts · Academy · Toolkit — Learn and grow with Leeo.',
-      'hero.desc': 'Building apps, teaching, and growing together.<br>A solo developer sharing 10 years of iOS experience through a library, courses, and tools.',
-      'hero.cta.youtube': 'YouTube Channel →',
+      'meta.desc': "Leeo's Practice Notebook — a space to learn, record, and share. Library, Thoughts, Academy, and Toolkit by iOS developer Leeo.",
+      'meta.og.desc': 'Learn. Record. Share. Library · Thoughts · Academy · Toolkit.',
+      'hero.title': "Leeo's Practice Notebook",
+      'hero.desc': 'Learn. Record. Share.<br>A practice notebook for organizing 10 years of iOS experience<br>to make the next person\'s journey a little easier.',
+      'hero.quote': '"I believe sharing the process of building is a more honest form of learning than showcasing a finished product."',
+      'hero.cta.explore': 'Explore the Library →',
+      'hero.cta.youtube': 'YouTube Channel',
       'nav.library': 'Library', 'nav.thoughts': 'Thoughts', 'nav.academy': 'Academy', 'nav.tools': 'Toolkit', 'nav.contact': 'Contact',
+      'nav.library.title': "Leeo's Library", 'nav.library.desc': 'Guides, references, blog posts, and books — written and built by Leeo.',
+      'nav.thoughts.title': "Leeo's Thoughts", 'nav.thoughts.desc': 'Conference talks, keynotes, and recorded thinking.',
+      'nav.academy.title': "Leeo's Academy", 'nav.academy.desc': 'Full course list on Inflearn, Fastcampus, and YouTube.',
+      'nav.tools.title': "Leeo's Toolkit", 'nav.tools.desc': 'Web tools, iOS apps, and macOS apps built from scratch.',
       'library.label': 'Library', 'library.title': "Leeo's Library",
       'library.desc': 'Guides, references, and blog posts — written and built by Leeo.',
       'library.guides': 'Guides & References', 'library.blog': 'Blog', 'library.books': 'Books',
