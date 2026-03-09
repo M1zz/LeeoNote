@@ -1,0 +1,205 @@
+{
+  "webProjects": [
+    {
+      "id": "claude-code-101",
+      "name": "Claude Code 101 — 완전 입문 가이드",
+      "url": "https://m1zz.github.io/ClaudeCode101/",
+      "type": "featured",
+      "badge": "Open Guide · 11 Modules",
+      "badgeColor": "purple",
+      "gradient": "135deg,#a78bfa,#7c3aed",
+      "featuredLabel": "Claude Code\n101",
+      "desc": "비개발자도 따라할 수 있는 Claude Code 한국어 입문서. 터미널 기초부터 실전 앱 제작까지 16~22시간 커리큘럼.",
+      "hint": "가이드 사이트 바로가기"
+    },
+    {
+      "id": "hig-lab",
+      "name": "HIGLab",
+      "url": "https://m1zz.github.io/HIGLab/",
+      "type": "row",
+      "badge": "Learning Lab · 50 Frameworks",
+      "badgeColor": "blue",
+      "gradient": "135deg,#4a9eff,#2563eb",
+      "icon": "🔬",
+      "desc": "Apple 핵심 프레임워크 50개를 코드로 실습하는 학습 플랫폼. 블로그 튜토리얼 + DocC 문서 + 샘플 프로젝트.",
+      "hint": "HIGLab 바로가기"
+    },
+    {
+      "id": "apple-platform-guide",
+      "name": "Apple 유니버셜 앱 확장 전략",
+      "url": "https://m1zz.github.io/apple-platform-guide/",
+      "type": "row",
+      "badge": "Guide · Apple Platform",
+      "badgeColor": "red",
+      "gradient": "135deg,#fb923c,#ea580c",
+      "icon": "🍎",
+      "desc": "Apple 플랫폼 확장 전략 가이드. iOS 앱을 macOS, iPadOS, visionOS로 확장하는 방법과 유니버셜 앱 개발 전략을 다룬다.",
+      "hint": "가이드 바로가기"
+    },
+    {
+      "id": "apple-component-gallery",
+      "name": "Apple Component Gallery",
+      "url": "https://m1zz.github.io/apple-component-gallery/",
+      "type": "row",
+      "badge": "Reference · SwiftUI · UIKit",
+      "badgeColor": "blue",
+      "gradient": "135deg,#60a5fa,#2563eb",
+      "icon": "🧩",
+      "desc": "SwiftUI와 UIKit의 UI 컴포넌트를 한눈에 탐색하는 레퍼런스 갤러리. Apple 플랫폼 앱 개발 시 표준 컴포넌트를 빠르게 검색하고 학습.",
+      "hint": "갤러리 바로가기"
+    },
+    {
+      "id": "mentee-quiz",
+      "name": "학습 유형 진단",
+      "url": "https://mentee-quiz-app.vercel.app",
+      "type": "row",
+      "badge": "Diagnostic Tool · 32 Types",
+      "badgeColor": "green",
+      "gradient": "135deg,#34d399,#059669",
+      "icon": "🧬",
+      "desc": "15개 질문, 5가지 차원으로 32가지 학습 유형을 진단. 멘티 맞춤 학습 전략과 멘토 지도 가이드 제공.",
+      "hint": "진단 시작하기"
+    },
+    {
+      "id": "ai-privacy-risk-scanner",
+      "name": "AI Privacy Risk Scanner",
+      "url": "https://m1zz.github.io/ai-privacy-risk-scanner/",
+      "type": "row",
+      "badge": "Privacy · AI Risk",
+      "badgeColor": "red",
+      "gradient": "135deg,#f87171,#dc2626",
+      "icon": "🔐",
+      "desc": "AI 자동화로 인한 개인정보 위험 요소를 자동 진단. 데이터 보안 취약점과 개인정보 보호 이슈를 스캔하고 분석.",
+      "hint": "스캐너 바로가기"
+    },
+    {
+      "id": "industry-explorer",
+      "name": "Industry Explorer",
+      "url": "https://m1zz.github.io/industry-explorer/",
+      "type": "row",
+      "badge": "Interactive · 13 Industries",
+      "badgeColor": "purple",
+      "gradient": "135deg,#a78bfa,#7c3aed",
+      "icon": "🗺️",
+      "desc": "한국 산업 생태계에서 고객 문제와 솔루션의 관계를 인터랙티브하게 탐색. 13개 산업군을 순방향/역방향 트리와 네트워크 그래프로 시각화.",
+      "hint": "탐색기 바로가기"
+    },
+    {
+      "id": "cs-visualizer",
+      "name": "CS Visualizer",
+      "url": "https://m1zz.github.io/cs-visualizer/",
+      "type": "row",
+      "badge": "Education · 14 Chapters",
+      "badgeColor": "blue",
+      "gradient": "135deg,#4a9eff,#2563eb",
+      "icon": "💻",
+      "desc": "이진수부터 고급 알고리즘까지 — 컴퓨터 공학 핵심 개념을 인터랙티브 시각화로 체험. 전공 배경 없이도 접근 가능한 14개 챕터.",
+      "hint": "CS 시각화 바로가기"
+    }
+  ],
+
+  "iosApps": [
+    {
+      "id": "clip-keyboard",
+      "name": "ClipKeyboard",
+      "appStoreId": "1543660502",
+      "appStoreURL": "https://apps.apple.com/us/app/clip-keyboard-quick-phrases/id1543660502",
+      "landingURL": "https://m1zz.github.io/ClipKeyboard/",
+      "version": "4.0",
+      "badge": "Productivity · v4.0",
+      "badgeColor": "blue",
+      "desc": "자주 쓰는 문구를 키보드에서 바로 입력. 커스텀 키보드 익스텐션으로 어디서든 빠르게 붙여넣기.",
+      "pricing": {
+        "download": "무료",
+        "lifetime": "₩14,000"
+      },
+      "languages": ["ko", "en"],
+      "platforms": ["iOS"]
+    },
+    {
+      "id": "rereminder",
+      "name": "Rereminder",
+      "appStoreId": "6752551268",
+      "appStoreURL": "https://apps.apple.com/us/app/rereminder/id6752551268",
+      "landingURL": "https://m1zz.github.io/Rereminder/",
+      "version": "2.0",
+      "badge": "Timer · v2.0 · iOS & Apple Watch",
+      "badgeColor": "purple",
+      "desc": "타이머 끝나기 전에 미리 알림. 10분, 5분, 1분 전 프리얼럿 + 초과시간 추적 + Dynamic Island + Apple Watch 연동.",
+      "pricing": {
+        "download": "무료",
+        "lifetime": "₩14,000"
+      },
+      "languages": ["ko", "en"],
+      "platforms": ["iOS", "watchOS"]
+    },
+    {
+      "id": "leave-wise",
+      "name": "LeaveWise",
+      "appStoreId": "6755983135",
+      "appStoreURL": "https://apps.apple.com/app/id6755983135",
+      "landingURL": "https://m1zz.github.io/LeaveWise/",
+      "version": "2.0",
+      "badge": "Lifestyle · v2.0",
+      "badgeColor": "gold",
+      "desc": "스마트 연차 관리. AI 황금연휴 추천, 반차/반반차 관리, 보너스 연차, 홈 위젯, iCloud 백업. 한/영/일/중 4개국 지원.",
+      "pricing": {
+        "download": "무료",
+        "lifetime": "₩6,600"
+      },
+      "languages": ["ko", "en", "ja", "zh-Hans"],
+      "platforms": ["iOS"]
+    },
+    {
+      "id": "pixel-meme",
+      "name": "Pixel MeMe",
+      "appStoreId": "6449769987",
+      "appStoreURL": "https://apps.apple.com/app/id6449769987",
+      "landingURL": "https://m1zz.github.io/PixelMe/",
+      "version": "2.0",
+      "badge": "Creative · v2.0",
+      "badgeColor": "red",
+      "desc": "사진을 픽셀 아트로 변환. 9가지 레트로 팔레트, AI 디더링, CRT 필터, GIF 애니메이션, 레이어 시스템.",
+      "pricing": {
+        "download": "무료",
+        "monthly": "₩6,600",
+        "yearly": "₩44,000",
+        "lifetime": "₩66,000"
+      },
+      "languages": ["ko", "en"],
+      "platforms": ["iOS"]
+    },
+    {
+      "id": "klosed",
+      "name": "Klosed",
+      "appStoreId": "6450387984",
+      "appStoreURL": "https://apps.apple.com/us/app/klosed/id6450387984",
+      "landingURL": "https://m1zz.github.io/Klosed/",
+      "version": "2.0",
+      "badge": "Utility · v2.0",
+      "badgeColor": "green",
+      "desc": "대형마트 휴무일 알리미. 이마트, 코스트코, 홈플러스, 트레이더스 휴무일을 위젯과 D-Day 알림으로 확인.",
+      "pricing": {
+        "download": "무료",
+        "lifetime": "₩6,600"
+      },
+      "languages": ["ko", "en"],
+      "platforms": ["iOS"]
+    }
+  ],
+
+  "macosApps": [
+    {
+      "id": "sprint-commander",
+      "name": "Sprint Commander — 스프린트 관리 앱",
+      "type": "featured",
+      "githubURL": "https://github.com/M1zz/SprintCommander",
+      "badge": "macOS Native · SwiftUI · CloudKit",
+      "badgeColor": "blue",
+      "gradient": "135deg,#4a9eff,#1e40af",
+      "featuredLabel": "Sprint\nCommander",
+      "desc": "칸반 보드, 간트 차트 타임라인, 번다운 차트를 한 화면에서. 프로젝트 소스 자동 스캔, CloudKit 동기화, Claude Code 연동으로 AI 백로그 자동 생성.",
+      "hint": "GitHub에서 보기"
+    }
+  ]
+}
