@@ -255,6 +255,37 @@
   footer { padding: 2rem 0; border-top: 1px solid var(--border); text-align: center; }
   .footer-copy { font-size: 0.75rem; color: var(--text-dim); }
 
+  /* ===== BOOKS ===== */
+  .book-mini-label {
+    font-size: 0.78rem; font-weight: 600; color: var(--text-secondary);
+    margin: 2.5rem 0 0.9rem; display: flex; align-items: center; gap: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+  .book-mini-label:first-child { margin-top: 0; }
+
+  .book-spine {
+    flex-shrink: 0; width: 8px; align-self: stretch; border-radius: 4px 0 0 4px;
+  }
+  .card.card--book { padding-left: 1.25rem; }
+
+  .reading-cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem;
+  }
+  .reading-cat-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1rem 1.25rem; transition: border-color 0.2s;
+  }
+  .reading-cat-card:hover { border-color: var(--border-hover); }
+  .reading-cat-title {
+    font-size: 0.72rem; font-weight: 700; color: var(--text-secondary);
+    margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.35rem;
+  }
+  .reading-cat-book {
+    font-size: 0.73rem; color: var(--text-secondary); padding: 0.18rem 0;
+    display: flex; align-items: flex-start; gap: 0.35rem; line-height: 1.4;
+  }
+  .reading-cat-book .tag { font-size: 0.65rem; flex-shrink: 0; margin-top: 0.05rem; }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -412,29 +443,169 @@
     </div>
 
     <h3 class="subsection-title" style="margin-top:3.5rem;" data-i18n="library.books">Books</h3>
+
+    <!-- 리이오가 쓴 책 -->
+    <p class="book-mini-label">✍️ 리이오가 쓴 책</p>
     <div class="card-grid">
-      <a class="card card--row" href="https://www.inflearn.com/clip/736/주니어-개발자가-해봐야-할-100가지-실수" target="_blank">
-        <div class="card-visual" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);border:none;">
+      <a class="card card--row card--book" href="https://www.inflearn.com/clip/736/주니어-개발자가-해봐야-할-100가지-실수" target="_blank" style="padding-left:0;overflow:hidden;">
+        <div class="book-spine" style="background:linear-gradient(180deg,#a78bfa,#7c3aed);"></div>
+        <div style="display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.25rem 1.25rem 1rem;flex:1;">
+          <div class="card-visual" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);border:none;flex-shrink:0;">
+            <span style="font-size:1.5rem;">📕</span>
+          </div>
+          <div class="card-info">
+            <span class="card-badge badge--purple">Book · 100 Items</span>
+            <h3 class="card-title">주니어 개발자가 해봐야 할 100가지 실수</h3>
+            <p class="card-desc">"실수를 하지 마세요"가 아닌 "이 실수를 꼭 해보세요". 10개 카테고리, 400개 회고 질문으로 성장하는 실전 가이드.</p>
+            <div class="card-hint">&rarr; 책 보기</div>
+          </div>
+        </div>
+      </a>
+      <a class="card card--row card--book" href="https://www.inflearn.com/clip/732/stash-그만-하세요-ai-시대의-브랜치-관리법이-바뀌었습니다" target="_blank" style="padding-left:0;overflow:hidden;">
+        <div class="book-spine" style="background:linear-gradient(180deg,#4a9eff,#2563eb);"></div>
+        <div style="display:flex;align-items:flex-start;gap:1rem;padding:1.25rem 1.25rem 1.25rem 1rem;flex:1;">
+          <div class="card-visual" style="background:linear-gradient(135deg,#4a9eff,#2563eb);border:none;flex-shrink:0;">
+            <span style="font-size:1.5rem;">📘</span>
+          </div>
+          <div class="card-info">
+            <span class="card-badge badge--blue">Book · ₩990</span>
+            <h3 class="card-title">stash 그만 하세요 — AI 시대의 브랜치 관리법</h3>
+            <p class="card-desc">Git Worktree + Claude Code --worktree로 솔로 개발자도 병렬 협업. 실전 시나리오 5가지, 셸 자동화 함수, 치트시트 포함.</p>
+            <div class="card-hint">&rarr; 책 보기</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 추천하는 책 -->
+    <p class="book-mini-label">⭐ 추천하는 책</p>
+    <div class="card-grid">
+      <a class="card card--row" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=175977462" target="_blank">
+        <div class="card-visual" style="background:linear-gradient(135deg,#34d399,#059669);border:none;">
+          <span style="font-size:1.5rem;">📗</span>
+        </div>
+        <div class="card-info">
+          <span class="card-badge badge--green">학습</span>
+          <h3 class="card-title">함께 자라기</h3>
+          <p class="card-desc">개인의 성장과 집단의 성장은 어떻게 해야 할까? 애자일로 가는 길.</p>
+          <div class="card-hint">&rarr; 알라딘에서 보기</div>
+        </div>
+      </a>
+      <a class="card card--row" href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=86321510" target="_blank">
+        <div class="card-visual" style="background:linear-gradient(135deg,#4a9eff,#2563eb);border:none;">
+          <span style="font-size:1.5rem;">📘</span>
+        </div>
+        <div class="card-info">
+          <span class="card-badge badge--blue">학습</span>
+          <h3 class="card-title">1만 시간의 재발견</h3>
+          <p class="card-desc">인간의 능력은 선천적으로 타고나지 않는다면, 그 근거는 무엇이고 어떻게 발달시킬 수 있을까?</p>
+          <div class="card-hint">&rarr; 알라딘에서 보기</div>
+        </div>
+      </a>
+      <a class="card card--row" href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchWord=완벽한+공부법" target="_blank">
+        <div class="card-visual" style="background:linear-gradient(135deg,#fbbf24,#d97706);border:none;">
+          <span style="font-size:1.5rem;">📙</span>
+        </div>
+        <div class="card-info">
+          <span class="card-badge badge--gold">학습</span>
+          <h3 class="card-title">완벽한 공부법</h3>
+          <p class="card-desc">공부를 잘하려면 어떤 능력들이 필요할까?</p>
+          <div class="card-hint">&rarr; 알라딘에서 보기</div>
+        </div>
+      </a>
+      <a class="card card--row" href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchWord=마음가면+브레네+브라운" target="_blank">
+        <div class="card-visual" style="background:linear-gradient(135deg,#c084fc,#7c3aed);border:none;">
+          <span style="font-size:1.5rem;">📔</span>
+        </div>
+        <div class="card-info">
+          <span class="card-badge badge--purple">마음</span>
+          <h3 class="card-title">마음가면</h3>
+          <p class="card-desc">사람은 언제 취약해지고, 어떻게 강해질 수 있을까?</p>
+          <div class="card-hint">&rarr; 알라딘에서 보기</div>
+        </div>
+      </a>
+      <a class="card card--row" href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchWord=마인드셋+캐럴+드웩" target="_blank">
+        <div class="card-visual" style="background:linear-gradient(135deg,#f87171,#dc2626);border:none;">
           <span style="font-size:1.5rem;">📕</span>
         </div>
         <div class="card-info">
-          <span class="card-badge badge--purple">Book · 100 Items</span>
-          <h3 class="card-title">주니어 개발자가 해봐야 할 100가지 실수</h3>
-          <p class="card-desc">"실수를 하지 마세요"가 아닌 "이 실수를 꼭 해보세요". 10개 카테고리, 400개 회고 질문으로 성장하는 실전 가이드.</p>
-          <div class="card-hint">&rarr; 책 보기</div>
+          <span class="card-badge badge--red">마음</span>
+          <h3 class="card-title">마인드셋</h3>
+          <p class="card-desc">사람은 어떤 태도로 실패를 바라볼 수 있을까?</p>
+          <div class="card-hint">&rarr; 알라딘에서 보기</div>
         </div>
       </a>
-      <a class="card card--row" href="https://www.inflearn.com/clip/732/stash-그만-하세요-ai-시대의-브랜치-관리법이-바뀌었습니다" target="_blank">
-        <div class="card-visual" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);border:none;">
-          <span style="font-size:1.5rem;">📕</span>
-        </div>
-        <div class="card-info">
-          <span class="card-badge badge--purple">Book · ₩990</span>
-          <h3 class="card-title">stash 그만 하세요 — AI 시대의 브랜치 관리법</h3>
-          <p class="card-desc">Git Worktree + Claude Code --worktree로 솔로 개발자도 병렬 협업. 실전 시나리오 5가지, 셸 자동화 함수, 치트시트 포함.</p>
-          <div class="card-hint">&rarr; 책 보기</div>
-        </div>
-      </a>
+    </div>
+
+    <!-- 학습 리스트 -->
+    <p class="book-mini-label">📋 학습 리스트 <span style="font-size:0.68rem;color:var(--text-dim);font-weight:400;">✅ 완독 &nbsp;⭐ 추천</span></p>
+    <div class="reading-cat-grid">
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">📚 배우고 가르치기</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>함께 자라기</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>1만 시간의 재발견</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>탤런트 코드</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>실용주의 사고와 학습</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>침묵으로 가르치기</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>학습은 어떻게 이루어지나</div>
+        <div class="reading-cat-book"><span class="tag">  </span>어떻게 공부할 것인가</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">💼 코칭 &amp; 컨설팅</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>완벽한 컨설팅</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>성과향상을 위한 코칭 리더십</div>
+        <div class="reading-cat-book"><span class="tag">  </span>컨설팅의 비밀</div>
+        <div class="reading-cat-book"><span class="tag">  </span>조직 변화의 긍정 혁명</div>
+        <div class="reading-cat-book"><span class="tag">  </span>해결중심 단기코칭</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">🎯 대화와 설득</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>우리는 어떻게 마음을 움직이는가</div>
+        <div class="reading-cat-book"><span class="tag">  </span>설득의 심리학</div>
+        <div class="reading-cat-book"><span class="tag">  </span>결정적 순간의 대화</div>
+        <div class="reading-cat-book"><span class="tag">  </span>불의 화법</div>
+        <div class="reading-cat-book"><span class="tag">  </span>대화의 심리학</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">🔄 변화 만들기</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>인플루엔서</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>넛지</div>
+        <div class="reading-cat-book"><span class="tag">✅</span>긍정적 이탈</div>
+        <div class="reading-cat-book"><span class="tag">  </span>스위치</div>
+        <div class="reading-cat-book"><span class="tag">  </span>습관의 힘</div>
+        <div class="reading-cat-book"><span class="tag">  </span>의지력의 재발견</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">🧠 의사결정 &amp; 직관</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>이기는 결정의 제1원칙</div>
+        <div class="reading-cat-book"><span class="tag">  </span>제7의 감각</div>
+        <div class="reading-cat-book"><span class="tag">  </span>증거경영</div>
+        <div class="reading-cat-book"><span class="tag">  </span>헤일로 이펙트</div>
+        <div class="reading-cat-book"><span class="tag">  </span>대체 뭐가 문제야</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">🌱 사람 이해하기</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>성격의 탄생</div>
+        <div class="reading-cat-book"><span class="tag">⭐</span>전진의 법칙</div>
+        <div class="reading-cat-book"><span class="tag">  </span>존 가트맨의 서적들</div>
+        <div class="reading-cat-book"><span class="tag">  </span>사티어 모델</div>
+        <div class="reading-cat-book"><span class="tag">  </span>강점이 독이 되는 리더십 함정</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">🤝 애자일 &amp; 팀</div>
+        <div class="reading-cat-book"><span class="tag">  </span>익스트림 프로그래밍</div>
+        <div class="reading-cat-book"><span class="tag">  </span>스크럼과 XP</div>
+        <div class="reading-cat-book"><span class="tag">  </span>티밍</div>
+        <div class="reading-cat-book"><span class="tag">  </span>성공적인 팀의 5가지 조건</div>
+        <div class="reading-cat-book"><span class="tag">  </span>안티프래질</div>
+      </div>
+      <div class="reading-cat-card">
+        <div class="reading-cat-title">📊 성과 &amp; 조직</div>
+        <div class="reading-cat-book"><span class="tag">  </span>성과주의의 혁신</div>
+        <div class="reading-cat-book"><span class="tag">  </span>회사를 살리는 성과경영</div>
+        <div class="reading-cat-book"><span class="tag">  </span>당신이 회사에서 보지 못하는 90%의 진실</div>
+        <div class="reading-cat-book"><span class="tag">  </span>영속 성장 기업의 비밀 6</div>
+      </div>
     </div>
   </div>
 </section>
@@ -752,7 +923,7 @@
       'nav.tools.title': '리이오의 도구모음', 'nav.tools.desc': '직접 만든 웹 도구, iOS 앱, macOS 앱들.',
       'library.label': 'Library', 'library.title': '리이오의 서재',
       'library.desc': '직접 쓰고 만든 가이드, 레퍼런스, 그리고 생각을 담은 글들입니다.',
-      'library.guides': '가이드 & 레퍼런스', 'library.blog': '블로그', 'library.books': 'Books',
+      'library.guides': '가이드 & 레퍼런스', 'library.blog': '블로그', 'library.books': '📚 Books',
       'library.viewAll': '블로그 전체 글 보기 →',
       'thoughts.label': 'Thoughts', 'thoughts.title': '리이오의 생각',
       'thoughts.desc': 'SyncSwift, adiOS, let us: Go!, 데이터야놀자 등 다양한 컨퍼런스에서 발표한 생각들입니다.',
@@ -797,7 +968,7 @@
       'nav.tools.title': "Leeo's Toolkit", 'nav.tools.desc': 'Web tools, iOS apps, and macOS apps built from scratch.',
       'library.label': 'Library', 'library.title': "Leeo's Library",
       'library.desc': 'Guides, references, and blog posts — written and built by Leeo.',
-      'library.guides': 'Guides & References', 'library.blog': 'Blog', 'library.books': 'Books',
+      'library.guides': 'Guides & References', 'library.blog': 'Blog', 'library.books': '📚 Books',
       'library.viewAll': 'View All Posts →',
       'thoughts.label': 'Thoughts', 'thoughts.title': "Leeo's Thoughts",
       'thoughts.desc': 'Talks at SyncSwift, adiOS, let us: Go!, Data Play, and more.',
