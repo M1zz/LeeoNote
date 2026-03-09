@@ -100,9 +100,24 @@ const APPS_DATA = {
       "descEn": "A hands-on learning platform for iOS app architecture patterns. Compare MVC, MVVM, TCA, and more through working code examples.",
       "hint": "iOSArchLab 바로가기",
       "hintEn": "Open iOSArchLab"
-    }
+    },
   ],
   "toolProjects": [
+    {
+      "id": "tech-interview-app",
+      "name": "기술 면접 트레이너",
+      "nameEn": "Tech Interview Trainer",
+      "url": "https://m1zz.github.io/tech-interview-app",
+      "type": "row",
+      "badge": "Interview · 100 Questions",
+      "badgeColor": "green",
+      "gradient": "135deg,#34d399,#059669",
+      "icon": "🎯",
+      "desc": "알고리즘, DB, 네트워크, OS, OOP, 시스템 설계까지 — 100가지 기술 면접 질문을 5단계 능동 학습으로 훈련.",
+      "descEn": "Train for technical interviews with 100 questions across algorithms, databases, networking, OS, OOP, and system design — using a 5-step active learning method.",
+      "hint": "면접 훈련 시작하기",
+      "hintEn": "Start Training"
+    },
     {
       "id": "mentee-quiz",
       "name": "학습 유형 진단",
