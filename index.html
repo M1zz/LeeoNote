@@ -168,6 +168,13 @@
   .paradigm-side.before .paradigm-flow { color: #8A7070; }
   .paradigm-side.after  .paradigm-flow { color: #7A9A85; }
   .paradigm-desc { font-size: 0.75rem; color: var(--muted); }
+  .paradigm-detail {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+    opacity: 0; margin-top: 0;
+  }
+  .paradigm-side:hover .paradigm-detail { max-height: 80px; opacity: 1; margin-top: 0.6rem; }
+  .paradigm-detail-text { font-size: 0.72rem; color: var(--muted); line-height: 1.6; font-style: italic; }
+  .paradigm-side { transition: background 0.3s ease; cursor: default; }
   @media (max-width: 600px) { .paradigm { flex-direction: column; } }
 
   /* ===== DIVIDER ===== */
@@ -199,7 +206,28 @@
   .seed:nth-child(3) { animation-delay: 0.8s; }
   .seed:nth-child(4) { animation-delay: 0.9s; }
   .seed:nth-child(5) { animation-delay: 1.0s; }
+  .seed { cursor: pointer; }
   .seed:hover { background: var(--card); border-color: var(--border-hover); }
+
+  .seed-expand-icon {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--subtle);
+    transition: transform 0.3s ease; display: inline-block; margin-left: auto; flex-shrink: 0;
+  }
+  .seed.open .seed-expand-icon { transform: rotate(45deg); }
+
+  .seed-detail {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+    opacity: 0; margin-top: 0;
+  }
+  .seed.open .seed-detail { max-height: 200px; opacity: 1; margin-top: 0.75rem; }
+  .seed-detail-inner {
+    padding: 0.75rem 1rem; background: var(--surface-subtle); border-radius: 8px;
+    font-size: 0.8rem; color: var(--muted); line-height: 1.7;
+  }
+  .seed-detail-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 0.4rem;
+  }
 
   .seed-letter {
     font-family: 'Sora', sans-serif; font-size: 1.5rem;
@@ -232,24 +260,39 @@
 
   /* ===== ROOTS ===== */
   .roots {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 0.4rem; margin-bottom: 4rem;
+    display: flex; flex-direction: column;
+    gap: 0.2rem; margin-bottom: 4rem;
     opacity: 0; animation: enter 0.6s ease forwards 1.1s;
   }
   .root {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; flex-wrap: wrap;
     padding: 0.7rem 1rem; border-radius: 6px; transition: background 0.2s ease;
   }
+  .root { cursor: pointer; }
   .root:hover { background: var(--surface); }
   .root-left { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
   .root-name { font-family: 'Sora', sans-serif; font-weight: 500; font-size: 0.82rem; color: var(--text); white-space: nowrap; }
   .root-idea { font-size: 0.72rem; color: var(--subtle); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .root-year { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--subtle); flex-shrink: 0; margin-left: 0.5rem; }
+  .root-detail {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0; width: 100%; flex-basis: 100%;
+  }
+  .root.open .root-detail { max-height: 120px; opacity: 1; }
+  .root-detail-inner {
+    padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.5rem;
+    background: var(--surface-subtle); border-radius: 6px;
+    font-size: 0.75rem; color: var(--muted); line-height: 1.65;
+  }
+  .root-toggle {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--subtle);
+    transition: transform 0.3s; display: inline-block; flex-shrink: 0; margin-left: 0.5rem;
+  }
+  .root.open .root-toggle { transform: rotate(90deg); }
 
   /* ===== EXPLORE (section nav) ===== */
   .explore-section {
     margin-bottom: 4rem;
-    opacity: 0; animation: enter 0.6s ease forwards 1.25s;
   }
   .explore-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;
@@ -278,12 +321,17 @@
     margin-top: 0.25rem; transition: color 0.2s;
   }
   .explore-card:hover .explore-card-arrow { color: var(--warm); }
+  .explore-card-stat {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    color: var(--subtle); letter-spacing: 0.05em;
+    margin-top: 0.15rem;
+  }
+  .explore-card:hover .explore-card-stat { color: var(--muted); }
 
   /* ===== CONTACT ===== */
   .contact-section {
     text-align: center; padding: 3rem 0;
     border-top: 1px solid var(--border);
-    opacity: 0; animation: enter 0.8s ease forwards 1.35s;
   }
   .contact-links { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
   .contact-link {
@@ -309,7 +357,6 @@
   .footer {
     text-align: center; padding-top: 2rem;
     border-top: 1px solid var(--border);
-    opacity: 0; animation: enter 0.8s ease forwards 1.45s;
   }
   .footer-quote {
     font-size: 0.85rem; font-weight: 300; color: var(--muted);
@@ -321,6 +368,17 @@
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+
+  /* scroll-reveal */
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
 </style>
 </head>
 <body>
@@ -328,7 +386,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">leeo.note</a>
+    <a href="index.html" class="nav-logo">리이오의 연습장</a>
     <div class="nav-links">
       <a href="library.html" data-i18n="nav.library">서재</a>
       <a href="thoughts.html" data-i18n="nav.thoughts">생각</a>
@@ -362,11 +420,17 @@
       <div class="paradigm-tag">Before</div>
       <div class="paradigm-flow">교육자 → 지식 → 학습자</div>
       <div class="paradigm-desc">Banking Model — 전달식 교육</div>
+      <div class="paradigm-detail">
+        <div class="paradigm-detail-text">교육자가 지식을 가지고 있고, 학습자의 머리에 '입금'하는 모델. 파울루 프레이리가 비판한 전통적 교육 방식.</div>
+      </div>
     </div>
     <div class="paradigm-side after">
       <div class="paradigm-tag">After</div>
       <div class="paradigm-flow">교육자 → 경험 설계 → 학습 발생</div>
       <div class="paradigm-desc">SEEDS Model — 학습 경험 설계</div>
+      <div class="paradigm-detail">
+        <div class="paradigm-detail-text">교육자는 질문과 환경을 설계하고, 학습자가 스스로 발견하고 구성하는 경험 중심 모델.</div>
+      </div>
     </div>
   </div>
 
@@ -377,59 +441,94 @@
   </div>
 
   <div class="seeds">
-    <div class="seed">
+    <div class="seed" onclick="toggleSeed(this)">
       <div class="seed-letter">S</div>
       <div class="seed-content">
         <div class="seed-top">
           <span class="seed-name">Situation</span>
           <span class="seed-role">문제 제기자</span>
+          <span class="seed-expand-icon">+</span>
         </div>
         <div class="seed-desc">질문이 생길 수밖에 없는 상황을 던진다. 정답이 아닌 인지적 갈등을 설계한다.</div>
         <div class="seed-theorist">Freire · Problem-posing</div>
+        <div class="seed-detail">
+          <div class="seed-detail-inner">
+            <div class="seed-detail-label">Example</div>
+            "이 코드가 왜 작동하는지 설명할 수 있나요?" — 작동하는 코드를 보여주되, 설명을 요구함으로써 인지적 갈등이 시작된다.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="seed">
+    <div class="seed" onclick="toggleSeed(this)">
       <div class="seed-letter">E</div>
       <div class="seed-content">
         <div class="seed-top">
           <span class="seed-name">Explore</span>
           <span class="seed-role">환경 구축자</span>
+          <span class="seed-expand-icon">+</span>
         </div>
         <div class="seed-desc">자기 방식대로 탐색하는 시간과 도구를 제공한다. 정해진 경로를 제시하지 않는다.</div>
         <div class="seed-theorist">Papert · Constructionism</div>
+        <div class="seed-detail">
+          <div class="seed-detail-inner">
+            <div class="seed-detail-label">Example</div>
+            Playground, 문서, 샘플 코드를 제공하고 "자유롭게 실험해보세요"라고 한다. 튜토리얼 순서를 강제하지 않는다.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="seed">
+    <div class="seed" onclick="toggleSeed(this)">
       <div class="seed-letter">E</div>
       <div class="seed-content">
         <div class="seed-top">
           <span class="seed-name">Encounter</span>
           <span class="seed-role">비계 제공자</span>
+          <span class="seed-expand-icon">+</span>
         </div>
         <div class="seed-desc">의도적으로 벽을 만나게 하고, 그 순간에 답이 아닌 비계를 제공한다.</div>
         <div class="seed-theorist">Bruner · Scaffolding + ZPD</div>
+        <div class="seed-detail">
+          <div class="seed-detail-inner">
+            <div class="seed-detail-label">Example</div>
+            학습자가 에러를 만났을 때 정답 코드를 주지 않고, "에러 메시지의 두 번째 줄을 읽어보세요"라는 힌트만 제공한다.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="seed">
+    <div class="seed" onclick="toggleSeed(this)">
       <div class="seed-letter">D</div>
       <div class="seed-content">
         <div class="seed-top">
           <span class="seed-name">Discover</span>
           <span class="seed-role">촉진자</span>
+          <span class="seed-expand-icon">+</span>
         </div>
         <div class="seed-desc">스스로 발견하는 순간을 기다린다. 발견이 일어날 조건만 만들 수 있다.</div>
         <div class="seed-theorist">Rogers · Facilitation</div>
+        <div class="seed-detail">
+          <div class="seed-detail-inner">
+            <div class="seed-detail-label">Example</div>
+            "아, 그래서 프로토콜이 이렇게 동작하는 거구나!" — 이 순간은 가르칠 수 없다. 학습자 스스로 도달해야 한다.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="seed">
+    <div class="seed" onclick="toggleSeed(this)">
       <div class="seed-letter">S</div>
       <div class="seed-content">
         <div class="seed-top">
           <span class="seed-name">Share</span>
           <span class="seed-role">동료학습 설계자</span>
+          <span class="seed-expand-icon">+</span>
         </div>
         <div class="seed-desc">공유와 설명을 통해 지식이 재구성되고 깊어진다.</div>
         <div class="seed-theorist">Resnick · Peers (4P)</div>
+        <div class="seed-detail">
+          <div class="seed-detail-inner">
+            <div class="seed-detail-label">Example</div>
+            "방금 배운 것을 옆 사람에게 설명해보세요." — 설명하는 과정에서 자신의 이해가 재구성된다.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -441,54 +540,82 @@
   </div>
 
   <div class="roots">
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Freire</div>
         <div class="root-idea">대화와 문제제기 중심 교육</div>
       </div>
       <div class="root-year">1968</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">《페다고지》의 저자. 교육을 '은행 저금식'이 아닌, 억압에서 해방으로 이끄는 대화적 과정으로 재정의했다.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Dewey</div>
         <div class="root-idea">경험에 의한 학습</div>
       </div>
       <div class="root-year">1938</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">"1온스의 경험이 1톤의 이론보다 낫다." 학습은 추상적 지식이 아닌 실제 경험과 반성의 순환에서 발생한다고 주장했다.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Papert</div>
         <div class="root-idea">만드는 과정의 학습</div>
       </div>
       <div class="root-year">1980</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">Logo 프로그래밍 언어의 창시자. 아이들이 직접 무언가를 만들며 배우는 구성주의적 학습(Constructionism)을 제안했다.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Bruner</div>
         <div class="root-idea">발견 학습과 비계</div>
       </div>
       <div class="root-year">1960</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">학습자가 스스로 발견하도록 비계(scaffolding)를 제공하는 교수법을 체계화했다. 나선형 교육과정의 개념도 제안.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Rogers</div>
         <div class="root-idea">촉진자로서의 교사</div>
       </div>
       <div class="root-year">1969</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">인본주의 심리학자. 교사는 가르치는 사람이 아니라 학습이 일어날 수 있는 안전한 환경을 만드는 촉진자라고 보았다.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Vygotsky</div>
         <div class="root-idea">근접발달영역(ZPD)</div>
       </div>
       <div class="root-year">1978</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">혼자서는 못 하지만 도움을 받으면 할 수 있는 영역(ZPD)에서 가장 효과적인 학습이 일어난다고 주장했다.</div>
+      </div>
     </div>
-    <div class="root">
+    <div class="root" onclick="toggleRoot(this)">
       <div class="root-left">
         <div class="root-name">Resnick</div>
         <div class="root-idea">4P — Projects, Passion, Peers, Play</div>
       </div>
       <div class="root-year">2017</div>
+      <span class="root-toggle">›</span>
+      <div class="root-detail">
+        <div class="root-detail-inner">MIT 미디어랩의 Scratch 창시자. 창의적 학습의 4요소 — 프로젝트, 열정, 동료, 놀이를 통한 평생유치원 모델을 제안했다.</div>
+      </div>
     </div>
   </div>
 
@@ -498,36 +625,40 @@
     <div class="divider-line"></div>
   </div>
 
-  <div class="explore-section">
+  <div class="explore-section reveal">
     <div class="explore-grid">
       <a class="explore-card" href="library.html">
         <div class="explore-card-label">Library</div>
         <div class="explore-card-title" data-i18n="nav.library.title">리이오의 서재</div>
         <div class="explore-card-desc" data-i18n="nav.library.desc">읽고, 쓰고, 추천하는 책들을 모아둔 서재.</div>
+        <div class="explore-card-stat">가이드 · 레퍼런스 · 블로그 · 추천 도서</div>
         <div class="explore-card-arrow">→ 서재 가기</div>
       </a>
       <a class="explore-card" href="thoughts.html">
         <div class="explore-card-label">Thoughts</div>
         <div class="explore-card-title" data-i18n="nav.thoughts.title">리이오의 생각</div>
         <div class="explore-card-desc" data-i18n="nav.thoughts.desc">컨퍼런스 발표, 강연, 생각의 기록들.</div>
+        <div class="explore-card-stat">15+ 발표 · SyncSwift · adiOS · let us: Go!</div>
         <div class="explore-card-arrow">→ 생각 보기</div>
       </a>
       <a class="explore-card" href="academy.html">
         <div class="explore-card-label">Academy</div>
         <div class="explore-card-title" data-i18n="nav.academy.title">리이오 아카데미</div>
         <div class="explore-card-desc" data-i18n="nav.academy.desc">인프런, 패스트캠퍼스, YouTube 강의 전체 목록.</div>
+        <div class="explore-card-stat">8,000+ 수강생 · 평점 4.9 · 인프런 · 패캠 · YouTube</div>
         <div class="explore-card-arrow">→ 강의 보기</div>
       </a>
       <a class="explore-card" href="tools.html">
         <div class="explore-card-label">Toolkit</div>
         <div class="explore-card-title" data-i18n="nav.tools.title">리이오의 도구모음</div>
         <div class="explore-card-desc" data-i18n="nav.tools.desc">직접 만든 웹 도구, iOS 앱, macOS 앱들.</div>
+        <div class="explore-card-stat">웹 도구 · iOS 앱 20+ · macOS 앱</div>
         <div class="explore-card-arrow">→ 도구 보기</div>
       </a>
     </div>
   </div>
 
-  <div class="contact-section">
+  <div class="contact-section reveal">
     <div class="contact-links">
       <a href="mailto:leeo@kakao.com" class="contact-link">Email</a>
       <a href="https://www.youtube.com/@Leeo25" target="_blank" class="contact-link">YouTube</a>
@@ -544,7 +675,7 @@
     </div>
   </div>
 
-  <div class="footer">
+  <div class="footer reveal">
     <p class="footer-quote">
       교육자의 가치는 지식을 전달하는 것이 아니라,<br>
       AI로도 대체할 수 없는 학습 경험을 설계하는 것이다.
@@ -554,6 +685,16 @@
 
 </div>
 
+<script>
+  function toggleSeed(el) { el.classList.toggle('open'); }
+  function toggleRoot(el) { el.classList.toggle('open'); }
+
+  // scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
