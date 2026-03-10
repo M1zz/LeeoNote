@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <title>리이오의 연습장</title>
 <meta name="description" data-i18n-content="meta.desc" content="리이오의 연습장 — 배우고 기록하고 나누는 공간. iOS 개발자 Leeo의 서재, 생각, 아카데미, 도구모음.">
 <meta property="og:title" content="리이오의 연습장">
@@ -12,6 +13,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light;
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --card: #EFEFEB;
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(0,0,0,0.16);
+    --text: #3A3530;
+    --text-strong: #1A1714;
+    --muted: #8A8380;
+    --subtle: #BFBCB5;
+    --accent: #4A6B9F;
+    --warm: #9B7645;
+    --sage: #4A7A6A;
+    --rose: #8A6060;
+    --lavender: #7060A0;
+    --clay: #8A6A50;
+    --nav-bg: rgba(247,246,242,0.88);
+    --paradigm-before: #F5EFEF;
+    --paradigm-after: #EFF5F1;
+    --surface-subtle: rgba(0,0,0,0.04);
+  }
+
+  html.dark {
+    color-scheme: dark;
     --bg: #111111;
     --surface: #191919;
     --card: #1E1E1E;
@@ -27,6 +52,10 @@
     --rose: #B08E8E;
     --lavender: #9B8EAD;
     --clay: #B39A7C;
+    --nav-bg: rgba(17,17,17,0.88);
+    --paradigm-before: #1A1616;
+    --paradigm-after: #161A17;
+    --surface-subtle: rgba(255,255,255,0.03);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,7 +81,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.1rem 2rem;
     backdrop-filter: blur(20px);
-    background: rgba(17,17,17,0.88);
+    background: var(--nav-bg);
     border-bottom: 1px solid var(--border);
   }
   .nav-inner { max-width: 880px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -124,8 +153,8 @@
     opacity: 0; animation: enter 0.8s ease forwards 0.45s;
   }
   .paradigm-side { flex: 1; padding: 1.75rem 1.5rem; }
-  .paradigm-side.before { background: #1A1616; }
-  .paradigm-side.after  { background: #161A17; }
+  .paradigm-side.before { background: var(--paradigm-before); }
+  .paradigm-side.after  { background: var(--paradigm-after); }
   .paradigm-tag {
     font-family: 'DM Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem;
@@ -194,7 +223,7 @@
     display: inline-block; margin-top: 0.6rem;
     font-family: 'DM Mono', monospace; font-size: 0.65rem;
     color: var(--subtle); padding: 0.2rem 0.5rem;
-    background: rgba(255,255,255,0.03); border-radius: 4px;
+    background: var(--surface-subtle); border-radius: 4px;
   }
   @media (max-width: 500px) {
     .seed { grid-template-columns: 1fr; gap: 0.5rem; }

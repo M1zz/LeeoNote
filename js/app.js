@@ -231,12 +231,14 @@
   });
 
   const toggle = document.getElementById('themeToggle');
-  if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); toggle.textContent = '☀️'; } else { toggle.textContent = '🌙'; }
-  toggle.addEventListener('click', () => {
-    const dark = document.documentElement.classList.toggle('dark');
-    toggle.textContent = dark ? '☀️' : '🌙';
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  });
+  if (toggle) {
+    toggle.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    toggle.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      toggle.textContent = dark ? '☀️' : '🌙';
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    });
+  }
 
   function toggleBookInfo(btn) {
     const item = btn.closest('.book-item');
