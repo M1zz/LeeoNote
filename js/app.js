@@ -200,12 +200,21 @@
 
   let iconMap = {};
   async function loadProjects() {
-    const ids = APPS_DATA.iosApps.map(a => a.appStoreId).join(',');
+    const allIds = APPS_DATA.iosApps.map(a => a.appStoreId);
     try {
-      const r = await fetch(`https://itunes.apple.com/lookup?id=${ids}&country=kr`);
+      const r = await fetch(`https://itunes.apple.com/lookup?id=${allIds.join(',')}&country=kr`);
       const d = await r.json();
       d.results.forEach(r => { iconMap[String(r.trackId)] = r.artworkUrl512; });
     } catch (e) {}
+    // fallback: re-fetch any missing icons from US store
+    const missing = allIds.filter(id => !iconMap[id]);
+    if (missing.length) {
+      try {
+        const r2 = await fetch(`https://itunes.apple.com/lookup?id=${missing.join(',')}&country=us`);
+        const d2 = await r2.json();
+        d2.results.forEach(r => { iconMap[String(r.trackId)] = r.artworkUrl512; });
+      } catch (e) {}
+    }
     renderProjects(currentLang);
   }
   loadProjects();
