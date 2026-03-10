@@ -149,18 +149,48 @@
     return `<a class="card card--featured" href="${url}" target="_blank"><div class="card-visual card-visual--wide" style="background:linear-gradient(${app.gradient});"><span style="font-family:'JetBrains Mono',monospace;font-size:0.9rem;font-weight:700;color:white;text-align:center;line-height:1.3;">${label}</span></div><div class="card-info"><span class="card-badge badge--${app.badgeColor}">${app.badge}</span><h3 class="card-title">${name}</h3><p class="card-desc">${desc}</p><div class="card-hint">&rarr; ${hint}</div></div></a>`;
   }
 
+  const WEB_CATS = {
+    'web-guide-grid': ['claude-code-101','hig-lab','apple-platform-guide','apple-component-gallery'],
+    'web-lab-grid':   ['ios-concept-lab','cs-visualizer','ios-arch-lab','tech-interview-app'],
+    'web-diag-grid':  ['mentee-quiz','ai-privacy-risk-scanner','industry-explorer'],
+  };
+  const IOS_CATS = {
+    'ios-productivity-grid': ['clip-keyboard','rereminder','leave-wise'],
+    'ios-creative-grid':     ['pixel-meme','klosed'],
+  };
+
   function renderProjects(lang) {
     const data = APPS_DATA;
+    const allWeb = [...data.libraryProjects, ...data.toolProjects];
+
+    // legacy compat grids
     const libraryGrid = document.getElementById('library-projects-grid');
     if (libraryGrid) libraryGrid.innerHTML = data.libraryProjects.map(a => renderWebCard(a, lang)).join('');
     const toolGrid = document.getElementById('tool-projects-grid');
-    if (toolGrid) toolGrid.innerHTML = [...data.libraryProjects, ...data.toolProjects].map(a => renderWebCard(a, lang)).join('');
+    if (toolGrid) toolGrid.innerHTML = allWeb.map(a => renderWebCard(a, lang)).join('');
 
+    // categorised web grids
+    Object.entries(WEB_CATS).forEach(([id, ids]) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = allWeb.filter(a => ids.includes(a.id)).map(a => renderWebCard(a, lang)).join('');
+    });
+
+    // categorised iOS grids
+    const moreTitle = lang === 'en' ? '15+ More Apps' : '그 외 15+ 앱';
+    const moreDesc  = lang === 'en' ? 'Apps across various categories — from planning to launch, all solo.' : '다양한 카테고리의 앱을 기획부터 출시까지 혼자서 만들고 운영 중.';
+    Object.entries(IOS_CATS).forEach(([id, ids]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = data.iosApps.filter(a => ids.includes(a.id)).map(a => renderIosCard(a, iconMap[a.appStoreId], lang)).join('');
+      if (id === 'ios-creative-grid') {
+        el.innerHTML += `<div class="card card--row"><div class="card-visual" style="font-size:1rem;font-weight:700;color:var(--accent-green);">+15</div><div class="card-info"><span class="card-badge badge--green">Portfolio</span><h3 class="card-title">${moreTitle}</h3><p class="card-desc">${moreDesc}</p></div></div>`;
+      }
+    });
+
+    // legacy single iOS grid
     const iosGrid = document.getElementById('ios-apps-grid');
     if (iosGrid) {
       iosGrid.innerHTML = data.iosApps.map(a => renderIosCard(a, iconMap[a.appStoreId], lang)).join('');
-      const moreTitle = lang === 'en' ? '15+ More Apps' : '그 외 15+ 앱';
-      const moreDesc = lang === 'en' ? 'Apps across various categories — from planning to launch, all solo.' : '다양한 카테고리의 앱을 기획부터 출시까지 혼자서 만들고 운영 중.';
       iosGrid.innerHTML += `<div class="card card--row"><div class="card-visual" style="font-size:1rem;font-weight:700;color:var(--accent-green);">+15</div><div class="card-info"><span class="card-badge badge--green">Portfolio</span><h3 class="card-title">${moreTitle}</h3><p class="card-desc">${moreDesc}</p></div></div>`;
     }
 
