@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아카데미 — 리이오의 연습장</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<script src="data/apps.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="index.html" class="nav-logo">리이오의 연습장</a>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <div class="nav-links">
+        <a href="library.html" data-i18n="nav.library">서재</a>
+        <a href="thoughts.html" data-i18n="nav.thoughts">생각</a>
+        <a href="academy.html" data-i18n="nav.academy">아카데미</a>
+        <a href="tools.html" data-i18n="nav.tools">도구모음</a>
+      </div>
+      <button class="lang-toggle" id="langToggle" aria-label="언어 전환 / Switch language">KO</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="다크/라이트 모드 전환">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-top:5rem;">
+
+<!-- ===== 리이오 아카데미 ===== -->
+<section id="academy" class="section animate-on-scroll" style="padding-top:6rem;">
+  <div class="container">
+    <p class="section-label" data-i18n="academy.label">Academy</p>
+    <h2 class="section-title" data-i18n="academy.title">리이오 아카데미</h2>
+    <p class="section-desc" data-i18n="academy.desc">인프런 수강생 8,000명+, 평점 4.9. 개발 경험을 강의와 멘토링으로 나눕니다.</p>
+
+    <!-- Inflearn -->
+    <h3 class="subsection-title">Inflearn</h3>
+    <div class="card-grid" style="grid-template-columns:1fr;">
+      <a class="course-card" href="https://www.inflearn.com/users/604991/@leeo" target="_blank" style="display:flex;overflow:hidden;">
+        <div class="course-thumb course-thumb--inflearn" style="width:200px;height:auto;min-height:140px;flex-shrink:0;">
+          <span class="course-platform-name">Inflearn</span>
+        </div>
+        <div class="course-body" style="flex:1;">
+          <span class="card-badge badge--green" data-i18n="academy.inflearn.badge">8,000+ 수강생 · 평점 4.9</span>
+          <h3 class="course-title" data-i18n="academy.inflearn.title">리이오의 인프런 강의</h3>
+          <p class="course-desc" data-i18n="academy.inflearn.desc">Swift/SwiftUI 기반 iOS 개발 강의부터 AI 코딩 챌린지까지.</p>
+          <div class="course-hint" data-i18n="academy.inflearn.hint">→ 전체 강의 목록 보기</div>
+        </div>
+      </a>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top:2rem;">온라인 강의</h3>
+    <div class="course-list">
+      <a class="course-list-item" href="https://inf.run/dHvmn" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">한 조각씩 배우는 SwiftUI - 입문편</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/7A9mp" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">한 조각씩 배우는 SwiftUI - 레벨 2</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/aPeEk" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">한 조각씩 배우는 SwiftUI - 레벨 3</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/bS92n" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">UI와 함께 배우는 Swift - 기초편</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/kufB9" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">UI와 함께 배우는 Swift - 레벨 2</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/fDjTj" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">UI와 함께 배우는 Swift - 레벨 3</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/f8pff" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">계산기앱으로 시작해보는 SwiftUI</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/A4Jgo" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">간단하게 만들어 보는 iOS 설정앱</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/tk8mp" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">게임처럼 공부하는 Git 던전</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/86iji" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">개발자 용어 부스러기 주워먹기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/rwpQE" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">개발을 위한 프로그래밍적 사고 기르기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/Q9utP" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">앱 시작하기로 첫 앱 만들어 보기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/kWLdo" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">AI와 함께하는 코딩 체험</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/ghSQf" target="_blank">
+        <span class="card-badge badge--green" style="margin:0;">Free</span>
+        <span class="course-list-name">일정 관리 앱 만들기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+    </div>
+
+    <h3 class="subsection-title" style="margin-top:3.5rem;">Inflearn Challenges</h3>
+    <div class="course-list">
+      <a class="course-list-item" href="https://inf.run/PpLd4" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">AI와 함께하는 코딩 체험 챌린지 - 1기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/61P39" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">AI와 함께하는 코딩 체험 챌린지 - 2기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/aqMVm" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">일정 관리 앱 만들기 챌린지 - 1기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/SVU7i" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">일정 관리 앱 만들기 챌린지 - 2기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/1cjih" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">코딩 퍼즐 미션 클리어 챌린지 - 1기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+      <a class="course-list-item" href="https://inf.run/M5E4D" target="_blank">
+        <span class="card-badge badge--purple" style="margin:0;">Challenge</span>
+        <span class="course-list-name">랜덤 뽑기 앱 만들기 챌린지 - 1기</span>
+        <span class="course-list-arrow">&rarr;</span>
+      </a>
+    </div>
+
+    <!-- Fastcampus -->
+    <h3 class="subsection-title" style="margin-top:3.5rem;">Fastcampus</h3>
+    <div class="card-grid" style="grid-template-columns:1fr;max-width:500px;">
+      <a class="course-card" href="https://fastcampus.co.kr/dev_online_ios" target="_blank">
+        <div class="course-thumb course-thumb--fastcampus">
+          <span class="course-platform-name">Fastcampus</span>
+        </div>
+        <div class="course-body">
+          <span class="card-badge badge--red">Platform Course</span>
+          <h3 class="course-title" data-i18n="academy.fastcampus.title">패스트캠퍼스 iOS 개발 강의</h3>
+          <p class="course-desc" data-i18n="academy.fastcampus.desc">대형 교육 플랫폼을 통한 체계적 iOS 개발 교육.</p>
+          <div class="course-hint" data-i18n="academy.fastcampus.hint">→ 강의 보기</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- YouTube -->
+    <h3 class="subsection-title" style="margin-top:3.5rem;">YouTube 개발자리</h3>
+    <div class="card-grid" style="grid-template-columns:1fr;">
+      <a class="course-card" href="https://www.youtube.com/@Leeo25" target="_blank" style="display:flex;overflow:hidden;">
+        <div class="course-thumb course-thumb--youtube" style="width:200px;height:auto;min-height:140px;flex-shrink:0;">
+          <span class="course-platform-name">YouTube</span>
+        </div>
+        <div class="course-body" style="flex:1;">
+          <span class="card-badge badge--red">Free Content</span>
+          <h3 class="course-title" data-i18n="academy.youtube.title">개발자리 채널</h3>
+          <p class="course-desc" data-i18n="academy.youtube.desc">iOS 개발 팁, 앱 개발 과정, 개발자 커리어 이야기를 무료로 공유합니다.</p>
+          <div class="course-hint" data-i18n="academy.youtube.hint">→ 채널 구경하기</div>
+        </div>
+      </a>
+    </div>
+    <div class="playlist-grid">
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vReemxqvvXMzErYNmlj-U0" target="_blank"><span class="playlist-icon">🌱</span><span class="playlist-name">[Lv.0] 스위프트 유치원</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8usI0oHl9d8FJ-gtaqeBpgj" target="_blank"><span class="playlist-icon">📱</span><span class="playlist-name">[Lv.1] App Dev Tutorial SwiftUI</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8u2_o9xQDGtixeIXWi-V91F" target="_blank"><span class="playlist-icon">🧮</span><span class="playlist-name">[Lv.1] 클론코딩 - 계산기앱</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vANKb4E3Czx0I-EpuakK5x" target="_blank"><span class="playlist-icon">🔢</span><span class="playlist-name">[Lv.1] 클론코딩 - 키패드앱</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8sseacReEJzJLrPQRwzonU1" target="_blank"><span class="playlist-icon">📐</span><span class="playlist-name">[Lv.2] SwiftUI Swift문법 기초</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vYBuEUI7USbepsn8IZt_Y1" target="_blank"><span class="playlist-icon">⚙️</span><span class="playlist-name">[Lv.2] 클론코딩 - 설정앱</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8tro-WXDI-DoS_ayy1C3SfK" target="_blank"><span class="playlist-icon">💰</span><span class="playlist-name">[Lv.2] 클론코딩 - 팁앱</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uXVW33Co8zEBSH0opTYMY9" target="_blank"><span class="playlist-icon">🧩</span><span class="playlist-name">[Lv.2] 기능단위 도움말</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uwMezrZ58Y-BOvhZVk5ZY4" target="_blank"><span class="playlist-icon">🏗️</span><span class="playlist-name">[Lv.3] 따라해요 UIKit</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8s6rcdSidGhYCjfPam2W3Q-" target="_blank"><span class="playlist-icon">🌤️</span><span class="playlist-name">[Lv.3] 클론코딩 - 날씨앱</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8tg6HUoXPuNrXfeUaVvY7Yr" target="_blank"><span class="playlist-icon">🍰</span><span class="playlist-name">[Lv.3] 하나씩 꺼내먹는 SwiftUI</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8sI3mKXFvfTa8wYsfGtlEsz" target="_blank"><span class="playlist-icon">📚</span><span class="playlist-name">SwiftUI를 공부하고 싶으신 분</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uSECZQyOBlGWZYT5VjisRv" target="_blank"><span class="playlist-icon">🌐</span><span class="playlist-name">Network 뽀개보기</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uP9Aw18YqdRYHmrzyUmNEH" target="_blank"><span class="playlist-icon">🎓</span><span class="playlist-name">Swift Coding Class</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8v2NiMOi6tkB9VAJz3UaiP6" target="_blank"><span class="playlist-icon">📖</span><span class="playlist-name">HIG를 모조리 읽어보기</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8tI4_ptzFuNUr7QZs1eMT4N" target="_blank"><span class="playlist-icon">🚀</span><span class="playlist-name">앱 시작하기</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vUBDRbL0Zfwc29kdjNJvev" target="_blank"><span class="playlist-icon">♻️</span><span class="playlist-name">지속 가능한 앱을 만드는 방법</span><span class="playlist-arrow">&rarr;</span></a>
+      <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8v4mAk0lur5t9o0vsTplI2c" target="_blank"><span class="playlist-icon">📈</span><span class="playlist-name">성장부스팅</span><span class="playlist-arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p class="footer-copy">&copy; 2026 Leeo. Built with passion, shipped solo.</p>
+  </div>
+</footer>
+<script src="js/app.js"></script>
+</body>
+</html>
