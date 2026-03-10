@@ -1284,10 +1284,10 @@
   });
 
   const toggle = document.getElementById('themeToggle');
-  if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); toggle.textContent = '🌙'; }
+  if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); toggle.textContent = '☀️'; } else { toggle.textContent = '🌙'; }
   toggle.addEventListener('click', () => {
     const dark = document.documentElement.classList.toggle('dark');
-    toggle.textContent = dark ? '🌙' : '☀️';
+    toggle.textContent = dark ? '☀️' : '🌙';
     localStorage.setItem('theme', dark ? 'dark' : 'light');
   });
 
