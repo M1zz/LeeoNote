@@ -1249,7 +1249,7 @@
   function renderProjects(lang) {
     const data = APPS_DATA;
     document.getElementById('library-projects-grid').innerHTML = data.libraryProjects.map(a => renderWebCard(a, lang)).join('');
-    document.getElementById('tool-projects-grid').innerHTML = data.toolProjects.map(a => renderWebCard(a, lang)).join('');
+    document.getElementById('tool-projects-grid').innerHTML = [...data.libraryProjects, ...data.toolProjects].map(a => renderWebCard(a, lang)).join('');
 
     const iosGrid = document.getElementById('ios-apps-grid');
     iosGrid.innerHTML = data.iosApps.map(a => renderIosCard(a, iconMap[a.appStoreId], lang)).join('');
