@@ -139,8 +139,18 @@
     color: var(--text-dim); letter-spacing: 0.1em;
   }
 
-  /* Depth roadmap inside Phase 03 */
+  /* Depth roadmap */
   .depth-roadmap { display: flex; flex-direction: column; gap: 0; }
+  .curriculum-hero {
+    opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
+    border-color: var(--accent-purple) !important;
+    box-shadow: 0 0 0 1px var(--accent-purple), 0 4px 20px rgba(83, 52, 131, 0.15);
+    padding: 1.5rem;
+  }
+  .curriculum-hero.visible { opacity: 1; transform: translateY(0); }
+  .curriculum-hero .phase-featured-visual { width: 140px; height: 90px; }
+  .curriculum-hero .phase-featured-title { font-size: 1.1rem; }
+  .curriculum-hero:hover { box-shadow: 0 0 0 1px var(--accent-purple), 0 8px 30px rgba(83, 52, 131, 0.25); }
   .depth-step {
     position: relative; display: flex; gap: 1rem; align-items: flex-start;
   }
@@ -158,6 +168,10 @@
     position: absolute; left: 15px; top: 48px; bottom: -16px;
     width: 2px; background: var(--border);
   }
+  .depth-step {
+    opacity: 0; transform: translateY(15px); transition: all 0.5s ease;
+  }
+  .depth-step.visible { opacity: 1; transform: translateY(0); }
   .depth-step-content { flex: 1; min-width: 0; padding-bottom: 1rem; }
   .depth-step-label {
     font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
@@ -165,42 +179,14 @@
     margin-bottom: 0.4rem; margin-top: 0.6rem;
   }
 
-  .curriculum-hero {
-    border-color: var(--accent-purple) !important;
-    box-shadow: 0 0 0 1px var(--accent-purple), 0 4px 20px rgba(83, 52, 131, 0.15);
-    padding: 1.5rem;
-  }
-  .curriculum-hero .phase-featured-visual { width: 140px; height: 90px; }
-  .curriculum-hero .phase-featured-title { font-size: 1.1rem; }
-  .curriculum-hero:hover { box-shadow: 0 0 0 1px var(--accent-purple), 0 8px 30px rgba(83, 52, 131, 0.25); }
-
   /* Resources section */
-  .depth-resources {
-    margin-top: 2rem; padding-top: 1.5rem;
+  .resources-section {
+    margin-top: 0; padding-top: 2rem;
     border-top: 1px solid var(--border);
   }
-  .depth-resources-title {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);
-    margin-bottom: 1rem;
-  }
-  .depth-resources-row {
-    display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem;
-  }
-  .depth-resource-link {
-    display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem;
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
-    text-decoration: none; color: inherit; transition: all 0.2s;
-  }
-  .depth-resource-link:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
-  .depth-resource-icon {
-    flex-shrink: 0; width: 22px; height: 22px; border-radius: 5px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; color: white;
-  }
-  .depth-resource-name { font-size: 0.8rem; font-weight: 500; flex: 1; }
-  .depth-resources-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.35rem;
+  .resources-section-title {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 0.4rem;
   }
 
   @media (max-width: 640px) {
@@ -243,219 +229,195 @@
     <h2 class="section-title" data-i18n="academy.title">리이오 아카데미</h2>
     <p class="section-desc" data-i18n="academy.desc">인프런 수강생 8,000명+, 평점 4.9. 개발 경험을 강의와 멘토링으로 나눕니다.</p>
 
-    <div class="roadmap">
+    <!-- ===== 컴퓨터 공학 커리큘럼 히어로 ===== -->
+    <a class="phase-featured curriculum-hero" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank" style="margin-bottom:2.5rem;">
+      <div class="phase-featured-visual" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">
+        <span>🗺️<br>CS Full</span>
+      </div>
+      <div class="phase-featured-body">
+        <span class="phase-course-badge badge--purple">Top-Down CS Curriculum</span>
+        <div class="phase-featured-title">개발자리 컴퓨터 공학 커리큘럼</div>
+        <div class="phase-featured-desc">앱을 만들다 막힌 순간이 교과서다. 이론 먼저가 아닌, 문제에서 출발하는 Top-Down 방식의 CS 학습 지도.</div>
+        <div class="phase-featured-meta">🎯 8 Stages · 📚 28 Chapters · 🌿 200+ Topics → 커리큘럼 보기</div>
+      </div>
+    </a>
 
-      <!-- Phase 1: 궁금해지다 -->
-      <div class="roadmap-phase">
-        <div class="phase-marker phase-marker--green">🌱</div>
-        <div class="phase-header">
-          <span class="phase-number">Phase 01</span>
-          <span class="phase-title">궁금해지다</span>
-          <span class="phase-count">시작</span>
-        </div>
-        <p class="phase-desc">
-          코딩이 뭔지 아직 모른다. 개발자는 뭘 하는 사람인지 궁금하다.<br>
-          부담 없이 영상으로 먼저 접근하는 단계.
-        </p>
+    <!-- ===== 커리큘럼 학습 경로 ===== -->
+    <div class="depth-roadmap" style="margin-bottom:3rem;">
 
-        <div class="phase-courses">
-          <a class="phase-course" href="https://inf.run/rwpQE" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">개발을 위한 프로그래밍적 사고 기르기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/86iji" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">개발자 용어 부스러기 주워먹기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/kWLdo" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">AI와 함께하는 코딩 체험</span>
-            <span class="phase-course-arrow">&rarr;</span>
+      <div class="depth-step">
+        <div class="depth-step-line"></div>
+        <div class="depth-step-dot depth-step-dot--red">1</div>
+        <div class="depth-step-content">
+          <div class="depth-step-label">앱으로 체화</div>
+          <a class="phase-featured" href="https://m1zz.github.io/cs-swiftUI/" target="_blank" style="margin:0;">
+            <div class="phase-featured-visual" style="background:linear-gradient(135deg,#0f3460,#533483,#e94560);">
+              <span>📱<br>CS × SwiftUI</span>
+            </div>
+            <div class="phase-featured-body">
+              <span class="phase-course-badge badge--red">App-First CS</span>
+              <div class="phase-featured-title">CS × SwiftUI</div>
+              <div class="phase-featured-desc">앱을 만들다 마주치는 문제를 해결하며 CS를 배운다. Problem-Driven · App-First 방식.</div>
+              <div class="phase-featured-meta">→ 바로가기</div>
+            </div>
           </a>
         </div>
       </div>
 
-      <!-- Phase 2: 따라 만들다 -->
-      <div class="roadmap-phase">
-        <div class="phase-marker phase-marker--blue">📱</div>
-        <div class="phase-header">
-          <span class="phase-number">Phase 02</span>
-          <span class="phase-title">따라 만들다</span>
-          <span class="phase-count">Swift · SwiftUI</span>
-        </div>
-        <p class="phase-desc">
-          Swift 문법을 배우고, SwiftUI로 화면을 만들어본다.<br>
-          계산기, 설정앱, 키패드 — 따라 만들면서 손에 익히는 단계.
-        </p>
-
-        <div class="phase-sublabel">Swift 기초</div>
-        <div class="phase-courses">
-          <a class="phase-course" href="https://inf.run/bS92n" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">UI와 함께 배우는 Swift - 기초편</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/kufB9" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">UI와 함께 배우는 Swift - 레벨 2</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/fDjTj" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">UI와 함께 배우는 Swift - 레벨 3</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-        </div>
-
-        <div class="phase-sublabel">SwiftUI 입문</div>
-        <div class="phase-courses">
-          <a class="phase-course" href="https://inf.run/dHvmn" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 입문편</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/7A9mp" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 레벨 2</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/aPeEk" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 레벨 3</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-        </div>
-
-        <div class="phase-sublabel">클론코딩</div>
-        <div class="phase-courses">
-          <a class="phase-course" href="https://inf.run/f8pff" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">계산기앱으로 시작해보는 SwiftUI</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/A4Jgo" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">간단하게 만들어 보는 iOS 설정앱</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/Q9utP" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">앱 시작하기로 첫 앱 만들어 보기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/ghSQf" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">일정 관리 앱 만들기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/tk8mp" target="_blank">
-            <span class="phase-course-badge badge--green">Free</span>
-            <span class="phase-course-name">게임처럼 공부하는 Git 던전</span>
-            <span class="phase-course-arrow">&rarr;</span>
+      <div class="depth-step">
+        <div class="depth-step-line" style="display:none;"></div>
+        <div class="depth-step-dot depth-step-dot--gold">2</div>
+        <div class="depth-step-content">
+          <div class="depth-step-label">자료구조</div>
+          <a class="phase-featured" href="https://m1zz.github.io/swift-data-structures/" target="_blank" style="margin:0;">
+            <div class="phase-featured-visual" style="background:linear-gradient(135deg,#ff6b35,#f7931e,#fbb03b);">
+              <span>📦<br>Swift DS</span>
+            </div>
+            <div class="phase-featured-body">
+              <span class="phase-course-badge badge--gold">Data Structures</span>
+              <div class="phase-featured-title">Swift 자료구조</div>
+              <div class="phase-featured-desc">배열, 스택, 큐, 트리 — 핵심 자료구조를 Swift로 직접 구현하며 CS의 기초 체력을 쌓는다.</div>
+              <div class="phase-featured-meta">→ 바로가기</div>
+            </div>
           </a>
         </div>
       </div>
 
-      <!-- Phase 3: 깊이 이해하다 — 자체 로드맵 -->
-      <div class="roadmap-phase">
-        <div class="phase-marker phase-marker--purple">🧠</div>
-        <div class="phase-header">
-          <span class="phase-number">Phase 03</span>
-          <span class="phase-title">깊이 이해하다</span>
-          <span class="phase-count">커리큘럼 로드맵</span>
+    </div>
+
+    <!-- ===== 강의 & 리소스 ===== -->
+    <div class="resources-section">
+      <div class="resources-section-title">강의 & 리소스</div>
+      <p class="phase-desc" style="margin-bottom:1.5rem;">커리큘럼과 함께 활용하면 좋은 인프런 강의, YouTube 영상, 챌린지 모음입니다.</p>
+
+      <div class="roadmap">
+
+        <!-- 인프런 강의 -->
+        <div class="roadmap-phase">
+          <div class="phase-marker phase-marker--green">📚</div>
+          <div class="phase-header">
+            <span class="phase-title">인프런 강의</span>
+            <span class="phase-count">8,000+ 수강생 · 평점 4.9</span>
+          </div>
+
+          <div class="phase-sublabel">입문</div>
+          <div class="phase-courses">
+            <a class="phase-course" href="https://inf.run/rwpQE" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">개발을 위한 프로그래밍적 사고 기르기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/86iji" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">개발자 용어 부스러기 주워먹기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/kWLdo" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">AI와 함께하는 코딩 체험</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="phase-sublabel">Swift 기초</div>
+          <div class="phase-courses">
+            <a class="phase-course" href="https://inf.run/bS92n" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">UI와 함께 배우는 Swift - 기초편</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/kufB9" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">UI와 함께 배우는 Swift - 레벨 2</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/fDjTj" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">UI와 함께 배우는 Swift - 레벨 3</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="phase-sublabel">SwiftUI</div>
+          <div class="phase-courses">
+            <a class="phase-course" href="https://inf.run/dHvmn" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 입문편</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/7A9mp" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 레벨 2</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/aPeEk" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">한 조각씩 배우는 SwiftUI - 레벨 3</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="phase-sublabel">클론코딩</div>
+          <div class="phase-courses">
+            <a class="phase-course" href="https://inf.run/f8pff" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">계산기앱으로 시작해보는 SwiftUI</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/A4Jgo" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">간단하게 만들어 보는 iOS 설정앱</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/Q9utP" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">앱 시작하기로 첫 앱 만들어 보기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/ghSQf" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">일정 관리 앱 만들기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/tk8mp" target="_blank">
+              <span class="phase-course-badge badge--green">Free</span>
+              <span class="phase-course-name">게임처럼 공부하는 Git 던전</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
+
+          <div class="section-more" style="margin-top:1rem;">
+            <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" class="btn btn--outline">인프런 전체 강의 보기 →</a>
+          </div>
         </div>
-        <p class="phase-desc">
-          따라 만드는 건 됐다. 이제 "왜 이렇게 동작하는지"가 궁금해진다.<br>
-          아래 로드맵을 따라 자료구조 → 앱 기반 CS → 전체 컴퓨터 공학까지 단계적으로 깊이를 더한다.
-        </p>
 
-        <!-- 깊이 이해하다 내부 로드맵 -->
-        <div class="depth-roadmap">
-
-          <div class="depth-step">
-            <div class="depth-step-line"></div>
-            <div class="depth-step-dot depth-step-dot--red">1</div>
-            <div class="depth-step-content">
-              <div class="depth-step-label">앱으로 체화</div>
-              <a class="phase-featured" href="https://m1zz.github.io/cs-swiftUI/" target="_blank" style="margin:0;">
-                <div class="phase-featured-visual" style="background:linear-gradient(135deg,#0f3460,#533483,#e94560);">
-                  <span>📱<br>CS × SwiftUI</span>
-                </div>
-                <div class="phase-featured-body">
-                  <span class="phase-course-badge badge--red">App-First CS</span>
-                  <div class="phase-featured-title">CS × SwiftUI</div>
-                  <div class="phase-featured-desc">앱을 만들다 마주치는 문제를 해결하며 CS를 배운다. Problem-Driven · App-First 방식.</div>
-                  <div class="phase-featured-meta">→ 바로가기</div>
-                </div>
-              </a>
-            </div>
+        <!-- YouTube -->
+        <div class="roadmap-phase">
+          <div class="phase-marker phase-marker--red" style="border-color:#ff0000;">▶</div>
+          <div class="phase-header">
+            <span class="phase-title">YouTube 재생목록</span>
+            <span class="phase-count">개발자리 채널</span>
           </div>
 
-          <div class="depth-step">
-            <div class="depth-step-line"></div>
-            <div class="depth-step-dot depth-step-dot--gold">2</div>
-            <div class="depth-step-content">
-              <div class="depth-step-label">기초 체력</div>
-              <a class="phase-featured" href="https://m1zz.github.io/swift-data-structures/" target="_blank" style="margin:0;">
-                <div class="phase-featured-visual" style="background:linear-gradient(135deg,#ff6b35,#f7931e,#fbb03b);">
-                  <span>📦<br>Swift DS</span>
-                </div>
-                <div class="phase-featured-body">
-                  <span class="phase-course-badge badge--gold">자료구조</span>
-                  <div class="phase-featured-title">Swift 자료구조</div>
-                  <div class="phase-featured-desc">배열, 스택, 큐, 트리 — 핵심 자료구조를 Swift로 직접 구현하며 CS의 기초 체력을 쌓는다.</div>
-                  <div class="phase-featured-meta">→ 바로가기</div>
-                </div>
-              </a>
-            </div>
+          <div class="phase-sublabel">입문</div>
+          <div class="phase-playlists">
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vReemxqvvXMzErYNmlj-U0" target="_blank"><span class="playlist-icon">🌱</span><span class="playlist-name">[Lv.0] 스위프트 유치원</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uP9Aw18YqdRYHmrzyUmNEH" target="_blank"><span class="playlist-icon">🎓</span><span class="playlist-name">Swift Coding Class</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8v4mAk0lur5t9o0vsTplI2c" target="_blank"><span class="playlist-icon">📈</span><span class="playlist-name">성장부스팅</span><span class="playlist-arrow">→</span></a>
           </div>
 
-          <div class="depth-step">
-            <div class="depth-step-line" style="display:none;"></div>
-            <div class="depth-step-dot depth-step-dot--purple">3</div>
-            <div class="depth-step-content">
-              <div class="depth-step-label">전체 지도</div>
-              <a class="phase-featured curriculum-hero" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank" style="margin:0;">
-                <div class="phase-featured-visual" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">
-                  <span>🗺️<br>CS Full</span>
-                </div>
-                <div class="phase-featured-body">
-                  <span class="phase-course-badge badge--purple">Top-Down CS Curriculum</span>
-                  <div class="phase-featured-title">개발자리 컴퓨터 공학 커리큘럼</div>
-                  <div class="phase-featured-desc">앱을 만들다 막힌 순간이 교과서다. 이론 먼저가 아닌, 문제에서 출발하는 Top-Down 방식의 CS 학습 지도.</div>
-                  <div class="phase-featured-meta">🎯 8 Stages · 📚 28 Chapters · 🌿 200+ Topics → 커리큘럼 보기</div>
-                </div>
-              </a>
-            </div>
+          <div class="phase-sublabel">클론코딩</div>
+          <div class="phase-playlists">
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8usI0oHl9d8FJ-gtaqeBpgj" target="_blank"><span class="playlist-icon">📱</span><span class="playlist-name">[Lv.1] App Dev Tutorial SwiftUI</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8u2_o9xQDGtixeIXWi-V91F" target="_blank"><span class="playlist-icon">🧮</span><span class="playlist-name">[Lv.1] 클론코딩 - 계산기앱</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vANKb4E3Czx0I-EpuakK5x" target="_blank"><span class="playlist-icon">🔢</span><span class="playlist-name">[Lv.1] 클론코딩 - 키패드앱</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8sseacReEJzJLrPQRwzonU1" target="_blank"><span class="playlist-icon">📐</span><span class="playlist-name">[Lv.2] SwiftUI Swift문법 기초</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vYBuEUI7USbepsn8IZt_Y1" target="_blank"><span class="playlist-icon">⚙️</span><span class="playlist-name">[Lv.2] 클론코딩 - 설정앱</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8tro-WXDI-DoS_ayy1C3SfK" target="_blank"><span class="playlist-icon">💰</span><span class="playlist-name">[Lv.2] 클론코딩 - 팁앱</span><span class="playlist-arrow">→</span></a>
           </div>
 
-        </div>
-
-        <!-- 같이 보면 좋은 리소스 -->
-        <div class="depth-resources">
-          <div class="depth-resources-title">같이 보면 좋은 리소스</div>
-
-          <div class="depth-resources-row">
-            <a class="depth-resource-link" href="https://www.youtube.com/@Leeo25" target="_blank">
-              <span class="depth-resource-icon" style="background:#ff0000;">▶</span>
-              <span class="depth-resource-name">개발자리 YouTube 채널</span>
-              <span class="phase-course-arrow">→</span>
-            </a>
-            <a class="depth-resource-link" href="https://www.inflearn.com/users/604991/@leeo" target="_blank">
-              <span class="depth-resource-icon" style="background:#1dc078;">i</span>
-              <span class="depth-resource-name">리이오의 인프런 (8,000+ 수강생)</span>
-              <span class="phase-course-arrow">→</span>
-            </a>
-            <a class="depth-resource-link" href="https://fastcampus.co.kr/dev_online_ios" target="_blank">
-              <span class="depth-resource-icon" style="background:#e8344e;">F</span>
-              <span class="depth-resource-name">패스트캠퍼스 iOS 개발 강의</span>
-              <span class="phase-course-arrow">→</span>
-            </a>
-          </div>
-
-          <div class="depth-resources-grid">
+          <div class="phase-sublabel">심화</div>
+          <div class="phase-playlists">
             <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uXVW33Co8zEBSH0opTYMY9" target="_blank"><span class="playlist-icon">🧩</span><span class="playlist-name">[Lv.2] 기능단위 도움말</span><span class="playlist-arrow">→</span></a>
             <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8uwMezrZ58Y-BOvhZVk5ZY4" target="_blank"><span class="playlist-icon">🏗️</span><span class="playlist-name">[Lv.3] 따라해요 UIKit</span><span class="playlist-arrow">→</span></a>
             <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8s6rcdSidGhYCjfPam2W3Q-" target="_blank"><span class="playlist-icon">🌤️</span><span class="playlist-name">[Lv.3] 클론코딩 - 날씨앱</span><span class="playlist-arrow">→</span></a>
@@ -464,69 +426,77 @@
             <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8v2NiMOi6tkB9VAJz3UaiP6" target="_blank"><span class="playlist-icon">📖</span><span class="playlist-name">HIG를 모조리 읽어보기</span><span class="playlist-arrow">→</span></a>
             <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8sI3mKXFvfTa8wYsfGtlEsz" target="_blank"><span class="playlist-icon">📚</span><span class="playlist-name">SwiftUI를 공부하고 싶으신 분</span><span class="playlist-arrow">→</span></a>
           </div>
-        </div>
-      </div>
 
-      <!-- Phase 4: 도전하다 -->
-      <div class="roadmap-phase">
-        <div class="phase-marker phase-marker--red">🔥</div>
-        <div class="phase-header">
-          <span class="phase-number">Phase 04</span>
-          <span class="phase-title">도전하다</span>
-          <span class="phase-count">챌린지 · 실전</span>
-        </div>
-        <p class="phase-desc">
-          혼자 공부만으로는 부족하다. 같은 목표를 가진 사람들과 함께<br>
-          기한 내에 미션을 완수하며 실전 감각을 키우는 단계.
-        </p>
+          <div class="phase-sublabel">커리어</div>
+          <div class="phase-playlists">
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8tI4_ptzFuNUr7QZs1eMT4N" target="_blank"><span class="playlist-icon">🚀</span><span class="playlist-name">앱 시작하기</span><span class="playlist-arrow">→</span></a>
+            <a class="playlist-card" href="https://www.youtube.com/playlist?list=PL1PI2d-NlJ8vUBDRbL0Zfwc29kdjNJvev" target="_blank"><span class="playlist-icon">♻️</span><span class="playlist-name">지속 가능한 앱을 만드는 방법</span><span class="playlist-arrow">→</span></a>
+          </div>
 
-        <div class="phase-courses">
-          <a class="phase-course" href="https://inf.run/PpLd4" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">AI와 함께하는 코딩 체험 챌린지 - 1기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/61P39" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">AI와 함께하는 코딩 체험 챌린지 - 2기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/aqMVm" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">일정 관리 앱 만들기 챌린지 - 1기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/SVU7i" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">일정 관리 앱 만들기 챌린지 - 2기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/1cjih" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">코딩 퍼즐 미션 클리어 챌린지 - 1기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
-          <a class="phase-course" href="https://inf.run/M5E4D" target="_blank">
-            <span class="phase-course-badge badge--purple">Challenge</span>
-            <span class="phase-course-name">랜덤 뽑기 앱 만들기 챌린지 - 1기</span>
-            <span class="phase-course-arrow">&rarr;</span>
-          </a>
+          <div class="section-more" style="margin-top:1rem;">
+            <a href="https://www.youtube.com/@Leeo25" target="_blank" class="btn btn--outline">YouTube 채널 바로가기 →</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Phase 5: 지속하다 -->
-      <div class="roadmap-phase">
-        <div class="phase-marker phase-marker--gold">♻️</div>
-        <div class="phase-header">
-          <span class="phase-number">Phase 05</span>
-          <span class="phase-title">지속하다</span>
-          <span class="phase-count">커리어 · 성장</span>
+        <!-- 챌린지 -->
+        <div class="roadmap-phase">
+          <div class="phase-marker phase-marker--purple">🔥</div>
+          <div class="phase-header">
+            <span class="phase-title">챌린지</span>
+            <span class="phase-count">인프런</span>
+          </div>
+
+          <div class="phase-courses">
+            <a class="phase-course" href="https://inf.run/PpLd4" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">AI와 함께하는 코딩 체험 챌린지 - 1기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/61P39" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">AI와 함께하는 코딩 체험 챌린지 - 2기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/aqMVm" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">일정 관리 앱 만들기 챌린지 - 1기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/SVU7i" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">일정 관리 앱 만들기 챌린지 - 2기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/1cjih" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">코딩 퍼즐 미션 클리어 챌린지 - 1기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+            <a class="phase-course" href="https://inf.run/M5E4D" target="_blank">
+              <span class="phase-course-badge badge--purple">Challenge</span>
+              <span class="phase-course-name">랜덤 뽑기 앱 만들기 챌린지 - 1기</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
         </div>
-        <p class="phase-desc">
-          기술은 계속 바뀐다. 중요한 건 배움을 멈추지 않는 것.<br>
-          지속 가능한 앱 운영과 개발자 커리어를 고민하는 단계.
-        </p>
-      </div>
+
+        <!-- 외부 플랫폼 -->
+        <div class="roadmap-phase">
+          <div class="phase-marker phase-marker--gold">🔗</div>
+          <div class="phase-header">
+            <span class="phase-title">외부 플랫폼</span>
+          </div>
+
+          <div class="phase-courses">
+            <a class="phase-course" href="https://fastcampus.co.kr/dev_online_ios" target="_blank">
+              <span class="phase-course-badge badge--red">Fastcampus</span>
+              <span class="phase-course-name">패스트캠퍼스 iOS 개발 강의</span>
+              <span class="phase-course-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /roadmap -->
 
       <!-- End -->
       <div class="roadmap-end">
@@ -579,7 +549,7 @@
       if (e.isIntersecting) { e.target.classList.add('visible'); phaseObserver.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.roadmap-phase, .roadmap-progress').forEach(el => phaseObserver.observe(el));
+  document.querySelectorAll('.roadmap-phase, .roadmap-progress, .curriculum-hero, .depth-step').forEach(el => phaseObserver.observe(el));
 </script>
 <script src="js/app.js"></script>
 </body>
