@@ -164,10 +164,14 @@
   .curriculum-step:hover .curriculum-step-marker {
     background: var(--accent-purple); color: white; transform: scale(1.15);
   }
-  .curriculum-final {
+  .curriculum-hero {
     border-color: var(--accent-purple) !important;
-    box-shadow: 0 0 0 1px var(--accent-purple);
+    box-shadow: 0 0 0 1px var(--accent-purple), 0 4px 20px rgba(83, 52, 131, 0.15);
+    padding: 1.5rem;
   }
+  .curriculum-hero .phase-featured-visual { width: 140px; height: 90px; }
+  .curriculum-hero .phase-featured-title { font-size: 1.1rem; }
+  .curriculum-hero:hover { box-shadow: 0 0 0 1px var(--accent-purple), 0 8px 30px rgba(83, 52, 131, 0.25); }
 
   @media (max-width: 640px) {
     .roadmap { padding-left: 2.25rem; }
@@ -322,20 +326,35 @@
         </div>
       </div>
 
-      <!-- Phase 3: 깊이 이해하다 — 커리큘럼 타임라인 -->
+      <!-- Phase 3: 깊이 이해하다 — 커리큘럼 -->
       <div class="roadmap-phase">
         <div class="phase-marker phase-marker--purple">🧠</div>
         <div class="phase-header">
           <span class="phase-number">Phase 03</span>
           <span class="phase-title">깊이 이해하다</span>
-          <span class="phase-count">커리큘럼 로드맵</span>
+          <span class="phase-count">커리큘럼</span>
         </div>
         <p class="phase-desc">
           따라 만드는 건 됐다. 이제 "왜 이렇게 동작하는지"가 궁금해진다.<br>
-          자료구조부터 CS 전체를 아우르는 커리큘럼까지, 단계별로 깊이를 더한다.
+          컴퓨터 공학 커리큘럼이라는 전체 지도 위에서, 필요한 영역을 깊이 파고든다.
         </p>
 
-        <!-- Step timeline within Phase 03 -->
+        <!-- 컴퓨터 공학 커리큘럼: 전체 지도 -->
+        <a class="phase-featured curriculum-hero" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank">
+          <div class="phase-featured-visual" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">
+            <span>🗺️<br>CS Full</span>
+          </div>
+          <div class="phase-featured-body">
+            <span class="phase-course-badge badge--purple">Top-Down CS Curriculum</span>
+            <div class="phase-featured-title">개발자리 컴퓨터 공학 커리큘럼</div>
+            <div class="phase-featured-desc">앱을 만들다 막힌 순간이 교과서다. 이론 먼저가 아닌, 문제에서 출발하는 Top-Down 방식의 CS 학습 지도.</div>
+            <div class="phase-featured-meta" style="margin-top:0.5rem;">🎯 8 Stages · 📚 28 Chapters · 🌿 200+ Topics → 커리큘럼 보기</div>
+          </div>
+        </a>
+
+        <div class="phase-sublabel" style="margin-top:1.5rem;">이 커리큘럼 안에서 깊이 파는 학습 경로</div>
+
+        <!-- 학습 경로 타임라인 -->
         <div class="curriculum-timeline">
           <div class="curriculum-step">
             <div class="curriculum-step-marker">1</div>
@@ -344,10 +363,10 @@
                 <span>📦<br>Swift DS</span>
               </div>
               <div class="phase-featured-body">
-                <span class="phase-course-badge badge--gold">Step 1 · Data Structures</span>
+                <span class="phase-course-badge badge--gold">학습 경로 1 · 자료구조</span>
                 <div class="phase-featured-title">Swift 자료구조</div>
-                <div class="phase-featured-desc">배열, 스택, 큐, 트리 등 핵심 자료구조를 Swift로 직접 구현하며 기초 체력을 쌓는다.</div>
-                <div class="phase-featured-meta">→ 커리큘럼 바로가기</div>
+                <div class="phase-featured-desc">배열, 스택, 큐, 트리 — 핵심 자료구조를 Swift로 직접 구현하며 기초 체력을 쌓는다.</div>
+                <div class="phase-featured-meta">→ 바로가기</div>
               </div>
             </a>
           </div>
@@ -359,25 +378,10 @@
                 <span>📱<br>CS × SwiftUI</span>
               </div>
               <div class="phase-featured-body">
-                <span class="phase-course-badge badge--red">Step 2 · App-First CS</span>
+                <span class="phase-course-badge badge--red">학습 경로 2 · 앱으로 배우는 CS</span>
                 <div class="phase-featured-title">CS × SwiftUI</div>
-                <div class="phase-featured-desc">앱을 만들다 마주치는 문제를 해결하며 CS를 배운다. Top-Down · Problem-Driven 방식.</div>
-                <div class="phase-featured-meta">→ 커리큘럼 바로가기</div>
-              </div>
-            </a>
-          </div>
-
-          <div class="curriculum-step">
-            <div class="curriculum-step-marker">3</div>
-            <a class="phase-featured curriculum-final" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank" style="margin-bottom:0;">
-              <div class="phase-featured-visual" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">
-                <span>🗺️<br>CS Full</span>
-              </div>
-              <div class="phase-featured-body">
-                <span class="phase-course-badge badge--purple">Step 3 · Final Curriculum</span>
-                <div class="phase-featured-title">개발자리 컴퓨터 공학 커리큘럼</div>
-                <div class="phase-featured-desc">앱을 만들다 막힌 순간이 교과서다. 8 Stages · 28 Chapters · 200+ Topics. 최종 목적지.</div>
-                <div class="phase-featured-meta">→ 커리큘럼 보기</div>
+                <div class="phase-featured-desc">앱을 만들다 마주치는 문제를 해결하며 CS를 배운다. Problem-Driven · App-First 방식.</div>
+                <div class="phase-featured-meta">→ 바로가기</div>
               </div>
             </a>
           </div>
