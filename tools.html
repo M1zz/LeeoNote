@@ -206,7 +206,7 @@
 <!-- NAV -->
 <nav>
   <div class="container">
-    <a href="index.html" class="nav-logo">리이오의 연습장</a>
+    <a href="index.html" class="nav-logo" data-i18n="nav.logo">리이오의 연습장</a>
     <div style="display:flex;align-items:center;gap:1.5rem;">
       <div class="nav-links">
         <a href="library.html" data-i18n="nav.library">서재</a>
@@ -230,15 +230,15 @@
 
     <div class="roadmap-intro">
       <div class="roadmap-journey">
-        <span class="roadmap-journey-step active" data-phase="all">전체</span>
+        <span class="roadmap-journey-step active" data-phase="all" data-i18n="tools.phase.all">전체</span>
         <span class="roadmap-journey-arrow">→</span>
-        <span class="roadmap-journey-step" data-phase="learn">배우다</span>
+        <span class="roadmap-journey-step" data-phase="learn" data-i18n="tools.phase.learn">배우다</span>
         <span class="roadmap-journey-arrow">→</span>
-        <span class="roadmap-journey-step" data-phase="experiment">실험하다</span>
+        <span class="roadmap-journey-step" data-phase="experiment" data-i18n="tools.phase.experiment">실험하다</span>
         <span class="roadmap-journey-arrow">→</span>
-        <span class="roadmap-journey-step" data-phase="build">만들다</span>
+        <span class="roadmap-journey-step" data-phase="build" data-i18n="tools.phase.build">만들다</span>
         <span class="roadmap-journey-arrow">→</span>
-        <span class="roadmap-journey-step" data-phase="share">나누다</span>
+        <span class="roadmap-journey-step" data-phase="share" data-i18n="tools.phase.share">나누다</span>
       </div>
     </div>
 
@@ -250,10 +250,10 @@
         <div class="phase-marker phase-marker--gold">📖</div>
         <div class="phase-header">
           <span class="phase-number">Phase 01</span>
-          <span class="phase-title">배우다</span>
+          <span class="phase-title" data-i18n="tools.phase1.title">배우다</span>
           <span class="phase-count">4 tools</span>
         </div>
-        <p class="phase-desc">
+        <p class="phase-desc" data-i18n="tools.phase1.desc">
           처음 개발을 시작하거나 Apple 플랫폼의 전체 그림이 필요할 때.<br>
           어디서부터 배워야 할지 막막한 사람을 위한 가이드와 레퍼런스.
         </p>
@@ -265,10 +265,10 @@
         <div class="phase-marker phase-marker--blue">🔬</div>
         <div class="phase-header">
           <span class="phase-number">Phase 02</span>
-          <span class="phase-title">실험하다</span>
+          <span class="phase-title" data-i18n="tools.phase2.title">실험하다</span>
           <span class="phase-count">4 tools</span>
         </div>
-        <p class="phase-desc">
+        <p class="phase-desc" data-i18n="tools.phase2.desc">
           코드만 봐서는 이해가 안 되는 개념들을 눈으로 보고 손으로 느끼는 단계.<br>
           외우는 것이 아니라 체험하며 이해하는 인터랙티브 실습 공간.
         </p>
@@ -280,10 +280,10 @@
         <div class="phase-marker phase-marker--purple">🚀</div>
         <div class="phase-header">
           <span class="phase-number">Phase 03</span>
-          <span class="phase-title">만들다</span>
+          <span class="phase-title" data-i18n="tools.phase3.title">만들다</span>
           <span class="phase-count" id="build-count">6 apps</span>
         </div>
-        <p class="phase-desc">
+        <p class="phase-desc" data-i18n="tools.phase3.desc">
           배운 것을 실제 앱으로 만들어 출시하는 단계.<br>
           기획부터 디자인, 개발, App Store 출시까지 혼자서 해낸 앱들.
         </p>
@@ -304,10 +304,10 @@
         <div class="phase-marker phase-marker--green">🌱</div>
         <div class="phase-header">
           <span class="phase-number">Phase 04</span>
-          <span class="phase-title">나누다</span>
+          <span class="phase-title" data-i18n="tools.phase4.title">나누다</span>
           <span class="phase-count">3 tools</span>
         </div>
-        <p class="phase-desc">
+        <p class="phase-desc" data-i18n="tools.phase4.desc">
           나 자신과 환경을 더 정확하게 파악하고, 다른 사람도 도울 수 있는 도구들.<br>
           학습 유형 진단, 프라이버시 점검, 산업 생태계 탐색까지.
         </p>
@@ -316,30 +316,30 @@
 
       <!-- End marker -->
       <div class="roadmap-end">
-        <div class="roadmap-end-text">계속 만드는 중 · building in progress...</div>
+        <div class="roadmap-end-text" data-i18n="tools.end">계속 만드는 중 · building in progress...</div>
       </div>
 
     </div>
 
     <!-- ===== PROGRESS SUMMARY ===== -->
     <div class="roadmap-progress">
-      <div class="progress-title">지금까지의 기록</div>
+      <div class="progress-title" data-i18n="tools.progress.title">지금까지의 기록</div>
       <div class="progress-stats">
         <div class="progress-stat">
           <span class="progress-stat-number" id="stat-web">11</span>
-          <span class="progress-stat-label">웹 도구</span>
+          <span class="progress-stat-label" data-i18n="tools.progress.web">웹 도구</span>
         </div>
         <div class="progress-stat">
           <span class="progress-stat-number" id="stat-ios">20+</span>
-          <span class="progress-stat-label">iOS 앱</span>
+          <span class="progress-stat-label" data-i18n="tools.progress.ios">iOS 앱</span>
         </div>
         <div class="progress-stat">
           <span class="progress-stat-number" id="stat-macos">1</span>
-          <span class="progress-stat-label">macOS 앱</span>
+          <span class="progress-stat-label" data-i18n="tools.progress.macos">macOS 앱</span>
         </div>
         <div class="progress-stat">
           <span class="progress-stat-number">solo</span>
-          <span class="progress-stat-label">기획 · 디자인 · 개발 · 출시</span>
+          <span class="progress-stat-label" data-i18n="tools.progress.solo">기획 · 디자인 · 개발 · 출시</span>
         </div>
       </div>
     </div>
