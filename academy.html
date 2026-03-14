@@ -142,12 +142,10 @@
   /* Depth roadmap */
   .depth-roadmap { display: flex; flex-direction: column; gap: 0; }
   .curriculum-hero {
-    opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
     border-color: var(--accent-purple) !important;
     box-shadow: 0 0 0 1px var(--accent-purple), 0 4px 20px rgba(83, 52, 131, 0.15);
     padding: 1.5rem;
   }
-  .curriculum-hero.visible { opacity: 1; transform: translateY(0); }
   .curriculum-hero .phase-featured-visual { width: 140px; height: 90px; }
   .curriculum-hero .phase-featured-title { font-size: 1.1rem; }
   .curriculum-hero:hover { box-shadow: 0 0 0 1px var(--accent-purple), 0 8px 30px rgba(83, 52, 131, 0.25); }
@@ -168,10 +166,6 @@
     position: absolute; left: 15px; top: 48px; bottom: -16px;
     width: 2px; background: var(--border);
   }
-  .depth-step {
-    opacity: 0; transform: translateY(15px); transition: all 0.5s ease;
-  }
-  .depth-step.visible { opacity: 1; transform: translateY(0); }
   .depth-step-content { flex: 1; min-width: 0; padding-bottom: 1rem; }
   .depth-step-label {
     font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
@@ -682,7 +676,7 @@
       if (e.isIntersecting) { e.target.classList.add('visible'); phaseObserver.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.roadmap-phase, .roadmap-progress, .curriculum-hero, .depth-step').forEach(el => phaseObserver.observe(el));
+  document.querySelectorAll('.roadmap-phase, .roadmap-progress').forEach(el => phaseObserver.observe(el));
 </script>
 <script src="js/app.js"></script>
 </body>
