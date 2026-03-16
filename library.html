@@ -19,6 +19,7 @@
         <a href="library.html" data-i18n="nav.library">서재</a>
         <a href="thoughts.html" data-i18n="nav.thoughts">생각</a>
         <a href="academy.html" data-i18n="nav.academy">아카데미</a>
+        <a href="philosophy.html">교육철학</a>
         <a href="tools.html" data-i18n="nav.tools">도구모음</a>
       </div>
       <button class="lang-toggle" id="langToggle" aria-label="언어 전환 / Switch language">KO</button>
@@ -27,90 +28,11 @@
   </div>
 </nav>
 
-<style>
-  .library-layout {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-  .library-sidebar {
-    position: sticky;
-    top: 6rem;
-  }
-  .sidebar-back {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    padding: 0.4rem 0;
-    transition: color 0.2s;
-    margin-bottom: 1.5rem;
-  }
-  .sidebar-back:hover { color: var(--text-primary); }
-  .sidebar-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.75rem;
-  }
-  .sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; }
-  .sidebar-nav a {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 0.45rem 0.75rem;
-    border-radius: 8px;
-    transition: all 0.2s;
-    border-left: 2px solid transparent;
-  }
-  .sidebar-nav a:hover { color: var(--text-primary); background: var(--bg-card); }
-  .sidebar-nav a.active {
-    color: var(--text-primary);
-    font-weight: 500;
-    border-left-color: var(--accent-gold);
-    background: var(--bg-card);
-  }
-  @media (max-width: 768px) {
-    .library-layout { grid-template-columns: 1fr; }
-    .library-sidebar {
-      position: static;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .sidebar-label { display: none; }
-    .sidebar-nav { flex-direction: row; }
-    .sidebar-back { margin-bottom: 0; }
-  }
-</style>
-
 <main style="padding-top:5rem;">
 
 <!-- ===== 리이오의 서재 ===== -->
 <section id="library" class="section animate-on-scroll" style="padding-top:6rem;">
   <div class="container">
-  <div class="library-layout">
-
-  <!-- 사이드바 -->
-  <aside class="library-sidebar">
-    <a href="index.html" class="sidebar-back">← 홈으로</a>
-    <div class="sidebar-label">서재</div>
-    <nav class="sidebar-nav">
-      <a href="library.html" class="active">📚 서재</a>
-      <a href="philosophy.html">🌱 교육철학</a>
-    </nav>
-  </aside>
-
-  <!-- 메인 콘텐츠 -->
-  <div>
     <p class="section-label" data-i18n="library.label">Library</p>
     <h2 class="section-title" data-i18n="library.title">리이오의 서재</h2>
     <p class="section-desc" data-i18n="library.desc">읽고, 쓰고, 추천하는 책들을 모아둔 서재입니다.</p>
@@ -430,8 +352,6 @@
       </div>
     </div>
 
-  </div><!-- /메인 콘텐츠 -->
-  </div><!-- /library-layout -->
   </div><!-- /container -->
 </section>
 
