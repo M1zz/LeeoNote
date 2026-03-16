@@ -18,9 +18,7 @@
 
   .roadmap-phase {
     position: relative; margin-bottom: 4rem;
-    opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
   }
-  .roadmap-phase.visible { opacity: 1; transform: translateY(0); }
 
   .phase-marker {
     position: absolute; left: -2.35rem; top: 0.1rem;
@@ -112,9 +110,7 @@
   .roadmap-progress {
     margin-top: 3rem; padding: 1.5rem; background: var(--bg-card);
     border: 1px solid var(--border); border-radius: 14px;
-    opacity: 0; transform: translateY(20px); transition: all 0.6s ease;
   }
-  .roadmap-progress.visible { opacity: 1; transform: translateY(0); }
   .progress-title {
     font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
     letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim);
@@ -217,7 +213,7 @@
 
 <main style="padding-top:5rem;">
 
-<section id="academy" class="section animate-on-scroll" style="padding-top:6rem;">
+<section id="academy" class="section" style="padding-top:6rem;">
   <div class="container">
     <p class="section-label" data-i18n="academy.label">Academy</p>
     <h2 class="section-title" data-i18n="academy.title">리이오 아카데미</h2>
@@ -670,14 +666,6 @@
   </div>
 </footer>
 
-<script>
-  const phaseObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); phaseObserver.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.roadmap-phase, .roadmap-progress').forEach(el => phaseObserver.observe(el));
-</script>
 <script src="js/app.js"></script>
 </body>
 </html>
