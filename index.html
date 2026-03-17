@@ -162,7 +162,41 @@
     transition: all 0.2s; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
   }
   .nav-btn:hover { border-color: var(--border-hover); color: var(--text); }
-  @media (max-width: 640px) { .nav-links { display: none; } }
+  .nav-hamburger {
+    display: none;
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer;
+    width: 32px; height: 32px;
+    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    flex-shrink: 0; transition: border-color 0.2s;
+  }
+  .nav-hamburger:hover { border-color: var(--border-hover); color: var(--text); }
+  .nav-hamburger span { display: block; width: 14px; height: 1px; background: currentColor; border-radius: 1px; transition: all 0.25s; }
+  nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+  nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+  @media (max-width: 640px) {
+    .nav-inner { grid-template-columns: 1fr auto; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+
+    nav.nav-open .nav-links {
+      display: flex; flex-direction: column; gap: 0;
+      position: fixed; top: 100px; left: 0; right: 0;
+      background: rgba(247,246,242,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 2rem 1rem; z-index: 99;
+    }
+    html.dark nav.nav-open .nav-links { background: rgba(17,17,17,0.97); }
+    nav.nav-open .nav-links a {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem; letter-spacing: 0.08em;
+    }
+    nav.nav-open .nav-links a:last-child { border-bottom: none; }
+  }
 
   /* ===== CONTAINER ===== */
   .container {
@@ -656,6 +690,7 @@
     <div class="nav-controls">
       <button class="nav-btn lang-toggle" id="langToggle" aria-label="언어 전환">KO</button>
       <button class="nav-btn theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
@@ -1189,6 +1224,11 @@
 <script>
   function toggleSeed(el) { el.classList.toggle('open'); }
   function toggleRoot(el) { el.classList.toggle('open'); }
+
+  // hamburger
+  document.getElementById('navHamburger').addEventListener('click', function() {
+    document.querySelector('nav').classList.toggle('nav-open');
+  });
 
   // substack rss
   (function () {
