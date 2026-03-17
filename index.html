@@ -620,6 +620,44 @@
     .community-divider { display: none; }
   }
 
+  /* ===== FUNNEL STEPS ===== */
+  .funnel-steps { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .funnel-step { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .funnel-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    border: 1px solid var(--border); color: var(--muted); background: var(--surface-subtle);
+  }
+  .funnel-step-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.05em; color: var(--subtle); text-align: center; }
+  .funnel-step--done .funnel-step-num { background: var(--sage); color: #fff; border-color: var(--sage); }
+  .funnel-step--done .funnel-step-label { color: var(--sage); }
+  .funnel-step--active .funnel-step-num { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .funnel-step--active .funnel-step-label { color: var(--accent); }
+  .funnel-arrow { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--subtle); flex-shrink: 0; padding-bottom: 1.2rem; }
+
+  /* ===== CHALLENGE ===== */
+  .challenge-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+  .challenge-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+  .challenge-inner { display: flex; gap: 3rem; align-items: flex-start; }
+  .challenge-copy { flex: 1; }
+  .challenge-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+  .challenge-badge-item { font-family: 'DM Mono', monospace; font-size: 0.58rem; padding: 0.2rem 0.6rem; border-radius: 100px; background: var(--surface-subtle); color: var(--muted); letter-spacing: 0.05em; border: 1px solid var(--border); }
+  .challenge-title { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-strong); margin-bottom: 0.6rem; line-height: 1.3; }
+  .challenge-desc { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+  .challenge-feats { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .challenge-feats li { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); }
+  .challenge-cta { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.85rem; padding-top: 0.25rem; min-width: 160px; }
+  .challenge-next-badge { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.25rem 0.7rem; border-radius: 100px; background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .challenge-notify-btn { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.04em; padding: 0.7rem 1.3rem; background: var(--text-strong); color: var(--bg); border-radius: 8px; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; }
+  .challenge-notify-btn:hover { opacity: 0.75; }
+  .challenge-or { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--subtle); letter-spacing: 0.1em; text-transform: uppercase; }
+  .challenge-channel-btn { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+  .challenge-channel-btn:hover { color: var(--text); border-color: var(--muted); }
+  @media (max-width: 600px) {
+    .challenge-inner { flex-direction: column; gap: 1.5rem; }
+  }
+
   /* ===== SUPPORT ===== */
   .support-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
   .support-inner { display: flex; gap: 3rem; align-items: flex-start; }
@@ -1155,8 +1193,30 @@
   </div>
 
   <!-- 커뮤니티 -->
-  <div class="community-section reveal">
+  <div class="community-section reveal" id="community">
     <div class="community-label">Community</div>
+    <!-- 퍼널 단계 표시 -->
+    <div class="funnel-steps">
+      <div class="funnel-step funnel-step--done">
+        <div class="funnel-step-num">✓</div>
+        <div class="funnel-step-label">구독</div>
+      </div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step funnel-step--active">
+        <div class="funnel-step-num">2</div>
+        <div class="funnel-step-label">채널 참여</div>
+      </div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step">
+        <div class="funnel-step-num">3</div>
+        <div class="funnel-step-label">챌린지</div>
+      </div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step">
+        <div class="funnel-step-num">4</div>
+        <div class="funnel-step-label">멤버십</div>
+      </div>
+    </div>
     <div class="community-grid">
       <div class="community-channel">
         <img class="community-qr" src="./images/kakao-channel-qr.jpg" alt="카카오톡 채널 QR">
@@ -1174,6 +1234,33 @@
           <div class="community-desc">깊은 대화 · 1:1 피드백<br>멤버십 전용 채널</div>
           <span class="community-badge community-badge--soon">멤버십 오픈 예정</span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 챌린지 -->
+  <div class="challenge-section reveal" id="challenge">
+    <div class="challenge-label">Challenge</div>
+    <div class="challenge-inner">
+      <div class="challenge-copy">
+        <div class="challenge-badges">
+          <span class="challenge-badge-item">6기 완료</span>
+          <span class="challenge-badge-item">누적 127명 수료</span>
+          <span class="challenge-badge-item">30일 과정</span>
+        </div>
+        <div class="challenge-title">iOS 개발 30일 챌린지</div>
+        <div class="challenge-desc">매일 1시간, 30일이면 앱이 완성됩니다.<br>강의만 듣는 게 아니라, 함께 만들어냅니다.</div>
+        <ul class="challenge-feats">
+          <li>✓ 매일 미션 & 인증 — 혼자 하지 않아도 됩니다</li>
+          <li>✓ 카카오톡 채널 실시간 Q&A</li>
+          <li>✓ 수료 후 포트폴리오 리뷰</li>
+        </ul>
+      </div>
+      <div class="challenge-cta">
+        <span class="challenge-next-badge">7기 모집 예정</span>
+        <a href="https://leeo25.substack.com" target="_blank" class="challenge-notify-btn">알림 받기 →</a>
+        <div class="challenge-or">또는</div>
+        <a href="#community" class="challenge-channel-btn">카카오톡 채널 먼저 참여하기</a>
       </div>
     </div>
   </div>
@@ -1271,19 +1358,25 @@
   })();
 
   // top banner
+  function closeBanner() {
+    document.getElementById('topBanner').style.display = 'none';
+    document.querySelector('nav').style.top = '0';
+    document.querySelector('.container').style.paddingTop = '7rem';
+  }
   document.getElementById('bannerForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('bannerEmail').value;
     window.open('https://leeo25.substack.com/subscribe?email=' + encodeURIComponent(email), '_blank');
-    document.getElementById('topBanner').style.display = 'none';
-    document.querySelector('nav').style.top = '0';
-    document.querySelector('.container').style.paddingTop = '7rem';
+    // 구독 완료 → 다음 단계(채널) CTA 노출
+    const banner = document.getElementById('topBanner');
+    banner.innerHTML = `
+      <span class="top-banner-text" style="opacity:1;">✓ 구독 완료!</span>
+      <span class="top-banner-text" style="opacity:0.7;">다음 단계 →</span>
+      <a href="#community" class="top-banner-btn" style="text-decoration:none;" onclick="closeBanner()">카카오톡 채널 참여하기</a>
+      <button class="top-banner-close" onclick="closeBanner()" aria-label="닫기">✕</button>
+    `;
   });
-  document.getElementById('bannerClose').addEventListener('click', function() {
-    document.getElementById('topBanner').style.display = 'none';
-    document.querySelector('nav').style.top = '0';
-    document.querySelector('.container').style.paddingTop = '7rem';
-  });
+  document.getElementById('bannerClose').addEventListener('click', closeBanner);
 
   // scroll reveal
   const revealObserver = new IntersectionObserver((entries) => {
