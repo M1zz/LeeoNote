@@ -358,6 +358,87 @@
   }
   .contact-link:hover { border-color: var(--border-hover); color: var(--text); }
 
+  /* ===== ONBOARDING PATHS ===== */
+  .path-section { padding: 0 0 3rem; }
+  .path-question {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.25rem; text-align: center;
+  }
+  .path-cards { display: flex; flex-direction: column; gap: 0.5rem; }
+  .path-card {
+    border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .path-card:hover { border-color: var(--border-hover); }
+  .path-card.open { border-color: var(--accent); }
+  .path-card-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    user-select: none;
+  }
+  .path-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--muted);
+    flex-shrink: 0; transition: all 0.2s;
+  }
+  .path-card.open .path-tag { border-color: var(--accent); color: var(--accent); }
+  .path-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem; font-weight: 600; color: var(--text-strong); flex: 1;
+  }
+  .path-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; color: var(--muted);
+  }
+  .path-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem; color: var(--subtle);
+    transition: transform 0.25s;
+  }
+  .path-card.open .path-toggle { transform: rotate(45deg); }
+  .path-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+  }
+  .path-card.open .path-body { display: block; }
+  .path-steps { display: flex; flex-direction: column; gap: 0.35rem; }
+  .path-step {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--surface-subtle); border-radius: 8px;
+    text-decoration: none; color: inherit;
+    transition: background 0.15s;
+  }
+  .path-step:hover { background: var(--card); }
+  .path-step-num {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--subtle); flex-shrink: 0; margin-top: 0.15rem;
+  }
+  .path-step-body { flex: 1; min-width: 0; }
+  .path-step-name {
+    font-size: 0.82rem; font-weight: 500; color: var(--text-strong);
+    margin-bottom: 0.15rem;
+  }
+  .path-step-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted);
+    line-height: 1.5;
+  }
+  .path-step-arrow {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--subtle); flex-shrink: 0; margin-top: 0.15rem;
+  }
+  .path-step:hover .path-step-arrow { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .path-title { font-size: 0.82rem; }
+    .path-sub { display: none; }
+  }
+
   /* ===== EMAIL SIGNUP ===== */
   .email-section {
     padding: 4rem 0;
@@ -714,6 +795,151 @@
     <div class="divider-line"></div>
     <div class="divider-text" data-i18n="index.explore.divider">Explore</div>
     <div class="divider-line"></div>
+  </div>
+
+  <div class="path-section reveal">
+    <div class="path-question">나는 지금 어디에 있나요?</div>
+    <div class="path-cards">
+
+      <!-- 완전 처음 -->
+      <div class="path-card" onclick="this.classList.toggle('open')">
+        <div class="path-card-header">
+          <span class="path-tag">입문</span>
+          <span class="path-title">코딩이 처음이에요</span>
+          <span class="path-sub">Swift · iOS 아예 모름</span>
+          <span class="path-toggle">+</span>
+        </div>
+        <div class="path-body">
+          <div class="path-steps">
+            <a class="path-step" href="https://inf.run/rwpQE" target="_blank">
+              <span class="path-step-num">01</span>
+              <div class="path-step-body">
+                <div class="path-step-name">프로그래밍적 사고 기르기</div>
+                <div class="path-step-desc">코드 전에 생각하는 법부터 — 무료 강의</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://inf.run/kWLdo" target="_blank">
+              <span class="path-step-num">02</span>
+              <div class="path-step-body">
+                <div class="path-step-name">AI와 함께하는 코딩 체험</div>
+                <div class="path-step-desc">두려움 없이 첫 코드 작성 — 무료 강의</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://inf.run/bS92n" target="_blank">
+              <span class="path-step-num">03</span>
+              <div class="path-step-body">
+                <div class="path-step-name">UI와 함께 배우는 Swift 기초</div>
+                <div class="path-step-desc">화면을 만들며 Swift 문법 체득 — 무료 강의</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://inf.run/dHvmn" target="_blank">
+              <span class="path-step-num">04</span>
+              <div class="path-step-body">
+                <div class="path-step-name">한 조각씩 배우는 SwiftUI 입문</div>
+                <div class="path-step-desc">첫 앱 완성까지 — 무료 강의</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 막힌 상태 -->
+      <div class="path-card" onclick="this.classList.toggle('open')">
+        <div class="path-card-header">
+          <span class="path-tag">중급</span>
+          <span class="path-title">기초는 했는데 앱이 안 만들어져요</span>
+          <span class="path-sub">문법은 아는데 막막함</span>
+          <span class="path-toggle">+</span>
+        </div>
+        <div class="path-body">
+          <div class="path-steps">
+            <a class="path-step" href="https://m1zz.github.io/cs-swiftUI/" target="_blank">
+              <span class="path-step-num">01</span>
+              <div class="path-step-body">
+                <div class="path-step-name">CS × SwiftUI — 앱을 만들며 CS 배우기</div>
+                <div class="path-step-desc">막히는 순간이 교과서 — Problem-Driven 방식</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/iOSArchLab/" target="_blank">
+              <span class="path-step-num">02</span>
+              <div class="path-step-body">
+                <div class="path-step-name">iOS Architecture Lab</div>
+                <div class="path-step-desc">MVC · MVVM · Clean Architecture 실습</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/ios-concept-lab/" target="_blank">
+              <span class="path-step-num">03</span>
+              <div class="path-step-body">
+                <div class="path-step-name">iOS Concept Lab</div>
+                <div class="path-step-desc">자주 막히는 핵심 개념 정리</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/network" target="_blank">
+              <span class="path-step-num">04</span>
+              <div class="path-step-body">
+                <div class="path-step-name">iOS Network</div>
+                <div class="path-step-desc">URLSession · REST API · JSON 파싱</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 취업/이직 -->
+      <div class="path-card" onclick="this.classList.toggle('open')">
+        <div class="path-card-header">
+          <span class="path-tag">심화</span>
+          <span class="path-title">취업 · 이직을 준비하고 있어요</span>
+          <span class="path-sub">포트폴리오 · 기술면접 · 앱 출시</span>
+          <span class="path-toggle">+</span>
+        </div>
+        <div class="path-body">
+          <div class="path-steps">
+            <a class="path-step" href="https://m1zz.github.io/ios-concurrency-performance/" target="_blank">
+              <span class="path-step-num">01</span>
+              <div class="path-step-body">
+                <div class="path-step-name">iOS Concurrency &amp; Performance</div>
+                <div class="path-step-desc">GCD · async/await · 성능 최적화 — 면접 단골 주제</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/swift-data-structures/" target="_blank">
+              <span class="path-step-num">02</span>
+              <div class="path-step-body">
+                <div class="path-step-name">Swift 자료구조</div>
+                <div class="path-step-desc">배열 · 스택 · 트리 직접 구현 — 코딩테스트 대비</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/ios-distribution" target="_blank">
+              <span class="path-step-num">03</span>
+              <div class="path-step-body">
+                <div class="path-step-name">iOS Distribution</div>
+                <div class="path-step-desc">앱 출시 전 과정 — 포트폴리오 완성</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+            <a class="path-step" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank">
+              <span class="path-step-num">04</span>
+              <div class="path-step-body">
+                <div class="path-step-name">CS 전체 커리큘럼 지도</div>
+                <div class="path-step-desc">내가 뭘 모르는지 파악하는 체크리스트</div>
+              </div>
+              <span class="path-step-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="explore-section reveal">
