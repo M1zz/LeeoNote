@@ -547,16 +547,59 @@
     margin-top: 1rem; letter-spacing: 0.05em;
   }
 
-  /* ===== SUPPORT ===== */
-  .support-wrap {
-    display: inline-block; background: var(--surface);
-    border: 1px solid var(--border); border-radius: 16px;
-    padding: 1.5rem; margin-bottom: 2.5rem; transition: border-color 0.3s;
+  /* ===== PROOF ===== */
+  .proof-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+  .proof-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 2rem; }
+  .proof-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .proof-stat { text-align: center; }
+  .proof-stat-num { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-strong); line-height: 1; }
+  .proof-stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-top: 0.35rem; letter-spacing: 0.05em; }
+
+  /* ===== POSTS ===== */
+  .posts-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+  .posts-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem; }
+  .posts-title { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .posts-more { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .posts-more:hover { color: var(--text); }
+  .posts-list { display: flex; flex-direction: column; gap: 0; }
+  .post-item { display: flex; align-items: baseline; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: opacity 0.2s; }
+  .post-item:last-child { border-bottom: none; }
+  .post-item:hover { opacity: 0.7; }
+  .post-item-title { font-size: 0.85rem; color: var(--text-strong); flex: 1; }
+  .post-item-arrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--subtle); flex-shrink: 0; }
+
+  /* ===== COMMUNITY ===== */
+  .community-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+  .community-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+  .community-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 2.5rem; align-items: center; }
+  .community-divider { background: var(--border); height: 100%; min-height: 140px; }
+  .community-channel { display: flex; align-items: center; gap: 1.5rem; }
+  .community-qr { width: 90px; height: 90px; border-radius: 10px; border: 1px solid var(--border); flex-shrink: 0; }
+  .community-info {}
+  .community-name { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.3rem; }
+  .community-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.6; }
+  .community-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 100px; border: 1px solid var(--border); color: var(--subtle); margin-top: 0.5rem; }
+  .community-badge--soon { border-color: var(--muted); color: var(--muted); }
+  @media (max-width: 600px) {
+    .community-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .community-divider { display: none; }
   }
-  .support-wrap:hover { border-color: var(--border-hover); }
-  .support-logo { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.75rem; }
-  .support-qr { width: 160px; height: 160px; border-radius: 10px; display: block; }
-  .support-name { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--subtle); margin-top: 0.6rem; }
+
+  /* ===== SUPPORT ===== */
+  .support-section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+  .support-inner { display: flex; gap: 3rem; align-items: flex-start; }
+  .support-copy { flex: 1; }
+  .support-copy-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+  .support-copy-title { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.75rem; line-height: 1.4; }
+  .support-copy-desc { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); line-height: 1.8; }
+  .support-qr-wrap { flex-shrink: 0; text-align: center; }
+  .support-qr-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+  .support-qr { width: 120px; height: 120px; border-radius: 10px; display: block; border: 1px solid var(--border); }
+  .support-qr-name { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); margin-top: 0.5rem; }
+  @media (max-width: 600px) {
+    .support-inner { flex-direction: column; gap: 1.5rem; }
+    .support-qr-wrap { align-self: center; }
+  }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -1034,6 +1077,104 @@
     </div>
   </div>
 
+  <!-- 소셜 프루프 -->
+  <div class="proof-section reveal">
+    <div class="proof-label">Numbers</div>
+    <div class="proof-stats">
+      <div class="proof-stat">
+        <div class="proof-stat-num">8,000+</div>
+        <div class="proof-stat-label">인프런 수강생</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">4.9</div>
+        <div class="proof-stat-label">평균 평점</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">14</div>
+        <div class="proof-stat-label">무료 강의</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">6</div>
+        <div class="proof-stat-label">챌린지 기수</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-num">15+</div>
+        <div class="proof-stat-label">컨퍼런스 발표</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 최신 글 -->
+  <div class="posts-section reveal">
+    <div class="posts-header">
+      <span class="posts-title">Latest Posts</span>
+      <a class="posts-more" href="https://leeo25.substack.com" target="_blank">전체 보기 →</a>
+    </div>
+    <div class="posts-list">
+      <a class="post-item" href="https://leeo25.substack.com/p/claude-code-101" target="_blank">
+        <span class="post-item-title">Claude Code 101 — 한국어 입문 가이드를 만든 이유</span>
+        <span class="post-item-arrow">→</span>
+      </a>
+      <a class="post-item" href="https://leeo25.substack.com/p/1" target="_blank">
+        <span class="post-item-title">1인 개발자가 돈을 버는 진짜 이유 — 성공 사례 해부</span>
+        <span class="post-item-arrow">→</span>
+      </a>
+      <a class="post-item" href="https://leeo25.substack.com/p/ai" target="_blank">
+        <span class="post-item-title">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</span>
+        <span class="post-item-arrow">→</span>
+      </a>
+      <a class="post-item" href="https://leeo25.substack.com/p/084" target="_blank">
+        <span class="post-item-title">공부에는 왕도가 없다, 하지만 '나만의 길'은 있다</span>
+        <span class="post-item-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 커뮤니티 -->
+  <div class="community-section reveal">
+    <div class="community-label">Community</div>
+    <div class="community-grid">
+      <div class="community-channel">
+        <img class="community-qr" src="./images/kakao-channel-qr.jpg" alt="카카오톡 채널 QR">
+        <div class="community-info">
+          <div class="community-name">카카오톡 채널</div>
+          <div class="community-desc">새 강의 · 커리큘럼 업데이트<br>소식을 가장 먼저 받아보세요</div>
+          <span class="community-badge">무료 · 누구나</span>
+        </div>
+      </div>
+      <div class="community-divider"></div>
+      <div class="community-channel">
+        <div style="width:90px;height:90px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.5rem;background:var(--surface-subtle);">🔒</div>
+        <div class="community-info">
+          <div class="community-name">Discord</div>
+          <div class="community-desc">깊은 대화 · 1:1 피드백<br>멤버십 전용 채널</div>
+          <span class="community-badge community-badge--soon">멤버십 오픈 예정</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 후원 -->
+  <div class="support-section reveal">
+    <div class="support-inner">
+      <div class="support-copy">
+        <div class="support-copy-label">Support</div>
+        <div class="support-copy-title">14개 강의가 모두 무료인 이유</div>
+        <div class="support-copy-desc">
+          진입 장벽을 낮추는 것이 더 많은 사람에게 닿는 방법이라 믿습니다.<br>
+          강의가 도움이 됐다면, 커피 한 잔으로 다음 콘텐츠를 응원해 주세요.<br>
+          여러분의 후원이 무료 강의를 계속 만들 수 있게 합니다.
+        </div>
+      </div>
+      <div class="support-qr-wrap">
+        <div class="support-qr-label">카카오페이</div>
+        <img class="support-qr" src="./images/kakaopay-qr.jpg" alt="카카오페이 QR">
+        <div class="support-qr-name">이현호</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 링크 -->
   <div class="contact-section reveal">
     <div class="contact-links">
       <a href="mailto:leeo@kakao.com" class="contact-link">Email</a>
@@ -1043,11 +1184,6 @@
       <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" class="contact-link">Inflearn</a>
       <a href="https://fastcampus.co.kr/dev_online_ios" target="_blank" class="contact-link">Fastcampus</a>
       <a href="https://apps.apple.com/us/app/clip-keyboard-quick-phrases/id1543660502" target="_blank" class="contact-link">App Store</a>
-    </div>
-    <div class="support-wrap">
-      <div class="support-logo">💬 pay</div>
-      <img class="support-qr" src="./images/kakaopay-qr.jpg" alt="카카오페이 QR">
-      <p class="support-name">이현호</p>
     </div>
   </div>
 
