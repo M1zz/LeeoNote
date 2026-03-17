@@ -81,11 +81,13 @@
   }
   .lang-toggle:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
 
-  nav .container { display: flex; justify-content: space-between; align-items: center; }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a { font-size: 0.8rem; color: var(--text-secondary); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent-gold); }
+  nav .container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-logo:hover { color: var(--text-primary); }
+  .nav-links { display: flex; gap: 1.75rem; justify-content: center; }
+  .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-controls { display: flex; align-items: center; gap: 0.75rem; justify-content: flex-end; }
 
   /* ===== HERO ===== */
   .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 5rem; }
