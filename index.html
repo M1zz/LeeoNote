@@ -566,6 +566,7 @@
   .post-item:last-child { border-bottom: none; }
   .post-item:hover { opacity: 0.7; }
   .post-item-title { font-size: 0.85rem; color: var(--text-strong); flex: 1; }
+  .post-item-date { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--subtle); flex-shrink: 0; white-space: nowrap; }
   .post-item-arrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--subtle); flex-shrink: 0; }
 
   /* ===== COMMUNITY ===== */
@@ -1110,23 +1111,11 @@
       <span class="posts-title">Latest Posts</span>
       <a class="posts-more" href="https://leeo25.substack.com" target="_blank">전체 보기 →</a>
     </div>
-    <div class="posts-list">
-      <a class="post-item" href="https://leeo25.substack.com/p/claude-code-101" target="_blank">
-        <span class="post-item-title">Claude Code 101 — 한국어 입문 가이드를 만든 이유</span>
-        <span class="post-item-arrow">→</span>
-      </a>
-      <a class="post-item" href="https://leeo25.substack.com/p/1" target="_blank">
-        <span class="post-item-title">1인 개발자가 돈을 버는 진짜 이유 — 성공 사례 해부</span>
-        <span class="post-item-arrow">→</span>
-      </a>
-      <a class="post-item" href="https://leeo25.substack.com/p/ai" target="_blank">
-        <span class="post-item-title">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</span>
-        <span class="post-item-arrow">→</span>
-      </a>
-      <a class="post-item" href="https://leeo25.substack.com/p/084" target="_blank">
-        <span class="post-item-title">공부에는 왕도가 없다, 하지만 '나만의 길'은 있다</span>
-        <span class="post-item-arrow">→</span>
-      </a>
+    <div class="posts-list" id="postsList">
+      <!-- RSS로 동적 로드 -->
+      <div class="post-item" style="opacity:0.4;pointer-events:none;">
+        <span class="post-item-title">불러오는 중...</span>
+      </div>
     </div>
   </div>
 
@@ -1200,6 +1189,46 @@
 <script>
   function toggleSeed(el) { el.classList.toggle('open'); }
   function toggleRoot(el) { el.classList.toggle('open'); }
+
+  // substack rss
+  (function () {
+    const list = document.getElementById('postsList');
+    const RSS = 'https://leeo25.substack.com/feed';
+    const PROXY = 'https://api.allorigins.win/get?url=' + encodeURIComponent(RSS);
+
+    function fmtDate(str) {
+      const d = new Date(str);
+      if (isNaN(d)) return '';
+      return d.getFullYear() + '.' +
+        String(d.getMonth() + 1).padStart(2, '0') + '.' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    fetch(PROXY)
+      .then(r => r.json())
+      .then(data => {
+        const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+        const items = [...xml.querySelectorAll('item')].slice(0, 4);
+        if (!items.length) return;
+        list.innerHTML = items.map(item => {
+          const title = item.querySelector('title')?.textContent || '';
+          const link  = item.querySelector('link')?.textContent || '#';
+          const date  = item.querySelector('pubDate')?.textContent || '';
+          return `<a class="post-item" href="${link}" target="_blank">
+            <span class="post-item-title">${title}</span>
+            <span class="post-item-date">${fmtDate(date)}</span>
+            <span class="post-item-arrow">→</span>
+          </a>`;
+        }).join('');
+      })
+      .catch(() => {
+        list.innerHTML = `
+          <a class="post-item" href="https://leeo25.substack.com/p/claude-code-101" target="_blank"><span class="post-item-title">Claude Code 101 — 한국어 입문 가이드를 만든 이유</span><span class="post-item-arrow">→</span></a>
+          <a class="post-item" href="https://leeo25.substack.com/p/1" target="_blank"><span class="post-item-title">1인 개발자가 돈을 버는 진짜 이유 — 성공 사례 해부</span><span class="post-item-arrow">→</span></a>
+          <a class="post-item" href="https://leeo25.substack.com/p/ai" target="_blank"><span class="post-item-title">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</span><span class="post-item-arrow">→</span></a>
+          <a class="post-item" href="https://leeo25.substack.com/p/084" target="_blank"><span class="post-item-title">공부에는 왕도가 없다, 하지만 '나만의 길'은 있다</span><span class="post-item-arrow">→</span></a>`;
+      });
+  })();
 
   // top banner
   document.getElementById('bannerForm').addEventListener('submit', function(e) {
