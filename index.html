@@ -656,6 +656,13 @@
   .challenge-or { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--subtle); letter-spacing: 0.1em; text-transform: uppercase; }
   .challenge-channel-btn { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
   .challenge-channel-btn:hover { color: var(--text); border-color: var(--muted); }
+  .challenge-targets { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .challenge-targets-label { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 0.2rem; }
+  .challenge-target-link { display: flex; align-items: flex-start; gap: 0.5rem; text-decoration: none; padding: 0.55rem 0.75rem; border-radius: 7px; border: 1px solid var(--border); background: var(--surface-subtle); transition: background 0.15s, border-color 0.15s; }
+  .challenge-target-link:hover { background: var(--card); border-color: var(--border-hover); }
+  .challenge-target-icon { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent); flex-shrink: 0; padding-top: 0.05rem; }
+  .challenge-target-link span:last-child { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); line-height: 1.5; transition: color 0.15s; }
+  .challenge-target-link:hover span:last-child { color: var(--text); }
   @media (max-width: 600px) {
     .challenge-inner { flex-direction: column; gap: 1.5rem; }
   }
@@ -1258,6 +1265,17 @@
           <li>✓ 카카오톡 채널 실시간 Q&A</li>
           <li>✓ 수료 후 포트폴리오 리뷰</li>
         </ul>
+        <div class="challenge-targets">
+          <div class="challenge-targets-label">이런 분들을 위한 챌린지입니다</div>
+          <a href="join-career.html" class="challenge-target-link">
+            <span class="challenge-target-icon">→</span>
+            <span>다른 직군에서 iOS 개발자로 전환하고 싶다</span>
+          </a>
+          <a href="join-launcher.html" class="challenge-target-link">
+            <span class="challenge-target-icon">→</span>
+            <span>아이디어가 있는데 직접 앱을 만들어 출시하고 싶다</span>
+          </a>
+        </div>
       </div>
       <div class="challenge-cta">
         <span class="challenge-next-badge">7기 모집 예정</span>
