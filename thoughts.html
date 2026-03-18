@@ -41,60 +41,71 @@
     <!-- 내가 한 생각 -->
     <h3 class="subsection-title" data-i18n="thoughts.blog.title">내가 한 생각</h3>
     <p class="section-desc" style="margin-bottom:1.5rem;" data-i18n="thoughts.blog.desc">개발, 교육, 커리어에 대해 쓴 블로그 글들입니다.</p>
-    <div class="course-list animate-on-scroll">
+    <div class="course-list animate-on-scroll" id="blogList">
       <a class="course-list-item" href="https://leeo25.substack.com/p/ai" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post1">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/a1b" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post2">면접에서 떨어진 다음 날, 저는 그 탈락을 '기록'하기 시작했습니다</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/520" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post3">되돌아보니 실패로 이루어져있던 나의 성장</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/d0a" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post4">책도 봤고 강의도 들었는데 왜 개발 실력이 안 늘까</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/hig" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post5">더 좋은 앱을 만들고 싶어서, HIG를 시각화하기 시작했습니다</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/504" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post6">그 프롬프트, 보내기 전에 한 번만 읽어보세요</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/48f" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post7">"나는 누구에게, 무엇을, 어떻게 전달할 것인가?"</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/higlab-apple" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post8">HIGLab — Apple 기술의 지도를 손에 넣다</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/1" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post9">1인 개발자가 돈을 버는 진짜 이유 — 성공 사례 해부</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/084" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post10">공부에는 왕도가 없다, 하지만 '나만의 길'은 있다</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
       <a class="course-list-item" href="https://leeo25.substack.com/p/claude-code-101" target="_blank">
         <span class="card-badge badge--blue" style="margin:0;">Blog</span>
         <span class="course-list-name" data-i18n="thoughts.blog.post11">Claude Code 101 — 한국어 입문 가이드를 만든 이유</span>
+        <span class="course-list-date"></span>
         <span class="course-list-arrow">&rarr;</span>
       </a>
     </div>
@@ -166,6 +177,44 @@
   document.getElementById('navHamburger').addEventListener('click', function() {
     document.querySelector('nav').classList.toggle('nav-open');
   });
+</script>
+<script>
+  // Substack RSS → 블로그 글 날짜 주입
+  (function () {
+    const RSS = 'https://leeo25.substack.com/feed';
+    const PROXY = 'https://api.allorigins.win/get?url=' + encodeURIComponent(RSS);
+
+    function fmtDate(str) {
+      const d = new Date(str);
+      if (isNaN(d)) return '';
+      return d.getFullYear() + '.' +
+        String(d.getMonth() + 1).padStart(2, '0') + '.' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    fetch(PROXY)
+      .then(r => r.json())
+      .then(data => {
+        const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+        // slug → pubDate 맵 생성
+        const dateMap = {};
+        xml.querySelectorAll('item').forEach(item => {
+          const link = item.querySelector('link')?.textContent || '';
+          const pub  = item.querySelector('pubDate')?.textContent || '';
+          const slug = link.replace(/\/$/, '').split('/').pop();
+          if (slug && pub) dateMap[slug] = fmtDate(pub);
+        });
+
+        // 각 블로그 아이템에 날짜 주입
+        document.querySelectorAll('#blogList .course-list-item').forEach(el => {
+          const href = el.getAttribute('href') || '';
+          const slug = href.replace(/\/$/, '').split('/').pop();
+          const dateEl = el.querySelector('.course-list-date');
+          if (dateEl && dateMap[slug]) dateEl.textContent = dateMap[slug];
+        });
+      })
+      .catch(() => {}); // 실패 시 날짜 없이 표시
+  })();
 </script>
 <script src="js/app.js"></script>
 <script src="js/analytics.js"></script>

@@ -211,6 +211,7 @@
   }
   .course-list-item:hover { background: var(--bg-card-hover); border-color: var(--border-hover); }
   .course-list-name { font-size: 0.9rem; font-weight: 500; flex: 1; }
+  .course-list-date { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-dim); flex-shrink: 0; white-space: nowrap; }
   .course-list-arrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-dim); }
   .course-list-item:hover .course-list-arrow { color: var(--accent-gold); }
 
