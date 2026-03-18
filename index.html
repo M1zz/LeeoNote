@@ -613,6 +613,8 @@
   .community-info {}
   .community-name { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.3rem; }
   .community-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.6; }
+  .community-join-btn { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 600; color: #fff; background: var(--accent); padding: 0.35rem 0.85rem; border-radius: 6px; text-decoration: none; margin-top: 0.6rem; transition: opacity 0.15s; }
+  .community-join-btn:hover { opacity: 0.85; }
   .community-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 100px; border: 1px solid var(--border); color: var(--subtle); margin-top: 0.5rem; }
   .community-badge--soon { border-color: var(--muted); color: var(--muted); }
   @media (max-width: 600px) {
@@ -1197,12 +1199,12 @@
     <div class="community-label">Community</div>
     <!-- 퍼널 단계 표시 -->
     <div class="funnel-steps">
-      <div class="funnel-step funnel-step--done">
-        <div class="funnel-step-num">✓</div>
+      <div class="funnel-step" id="funnelStep1">
+        <div class="funnel-step-num" id="funnelStep1Num">1</div>
         <div class="funnel-step-label">구독</div>
       </div>
       <div class="funnel-arrow">→</div>
-      <div class="funnel-step funnel-step--active">
+      <div class="funnel-step" id="funnelStep2">
         <div class="funnel-step-num">2</div>
         <div class="funnel-step-label">채널 참여</div>
       </div>
@@ -1223,6 +1225,7 @@
         <div class="community-info">
           <div class="community-name">카카오톡 채널</div>
           <div class="community-desc">새 강의 · 커리큘럼 업데이트<br>소식을 가장 먼저 받아보세요</div>
+          <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="community-join-btn">채널 참여하기 →</a>
           <span class="community-badge">무료 · 누구나</span>
         </div>
       </div>
@@ -1260,7 +1263,7 @@
         <span class="challenge-next-badge">7기 모집 예정</span>
         <a href="https://leeo25.substack.com" target="_blank" class="challenge-notify-btn">알림 받기 →</a>
         <div class="challenge-or">또는</div>
-        <a href="#community" class="challenge-channel-btn">카카오톡 채널 먼저 참여하기</a>
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" class="challenge-channel-btn">카카오톡 채널 먼저 참여하기</a>
       </div>
     </div>
   </div>
@@ -1363,16 +1366,41 @@
     document.querySelector('nav').style.top = '0';
     document.querySelector('.container').style.paddingTop = '7rem';
   }
+  function markSubscribed() {
+    localStorage.setItem('subscribed', '1');
+    const step1 = document.getElementById('funnelStep1');
+    const num1 = document.getElementById('funnelStep1Num');
+    const step2 = document.getElementById('funnelStep2');
+    if (step1 && num1) {
+      step1.classList.remove('funnel-step--active');
+      step1.classList.add('funnel-step--done');
+      num1.textContent = '✓';
+    }
+    if (step2) {
+      step2.classList.add('funnel-step--active');
+    }
+  }
+
+  // 페이지 로드 시 구독 여부에 따라 퍼널 상태 초기화
+  if (localStorage.getItem('subscribed') === '1') {
+    markSubscribed();
+  } else {
+    // 미구독자: 1단계가 현재 행동 유도 단계
+    const step1 = document.getElementById('funnelStep1');
+    if (step1) step1.classList.add('funnel-step--active');
+  }
+
   document.getElementById('bannerForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('bannerEmail').value;
     window.open('https://leeo25.substack.com/subscribe?email=' + encodeURIComponent(email), '_blank');
+    markSubscribed();
     // 구독 완료 → 다음 단계(채널) CTA 노출
     const banner = document.getElementById('topBanner');
     banner.innerHTML = `
       <span class="top-banner-text" style="opacity:1;">✓ 구독 완료!</span>
       <span class="top-banner-text" style="opacity:0.7;">다음 단계 →</span>
-      <a href="#community" class="top-banner-btn" style="text-decoration:none;" onclick="closeBanner()">카카오톡 채널 참여하기</a>
+      <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" class="top-banner-btn" style="text-decoration:none;" onclick="closeBanner()">카카오톡 채널 참여하기</a>
       <button class="top-banner-close" onclick="closeBanner()" aria-label="닫기">✕</button>
     `;
   });
