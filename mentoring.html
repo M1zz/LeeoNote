@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>멘토링 — 리이오의 연습장</title>
+<meta name="description" content="iOS 개발, 커리어 전환, 앱 출시. 혼자 며칠씩 막히는 것을 1시간에 넘어갑니다. 카카오톡으로 무료 문의하세요.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --card: #EFEFEB;
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(0,0,0,0.16);
+    --text: #3A3530;
+    --text-strong: #1A1714;
+    --muted: #8A8380;
+    --subtle: #BFBCB5;
+    --accent: #4A6B9F;
+    --warm: #9B7645;
+    --sage: #4A7A6A;
+    --rose: #8A6060;
+    --lavender: #7060A0;
+    --nav-bg: rgba(247,246,242,0.88);
+    --surface-subtle: rgba(0,0,0,0.04);
+  }
+  html.dark {
+    color-scheme: dark;
+    --bg: #111111;
+    --surface: #191919;
+    --card: #1E1E1E;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --text: #D4D4D4;
+    --text-strong: #ECECEC;
+    --muted: #6B6B6B;
+    --subtle: #3A3A3A;
+    --accent: #8B9FBF;
+    --warm: #C4A882;
+    --sage: #8BA89A;
+    --lavender: #9B8EAD;
+    --nav-bg: rgba(17,17,17,0.88);
+    --surface-subtle: rgba(255,255,255,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2rem; backdrop-filter: blur(20px);
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-logo:hover { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+  .nav-btn {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer; font-size: 0.75rem;
+    padding: 0.35rem 0.6rem; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+  }
+  .nav-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .nav-hamburger {
+    display: none; background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer; width: 32px; height: 32px;
+    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    flex-shrink: 0; transition: border-color 0.2s;
+  }
+  .nav-hamburger span { display: block; width: 14px; height: 1px; background: currentColor; border-radius: 1px; transition: all 0.25s; }
+  nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+  nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    nav.nav-open .nav-links {
+      display: flex; flex-direction: column; gap: 0;
+      position: fixed; top: 56px; left: 0; right: 0;
+      background: rgba(247,246,242,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; z-index: 99;
+    }
+    html.dark nav.nav-open .nav-links { background: rgba(17,17,17,0.97); }
+    nav.nav-open .nav-links a { padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; }
+    nav.nav-open .nav-links a:last-child { border-bottom: none; }
+  }
+
+  /* CONTAINER */
+  .container { max-width: 880px; margin: 0 auto; padding: 7rem 2rem 5rem; }
+
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HERO */
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--warm); margin-bottom: 1.5rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.1s;
+  }
+  .hero-headline {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    font-weight: 900; line-height: 1.45; margin-bottom: 1.25rem;
+    color: var(--text-strong);
+    opacity: 0; animation: enter 0.8s ease forwards 0.2s;
+  }
+  .hero-headline .em { color: var(--warm); }
+  .hero-sub {
+    font-size: 0.95rem; font-weight: 300; color: var(--muted);
+    line-height: 1.9; max-width: 560px; margin-bottom: 2rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.35s;
+  }
+
+  /* HERO STATS */
+  .hero-stats {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    margin-bottom: 2rem; padding: 1.25rem 1.5rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    opacity: 0; animation: enter 0.8s ease forwards 0.4s;
+  }
+  .hero-stat { display: flex; flex-direction: column; gap: 0.15rem; }
+  .hero-stat-num { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-strong); }
+  .hero-stat-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .hero-stat-divider { width: 1px; height: 32px; background: var(--border); flex-shrink: 0; }
+  .hero-stat-link {
+    margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--accent); text-decoration: none; letter-spacing: 0.04em;
+    white-space: nowrap; transition: opacity 0.15s;
+  }
+  .hero-stat-link:hover { opacity: 0.75; }
+  @media (max-width: 540px) {
+    .hero-stat-divider { display: none; }
+    .hero-stat-link { margin-left: 0; }
+  }
+
+  /* CONTACT BTNS */
+  .contact-row {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.45s;
+  }
+  .contact-btn-kakao {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; color: #3A2F00;
+    background: #FEE500; padding: 0.85rem 1.75rem;
+    border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .contact-btn-kakao:hover { opacity: 0.88; }
+  .contact-btn-email {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.04em; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 0.85rem 1.75rem; border-radius: 8px; text-decoration: none;
+    transition: border-color 0.15s; white-space: nowrap;
+  }
+  .contact-btn-email:hover { border-color: var(--border-hover); }
+  .contact-free-badge {
+    font-family: 'DM Mono', monospace; font-size: 0.55rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #3A2F00; background: rgba(0,0,0,0.08);
+    padding: 0.15rem 0.45rem; border-radius: 4px;
+  }
+
+  /* SECTION */
+  .section { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.75rem; line-height: 1.4;
+  }
+  .section-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 600px; }
+
+  /* WHY */
+  .why-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+  .why-item {
+    display: flex; align-items: flex-start; gap: 1.25rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+  }
+  .why-icon { font-size: 1.2rem; flex-shrink: 0; padding-top: 0.1rem; }
+  .why-title { font-size: 0.9rem; font-weight: 500; color: var(--text-strong); margin-bottom: 0.2rem; }
+  .why-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
+
+  /* TYPES */
+  .types-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .types-grid { grid-template-columns: 1fr; } }
+  .type-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .type-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--warm); margin-bottom: 0.6rem;
+  }
+  .type-title {
+    font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.5rem; line-height: 1.4;
+  }
+  .type-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
+  .type-examples {
+    margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .type-example {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--subtle);
+    padding-left: 0.85rem; position: relative; line-height: 1.5;
+  }
+  .type-example::before { content: '—'; position: absolute; left: 0; }
+
+  /* UNSURE */
+  .unsure-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.25rem; margin-top: 1.5rem;
+  }
+  .unsure-title {
+    font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.6rem; line-height: 1.4;
+  }
+  .unsure-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.5rem; }
+  .unsure-contact-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    background: var(--text-strong); border-radius: 14px;
+    padding: 2.5rem; margin-top: 1.5rem; text-align: center;
+  }
+  .bottom-cta-label {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
+  }
+  .bottom-cta-title {
+    font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: #fff; margin-bottom: 0.5rem; line-height: 1.4;
+  }
+  .bottom-cta-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.75rem;
+  }
+  .bottom-cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .bottom-cta-kakao {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; color: #3A2F00;
+    background: #FEE500; padding: 0.8rem 1.75rem;
+    border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .bottom-cta-kakao:hover { opacity: 0.88; }
+  .bottom-cta-email {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.04em; color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.8rem 1.75rem; border-radius: 8px; text-decoration: none;
+    transition: background 0.15s; white-space: nowrap;
+  }
+  .bottom-cta-email:hover { background: rgba(255,255,255,0.14); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">리이오의 연습장</a>
+    <div class="nav-links">
+      <a href="philosophy.html">교육철학</a>
+      <a href="library.html">서재</a>
+      <a href="mentoring.html" class="active">멘토링</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구모음</a>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="tag">Mentoring · 1:1</div>
+  <h1 class="hero-headline">
+    혼자 며칠 걸릴 것을<br>
+    <span class="em">1시간에 넘어갑니다.</span>
+  </h1>
+  <p class="hero-sub">
+    막힌 코드, 커리어 방향, 앱 출시 전략.<br>
+    내 상황에 맞는 답은 강의에서 찾기 어렵습니다.<br>
+    직접 물어보는 게 가장 빠릅니다.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">8,000+</div>
+      <div class="hero-stat-label">인프런 수강생</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">127명</div>
+      <div class="hero-stat-label">챌린지 수료</div>
+    </div>
+    <div class="hero-stat-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">6기</div>
+      <div class="hero-stat-label">챌린지 운영</div>
+    </div>
+    <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" rel="noopener" class="hero-stat-link">인프런 강의 보기 →</a>
+  </div>
+  <div class="contact-row">
+    <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
+      카카오톡으로 무료 문의 <span class="contact-free-badge">FREE</span>
+    </a>
+    <a href="mailto:leeo@kakao.com" class="contact-btn-email">
+      이메일로 문의하기 →
+    </a>
+  </div>
+
+  <!-- WHY -->
+  <div class="section reveal">
+    <div class="section-label">멘토링이 필요한 이유</div>
+    <div class="section-title">강의로 해결되지 않는 것들이 있습니다</div>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-icon">⏱</div>
+        <div>
+          <div class="why-title">혼자 며칠씩 막히는 시간이 사라집니다</div>
+          <div class="why-desc">방향이 틀렸는지, 코드가 맞는지 모른 채 혼자 고민하는 시간이 가장 비쌉니다. 1시간 안에 넘어가는 것들이 대부분입니다.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🎯</div>
+        <div>
+          <div class="why-title">내 상황에 맞는 답을 얻습니다</div>
+          <div class="why-desc">강의는 모든 사람을 위한 내용입니다. 멘토링은 지금 내 코드, 내 아이디어, 내 커리어 상황에 맞게 얘기합니다.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🧭</div>
+        <div>
+          <div class="why-title">방향이 맞는지 확인하는 것만으로도 속도가 달라집니다</div>
+          <div class="why-desc">잘못된 방향으로 열심히 하는 것만큼 비효율적인 게 없습니다. 30분 대화로 다음 한 달의 방향이 바뀌는 경우가 많습니다.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💬</div>
+        <div>
+          <div class="why-title">강의에서 못 물어보는 것들을 물어봅니다</div>
+          <div class="why-desc">"이 길이 맞나요?", "이 코드 구조가 실무에서도 괜찮나요?", "저 같은 경우는 어떻게 하면 좋을까요?" — 이런 질문은 강의에서 답을 주지 않습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPES -->
+  <div class="section reveal">
+    <div class="section-label">어떤 멘토링을 할 수 있나요</div>
+    <div class="section-title">지금 어디서 막혀있는지에 따라 다릅니다</div>
+    <div class="types-grid">
+      <div class="type-card">
+        <div class="type-tag">커리어</div>
+        <div class="type-title">iOS 개발자로<br>직군 전환하고 싶다</div>
+        <div class="type-desc">지금 직군에서 어떻게 시작해야 하는지, 어떤 순서로 배워야 하는지 같이 잡습니다.</div>
+        <div class="type-examples">
+          <div class="type-example">전환 로드맵 설계</div>
+          <div class="type-example">포트폴리오 방향 결정</div>
+          <div class="type-example">이력서 · 자기소개서 피드백</div>
+          <div class="type-example">면접 준비 전략</div>
+        </div>
+      </div>
+      <div class="type-card">
+        <div class="type-tag">앱 출시</div>
+        <div class="type-title">아이디어를 직접<br>앱으로 만들고 싶다</div>
+        <div class="type-desc">어디서 시작해야 할지, 어떤 구조로 만들어야 할지, 막힌 부분을 같이 풀어갑니다.</div>
+        <div class="type-examples">
+          <div class="type-example">아이디어 → 기능 설계</div>
+          <div class="type-example">막힌 코드 해결</div>
+          <div class="type-example">App Store 출시 전략</div>
+          <div class="type-example">출시 후 개선 방향</div>
+        </div>
+      </div>
+      <div class="type-card">
+        <div class="type-tag">코드 리뷰</div>
+        <div class="type-title">내 코드가 맞는<br>방향인지 확인받고 싶다</div>
+        <div class="type-desc">구조가 맞는지, 더 나은 방법이 있는지, 실무에서도 통하는 코드인지 봐드립니다.</div>
+        <div class="type-examples">
+          <div class="type-example">코드 구조 · 아키텍처 리뷰</div>
+          <div class="type-example">특정 기능 구현 방향 확인</div>
+          <div class="type-example">막힌 버그 원인 찾기</div>
+        </div>
+      </div>
+      <div class="type-card">
+        <div class="type-tag">기타</div>
+        <div class="type-title">딱 뭔지 모르겠는데<br>막혀있다</div>
+        <div class="type-desc">뭘 물어봐야 할지 모를 때가 제일 막막합니다. 그냥 지금 상황을 얘기해주시면 됩니다.</div>
+        <div class="type-examples">
+          <div class="type-example">어디서 시작해야 할지 모름</div>
+          <div class="type-example">공부하는 방향이 맞는지 모름</div>
+          <div class="type-example">다음 스텝이 뭔지 모름</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNSURE -->
+  <div class="section reveal">
+    <div class="section-label">아직 망설여진다면</div>
+    <div class="unsure-box">
+      <div class="unsure-title">뭘 물어봐야 할지 몰라도 됩니다.<br>지금 상황을 그냥 보내주세요.</div>
+      <div class="unsure-desc">
+        "멘토링이 필요한지도 모르겠어요"라는 말로 시작하셔도 됩니다.<br>
+        카카오톡 채널 문의는 무료입니다. 부담 없이 현재 상황을 보내주시면,<br>
+        멘토링이 도움이 될지 솔직하게 말씀드립니다.<br>
+        필요 없다고 판단되면 그렇게 얘기합니다.
+      </div>
+      <div class="unsure-contact-row">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
+          카카오톡으로 무료 문의 <span class="contact-free-badge">FREE</span>
+        </a>
+        <a href="mailto:leeo@kakao.com" class="contact-btn-email">
+          이메일로 문의하기 →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section reveal">
+    <div class="bottom-cta">
+      <div class="bottom-cta-label">지금 막혀있다면</div>
+      <div class="bottom-cta-title">먼저 물어보세요.<br>맞는지 아닌지는 그다음에 결정해도 됩니다.</div>
+      <div class="bottom-cta-desc">
+        카카오톡 채널 문의는 무료입니다.<br>
+        부담 없이 지금 상황을 보내주시면 됩니다.
+      </div>
+      <div class="bottom-cta-row">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="bottom-cta-kakao">카카오톡으로 무료 문의</a>
+        <a href="mailto:leeo@kakao.com" class="bottom-cta-email">이메일로 문의하기 →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const t = document.getElementById('themeToggle');
+  if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); t.textContent = '☀️'; }
+  t.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    t.textContent = isDark ? '☀️' : '🌙';
+  });
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('nav-open');
+  });
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
