@@ -6,6 +6,18 @@
 <meta name="color-scheme" content="light">
 <title>앱 출시자 — 리이오의 연습장</title>
 <meta name="description" content="아이디어는 있는데 직접 만들고 싶은 분들을 위한 커뮤니티. 기획자·디자이너·비개발 창업자의 첫 앱 출시를 함께합니다.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG0Q3EQFWM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FG0Q3EQFWM', {
+    page_title: '앱 출시자 멤버십',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -587,6 +599,163 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+
+<script>
+(function() {
+  // ── 헬퍼 ──────────────────────────────────────────
+  function track(event, params) {
+    if (typeof gtag === 'undefined') return;
+    gtag('event', event, params);
+  }
+
+  // ── 1. 스크롤 깊이 ─────────────────────────────────
+  var scrollMilestones = [25, 50, 75, 90, 100];
+  var scrollFired = {};
+  window.addEventListener('scroll', function() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    var pct = Math.round((scrollTop / docHeight) * 100);
+    scrollMilestones.forEach(function(m) {
+      if (pct >= m && !scrollFired[m]) {
+        scrollFired[m] = true;
+        track('scroll_milestone', { percent: m, page: '앱출시자_멤버십' });
+      }
+    });
+  }, { passive: true });
+
+  // ── 2. 섹션 노출 추적 ──────────────────────────────
+  var sections = [
+    { el: document.querySelector('.tag'),           name: 'hero' },
+    { el: document.querySelector('.wall-list'),     name: '막힌_지점' },
+    { el: document.querySelector('.get-grid'),      name: '멤버십_혜택' },
+    { el: document.querySelector('.roadmap'),       name: '로드맵' },
+    { el: document.querySelector('.apply-steps'),   name: '신청_방법' },
+    { el: document.querySelector('.price-box'),     name: '가격_신청버튼' },
+    { el: document.querySelector('.cta-box'),       name: 'CTA_하단' },
+  ];
+  var sectionObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var name = entry.target.dataset.trackSection;
+        track('section_view', { section: name, page: '앱출시자_멤버십' });
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(function(s) {
+    if (s.el) {
+      s.el.dataset.trackSection = s.name;
+      sectionObserver.observe(s.el);
+    }
+  });
+
+  // ── 3. 체류 시간 마일스톤 ──────────────────────────
+  var timeMilestones = [15, 30, 60, 120, 300];
+  var timeFired = {};
+  var startTime = Date.now();
+  var activeTime = 0;
+  var lastActive = Date.now();
+  var isActive = true;
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      activeTime += Date.now() - lastActive;
+      isActive = false;
+    } else {
+      lastActive = Date.now();
+      isActive = true;
+    }
+  });
+  ['mousemove', 'keydown', 'scroll', 'click', 'touchstart'].forEach(function(e) {
+    document.addEventListener(e, function() { lastActive = Date.now(); }, { passive: true });
+  });
+
+  setInterval(function() {
+    if (!isActive) return;
+    activeTime += 1;
+    timeMilestones.forEach(function(t) {
+      if (activeTime >= t && !timeFired[t]) {
+        timeFired[t] = true;
+        track('time_on_page', { seconds: t, page: '앱출시자_멤버십' });
+      }
+    });
+  }, 1000);
+
+  // ── 4. 모든 링크·버튼 클릭 추적 ───────────────────
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a, button');
+    if (!el) return;
+
+    var label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+    var href  = el.getAttribute('href') || '';
+
+    // 신청 버튼 (메인 전환)
+    if (el.classList.contains('price-apply-btn')) {
+      track('apply_click', {
+        button_text: label,
+        destination: href,
+        scroll_depth: Math.round(((window.scrollY) / (document.documentElement.scrollHeight - window.innerHeight)) * 100),
+        time_spent: activeTime,
+        page: '앱출시자_멤버십'
+      });
+      return;
+    }
+
+    // CTA 버튼
+    if (el.classList.contains('cta-btn-primary') || el.classList.contains('cta-btn-secondary')) {
+      track('cta_click', { button_text: label, destination: href, page: '앱출시자_멤버십' });
+      return;
+    }
+
+    // 외부 링크
+    if (href && (href.startsWith('http') || href.startsWith('//'))) {
+      track('outbound_click', { url: href, link_text: label, page: '앱출시자_멤버십' });
+    }
+  });
+
+  // ── 5. 이탈 의도 (마우스가 뷰포트 상단 벗어남) ────
+  var exitFired = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !exitFired) {
+      exitFired = true;
+      var pct = Math.round(((window.scrollY) / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100);
+      track('exit_intent', {
+        scroll_depth_at_exit: pct,
+        time_spent: activeTime,
+        page: '앱출시자_멤버십'
+      });
+    }
+  });
+
+  // ── 6. 페이지 이탈 시 최종 체류시간 기록 ──────────
+  window.addEventListener('pagehide', function() {
+    activeTime += isActive ? Math.round((Date.now() - lastActive) / 1000) : 0;
+    track('page_exit', {
+      total_active_seconds: activeTime,
+      max_scroll_depth: Math.max.apply(null, Object.keys(scrollFired).map(Number).concat([0])),
+      page: '앱출시자_멤버십'
+    });
+  });
+
+  // ── 7. 로드맵 카드 노출 ────────────────────────────
+  var roadmapCards = document.querySelectorAll('.roadmap-card');
+  var cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var title = entry.target.querySelector('.roadmap-card-title');
+        track('roadmap_card_view', {
+          card_title: title ? title.textContent.trim() : '',
+          page: '앱출시자_멤버십'
+        });
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  roadmapCards.forEach(function(c) { cardObserver.observe(c); });
+
+})();
 </script>
 </body>
 </html>
