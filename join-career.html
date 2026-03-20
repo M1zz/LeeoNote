@@ -251,8 +251,8 @@
   .cta-btn-secondary:hover { background: rgba(255,255,255,0.14); }
 
   /* ROADMAP */
-  .roadmap { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.75rem; }
-  @media (max-width: 600px) { .roadmap { grid-template-columns: 1fr; } }
+  .roadmap { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 1.75rem; }
+  @media (max-width: 700px) { .roadmap { grid-template-columns: 1fr; } }
   .roadmap-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; overflow: hidden;
@@ -406,61 +406,50 @@
   <!-- ROADMAP -->
   <div class="section reveal">
     <div class="section-label">멤버십 로드맵</div>
-    <div class="section-title">주 단위로 함께 나아갑니다</div>
-    <div class="section-desc">막히면 이메일로 물어보세요. 그 주가 끝나기 전에 넘어갑니다.</div>
+    <div class="section-title">출시가 끝이 아닙니다</div>
+    <div class="section-desc">취업이 목표라면, 취업할 때까지 함께 갑니다. 월별로 집중하는 것이 달라집니다.</div>
     <div class="roadmap">
       <div class="roadmap-card">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 1</span>
-          <span class="roadmap-days">시작</span>
+          <span class="roadmap-week-label">Month 1</span>
+          <span class="roadmap-days">출시</span>
         </div>
-        <div class="roadmap-card-title">환경 세팅 + Swift 기초</div>
+        <div class="roadmap-card-title">첫 앱 App Store 출시</div>
         <ul class="roadmap-task-list">
-          <li>Xcode 설치 · Apple Developer 계정 생성</li>
-          <li>Swift 변수, 함수, 구조체 핵심만</li>
-          <li>SwiftUI 첫 번째 View 구조 이해</li>
-          <li>첫 화면 레이아웃 완성</li>
+          <li>Xcode · Swift · SwiftUI 핵심만</li>
+          <li>핵심 기능 1가지 구현 완성</li>
+          <li>TestFlight 베타 → 버그 수정</li>
+          <li>App Store 심사 제출 · 출시</li>
         </ul>
+        <div class="roadmap-milestone">포트폴리오 앱 1개 완성</div>
       </div>
       <div class="roadmap-card">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 2</span>
-          <span class="roadmap-days">구현</span>
+          <span class="roadmap-week-label">Month 2</span>
+          <span class="roadmap-days">포트폴리오</span>
         </div>
-        <div class="roadmap-card-title">핵심 기능 구현</div>
+        <div class="roadmap-card-title">두 번째 앱 + GitHub 정리</div>
         <ul class="roadmap-task-list">
-          <li>@State · @Binding 으로 화면 반응</li>
-          <li>NavigationStack 화면 전환</li>
-          <li>데이터 저장 (UserDefaults · SwiftData)</li>
-          <li>막힌 지점 이메일 Q&A 해결</li>
+          <li>두 번째 앱 기획 · 구현 시작</li>
+          <li>코드 품질 개선 · 리팩토링</li>
+          <li>GitHub 커밋 히스토리 정리</li>
+          <li>포트폴리오 사이트 or README 완성</li>
         </ul>
-      </div>
-      <div class="roadmap-card">
-        <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 3</span>
-          <span class="roadmap-days">다듬기</span>
-        </div>
-        <div class="roadmap-card-title">완성도 + TestFlight</div>
-        <ul class="roadmap-task-list">
-          <li>UI 다듬기 — 색상, 폰트, 여백</li>
-          <li>엣지 케이스 처리 · 버그 수정</li>
-          <li>TestFlight 베타 배포</li>
-          <li>앱 아이콘 · 스플래시 완성</li>
-        </ul>
+        <div class="roadmap-milestone">채용 제출용 포트폴리오 완성</div>
       </div>
       <div class="roadmap-card roadmap-card--highlight">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 4</span>
-          <span class="roadmap-days">출시</span>
+          <span class="roadmap-week-label">Month 3</span>
+          <span class="roadmap-days">전환</span>
         </div>
-        <div class="roadmap-card-title">App Store 출시</div>
+        <div class="roadmap-card-title">채용 지원 · 면접 준비</div>
         <ul class="roadmap-task-list">
-          <li>App Store Connect 설정</li>
-          <li>스크린샷 · 앱 설명 작성</li>
-          <li>심사 제출 · 리젝 대응</li>
-          <li>출시 완료 → 포트폴리오 정리</li>
+          <li>이력서 · 자기소개서 작성 · 피드백</li>
+          <li>기술 면접 예상 질문 대비</li>
+          <li>코딩테스트 기초 문제 루틴</li>
+          <li>채용 공고 선별 · 지원 전략</li>
         </ul>
-        <div class="roadmap-milestone">🎉 앱 스토어 포트폴리오 1개 완성</div>
+        <div class="roadmap-milestone">🎉 iOS 개발자로 전환</div>
       </div>
     </div>
   </div>
@@ -502,8 +491,8 @@
           <span class="price-unit">원 / 월</span>
         </div>
         <div class="price-note">
-          주간 Q&A + 코드 리뷰 + 출시 가이드 포함<br>
-          소수 정예 운영 · 모집 인원 제한 있음
+          Q&A + 코드 리뷰 + 포트폴리오 · 채용 전략 피드백<br>
+          월 10명 한정 · 직군 전환 완료까지 동행
         </div>
       </div>
       <a href="#" class="price-apply-btn">멤버십 신청하기 →</a>

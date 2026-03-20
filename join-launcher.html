@@ -270,8 +270,8 @@
   .cta-btn-secondary:hover { background: rgba(255,255,255,0.14); }
 
   /* ROADMAP */
-  .roadmap { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.75rem; }
-  @media (max-width: 600px) { .roadmap { grid-template-columns: 1fr; } }
+  .roadmap { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 1.75rem; }
+  @media (max-width: 700px) { .roadmap { grid-template-columns: 1fr; } }
   .roadmap-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; overflow: hidden;
@@ -460,61 +460,50 @@
   <!-- ROADMAP -->
   <div class="section reveal">
     <div class="section-label">멤버십 로드맵</div>
-    <div class="section-title">주 단위로 함께 나아갑니다</div>
-    <div class="section-desc">막히면 이메일로 물어보세요. 그 주가 끝나기 전에 넘어갑니다.</div>
+    <div class="section-title">출시가 끝이 아닙니다</div>
+    <div class="section-desc">출시 후가 진짜 시작입니다. 사용자가 쓰고, 수익이 나는 앱이 될 때까지 함께 갑니다.</div>
     <div class="roadmap">
       <div class="roadmap-card">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 1</span>
-          <span class="roadmap-days">시작</span>
+          <span class="roadmap-week-label">Month 1</span>
+          <span class="roadmap-days">출시</span>
         </div>
-        <div class="roadmap-card-title">아이디어 → 첫 화면</div>
+        <div class="roadmap-card-title">아이디어 → App Store 출시</div>
         <ul class="roadmap-task-list">
-          <li>내 앱의 핵심 기능 1가지 정의</li>
-          <li>Xcode 설치 · SwiftUI 기본 구조</li>
-          <li>첫 화면 레이아웃 완성</li>
-          <li>색상 · 폰트 · 아이콘 결정</li>
+          <li>핵심 기능 1가지 설계 · 구현</li>
+          <li>SwiftUI 화면 구성 · UI 완성</li>
+          <li>TestFlight 베타 → 버그 수정</li>
+          <li>App Store 심사 제출 · 출시</li>
         </ul>
+        <div class="roadmap-milestone">🚀 내 앱이 App Store에 올라갑니다</div>
       </div>
       <div class="roadmap-card">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 2</span>
-          <span class="roadmap-days">구현</span>
+          <span class="roadmap-week-label">Month 2</span>
+          <span class="roadmap-days">성장</span>
         </div>
-        <div class="roadmap-card-title">핵심 기능 구현</div>
+        <div class="roadmap-card-title">사용자 반응 분석 · 버전업</div>
         <ul class="roadmap-task-list">
-          <li>화면 전환 (NavigationStack)</li>
-          <li>데이터 입력 · 저장 · 표시</li>
-          <li>막힌 지점 이메일 Q&A 해결</li>
-          <li>핵심 기능 1가지 완성</li>
+          <li>리뷰 · 크래시 로그 분석</li>
+          <li>요청 기능 선별 · 우선순위 결정</li>
+          <li>v1.1 업데이트 배포</li>
+          <li>ASO 기초 — 키워드 · 스크린샷 개선</li>
         </ul>
-      </div>
-      <div class="roadmap-card">
-        <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 3</span>
-          <span class="roadmap-days">다듬기</span>
-        </div>
-        <div class="roadmap-card-title">완성도 + TestFlight</div>
-        <ul class="roadmap-task-list">
-          <li>UI 다듬기 — 간격, 색, 폰트</li>
-          <li>예외 처리 · 버그 수정</li>
-          <li>TestFlight 베타 배포</li>
-          <li>피드백 반영 · 앱 아이콘 완성</li>
-        </ul>
+        <div class="roadmap-milestone">다운로드가 늘어나기 시작합니다</div>
       </div>
       <div class="roadmap-card roadmap-card--highlight">
         <div class="roadmap-card-header">
-          <span class="roadmap-week-label">Week 4</span>
-          <span class="roadmap-days">출시</span>
+          <span class="roadmap-week-label">Month 3</span>
+          <span class="roadmap-days">수익화</span>
         </div>
-        <div class="roadmap-card-title">App Store 출시</div>
+        <div class="roadmap-card-title">유료 기능 · 구독 모델 설계</div>
         <ul class="roadmap-task-list">
-          <li>App Store Connect 등록</li>
-          <li>스크린샷 · 앱 설명 작성</li>
-          <li>심사 제출 · 리젝 대응</li>
-          <li>출시 완료 · MVP 검증 시작</li>
+          <li>무료 ↔ 유료 경계 전략 설계</li>
+          <li>In-App Purchase · 구독 구현</li>
+          <li>ASO 고도화 · 전환율 개선</li>
+          <li>수익 모니터링 루틴 구축</li>
         </ul>
-        <div class="roadmap-milestone">🚀 내 앱이 App Store에 올라갑니다</div>
+        <div class="roadmap-milestone">💰 수익이 나는 앱으로 성장</div>
       </div>
     </div>
   </div>
@@ -556,8 +545,8 @@
           <span class="price-unit">원 / 월</span>
         </div>
         <div class="price-note">
-          주간 Q&A + 코드 리뷰 + 출시 가이드 포함<br>
-          소수 정예 운영 · 모집 인원 제한 있음
+          Q&A + 코드 리뷰 + 성장·수익화 전략 피드백<br>
+          월 10명 한정 · 출시 이후 성장까지 함께
         </div>
       </div>
       <a href="#" class="price-apply-btn">멤버십 신청하기 →</a>
