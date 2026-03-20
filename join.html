@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>멤버십 — 리이오의 연습장</title>
+<meta name="description" content="아이디어를 직접 앱으로 만들거나, iOS 개발자로 전환하고 싶은 분들을 위한 소수 정예 멤버십. 월 10명 한정.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG0Q3EQFWM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FG0Q3EQFWM', {
+    page_title: '멤버십_통합',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --card: #EFEFEB;
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(0,0,0,0.16);
+    --text: #3A3530;
+    --text-strong: #1A1714;
+    --muted: #8A8380;
+    --subtle: #BFBCB5;
+    --accent: #4A6B9F;
+    --warm: #9B7645;
+    --sage: #4A7A6A;
+    --rose: #8A6060;
+    --lavender: #7060A0;
+    --nav-bg: rgba(247,246,242,0.88);
+    --surface-subtle: rgba(0,0,0,0.04);
+  }
+  html.dark {
+    color-scheme: dark;
+    --bg: #111111;
+    --surface: #191919;
+    --card: #1E1E1E;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(255,255,255,0.12);
+    --text: #D4D4D4;
+    --text-strong: #ECECEC;
+    --muted: #6B6B6B;
+    --subtle: #3A3A3A;
+    --accent: #8B9FBF;
+    --warm: #C4A882;
+    --sage: #8BA89A;
+    --lavender: #9B8EAD;
+    --nav-bg: rgba(17,17,17,0.88);
+    --surface-subtle: rgba(255,255,255,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2rem; backdrop-filter: blur(20px);
+    background: var(--nav-bg); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-logo:hover { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-controls { display: flex; align-items: center; gap: 0.75rem; }
+  .nav-btn {
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer; font-size: 0.75rem;
+    padding: 0.35rem 0.6rem; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+  }
+  .nav-btn:hover { border-color: var(--border-hover); color: var(--text); }
+  .nav-hamburger {
+    display: none; background: none; border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); cursor: pointer; width: 32px; height: 32px;
+    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    flex-shrink: 0; transition: border-color 0.2s;
+  }
+  .nav-hamburger span { display: block; width: 14px; height: 1px; background: currentColor; border-radius: 1px; transition: all 0.25s; }
+  nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+  nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    nav.nav-open .nav-links {
+      display: flex; flex-direction: column; gap: 0;
+      position: fixed; top: 56px; left: 0; right: 0;
+      background: rgba(247,246,242,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; z-index: 99;
+    }
+    html.dark nav.nav-open .nav-links { background: rgba(17,17,17,0.97); }
+    nav.nav-open .nav-links a { padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; }
+    nav.nav-open .nav-links a:last-child { border-bottom: none; }
+  }
+
+  /* CONTAINER */
+  .container { max-width: 880px; margin: 0 auto; padding: 7rem 2rem 5rem; }
+
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HERO */
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--lavender); margin-bottom: 1.5rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.1s;
+  }
+  .hero-headline {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+    font-weight: 900; line-height: 1.45; margin-bottom: 1.25rem;
+    color: var(--text-strong);
+    opacity: 0; animation: enter 0.8s ease forwards 0.2s;
+  }
+  .hero-headline .em { color: var(--lavender); }
+  .hero-headline .dim { color: var(--subtle); text-decoration: line-through; text-decoration-color: var(--subtle); text-decoration-thickness: 2px; }
+  .hero-sub {
+    font-size: 0.95rem; font-weight: 300; color: var(--muted);
+    line-height: 1.9; max-width: 560px; margin-bottom: 2rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.35s;
+  }
+  .hero-who-row {
+    display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap;
+    opacity: 0; animation: enter 0.8s ease forwards 0.4s;
+  }
+  .hero-who-chip {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.05em;
+    padding: 0.35rem 0.85rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--muted);
+    background: var(--surface);
+  }
+  .hero-cta-row {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: enter 0.8s ease forwards 0.5s;
+    margin-bottom: 3rem;
+  }
+  .hero-cta-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.06em; color: #fff; background: var(--lavender);
+    padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .hero-cta-btn:hover { opacity: 0.85; }
+  .hero-cta-note {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--subtle); letter-spacing: 0.04em;
+  }
+
+  /* SECTION */
+  .section { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.75rem; line-height: 1.4;
+  }
+  .section-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 600px; }
+
+  /* WHO */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .who-grid { grid-template-columns: 1fr; } }
+  .who-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .who-card--a { border-color: rgba(112,96,160,0.3); }
+  .who-card--b { border-color: rgba(74,122,106,0.3); }
+  .who-card-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .who-card--a .who-card-tag { color: var(--lavender); }
+  .who-card--b .who-card-tag { color: var(--sage); }
+  .who-card-title {
+    font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.5rem; line-height: 1.4;
+  }
+  .who-card-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
+
+  /* WALL */
+  .wall-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+  .wall-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.1rem 1.5rem;
+  }
+  .wall-num {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--rose);
+    flex-shrink: 0; padding-top: 0.15rem; letter-spacing: 0.05em;
+  }
+  .wall-text { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+
+  /* WHAT YOU GET */
+  .get-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .get-grid { grid-template-columns: 1fr; } }
+  .get-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.4rem 1.5rem;
+  }
+  .get-icon { font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .get-title { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.35rem; }
+  .get-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
+
+  /* ROADMAP */
+  .roadmap-month1 {
+    margin-top: 1.75rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .roadmap-month1-header {
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface-subtle);
+  }
+  .roadmap-month1-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--lavender);
+  }
+  .roadmap-month1-badge {
+    font-family: 'DM Mono', monospace; font-size: 0.55rem;
+    color: var(--subtle); background: var(--surface-subtle);
+    padding: 0.2rem 0.6rem; border-radius: 100px; border: 1px solid var(--border);
+  }
+  .roadmap-month1-body {
+    display: grid; grid-template-columns: 1fr 1fr; padding: 1.25rem 1.5rem; gap: 1rem;
+  }
+  @media (max-width: 560px) { .roadmap-month1-body { grid-template-columns: 1fr; } }
+  .roadmap-month1-title {
+    font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.6rem; grid-column: 1 / -1;
+  }
+  .roadmap-task-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .roadmap-task-list li {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted);
+    line-height: 1.55; padding-left: 0.9rem; position: relative;
+  }
+  .roadmap-task-list li::before { content: '—'; position: absolute; left: 0; color: var(--subtle); }
+  .roadmap-month1-milestone {
+    grid-column: 1 / -1; margin-top: 0.25rem;
+    padding: 0.45rem 0.7rem; border-radius: 6px;
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    background: rgba(112,96,160,0.08); color: var(--lavender); letter-spacing: 0.04em;
+  }
+
+  .roadmap-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+  @media (max-width: 600px) { .roadmap-paths { grid-template-columns: 1fr; } }
+  .roadmap-path {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .roadmap-path--launcher { border-color: rgba(112,96,160,0.25); }
+  .roadmap-path--career { border-color: rgba(74,122,106,0.25); }
+  .roadmap-path-header {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-subtle);
+  }
+  .roadmap-path-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.1rem;
+  }
+  .roadmap-path--launcher .roadmap-path-tag { color: var(--lavender); }
+  .roadmap-path--career .roadmap-path-tag { color: var(--sage); }
+  .roadmap-path-desc { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); }
+  .roadmap-path-body { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .roadmap-month-item {}
+  .roadmap-month-label {
+    font-family: 'DM Mono', monospace; font-size: 0.55rem;
+    color: var(--subtle); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .roadmap-month-title {
+    font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.3rem;
+  }
+  .roadmap-month-items {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); line-height: 1.6;
+  }
+  .roadmap-path-milestone {
+    margin: 0 1.25rem 1.1rem;
+    padding: 0.45rem 0.7rem; border-radius: 6px;
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.04em;
+  }
+  .roadmap-path--launcher .roadmap-path-milestone { background: rgba(112,96,160,0.08); color: var(--lavender); }
+  .roadmap-path--career .roadmap-path-milestone { background: rgba(74,122,106,0.08); color: var(--sage); }
+  .roadmap-divider {
+    display: flex; align-items: center; gap: 0.75rem; margin: 0.75rem 0;
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle);
+  }
+  .roadmap-divider::before, .roadmap-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* PROOF */
+  .proof-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+  .proof-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.25rem 1.5rem; display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
+  }
+  .proof-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--card); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .proof-name { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 0.35rem; letter-spacing: 0.05em; }
+  .proof-text { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
+  .proof-from { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); margin-top: 0.35rem; }
+
+  /* MIDDLE CTA */
+  .mid-cta {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem 2rem; margin-top: 1.75rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;
+  }
+  .mid-cta-text {
+    font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: var(--text-strong); line-height: 1.4;
+  }
+  .mid-cta-sub { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-top: 0.25rem; }
+  .mid-cta-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.06em; color: #fff; background: var(--lavender);
+    padding: 0.8rem 1.75rem; border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap; flex-shrink: 0;
+  }
+  .mid-cta-btn:hover { opacity: 0.85; }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem; }
+  .faq-item {
+    border-bottom: 1px solid var(--border); padding: 1.25rem 0;
+  }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-q {
+    font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.6rem; line-height: 1.4;
+  }
+  .faq-a { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); line-height: 1.75; }
+
+  /* WAITLIST */
+  .waitlist-box {
+    background: var(--text-strong); border-radius: 14px;
+    padding: 2.5rem; margin-top: 1.5rem; text-align: center;
+  }
+  .waitlist-label {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
+  }
+  .waitlist-title {
+    font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 600;
+    color: #fff; margin-bottom: 0.5rem; line-height: 1.4;
+  }
+  .waitlist-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.75rem;
+  }
+  .waitlist-form {
+    display: flex; gap: 0.6rem; max-width: 440px; margin: 0 auto 0.75rem;
+  }
+  @media (max-width: 520px) { .waitlist-form { flex-direction: column; } }
+  .waitlist-input {
+    flex: 1; font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    padding: 0.8rem 1.1rem; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08); color: #fff;
+    outline: none; transition: border-color 0.2s;
+  }
+  .waitlist-input::placeholder { color: rgba(255,255,255,0.3); }
+  .waitlist-input:focus { border-color: rgba(255,255,255,0.35); }
+  .waitlist-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--text-strong);
+    background: #fff; padding: 0.8rem 1.5rem;
+    border-radius: 8px; border: none; cursor: pointer;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .waitlist-btn:hover { opacity: 0.9; }
+  .waitlist-btn:disabled { opacity: 0.6; cursor: default; }
+  .waitlist-privacy {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .waitlist-success {
+    display: none; font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: rgba(255,255,255,0.7); padding: 0.8rem; letter-spacing: 0.04em;
+  }
+
+  /* BOTTOM CTA */
+  .cta-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.5rem; margin-top: 1.5rem; text-align: center;
+  }
+  .cta-box-label {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--subtle); margin-bottom: 0.75rem;
+  }
+  .cta-box-title {
+    font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.6rem; line-height: 1.4;
+  }
+  .cta-box-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .cta-btn-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .cta-btn-primary {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--text-strong);
+    background: var(--card); border: 1px solid var(--border);
+    padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none;
+    transition: border-color 0.15s; white-space: nowrap;
+  }
+  .cta-btn-primary:hover { border-color: var(--border-hover); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">리이오의 연습장</a>
+    <div class="nav-links">
+      <a href="philosophy.html">교육철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구모음</a>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="tag">Membership · Early Bird · 월 10명 한정</div>
+  <h1 class="hero-headline">
+    아이디어만 있는 사람이<br>
+    <span class="dim">혼자서는 완성이 안 됩니다.</span><br>
+    <span class="em">같이 만들어 냅니다.</span>
+  </h1>
+  <p class="hero-sub">
+    코드를 몰라도 됩니다. 다른 직군에서 왔어도 됩니다.<br>
+    막히면 물어보면 됩니다.<br>
+    아이디어를 앱으로 만들거나, iOS 개발자로 전환하는 것을<br>
+    끝까지 함께 하는 소수 정예 모임입니다.
+  </p>
+  <div class="hero-who-row">
+    <span class="hero-who-chip">기획자</span>
+    <span class="hero-who-chip">디자이너</span>
+    <span class="hero-who-chip">비개발 창업자</span>
+    <span class="hero-who-chip">직군 전환 희망자</span>
+  </div>
+  <div class="hero-cta-row">
+    <a href="#waitlist" class="hero-cta-btn">얼리버드 신청하기 →</a>
+    <span class="hero-cta-note">가격 확정 시 우선 안내 · 부담 없음</span>
+  </div>
+
+  <!-- WHO IS THIS FOR -->
+  <div class="section reveal">
+    <div class="section-label">어떤 분들을 위한 모임인가요</div>
+    <div class="section-title">목표가 다른 두 가지 경로가 있습니다</div>
+    <div class="who-grid">
+      <div class="who-card who-card--a">
+        <div class="who-card-tag">경로 A · 앱 출시자</div>
+        <div class="who-card-title">직접 만든 앱을<br>App Store에 올리고 싶다</div>
+        <div class="who-card-desc">
+          기획자·디자이너·창업자처럼<br>
+          아이디어는 있는데 코드가 없는 분.<br>
+          Month 1 출시 → Month 2 성장 → Month 3 수익화
+        </div>
+      </div>
+      <div class="who-card who-card--b">
+        <div class="who-card-tag">경로 B · 직군 전환자</div>
+        <div class="who-card-title">iOS 개발자로<br>직군을 바꾸고 싶다</div>
+        <div class="who-card-desc">
+          비전공자·타직군 출신으로<br>
+          퇴근 후 전환을 준비 중인 분.<br>
+          Month 1 출시 → Month 2 포트폴리오 → Month 3 취업
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WALL -->
+  <div class="section reveal">
+    <div class="section-label">지금 막혀 있는 곳</div>
+    <div class="section-title">기술보다 완성에 막혀있습니다</div>
+    <div class="wall-list">
+      <div class="wall-item">
+        <span class="wall-num">01</span>
+        <span class="wall-text">강의는 끝까지 들었는데 내 아이디어에 어떻게 적용하는지 모르겠다</span>
+      </div>
+      <div class="wall-item">
+        <span class="wall-num">02</span>
+        <span class="wall-text">만들다 막히면 물어볼 곳이 없어서 며칠째 멈춰있다</span>
+      </div>
+      <div class="wall-item">
+        <span class="wall-num">03</span>
+        <span class="wall-text">퇴근 후 혼자 하니까 결국 오늘도 미뤘다</span>
+      </div>
+      <div class="wall-item">
+        <span class="wall-num">04</span>
+        <span class="wall-text">출시까지 가본 적이 없어서 완성될 것 같지가 않다</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="section reveal">
+    <div class="section-label">멤버십에서 얻는 것</div>
+    <div class="section-title">혼자였으면 멈췄을 지점을 함께 넘습니다</div>
+    <div class="get-grid">
+      <div class="get-card">
+        <div class="get-icon">🧭</div>
+        <div class="get-title">아이디어 → 설계 전환</div>
+        <div class="get-desc">내 아이디어를 어떤 구조로 만들지, 첫 설계부터 같이 합니다</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">🔨</div>
+        <div class="get-title">막힌 부분 Q&A</div>
+        <div class="get-desc">이메일로 물어보면 그 주 안에 해결됩니다. 며칠씩 혼자 고민하지 않아도 됩니다</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">👀</div>
+        <div class="get-title">코드 리뷰</div>
+        <div class="get-desc">내 코드가 맞는 방향인지, 더 나은 방법이 있는지 확인받습니다</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">🚀</div>
+        <div class="get-title">출시까지 동행</div>
+        <div class="get-desc">App Store 등록·심사·리젝 대응 전 과정을 함께 갑니다</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="section reveal">
+    <div class="section-label">멤버십 로드맵</div>
+    <div class="section-title">출시가 끝이 아닙니다</div>
+    <div class="section-desc">Month 1은 모든 멤버가 함께 첫 앱을 출시합니다. Month 2부터는 목표에 따라 경로가 갈립니다.</div>
+
+    <div class="roadmap-month1">
+      <div class="roadmap-month1-header">
+        <span class="roadmap-month1-label">Month 1 — 공통</span>
+        <span class="roadmap-month1-badge">두 경로 모두 여기서 시작</span>
+      </div>
+      <div class="roadmap-month1-body">
+        <div class="roadmap-month1-title">첫 앱 App Store 출시</div>
+        <ul class="roadmap-task-list">
+          <li>핵심 기능 1가지 작동하게 만들기</li>
+          <li>앱 화면 레이아웃 · 디자인 완성</li>
+        </ul>
+        <ul class="roadmap-task-list">
+          <li>지인 테스트 → 버그 수정</li>
+          <li>App Store 심사 제출 · 출시</li>
+        </ul>
+        <div class="roadmap-month1-milestone">🚀 내 앱이 App Store에 올라갑니다</div>
+      </div>
+    </div>
+
+    <div class="roadmap-divider">Month 2부터 경로가 갈립니다</div>
+
+    <div class="roadmap-paths">
+      <div class="roadmap-path roadmap-path--launcher">
+        <div class="roadmap-path-header">
+          <div class="roadmap-path-tag">경로 A · 앱 출시자</div>
+          <div class="roadmap-path-desc">성장하고 수익이 나는 앱으로</div>
+        </div>
+        <div class="roadmap-path-body">
+          <div class="roadmap-month-item">
+            <div class="roadmap-month-label">Month 2 — 성장</div>
+            <div class="roadmap-month-title">사용자 반응 분석 · 버전업</div>
+            <div class="roadmap-month-items">리뷰·크래시 분석 / 기능 개선 배포<br>검색 노출 개선 — 키워드·스크린샷</div>
+          </div>
+          <div class="roadmap-month-item">
+            <div class="roadmap-month-label">Month 3 — 수익화</div>
+            <div class="roadmap-month-title">유료 기능 · 구독 모델 설계</div>
+            <div class="roadmap-month-items">무료↔유료 경계 전략 / 결제 기능 연결<br>다운로드 전환율 개선</div>
+          </div>
+        </div>
+        <div class="roadmap-path-milestone">💰 수익이 나는 앱으로 성장</div>
+      </div>
+
+      <div class="roadmap-path roadmap-path--career">
+        <div class="roadmap-path-header">
+          <div class="roadmap-path-tag">경로 B · 직군 전환자</div>
+          <div class="roadmap-path-desc">취업할 때까지 함께 갑니다</div>
+        </div>
+        <div class="roadmap-path-body">
+          <div class="roadmap-month-item">
+            <div class="roadmap-month-label">Month 2 — 포트폴리오</div>
+            <div class="roadmap-month-title">두 번째 앱 + GitHub 정리</div>
+            <div class="roadmap-month-items">두 번째 앱 기획·구현 / 코드 품질 개선<br>채용 제출용 포트폴리오 완성</div>
+          </div>
+          <div class="roadmap-month-item">
+            <div class="roadmap-month-label">Month 3 — 전환</div>
+            <div class="roadmap-month-title">채용 지원 · 면접 준비</div>
+            <div class="roadmap-month-items">이력서·자기소개서 피드백<br>기술 면접 대비 / 채용 지원 전략</div>
+          </div>
+        </div>
+        <div class="roadmap-path-milestone">🎉 iOS 개발자로 전환</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIDDLE CTA -->
+  <div class="mid-cta reveal">
+    <div>
+      <div class="mid-cta-text">이 로드맵을 함께 걷고 싶다면</div>
+      <div class="mid-cta-sub">월 10명 한정 · 얼리버드에게 가격 우선 안내</div>
+    </div>
+    <a href="#waitlist" class="mid-cta-btn">얼리버드 신청하기 →</a>
+  </div>
+
+  <!-- PROOF -->
+  <div class="section reveal">
+    <div class="section-label">신뢰 근거</div>
+    <div class="section-title">이 멤버십은 처음입니다.<br>하지만 챌린지를 통해 127명이 직접 앱을 만들었습니다.</div>
+    <div class="section-desc">아래는 멤버십이 아닌, 운영자가 진행한 챌린지 참가자들의 후기입니다.</div>
+    <div class="proof-list">
+      <div class="proof-item">
+        <div class="proof-avatar">🎨</div>
+        <div>
+          <div class="proof-name">김 ○○ — UX 디자이너</div>
+          <div class="proof-text">디자인은 할 수 있는데 코드는 몰랐어요. 챌린지 4주 동안 막히는 부분마다 질문했고, 결국 직접 만든 앱이 스토어에 올라갔습니다. 이렇게까지 되는 줄 몰랐어요.</div>
+          <div class="proof-from">챌린지 6기 참가자 · 앱 출시 완료</div>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-avatar">📣</div>
+        <div>
+          <div class="proof-name">최 ○○ — 前 마케터</div>
+          <div class="proof-text">마케터로 5년 일하다가 개발 공부를 시작했는데 혼자서는 계속 흐지부지됐어요. 챌린지에서 처음으로 앱을 끝까지 완성했고, 그게 포트폴리오가 됐습니다. 지금은 스타트업 iOS 개발자로 일하고 있습니다.</div>
+          <div class="proof-from">챌린지 7기 참가자 · 현 iOS 개발자 재직 중</div>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-avatar">🏪</div>
+        <div>
+          <div class="proof-name">박 ○○ — 소규모 창업자</div>
+          <div class="proof-text">외주 견적이 700만 원이었어요. 챌린지 끝나고 직접 만들었고, 지금도 업데이트하고 있습니다. 시간이 걸렸지만 내 것이라는 게 달랐습니다.</div>
+          <div class="proof-from">챌린지 11기 참가자 · 앱 출시 완료</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section reveal">
+    <div class="section-label">자주 묻는 질문</div>
+    <div class="section-title">신청 전에 걸리는 것들</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">코딩을 전혀 몰라도 되나요?</div>
+        <div class="faq-a">네. 이 멤버십은 코드를 이해하는 것이 목표가 아니라 앱을 완성하는 것이 목표입니다. 막히는 부분은 이메일로 물어보시면 됩니다. 비전공자, 타직군 출신 분들이 많이 계십니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">하루 얼마나 시간을 써야 하나요?</div>
+        <div class="faq-a">퇴근 후 1시간, 주 3회 정도면 Month 1 로드맵을 따라갈 수 있습니다. 더 빠르게 가고 싶다면 더 하셔도 되고, 바쁜 주는 조금 쉬어가도 됩니다. 속도보다 완성이 목표입니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">환불은 되나요?</div>
+        <div class="faq-a">첫 결제 후 7일 이내, 진행 내용이 없다면 전액 환불해 드립니다. 이미 Q&A를 주고받았거나 코드 리뷰를 받은 경우는 환불이 어렵습니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">다른 강의 플랫폼이랑 뭐가 다른가요?</div>
+        <div class="faq-a">강의는 혼자 보는 겁니다. 이 멤버십은 막히면 물어보는 곳입니다. 강의는 내 질문에 답해주지 않지만, 여기서는 내 코드를 봐주고, 내 아이디어에 맞는 방법을 같이 찾습니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">직군 전환은 얼마나 걸리나요?</div>
+        <div class="faq-a">사람마다 다릅니다. 이 멤버십은 "N개월 안에 취업"을 보장하지 않습니다. 다만 앱을 출시하고, 포트폴리오를 만들고, 채용 지원까지 방향과 속도를 같이 잡아갑니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">지금 당장 시작할 준비가 안 된 것 같아요.</div>
+        <div class="faq-a">얼리버드 신청은 시작이 아닙니다. 가격이 확정될 때 이메일 한 통 받는 것뿐입니다. 그때 다시 결정하셔도 됩니다. 자리만 먼저 확인해두는 거라고 생각해주세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAITLIST -->
+  <div class="section reveal">
+    <div class="section-label">얼리버드 모집</div>
+    <div id="waitlist" class="waitlist-box">
+      <div class="waitlist-label">Early Bird · 월 10명 한정</div>
+      <div class="waitlist-title">가격이 확정되면 가장 먼저 알려드립니다</div>
+      <div class="waitlist-desc">
+        지금은 가격 미확정입니다. 얼리버드에게 우선 안내 드립니다.<br>
+        이메일 하나로 자리를 확인해두세요. 스팸 없습니다.
+      </div>
+      <form class="waitlist-form" id="waitlistForm" action="#" novalidate>
+        <input class="waitlist-input" type="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email">
+        <button class="waitlist-btn" type="submit">얼리버드 신청 →</button>
+      </form>
+      <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 가격 확정 시 가장 먼저 연락드립니다.</div>
+      <div class="waitlist-privacy">이메일은 멤버십 안내 외에 사용하지 않습니다</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section reveal">
+    <div class="cta-box">
+      <div class="cta-box-label">아직 고민 중이라면</div>
+      <div class="cta-box-title">무료 강의로 먼저 감을 잡아보세요.<br>준비가 됐을 때 신청해도 늦지 않습니다.</div>
+      <div class="cta-box-desc">
+        강의 14개 전부 무료입니다.<br>
+        막히는 지점이 느껴지면, 그때 멤버십이 필요한 겁니다.
+      </div>
+      <div class="cta-btn-row">
+        <a href="academy.html" class="cta-btn-primary">무료 강의 보기 →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // theme
+  const t = document.getElementById('themeToggle');
+  if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); t.textContent = '☀️'; }
+  t.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    t.textContent = isDark ? '☀️' : '🌙';
+  });
+  // hamburger
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('nav-open');
+  });
+  // reveal
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // waitlist form
+  document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value.trim();
+    if (!email || !email.includes('@')) return;
+    this.querySelector('input').disabled = true;
+    const btn = this.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = '신청 완료 ✓';
+    this.style.display = 'none';
+    document.getElementById('waitlistSuccess').style.display = 'block';
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'waitlist_signup', { email_domain: email.split('@')[1], page: '멤버십_통합' });
+    }
+  });
+</script>
+
+<script>
+(function() {
+  function track(event, params) {
+    if (typeof gtag === 'undefined') return;
+    gtag('event', event, params);
+  }
+
+  // 스크롤 깊이
+  var scrollFired = {};
+  window.addEventListener('scroll', function() {
+    var pct = Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100);
+    [25, 50, 75, 90, 100].forEach(function(m) {
+      if (pct >= m && !scrollFired[m]) {
+        scrollFired[m] = true;
+        track('scroll_milestone', { percent: m, page: '멤버십_통합' });
+      }
+    });
+  }, { passive: true });
+
+  // 체류 시간
+  var activeTime = 0;
+  var timeFired = {};
+  var isActive = true;
+  document.addEventListener('visibilitychange', function() { isActive = !document.hidden; });
+  setInterval(function() {
+    if (!isActive) return;
+    activeTime += 1;
+    [15, 30, 60, 120, 300].forEach(function(s) {
+      if (activeTime >= s && !timeFired[s]) {
+        timeFired[s] = true;
+        track('time_on_page', { seconds: s, page: '멤버십_통합' });
+      }
+    });
+  }, 1000);
+
+  // 링크 클릭
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a, button');
+    if (!el) return;
+    var label = (el.textContent || '').trim().slice(0, 60);
+    var href = el.getAttribute('href') || '';
+    if (el.classList.contains('hero-cta-btn') || el.classList.contains('mid-cta-btn')) {
+      track('cta_click', { button_text: label, cta_position: el.classList.contains('hero-cta-btn') ? 'hero' : 'middle', page: '멤버십_통합' });
+    }
+    if (el.classList.contains('waitlist-btn')) {
+      track('waitlist_button_click', { page: '멤버십_통합' });
+    }
+  });
+
+  // 이탈 의도
+  var exitFired = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !exitFired) {
+      exitFired = true;
+      track('exit_intent', { scroll_depth: Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100), page: '멤버십_통합' });
+    }
+  });
+})();
+</script>
+</body>
+</html>
