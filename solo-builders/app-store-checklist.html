@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>App Store 출시 가이드 · 솔로 빌더스</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F2; --surface: #FFFFFF; --border: rgba(0,0,0,0.08);
+    --text: #3A3530; --text-strong: #1A1714; --muted: #8A8380; --subtle: #BFBCB5;
+    --accent: #7060A0; --sage: #4A7A6A; --rose: #8A6060;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; }
+  .container { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; }
+  .back { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); text-decoration: none; margin-bottom: 2rem; display: inline-block; }
+  .back:hover { color: var(--text-strong); }
+  h1 { font-size: 1.4rem; font-weight: 700; color: var(--text-strong); margin-bottom: 0.4rem; }
+  .sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.7; }
+  .phase { margin-bottom: 2.5rem; }
+  .phase-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .phase-num { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--accent); background: rgba(112,96,160,0.08); padding: 0.25rem 0.6rem; border-radius: 100px; }
+  .phase-title { font-size: 1rem; font-weight: 600; color: var(--text-strong); }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; line-height: 1.55; }
+  .check { flex-shrink: 0; width: 18px; height: 18px; border: 1.5px solid var(--subtle); border-radius: 4px; margin-top: 0.1rem; }
+  .tip { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--sage); background: rgba(74,122,106,0.06); padding: 0.6rem 0.9rem; border-radius: 6px; margin-top: 0.5rem; line-height: 1.6; }
+  .warn { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--rose); background: rgba(138,96,96,0.06); padding: 0.6rem 0.9rem; border-radius: 6px; margin-top: 0.5rem; line-height: 1.6; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .footer { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--subtle); text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="back" href="index.html">← 아카이브로 돌아가기</a>
+  <h1>🚀 App Store 출시 가이드</h1>
+  <p class="sub">앱을 처음 출시하는 사람을 위한 단계별 체크리스트입니다.<br>위에서부터 순서대로 따라가세요.</p>
+
+  <!-- Phase 1 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 1</span>
+      <span class="phase-title">출시 전 준비</span>
+    </div>
+    <ul class="checklist">
+      <li><div class="check"></div>Apple Developer Program 가입 (연 $99, 약 13만 원)</li>
+      <li><div class="check"></div>App Store Connect 접속 확인 (appstoreconnect.apple.com)</li>
+      <li><div class="check"></div>번들 ID 결정 (com.yourname.appname 형식)</li>
+      <li><div class="check"></div>앱 이름 결정 — App Store에서 검색될 이름 (30자 이내)</li>
+      <li><div class="check"></div>부제목 결정 (30자 이내, 핵심 기능 한 줄)</li>
+      <li><div class="check"></div>카테고리 선택 (주 카테고리 + 보조 카테고리)</li>
+      <li><div class="check"></div>개인정보 처리방침 URL 준비 (필수. 간단한 페이지라도 필요)</li>
+    </ul>
+    <div class="tip">💡 개인정보 처리방침은 GitHub Pages에 마크다운 한 페이지로 만들어도 충분합니다.</div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 2</span>
+      <span class="phase-title">앱 빌드 & 업로드</span>
+    </div>
+    <ul class="checklist">
+      <li><div class="check"></div>Xcode에서 Signing & Capabilities 설정 (Team, Bundle ID 확인)</li>
+      <li><div class="check"></div>앱 아이콘 준비 (1024×1024px, 투명 배경 불가)</li>
+      <li><div class="check"></div>Launch Screen 설정</li>
+      <li><div class="check"></div>버전 번호 설정 (1.0.0 권장)</li>
+      <li><div class="check"></div>빌드 번호 설정 (1부터 시작)</li>
+      <li><div class="check"></div>시뮬레이터가 아닌 실제 기기에서 테스트</li>
+      <li><div class="check"></div>Product → Archive → Distribute App → App Store Connect 업로드</li>
+      <li><div class="check"></div>App Store Connect에서 빌드가 "처리 중" → "준비됨"으로 바뀌는지 확인 (보통 10~30분)</li>
+    </ul>
+    <div class="tip">💡 Archive가 안 되면 대부분 Signing 문제입니다. Automatically manage signing이 켜져 있는지 확인하세요.</div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 3</span>
+      <span class="phase-title">App Store 메타데이터</span>
+    </div>
+    <ul class="checklist">
+      <li><div class="check"></div>스크린샷 준비 — 최소 6.7" (iPhone 15 Pro Max) 사이즈 필수</li>
+      <li><div class="check"></div>스크린샷 3~5장 (첫 번째가 가장 중요 — 핵심 기능을 보여줄 것)</li>
+      <li><div class="check"></div>앱 설명 작성 (첫 3줄이 접힌 상태에서 보이는 전부. 여기에 핵심 가치)</li>
+      <li><div class="check"></div>키워드 입력 (100자, 쉼표 구분. 앱 이름에 포함된 단어는 중복이니 빼기)</li>
+      <li><div class="check"></div>지원 URL 입력 (개인정보 처리방침과 같아도 됨)</li>
+      <li><div class="check"></div>연령 등급 설정 (설문 응답)</li>
+      <li><div class="check"></div>가격 설정 — 무료 or 유료</li>
+      <li><div class="check"></div>출시 국가/지역 선택</li>
+    </ul>
+    <div class="tip">💡 스크린샷은 실제 스크린샷보다 "기능 설명이 들어간 마케팅 이미지"가 다운로드를 더 많이 만듭니다. Figma나 Canva로 만들 수 있습니다.</div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 4</span>
+      <span class="phase-title">심사 제출</span>
+    </div>
+    <ul class="checklist">
+      <li><div class="check"></div>빌드 선택 (업로드한 빌드를 메타데이터에 연결)</li>
+      <li><div class="check"></div>심사 메모 작성 — 로그인이 필요하면 테스트 계정 정보 제공</li>
+      <li><div class="check"></div>"심사를 위해 제출" 클릭</li>
+      <li><div class="check"></div>상태가 "심사 대기 중"으로 변경되는지 확인</li>
+    </ul>
+    <div class="tip">💡 첫 심사는 보통 24~48시간 걸립니다. 주말에 제출하면 더 걸릴 수 있습니다.</div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 5</span>
+      <span class="phase-title">리젝 대응</span>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;line-height:1.7;">리젝은 실패가 아닙니다. 첫 출시에서 한 번은 거의 무조건 됩니다. 당황하지 마세요.</p>
+    <ul class="checklist">
+      <li><div class="check"></div>리젝 사유 읽기 — Resolution Center에서 구체적 이유 확인</li>
+      <li><div class="check"></div>가이드라인 번호 확인 (예: 2.1, 4.3 등)</li>
+      <li><div class="check"></div>해당 가이드라인을 Apple 문서에서 읽기</li>
+      <li><div class="check"></div>수정 후 새 빌드 업로드</li>
+      <li><div class="check"></div>Resolution Center에서 수정 내용 설명 후 재제출</li>
+    </ul>
+
+    <hr class="divider">
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--muted);margin-bottom:0.75rem;letter-spacing:0.05em;">자주 걸리는 리젝 사유 TOP 5</p>
+    <ul class="checklist">
+      <li><div class="check" style="border-color:var(--rose);"></div><strong>Guideline 2.1 — 성능</strong><br>크래시, 버그, 빈 화면. 실기기에서 충분히 테스트하면 피할 수 있음</li>
+      <li><div class="check" style="border-color:var(--rose);"></div><strong>Guideline 4.3 — 스팸/복제</strong><br>다른 앱과 너무 비슷하거나, 기능이 너무 단순한 경우. "이 앱만의 가치"를 심사 메모에 설명</li>
+      <li><div class="check" style="border-color:var(--rose);"></div><strong>Guideline 5.1.1 — 개인정보</strong><br>개인정보 수집하면서 처리방침이 없거나 부족. Privacy Manifest 확인</li>
+      <li><div class="check" style="border-color:var(--rose);"></div><strong>Guideline 3.1.1 — 인앱결제</strong><br>외부 결제 유도 금지. 디지털 콘텐츠는 반드시 Apple IAP 사용</li>
+      <li><div class="check" style="border-color:var(--rose);"></div><strong>Guideline 2.3 — 메타데이터</strong><br>스크린샷이 실제 앱과 다르거나, 설명이 오해를 주는 경우</li>
+    </ul>
+    <div class="warn">⚠️ 리젝 사유를 이해 못 하겠으면 위클리 핫시트에서 같이 봅시다. Resolution Center 스크린샷을 캡처해오세요.</div>
+  </div>
+
+  <!-- Phase 6 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="phase-num">Phase 6</span>
+      <span class="phase-title">출시 완료 후</span>
+    </div>
+    <ul class="checklist">
+      <li><div class="check"></div>앱이 "판매 준비됨" 상태인지 확인</li>
+      <li><div class="check"></div>App Store에서 직접 검색해서 다운로드 테스트</li>
+      <li><div class="check"></div>주변 3~5명에게 공유하고 피드백 수집</li>
+      <li><div class="check"></div>크래시 리포트 확인 (Xcode Organizer 또는 App Store Connect → Analytics)</li>
+      <li><div class="check"></div>첫 리뷰가 달리면 답글 달기</li>
+      <li><div class="check"></div>축하합니다 🎉 — 주간 체크인에 출시 완료라고 적어주세요</li>
+    </ul>
+  </div>
+
+  <div class="footer">Solo Builders · App Store 출시 가이드 · Leeo</div>
+
+</div>
+</body>
+</html>
