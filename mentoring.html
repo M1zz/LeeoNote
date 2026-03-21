@@ -6,6 +6,18 @@
 <meta name="color-scheme" content="light">
 <title>멘토링 — 리이오의 연습장</title>
 <meta name="description" content="iOS 개발, 커리어 전환, 앱 출시. 혼자 며칠씩 막히는 것을 1시간에 넘어갑니다. 카카오톡으로 무료 문의하세요.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FG0Q3EQFWM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FG0Q3EQFWM', {
+    page_title: '멘토링',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -188,6 +200,15 @@
     color: #3A2F00; background: rgba(0,0,0,0.08);
     padding: 0.15rem 0.45rem; border-radius: 4px;
   }
+  .contact-btn-inflearn {
+    display: flex; align-items: center;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; color: #fff;
+    background: #00C471; padding: 0.85rem 1.75rem;
+    border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .contact-btn-inflearn:hover { opacity: 0.88; }
   .contact-free-badge-email {
     font-family: 'DM Mono', monospace; font-size: 0.55rem;
     letter-spacing: 0.1em; text-transform: uppercase;
@@ -289,6 +310,14 @@
     transition: background 0.15s; white-space: nowrap;
   }
   .bottom-cta-email:hover { background: rgba(255,255,255,0.14); }
+  .bottom-cta-inflearn {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; color: #fff;
+    background: #00C471; border: 1px solid transparent;
+    padding: 0.8rem 1.75rem; border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .bottom-cta-inflearn:hover { opacity: 0.88; }
 
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -343,7 +372,7 @@
       <div class="hero-stat-num">6기</div>
       <div class="hero-stat-label">챌린지 운영</div>
     </div>
-    <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" rel="noopener" class="hero-stat-link">인프런 강의 보기 →</a>
+    <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="hero-stat-link">인프런 멘토링 신청 →</a>
   </div>
   <div class="contact-row">
     <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
@@ -458,6 +487,9 @@
         <a href="mailto:leeo@kakao.com" class="contact-btn-email">
           이메일로 무료 문의 <span class="contact-free-badge-email">FREE</span>
         </a>
+        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="contact-btn-inflearn">
+          인프런 멘토링 신청 →
+        </a>
       </div>
     </div>
   </div>
@@ -468,12 +500,13 @@
       <div class="bottom-cta-label">지금 막혀있다면</div>
       <div class="bottom-cta-title">먼저 물어보세요.<br>맞는지 아닌지는 그다음에 결정해도 됩니다.</div>
       <div class="bottom-cta-desc">
-        카카오톡 채널 문의는 무료입니다.<br>
-        부담 없이 지금 상황을 보내주시면 됩니다.
+        문의는 카카오톡 · 이메일 모두 무료입니다.<br>
+        바로 신청하고 싶다면 인프런에서도 가능합니다.
       </div>
       <div class="bottom-cta-row">
         <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="bottom-cta-kakao">카카오톡으로 무료 문의</a>
         <a href="mailto:leeo@kakao.com" class="bottom-cta-email">이메일로 무료 문의 →</a>
+        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="bottom-cta-inflearn">인프런 멘토링 신청 →</a>
       </div>
     </div>
   </div>
@@ -495,6 +528,69 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+
+<script>
+(function() {
+  function track(event, params) {
+    if (typeof gtag === 'undefined') return;
+    gtag('event', event, params);
+  }
+
+  // 스크롤 깊이
+  var scrollFired = {};
+  window.addEventListener('scroll', function() {
+    var pct = Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100);
+    [25, 50, 75, 90, 100].forEach(function(m) {
+      if (pct >= m && !scrollFired[m]) {
+        scrollFired[m] = true;
+        track('scroll_milestone', { percent: m, page: '멘토링' });
+      }
+    });
+  }, { passive: true });
+
+  // 체류 시간
+  var activeTime = 0; var timeFired = {}; var isActive = true;
+  document.addEventListener('visibilitychange', function() { isActive = !document.hidden; });
+  setInterval(function() {
+    if (!isActive) return;
+    activeTime += 1;
+    [15, 30, 60, 120, 300].forEach(function(s) {
+      if (activeTime >= s && !timeFired[s]) {
+        timeFired[s] = true;
+        track('time_on_page', { seconds: s, page: '멘토링' });
+      }
+    });
+  }, 1000);
+
+  // 클릭 추적
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a, button');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+
+    if (href.includes('inf.run') || href.includes('inflearn')) {
+      track('inflearn_mentoring_click', { button_text: label, page: '멘토링' });
+    } else if (href.includes('open.kakao')) {
+      track('kakao_inquiry_click', { button_text: label, page: '멘토링' });
+    } else if (href.startsWith('mailto:')) {
+      track('email_inquiry_click', { button_text: label, page: '멘토링' });
+    }
+  });
+
+  // 이탈 의도
+  var exitFired = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !exitFired) {
+      exitFired = true;
+      track('exit_intent', {
+        scroll_depth: Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100),
+        page: '멘토링'
+      });
+    }
+  });
+})();
 </script>
 </body>
 </html>
