@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>멤버십 — 리이오의 연습장</title>
-<meta name="description" content="아이디어를 직접 앱으로 만들거나, iOS 개발자로 전환하고 싶은 분들을 위한 소수 정예 멤버십. 월 10명 한정.">
+<title>솔로 빌더스 — 리이오의 연습장</title>
+<meta name="description" content="3개월 안에 내 이름으로 된 앱을 App Store에 올립니다. 막히면 물어보고, 매주 함께 진행하고, 출시까지 끝까지 가는 소수 정예 멤버십. 15명 한정.">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG0Q3EQFWM"></script>
 <script>
@@ -13,7 +13,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-FG0Q3EQFWM', {
-    page_title: '멤버십_통합',
+    page_title: '솔로_빌더스',
     page_location: window.location.href,
     send_page_view: true
   });
@@ -143,7 +143,6 @@
     opacity: 0; animation: enter 0.8s ease forwards 0.2s;
   }
   .hero-headline .em { color: var(--lavender); }
-  .hero-headline .dim { color: var(--subtle); text-decoration: line-through; text-decoration-color: var(--subtle); text-decoration-thickness: 2px; }
   .hero-sub {
     font-size: 0.95rem; font-weight: 300; color: var(--muted);
     line-height: 1.9; max-width: 560px; margin-bottom: 2rem;
@@ -188,27 +187,6 @@
   }
   .section-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 600px; }
 
-  /* WHO */
-  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
-  @media (max-width: 600px) { .who-grid { grid-template-columns: 1fr; } }
-  .who-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.5rem;
-  }
-  .who-card--a { border-color: rgba(112,96,160,0.3); }
-  .who-card--b { border-color: rgba(74,122,106,0.3); }
-  .who-card-tag {
-    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em;
-    text-transform: uppercase; margin-bottom: 0.75rem;
-  }
-  .who-card--a .who-card-tag { color: var(--lavender); }
-  .who-card--b .who-card-tag { color: var(--sage); }
-  .who-card-title {
-    font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 600;
-    color: var(--text-strong); margin-bottom: 0.5rem; line-height: 1.4;
-  }
-  .who-card-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
-
   /* WALL */
   .wall-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
   .wall-item {
@@ -233,97 +211,115 @@
   .get-title { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.35rem; }
   .get-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.7; }
 
-  /* ROADMAP */
-  .roadmap-month1 {
-    margin-top: 1.75rem;
+  /* ROADMAP 3-CARD */
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.75rem; }
+  @media (max-width: 700px) { .roadmap-grid { grid-template-columns: 1fr; } }
+  .roadmap-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: 12px; overflow: hidden;
   }
-  .roadmap-month1-header {
-    padding: 0.9rem 1.5rem;
+  .roadmap-card-header {
+    padding: 0.9rem 1.25rem;
     border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
     background: var(--surface-subtle);
   }
-  .roadmap-month1-label {
+  .roadmap-card-label {
     font-family: 'DM Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--lavender);
+    margin-bottom: 0.15rem;
   }
-  .roadmap-month1-badge {
-    font-family: 'DM Mono', monospace; font-size: 0.55rem;
-    color: var(--subtle); background: var(--surface-subtle);
-    padding: 0.2rem 0.6rem; border-radius: 100px; border: 1px solid var(--border);
+  .roadmap-card-headline {
+    font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+    color: var(--text-strong); line-height: 1.4;
   }
-  .roadmap-month1-body {
-    display: grid; grid-template-columns: 1fr 1fr; padding: 1.25rem 1.5rem; gap: 1rem;
-  }
-  @media (max-width: 560px) { .roadmap-month1-body { grid-template-columns: 1fr; } }
-  .roadmap-month1-title {
-    font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 600;
-    color: var(--text-strong); margin-bottom: 0.6rem; grid-column: 1 / -1;
+  .roadmap-card-body { padding: 1.1rem 1.25rem; }
+  .roadmap-card-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 0.75rem;
   }
   .roadmap-task-list {
     list-style: none; display: flex; flex-direction: column; gap: 0.3rem;
+    margin-bottom: 0.75rem;
   }
   .roadmap-task-list li {
     font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted);
     line-height: 1.55; padding-left: 0.9rem; position: relative;
   }
   .roadmap-task-list li::before { content: '—'; position: absolute; left: 0; color: var(--subtle); }
-  .roadmap-month1-milestone {
-    grid-column: 1 / -1; margin-top: 0.25rem;
+  .roadmap-card-milestone {
     padding: 0.45rem 0.7rem; border-radius: 6px;
     font-family: 'DM Mono', monospace; font-size: 0.6rem;
     background: rgba(112,96,160,0.08); color: var(--lavender); letter-spacing: 0.04em;
   }
 
-  .roadmap-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
-  @media (max-width: 600px) { .roadmap-paths { grid-template-columns: 1fr; } }
-  .roadmap-path {
+  /* WEEKLY */
+  .weekly-desc {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.8; max-width: 600px; margin-bottom: 1.5rem;
+  }
+  .weekly-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .weekly-item {
+    display: flex; align-items: flex-start; gap: 0.75rem;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden;
+    border-radius: 10px; padding: 1rem 1.25rem;
   }
-  .roadmap-path--launcher { border-color: rgba(112,96,160,0.25); }
-  .roadmap-path--career { border-color: rgba(74,122,106,0.25); }
-  .roadmap-path-header {
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface-subtle);
+  .weekly-time {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--lavender);
+    flex-shrink: 0; padding-top: 0.1rem; min-width: 3.5rem; letter-spacing: 0.04em;
   }
-  .roadmap-path-tag {
-    font-family: 'DM Mono', monospace; font-size: 0.58rem;
-    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.1rem;
+  .weekly-text { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+  .weekly-note {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    color: var(--subtle); line-height: 1.7; margin-top: 1rem;
   }
-  .roadmap-path--launcher .roadmap-path-tag { color: var(--lavender); }
-  .roadmap-path--career .roadmap-path-tag { color: var(--sage); }
-  .roadmap-path-desc { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); }
-  .roadmap-path-body { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .roadmap-month-item {}
-  .roadmap-month-label {
-    font-family: 'DM Mono', monospace; font-size: 0.55rem;
-    color: var(--subtle); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem;
+
+  /* PRICE */
+  .price-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.25rem; margin-top: 1.5rem; text-align: center;
   }
-  .roadmap-month-title {
-    font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
-    color: var(--text-strong); margin-bottom: 0.3rem;
+  .price-box-title {
+    font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 1.5rem;
   }
-  .roadmap-month-items {
-    font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); line-height: 1.6;
+  .price-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+  @media (max-width: 600px) { .price-tiers { grid-template-columns: 1fr; } }
+  .price-tier {
+    border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1rem;
+    background: var(--bg);
   }
-  .roadmap-path-milestone {
-    margin: 0 1.25rem 1.1rem;
-    padding: 0.45rem 0.7rem; border-radius: 6px;
-    font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.04em;
+  .price-tier--highlight {
+    border-color: var(--lavender); background: rgba(112,96,160,0.06);
   }
-  .roadmap-path--launcher .roadmap-path-milestone { background: rgba(112,96,160,0.08); color: var(--lavender); }
-  .roadmap-path--career .roadmap-path-milestone { background: rgba(74,122,106,0.08); color: var(--sage); }
-  .roadmap-divider {
-    display: flex; align-items: center; gap: 0.75rem; margin: 0.75rem 0;
+  .price-tier-name {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .price-tier--highlight .price-tier-name { color: var(--lavender); }
+  .price-tier-amount {
+    font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700;
+    color: var(--text-strong); margin-bottom: 0.25rem;
+  }
+  .price-tier-unit {
     font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle);
   }
-  .roadmap-divider::before, .roadmap-divider::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
+  .price-tier-badge {
+    display: inline-block; margin-top: 0.5rem;
+    font-family: 'DM Mono', monospace; font-size: 0.55rem;
+    color: var(--lavender); background: rgba(112,96,160,0.1);
+    padding: 0.2rem 0.6rem; border-radius: 100px;
   }
+  .price-note {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    color: var(--subtle); line-height: 1.7; margin-bottom: 1.25rem;
+  }
+  .price-cta-btn {
+    display: inline-block;
+    font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.06em; color: #fff; background: var(--lavender);
+    padding: 0.85rem 2rem; border-radius: 8px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap;
+  }
+  .price-cta-btn:hover { opacity: 0.85; }
 
   /* INSTRUCTOR */
   .instructor-card {
@@ -367,25 +363,6 @@
   .proof-name { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-bottom: 0.35rem; letter-spacing: 0.05em; }
   .proof-text { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
   .proof-from { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--subtle); margin-top: 0.35rem; }
-
-  /* MIDDLE CTA */
-  .mid-cta {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1.75rem 2rem; margin-top: 1.75rem;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;
-  }
-  .mid-cta-text {
-    font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
-    color: var(--text-strong); line-height: 1.4;
-  }
-  .mid-cta-sub { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-top: 0.25rem; }
-  .mid-cta-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.06em; color: #fff; background: var(--lavender);
-    padding: 0.8rem 1.75rem; border-radius: 8px; text-decoration: none;
-    transition: opacity 0.15s; white-space: nowrap; flex-shrink: 0;
-  }
-  .mid-cta-btn:hover { opacity: 0.85; }
 
   /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem; }
@@ -521,53 +498,24 @@
 <div class="container">
 
   <!-- HERO -->
-  <div class="tag">Membership · Early Bird · 월 10명 한정</div>
+  <div class="tag">Solo Builders · 15명 한정</div>
   <h1 class="hero-headline">
-    아이디어만 있는 사람이<br>
-    <span class="dim">혼자서는 완성이 안 됩니다.</span><br>
-    <span class="em">같이 만들어 냅니다.</span>
+    3개월 안에 내 이름으로 된 앱이<br>
+    <span class="em">App Store에 올라갑니다.</span>
   </h1>
   <p class="hero-sub">
-    코드를 몰라도 됩니다. 다른 직군에서 왔어도 됩니다.<br>
-    막히면 물어보면 됩니다.<br>
-    아이디어를 앱으로 만들거나, iOS 개발자로 전환하는 것을<br>
-    끝까지 함께 하는 소수 정예 모임입니다.
+    강의만으로는 완성이 안 됐던 분들을 위한 멤버십입니다.<br>
+    막히면 물어보고, 매주 함께 진행하고,<br>
+    출시까지 끝까지 갑니다.
   </p>
   <div class="hero-who-row">
-    <span class="hero-who-chip">기획자</span>
-    <span class="hero-who-chip">디자이너</span>
-    <span class="hero-who-chip">비개발 창업자</span>
-    <span class="hero-who-chip">직군 전환 희망자</span>
+    <span class="hero-who-chip">코딩 시작은 했지만 완주 못한 분</span>
+    <span class="hero-who-chip">아이디어는 있는데 만들 줄 모르는 분</span>
+    <span class="hero-who-chip">혼자 하니까 계속 미루게 되는 분</span>
   </div>
   <div class="hero-cta-row">
     <a href="#waitlist" class="hero-cta-btn">얼리버드 신청하기 →</a>
-    <span class="hero-cta-note">가격 확정 시 우선 안내 · 부담 없음</span>
-  </div>
-
-  <!-- WHO IS THIS FOR -->
-  <div class="section reveal">
-    <div class="section-label">어떤 분들을 위한 모임인가요</div>
-    <div class="section-title">목표가 다른 두 가지 경로가 있습니다</div>
-    <div class="who-grid">
-      <div class="who-card who-card--a">
-        <div class="who-card-tag">경로 A · 앱 출시자</div>
-        <div class="who-card-title">직접 만든 앱을<br>App Store에 올리고 싶다</div>
-        <div class="who-card-desc">
-          기획자·디자이너·창업자처럼<br>
-          아이디어는 있는데 코드가 없는 분.<br>
-          Month 1 출시 → Month 2 성장 → Month 3 수익화
-        </div>
-      </div>
-      <div class="who-card who-card--b">
-        <div class="who-card-tag">경로 B · 직군 전환자</div>
-        <div class="who-card-title">iOS 개발자로<br>직군을 바꾸고 싶다</div>
-        <div class="who-card-desc">
-          비전공자·타직군 출신으로<br>
-          퇴근 후 전환을 준비 중인 분.<br>
-          Month 1 출시 → Month 2 포트폴리오 → Month 3 취업
-        </div>
-      </div>
-    </div>
+    <span class="hero-cta-note">첫 10명 · 79,000원/월 · 3개월 묶음 199,000원</span>
   </div>
 
   <!-- WALL -->
@@ -577,7 +525,7 @@
     <div class="wall-list">
       <div class="wall-item">
         <span class="wall-num">01</span>
-        <span class="wall-text">강의는 끝까지 들었는데 내 아이디어에 어떻게 적용하는지 모르겠다</span>
+        <span class="wall-text">강의는 끝까지 들었는데 내 아이디어로 앱이 안 만들어진다</span>
       </div>
       <div class="wall-item">
         <span class="wall-num">02</span>
@@ -605,14 +553,14 @@
         <div class="get-desc">내 아이디어를 어떤 구조로 만들지, 첫 설계부터 같이 합니다</div>
       </div>
       <div class="get-card">
-        <div class="get-icon">🔨</div>
-        <div class="get-title">막힌 부분 Q&A</div>
-        <div class="get-desc">이메일로 물어보면 그 주 안에 해결됩니다. 며칠씩 혼자 고민하지 않아도 됩니다</div>
+        <div class="get-icon">📺</div>
+        <div class="get-title">빌더스 위클리</div>
+        <div class="get-desc">매주 목요일 21:00 라이브. 핫시트로 막힌 곳을 실시간 해결. 녹화 아카이브 제공</div>
       </div>
       <div class="get-card">
-        <div class="get-icon">👀</div>
-        <div class="get-title">코드 리뷰</div>
-        <div class="get-desc">내 코드가 맞는 방향인지, 더 나은 방법이 있는지 확인받습니다</div>
+        <div class="get-icon">🔨</div>
+        <div class="get-title">무제한 Q&A + 코드 리뷰</div>
+        <div class="get-desc">이메일로 물어보면 48시간 내 답변. 월 2회 코드 리뷰</div>
       </div>
       <div class="get-card">
         <div class="get-icon">🚀</div>
@@ -624,81 +572,112 @@
 
   <!-- ROADMAP -->
   <div class="section reveal">
-    <div class="section-label">멤버십 로드맵</div>
+    <div class="section-label">3개월 로드맵</div>
     <div class="section-title">출시가 끝이 아닙니다</div>
-    <div class="section-desc">Month 1은 모든 멤버가 함께 첫 앱을 출시합니다. Month 2부터는 목표에 따라 경로가 갈립니다.</div>
+    <div class="section-desc">3개월 동안 출시 → 수익화 → 성장까지 함께 갑니다.</div>
 
-    <div class="roadmap-month1">
-      <div class="roadmap-month1-header">
-        <span class="roadmap-month1-label">Month 1 — 공통</span>
-        <span class="roadmap-month1-badge">두 경로 모두 여기서 시작</span>
-      </div>
-      <div class="roadmap-month1-body">
-        <div class="roadmap-month1-title">첫 앱 App Store 출시</div>
-        <ul class="roadmap-task-list">
-          <li>핵심 기능 1가지 작동하게 만들기</li>
-          <li>앱 화면 레이아웃 · 디자인 완성</li>
-        </ul>
-        <ul class="roadmap-task-list">
-          <li>지인 테스트 → 버그 수정</li>
-          <li>App Store 심사 제출 · 출시</li>
-        </ul>
-        <div class="roadmap-month1-milestone">🚀 내 앱이 App Store에 올라갑니다</div>
-      </div>
-    </div>
-
-    <div class="roadmap-divider">Month 2부터 경로가 갈립니다</div>
-
-    <div class="roadmap-paths">
-      <div class="roadmap-path roadmap-path--launcher">
-        <div class="roadmap-path-header">
-          <div class="roadmap-path-tag">경로 A · 앱 출시자</div>
-          <div class="roadmap-path-desc">성장하고 수익이 나는 앱으로</div>
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <div class="roadmap-card-header">
+          <div class="roadmap-card-label">Month 1 — 출시</div>
+          <div class="roadmap-card-headline">핵심 기능 1개만 만들어<br>App Store에 올린다</div>
         </div>
-        <div class="roadmap-path-body">
-          <div class="roadmap-month-item">
-            <div class="roadmap-month-label">Month 2 — 성장</div>
-            <div class="roadmap-month-title">사용자 반응 분석 · 버전업</div>
-            <div class="roadmap-month-items">리뷰·크래시 분석 / 기능 개선 배포<br>검색 노출 개선 — 키워드·스크린샷</div>
-          </div>
-          <div class="roadmap-month-item">
-            <div class="roadmap-month-label">Month 3 — 수익화</div>
-            <div class="roadmap-month-title">유료 기능 · 구독 모델 설계</div>
-            <div class="roadmap-month-items">무료↔유료 경계 전략 / 결제 기능 연결<br>다운로드 전환율 개선</div>
-          </div>
+        <div class="roadmap-card-body">
+          <ul class="roadmap-task-list">
+            <li>기능 1개 작동</li>
+            <li>화면 완성</li>
+            <li>테스트</li>
+            <li>심사 제출</li>
+          </ul>
+          <div class="roadmap-card-milestone">🚀 내 앱이 App Store에 올라갑니다</div>
         </div>
-        <div class="roadmap-path-milestone">💰 수익이 나는 앱으로 성장</div>
       </div>
 
-      <div class="roadmap-path roadmap-path--career">
-        <div class="roadmap-path-header">
-          <div class="roadmap-path-tag">경로 B · 직군 전환자</div>
-          <div class="roadmap-path-desc">취업할 때까지 함께 갑니다</div>
+      <div class="roadmap-card">
+        <div class="roadmap-card-header">
+          <div class="roadmap-card-label">Month 2 — 수익화</div>
+          <div class="roadmap-card-headline">무료↔유료 경계 설계,<br>인앱결제 연결</div>
         </div>
-        <div class="roadmap-path-body">
-          <div class="roadmap-month-item">
-            <div class="roadmap-month-label">Month 2 — 포트폴리오</div>
-            <div class="roadmap-month-title">두 번째 앱 + GitHub 정리</div>
-            <div class="roadmap-month-items">두 번째 앱 기획·구현 / 코드 품질 개선<br>채용 제출용 포트폴리오 완성</div>
-          </div>
-          <div class="roadmap-month-item">
-            <div class="roadmap-month-label">Month 3 — 전환</div>
-            <div class="roadmap-month-title">채용 지원 · 면접 준비</div>
-            <div class="roadmap-month-items">이력서·자기소개서 피드백<br>기술 면접 대비 / 채용 지원 전략</div>
-          </div>
+        <div class="roadmap-card-body">
+          <ul class="roadmap-task-list">
+            <li>사용자 반응 분석</li>
+            <li>유료 기능 설계</li>
+            <li>결제 연결</li>
+          </ul>
+          <div class="roadmap-card-milestone">💰 수익이 나기 시작합니다</div>
         </div>
-        <div class="roadmap-path-milestone">🎉 iOS 개발자로 전환</div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-card-header">
+          <div class="roadmap-card-label">Month 3+ — 성장</div>
+          <div class="roadmap-card-headline">데이터 분석 → 개선 →<br>두 번째 앱</div>
+        </div>
+        <div class="roadmap-card-body">
+          <ul class="roadmap-task-list">
+            <li>리뷰·크래시 분석</li>
+            <li>키워드 최적화</li>
+            <li>두 번째 아이디어</li>
+          </ul>
+          <div class="roadmap-card-milestone">🔄 두 번째 앱으로 리셋</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MIDDLE CTA -->
-  <div class="mid-cta reveal">
-    <div>
-      <div class="mid-cta-text">이 로드맵을 함께 걷고 싶다면</div>
-      <div class="mid-cta-sub">월 10명 한정 · 얼리버드에게 가격 우선 안내</div>
+  <!-- BUILDERS WEEKLY -->
+  <div class="section reveal">
+    <div class="section-label">빌더스 위클리</div>
+    <div class="section-title">매주 목요일 21:00, 40분</div>
+    <div class="weekly-desc">누군가 혼자 막힌 것을 전원이 함께 배웁니다.</div>
+    <div class="weekly-list">
+      <div class="weekly-item">
+        <span class="weekly-time">0~5분</span>
+        <span class="weekly-text">이번 주 공지 · 리이오 근황</span>
+      </div>
+      <div class="weekly-item">
+        <span class="weekly-time">5~20분</span>
+        <span class="weekly-text">핫시트 — 멤버 1~2명이 막힌 곳을 화면 공유, 리이오가 라이브로 해결</span>
+      </div>
+      <div class="weekly-item">
+        <span class="weekly-time">20~35분</span>
+        <span class="weekly-text">이번 주 주제 — 자주 막히는 1가지를 짧게 다룸</span>
+      </div>
+      <div class="weekly-item">
+        <span class="weekly-time">35~40분</span>
+        <span class="weekly-text">다음 주 미니 과제 · 마무리</span>
+      </div>
     </div>
-    <a href="#waitlist" class="mid-cta-btn">얼리버드 신청하기 →</a>
+    <div class="weekly-note">참석 강제 없음 · 녹화 아카이브 제공 · 핫시트 신청은 주간 체크인 제출자만</div>
+  </div>
+
+  <!-- PRICE -->
+  <div class="section reveal">
+    <div class="section-label">가격</div>
+    <div class="price-box">
+      <div class="price-box-title">솔로 빌더스 멤버십</div>
+      <div class="price-tiers">
+        <div class="price-tier price-tier--highlight">
+          <div class="price-tier-name">얼리버드</div>
+          <div class="price-tier-amount">79,000원</div>
+          <div class="price-tier-unit">/월</div>
+          <div class="price-tier-badge">첫 10명 · 평생 유지</div>
+        </div>
+        <div class="price-tier">
+          <div class="price-tier-name">정가</div>
+          <div class="price-tier-amount">129,000원</div>
+          <div class="price-tier-unit">/월</div>
+        </div>
+        <div class="price-tier">
+          <div class="price-tier-name">3개월 묶음</div>
+          <div class="price-tier-amount">199,000원</div>
+          <div class="price-tier-unit">일시불</div>
+          <div class="price-tier-badge">얼리버드 한정 · 15% 할인</div>
+        </div>
+      </div>
+      <div class="price-note">월 최대 15명 · 실시간 화상 강제 없음 · 카페 2잔 값으로 막히는 곳을 넘깁니다</div>
+      <a href="#waitlist" class="price-cta-btn">얼리버드 신청하기 →</a>
+    </div>
   </div>
 
   <!-- INSTRUCTOR -->
@@ -716,9 +695,9 @@
         </div>
         <div class="instructor-tags">
           <span class="instructor-tag">솔로프리너</span>
-          <span class="instructor-tag">멘토</span>
-          <span class="instructor-tag">챌린지 운영 127명</span>
-          <span class="instructor-tag">앱 출시 다수</span>
+          <span class="instructor-tag">iOS 앱 20+</span>
+          <span class="instructor-tag">인프런 8,000+</span>
+          <span class="instructor-tag">챌린지 127명 수료</span>
         </div>
       </div>
     </div>
@@ -764,7 +743,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">코딩을 전혀 몰라도 되나요?</div>
-        <div class="faq-a">네. 이 멤버십은 코드를 이해하는 것이 목표가 아니라 앱을 완성하는 것이 목표입니다. 막히는 부분은 이메일로 물어보시면 됩니다. 비전공자, 타직군 출신 분들이 많이 계십니다.</div>
+        <div class="faq-a">네. 다만 이 멤버십은 '코딩을 전혀 모르는 분'보다 '시작은 했는데 완주를 못 한 분'에게 가장 잘 맞습니다. 완전 입문이라면 무료 강의로 먼저 시작해보시길 권합니다.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">하루 얼마나 시간을 써야 하나요?</div>
@@ -779,12 +758,16 @@
         <div class="faq-a">강의는 혼자 보는 겁니다. 이 멤버십은 막히면 물어보는 곳입니다. 강의는 내 질문에 답해주지 않지만, 여기서는 내 코드를 봐주고, 내 아이디어에 맞는 방법을 같이 찾습니다.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">직군 전환은 얼마나 걸리나요?</div>
-        <div class="faq-a">사람마다 다릅니다. 이 멤버십은 "N개월 안에 취업"을 보장하지 않습니다. 다만 앱을 출시하고, 포트폴리오를 만들고, 채용 지원까지 방향과 속도를 같이 잡아갑니다.</div>
+        <div class="faq-q">빌더스 위클리에 꼭 참석해야 하나요?</div>
+        <div class="faq-a">아닙니다. 녹화본을 제공하므로 참석 못 해도 괜찮습니다. 다만 핫시트(라이브 코드 리뷰)는 참석자만 신청 가능합니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">1:1 멘토링이랑 뭐가 다른가요?</div>
+        <div class="faq-a">멘토링은 1회성 단발 문제 해결입니다(30분 20,000원). 솔로 빌더스는 3개월 동안 출시까지 함께 가는 구조입니다. 주간 체크인, 위클리 라이브, Q&A, 코드 리뷰가 포함됩니다.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">지금 당장 시작할 준비가 안 된 것 같아요.</div>
-        <div class="faq-a">얼리버드 신청은 시작이 아닙니다. 가격이 확정될 때 이메일 한 통 받는 것뿐입니다. 그때 다시 결정하셔도 됩니다. 자리만 먼저 확인해두는 거라고 생각해주세요.</div>
+        <div class="faq-a">얼리버드 신청은 결제가 아닙니다. 신청해두시면 얼리버드 가격으로 안내드립니다. 그때 다시 결정하셔도 됩니다. 자리만 먼저 확인해두는 거라고 생각해주세요.</div>
       </div>
     </div>
   </div>
@@ -793,14 +776,13 @@
   <div class="section reveal">
     <div class="section-label">얼리버드 모집</div>
     <div id="waitlist" class="waitlist-box">
-      <div class="waitlist-label">Early Bird · 월 10명 한정</div>
-      <div class="waitlist-title">가격이 확정되면 가장 먼저 알려드립니다</div>
+      <div class="waitlist-label">Solo Builders · 얼리버드 · 첫 10명</div>
+      <div class="waitlist-title">3개월 뒤, 내 이름으로 된 앱이 App Store에 있습니다</div>
       <div class="waitlist-desc">
-        지금은 가격 미확정입니다. 얼리버드에게 우선 안내 드립니다.<br>
-        이메일 하나로 자리를 확인해두세요. 스팸 없습니다.
+        얼리버드 가격 79,000원/월은 첫 10명에게만 평생 유지됩니다.
       </div>
       <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xgonqgnl" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="멤버십 얼리버드 신청">
+        <input type="hidden" name="_subject" value="솔로 빌더스 얼리버드 신청">
         <input type="hidden" name="유입_경로" id="referrerField" value="">
 
         <div class="form-field">
@@ -814,21 +796,6 @@
         </div>
 
         <div class="form-field">
-          <span class="form-label">관심 멤버십</span>
-          <input type="hidden" name="관심_멤버십" id="fieldMembership" value="">
-          <div class="form-radio-group" id="membershipGroup">
-            <label class="form-radio-label"><input type="radio" name="_membership" value="앱 출시자 (경로 A)"> 앱 출시자</label>
-            <label class="form-radio-label"><input type="radio" name="_membership" value="직군 전환자 (경로 B)"> 직군 전환자</label>
-            <label class="form-radio-label"><input type="radio" name="_membership" value="아직 모르겠음"> 아직 모르겠음</label>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <label class="form-label" for="fieldJob">현재 직군 / 상황 <span class="form-label-opt">(선택)</span></label>
-          <input class="waitlist-input" type="text" id="fieldJob" name="현재_직군" placeholder="예: 디자이너, 마케터, 취준생 등" autocomplete="off">
-        </div>
-
-        <div class="form-field">
           <span class="form-label">Swift / iOS 경험</span>
           <input type="hidden" name="iOS_경험" id="fieldExp" value="">
           <div class="form-radio-group" id="expGroup">
@@ -839,13 +806,13 @@
         </div>
 
         <div class="form-field">
-          <label class="form-label" for="fieldMotivation">만들고 싶은 것 / 신청 동기 <span class="form-label-opt">(선택)</span></label>
-          <textarea class="form-textarea" id="fieldMotivation" name="지원동기" placeholder="어떤 앱을 만들고 싶은지, 왜 멤버십을 고민하게 됐는지 자유롭게 적어주세요"></textarea>
+          <label class="form-label" for="fieldApp">만들고 싶은 앱 <span class="form-label-opt">(선택)</span></label>
+          <textarea class="form-textarea" id="fieldApp" name="만들고_싶은_앱" placeholder="어떤 앱을 만들고 싶은지 자유롭게 적어주세요"></textarea>
         </div>
 
         <button class="waitlist-btn" type="submit">얼리버드 신청 →</button>
       </form>
-      <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 가격 확정 시 가장 먼저 연락드립니다.</div>
+      <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 얼리버드 가격으로 가장 먼저 안내드리겠습니다.</div>
       <div class="waitlist-privacy">이메일은 멤버십 안내 외에 사용하지 않습니다</div>
     </div>
   </div>
@@ -854,13 +821,14 @@
   <div class="section reveal">
     <div class="cta-box">
       <div class="cta-box-label">아직 고민 중이라면</div>
-      <div class="cta-box-title">무료 강의로 먼저 감을 잡아보세요.<br>준비가 됐을 때 신청해도 늦지 않습니다.</div>
+      <div class="cta-box-title">무료 강의로 먼저 감을 잡아보세요.</div>
       <div class="cta-box-desc">
         강의 14개 전부 무료입니다.<br>
         막히는 지점이 느껴지면, 그때 멤버십이 필요한 겁니다.
       </div>
       <div class="cta-btn-row">
         <a href="academy.html" class="cta-btn-primary">무료 강의 보기 →</a>
+        <a href="mentoring.html" class="cta-btn-primary">멘토링 알아보기 →</a>
       </div>
     </div>
   </div>
@@ -902,7 +870,6 @@
       });
     });
   }
-  setupRadioGroup('membershipGroup', 'fieldMembership');
   setupRadioGroup('expGroup', 'fieldExp');
 
   // waitlist form
@@ -933,9 +900,8 @@
         if (typeof gtag !== 'undefined') {
           gtag('event', 'waitlist_signup', {
             email_domain: email.split('@')[1],
-            membership_type: document.getElementById('fieldMembership').value,
             ios_experience: document.getElementById('fieldExp').value,
-            page: '멤버십_통합'
+            page: '솔로_빌더스'
           });
         }
       } else {
@@ -963,7 +929,7 @@
     [25, 50, 75, 90, 100].forEach(function(m) {
       if (pct >= m && !scrollFired[m]) {
         scrollFired[m] = true;
-        track('scroll_milestone', { percent: m, page: '멤버십_통합' });
+        track('scroll_milestone', { percent: m, page: '솔로_빌더스' });
       }
     });
   }, { passive: true });
@@ -979,7 +945,7 @@
     [15, 30, 60, 120, 300].forEach(function(s) {
       if (activeTime >= s && !timeFired[s]) {
         timeFired[s] = true;
-        track('time_on_page', { seconds: s, page: '멤버십_통합' });
+        track('time_on_page', { seconds: s, page: '솔로_빌더스' });
       }
     });
   }, 1000);
@@ -990,11 +956,11 @@
     if (!el) return;
     var label = (el.textContent || '').trim().slice(0, 60);
     var href = el.getAttribute('href') || '';
-    if (el.classList.contains('hero-cta-btn') || el.classList.contains('mid-cta-btn')) {
-      track('cta_click', { button_text: label, cta_position: el.classList.contains('hero-cta-btn') ? 'hero' : 'middle', page: '멤버십_통합' });
+    if (el.classList.contains('hero-cta-btn') || el.classList.contains('price-cta-btn')) {
+      track('cta_click', { button_text: label, cta_position: el.classList.contains('hero-cta-btn') ? 'hero' : 'price', page: '솔로_빌더스' });
     }
     if (el.classList.contains('waitlist-btn')) {
-      track('waitlist_button_click', { page: '멤버십_통합' });
+      track('waitlist_button_click', { page: '솔로_빌더스' });
     }
   });
 
@@ -1003,7 +969,7 @@
   document.addEventListener('mouseleave', function(e) {
     if (e.clientY <= 0 && !exitFired) {
       exitFired = true;
-      track('exit_intent', { scroll_depth: Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100), page: '멤버십_통합' });
+      track('exit_intent', { scroll_depth: Math.round((window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)) * 100), page: '솔로_빌더스' });
     }
   });
 })();

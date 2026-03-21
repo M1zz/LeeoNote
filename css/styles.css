@@ -327,7 +327,10 @@
   .card.card--book { padding-left: 1.25rem; }
 
   .reading-cat-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;
+  }
+  @media (max-width: 768px) {
+    .reading-cat-grid { grid-template-columns: 1fr; }
   }
   .reading-cat-card {
     background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
