@@ -319,6 +319,51 @@
   }
   .bottom-cta-inflearn:hover { opacity: 0.88; }
 
+  /* HERO CTA GROUP */
+  .hero-cta-group {
+    display: flex; flex-direction: column; gap: 0.75rem;
+    margin-bottom: 3rem;
+    opacity: 0; animation: enter 0.8s ease forwards 0.45s;
+  }
+  .hero-cta-primary-wrap { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .hero-price-note {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--subtle); letter-spacing: 0.04em;
+  }
+  .hero-cta-divider-text {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    color: var(--subtle); letter-spacing: 0.06em;
+  }
+  .hero-cta-secondary-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-email-link {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    color: var(--muted); text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .hero-email-link:hover { color: var(--text); }
+
+  /* MID CTA BLOCK */
+  .mid-cta-block {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem 1.75rem; margin-top: 1.25rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .mid-cta-text {
+    font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600;
+    color: var(--text-strong);
+  }
+  .mid-cta-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+  /* BOTTOM EMAIL LINK */
+  .bottom-cta-email-row { margin-top: 1rem; text-align: center; }
+  .bottom-cta-email-link {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .bottom-cta-email-link:hover { color: rgba(255,255,255,0.6); }
+
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -372,15 +417,21 @@
       <div class="hero-stat-num">6기</div>
       <div class="hero-stat-label">챌린지 운영</div>
     </div>
-    <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="hero-stat-link">인프런 멘토링 신청 →</a>
   </div>
-  <div class="contact-row">
-    <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
-      카카오톡으로 무료 문의 <span class="contact-free-badge">FREE</span>
-    </a>
-    <a href="mailto:leeo@kakao.com" class="contact-btn-email">
-      이메일로 무료 문의 <span class="contact-free-badge-email">FREE</span>
-    </a>
+  <div class="hero-cta-group">
+    <div class="hero-cta-primary-wrap">
+      <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="contact-btn-inflearn">
+        인프런 멘토링 신청하기 →
+      </a>
+      <span class="hero-price-note">유료 · 가격은 인프런에서 확인</span>
+    </div>
+    <div class="hero-cta-divider-text">먼저 물어보고 싶다면</div>
+    <div class="hero-cta-secondary-row">
+      <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
+        카카오톡 무료 문의 <span class="contact-free-badge">FREE</span>
+      </a>
+      <a href="mailto:leeo@kakao.com" class="hero-email-link">이메일로 문의 →</a>
+    </div>
   </div>
 
   <!-- WHY -->
@@ -398,22 +449,8 @@
       <div class="why-item">
         <div class="why-icon">🎯</div>
         <div>
-          <div class="why-title">내 상황에 맞는 답을 얻습니다</div>
-          <div class="why-desc">강의는 모든 사람을 위한 내용입니다. 멘토링은 지금 내 코드, 내 아이디어, 내 커리어 상황에 맞게 얘기합니다.</div>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon">🧭</div>
-        <div>
-          <div class="why-title">방향이 맞는지 확인하는 것만으로도 속도가 달라집니다</div>
-          <div class="why-desc">잘못된 방향으로 열심히 하는 것만큼 비효율적인 게 없습니다. 30분 대화로 다음 한 달의 방향이 바뀌는 경우가 많습니다.</div>
-        </div>
-      </div>
-      <div class="why-item">
-        <div class="why-icon">💬</div>
-        <div>
-          <div class="why-title">강의에서 못 물어보는 것들을 물어봅니다</div>
-          <div class="why-desc">"이 길이 맞나요?", "이 코드 구조가 실무에서도 괜찮나요?", "저 같은 경우는 어떻게 하면 좋을까요?" — 이런 질문은 강의에서 답을 주지 않습니다.</div>
+          <div class="why-title">강의는 모든 사람을 위한 것, 멘토링은 나를 위한 것입니다</div>
+          <div class="why-desc">"이 길이 맞나요?", "저 같은 경우는 어떻게 하면 좋을까요?" — 이런 질문은 강의에서 답을 주지 않습니다. 지금 내 코드, 내 상황에 맞는 답을 얻습니다.</div>
         </div>
       </div>
     </div>
@@ -469,6 +506,15 @@
     </div>
   </div>
 
+  <!-- MID CTA -->
+  <div class="mid-cta-block reveal">
+    <div class="mid-cta-text">해당하는 게 있다면 지금 바로 신청하거나 먼저 물어보세요.</div>
+    <div class="mid-cta-row">
+      <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="contact-btn-inflearn">인프런 멘토링 신청 →</a>
+      <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">카카오톡 무료 문의 <span class="contact-free-badge">FREE</span></a>
+    </div>
+  </div>
+
   <!-- UNSURE -->
   <div class="section reveal">
     <div class="section-label">아직 망설여진다면</div>
@@ -482,14 +528,9 @@
       </div>
       <div class="unsure-contact-row">
         <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="contact-btn-kakao">
-          카카오톡으로 무료 문의 <span class="contact-free-badge">FREE</span>
+          카카오톡 무료 문의 <span class="contact-free-badge">FREE</span>
         </a>
-        <a href="mailto:leeo@kakao.com" class="contact-btn-email">
-          이메일로 무료 문의 <span class="contact-free-badge-email">FREE</span>
-        </a>
-        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="contact-btn-inflearn">
-          인프런 멘토링 신청 →
-        </a>
+        <a href="mailto:leeo@kakao.com" class="hero-email-link" style="align-self:center;">이메일로 문의 →</a>
       </div>
     </div>
   </div>
@@ -504,9 +545,11 @@
         바로 신청하고 싶다면 인프런에서도 가능합니다.
       </div>
       <div class="bottom-cta-row">
-        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="bottom-cta-kakao">카카오톡으로 무료 문의</a>
-        <a href="mailto:leeo@kakao.com" class="bottom-cta-email">이메일로 무료 문의 →</a>
-        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="bottom-cta-inflearn">인프런 멘토링 신청 →</a>
+        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" class="bottom-cta-inflearn">인프런 멘토링 신청하기 →</a>
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" class="bottom-cta-kakao">카카오톡 무료 문의</a>
+      </div>
+      <div class="bottom-cta-email-row">
+        <a href="mailto:leeo@kakao.com" class="bottom-cta-email-link">이메일로 문의하기 →</a>
       </div>
     </div>
   </div>
