@@ -780,8 +780,10 @@
         지금은 가격 미확정입니다. 얼리버드에게 우선 안내 드립니다.<br>
         이메일 하나로 자리를 확인해두세요. 스팸 없습니다.
       </div>
-      <form class="waitlist-form" id="waitlistForm" action="#" novalidate>
-        <input class="waitlist-input" type="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email">
+      <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xgonqgnl" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="멤버십 얼리버드 신청">
+        <input type="hidden" name="유입_경로" id="referrerField" value="">
+        <input class="waitlist-input" type="email" name="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email">
         <button class="waitlist-btn" type="submit">얼리버드 신청 →</button>
       </form>
       <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 가격 확정 시 가장 먼저 연락드립니다.</div>
@@ -825,19 +827,39 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+  // 유입 경로 자동 기록
+  document.getElementById('referrerField').value = document.referrer || '직접 접속';
+
   // waitlist form
-  document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+  document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = this.querySelector('input[type="email"]').value.trim();
     if (!email || !email.includes('@')) return;
-    this.querySelector('input').disabled = true;
+
     const btn = this.querySelector('button');
     btn.disabled = true;
-    btn.textContent = '신청 완료 ✓';
-    this.style.display = 'none';
-    document.getElementById('waitlistSuccess').style.display = 'block';
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'waitlist_signup', { email_domain: email.split('@')[1], page: '멤버십_통합' });
+    btn.textContent = '전송 중...';
+
+    try {
+      const res = await fetch(this.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(this)
+      });
+
+      if (res.ok) {
+        this.style.display = 'none';
+        document.getElementById('waitlistSuccess').style.display = 'block';
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'waitlist_signup', { email_domain: email.split('@')[1], page: '멤버십_통합' });
+        }
+      } else {
+        btn.disabled = false;
+        btn.textContent = '다시 시도해주세요';
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = '다시 시도해주세요';
     }
   });
 </script>
