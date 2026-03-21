@@ -402,8 +402,9 @@
   /* WAITLIST */
   .waitlist-box {
     background: var(--text-strong); border-radius: 14px;
-    padding: 2.5rem; margin-top: 1.5rem; text-align: center;
+    padding: 2.5rem; margin-top: 1.5rem;
   }
+  .waitlist-header { text-align: center; margin-bottom: 2rem; }
   .waitlist-label {
     font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.75rem;
@@ -414,37 +415,55 @@
   }
   .waitlist-desc {
     font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 1.75rem;
+    color: rgba(255,255,255,0.45); line-height: 1.7;
   }
   .waitlist-form {
-    display: flex; gap: 0.6rem; max-width: 440px; margin: 0 auto 0.75rem;
+    max-width: 480px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 1.1rem;
   }
-  @media (max-width: 520px) { .waitlist-form { flex-direction: column; } }
-  .waitlist-input {
-    flex: 1; font-family: 'DM Mono', monospace; font-size: 0.72rem;
-    padding: 0.8rem 1.1rem; border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.08); color: #fff;
-    outline: none; transition: border-color 0.2s;
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45);
   }
-  .waitlist-input::placeholder { color: rgba(255,255,255,0.3); }
-  .waitlist-input:focus { border-color: rgba(255,255,255,0.35); }
+  .form-label-opt { color: rgba(255,255,255,0.25); margin-left: 0.3rem; }
+  .waitlist-input, .form-textarea {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    padding: 0.75rem 1rem; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07); color: #fff;
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .waitlist-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .waitlist-input:focus, .form-textarea:focus { border-color: rgba(255,255,255,0.35); }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.65; }
+  .form-radio-group { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .form-radio-label {
+    font-family: 'DM Mono', monospace; font-size: 0.63rem;
+    color: rgba(255,255,255,0.5); cursor: pointer;
+    padding: 0.45rem 0.9rem; border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px; transition: all 0.15s; user-select: none;
+  }
+  .form-radio-label:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.85); }
+  .form-radio-label.selected { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); }
+  .form-radio-label input { display: none; }
   .waitlist-btn {
-    font-family: 'DM Mono', monospace; font-size: 0.72rem; font-weight: 600;
+    font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 600;
     letter-spacing: 0.06em; color: var(--text-strong);
-    background: #fff; padding: 0.8rem 1.5rem;
+    background: #fff; padding: 0.9rem;
     border-radius: 8px; border: none; cursor: pointer;
-    transition: opacity 0.15s; white-space: nowrap;
+    transition: opacity 0.15s; margin-top: 0.5rem;
   }
   .waitlist-btn:hover { opacity: 0.9; }
-  .waitlist-btn:disabled { opacity: 0.6; cursor: default; }
+  .waitlist-btn:disabled { opacity: 0.5; cursor: default; }
   .waitlist-privacy {
-    font-family: 'DM Mono', monospace; font-size: 0.58rem;
-    color: rgba(255,255,255,0.3);
+    font-family: 'DM Mono', monospace; font-size: 0.57rem;
+    color: rgba(255,255,255,0.25); text-align: center; margin-top: 0.25rem;
   }
   .waitlist-success {
-    display: none; font-family: 'DM Mono', monospace; font-size: 0.72rem;
-    color: rgba(255,255,255,0.7); padding: 0.8rem; letter-spacing: 0.04em;
+    display: none; text-align: center;
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: rgba(255,255,255,0.75); line-height: 1.8; padding: 1rem 0;
   }
 
   /* BOTTOM CTA */
@@ -783,7 +802,47 @@
       <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xgonqgnl" method="POST" novalidate>
         <input type="hidden" name="_subject" value="멤버십 얼리버드 신청">
         <input type="hidden" name="유입_경로" id="referrerField" value="">
-        <input class="waitlist-input" type="email" name="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email">
+
+        <div class="form-field">
+          <label class="form-label" for="fieldName">이름</label>
+          <input class="waitlist-input" type="text" id="fieldName" name="이름" placeholder="홍길동" required autocomplete="name">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="fieldEmail">이메일</label>
+          <input class="waitlist-input" type="email" id="fieldEmail" name="email" placeholder="hello@example.com" required autocomplete="email">
+        </div>
+
+        <div class="form-field">
+          <span class="form-label">관심 멤버십</span>
+          <input type="hidden" name="관심_멤버십" id="fieldMembership" value="">
+          <div class="form-radio-group" id="membershipGroup">
+            <label class="form-radio-label"><input type="radio" name="_membership" value="앱 출시자 (경로 A)"> 앱 출시자</label>
+            <label class="form-radio-label"><input type="radio" name="_membership" value="직군 전환자 (경로 B)"> 직군 전환자</label>
+            <label class="form-radio-label"><input type="radio" name="_membership" value="아직 모르겠음"> 아직 모르겠음</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="fieldJob">현재 직군 / 상황 <span class="form-label-opt">(선택)</span></label>
+          <input class="waitlist-input" type="text" id="fieldJob" name="현재_직군" placeholder="예: 디자이너, 마케터, 취준생 등" autocomplete="off">
+        </div>
+
+        <div class="form-field">
+          <span class="form-label">Swift / iOS 경험</span>
+          <input type="hidden" name="iOS_경험" id="fieldExp" value="">
+          <div class="form-radio-group" id="expGroup">
+            <label class="form-radio-label"><input type="radio" name="_exp" value="전혀 없음"> 전혀 없음</label>
+            <label class="form-radio-label"><input type="radio" name="_exp" value="조금 해봤음"> 조금 해봤음</label>
+            <label class="form-radio-label"><input type="radio" name="_exp" value="어느 정도"> 어느 정도</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="fieldMotivation">만들고 싶은 것 / 신청 동기 <span class="form-label-opt">(선택)</span></label>
+          <textarea class="form-textarea" id="fieldMotivation" name="지원동기" placeholder="어떤 앱을 만들고 싶은지, 왜 멤버십을 고민하게 됐는지 자유롭게 적어주세요"></textarea>
+        </div>
+
         <button class="waitlist-btn" type="submit">얼리버드 신청 →</button>
       </form>
       <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 가격 확정 시 가장 먼저 연락드립니다.</div>
@@ -830,13 +889,34 @@
   // 유입 경로 자동 기록
   document.getElementById('referrerField').value = document.referrer || '직접 접속';
 
+  // 라디오 버튼 pill 선택 처리
+  function setupRadioGroup(groupId, hiddenId) {
+    const group = document.getElementById(groupId);
+    if (!group) return;
+    group.querySelectorAll('.form-radio-label').forEach(function(label) {
+      label.addEventListener('click', function() {
+        group.querySelectorAll('.form-radio-label').forEach(l => l.classList.remove('selected'));
+        this.classList.add('selected');
+        const radio = this.querySelector('input[type="radio"]');
+        if (radio) document.getElementById(hiddenId).value = radio.value;
+      });
+    });
+  }
+  setupRadioGroup('membershipGroup', 'fieldMembership');
+  setupRadioGroup('expGroup', 'fieldExp');
+
   // waitlist form
   document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const email = this.querySelector('input[type="email"]').value.trim();
-    if (!email || !email.includes('@')) return;
+    const email = document.getElementById('fieldEmail').value.trim();
+    const name = document.getElementById('fieldName').value.trim();
+    if (!email || !email.includes('@') || !name) {
+      if (!name) document.getElementById('fieldName').focus();
+      else document.getElementById('fieldEmail').focus();
+      return;
+    }
 
-    const btn = this.querySelector('button');
+    const btn = this.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = '전송 중...';
 
@@ -851,7 +931,12 @@
         this.style.display = 'none';
         document.getElementById('waitlistSuccess').style.display = 'block';
         if (typeof gtag !== 'undefined') {
-          gtag('event', 'waitlist_signup', { email_domain: email.split('@')[1], page: '멤버십_통합' });
+          gtag('event', 'waitlist_signup', {
+            email_domain: email.split('@')[1],
+            membership_type: document.getElementById('fieldMembership').value,
+            ios_experience: document.getElementById('fieldExp').value,
+            page: '멤버십_통합'
+          });
         }
       } else {
         btn.disabled = false;
