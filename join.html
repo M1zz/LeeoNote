@@ -443,6 +443,33 @@
     color: rgba(255,255,255,0.75); line-height: 1.8; padding: 1rem 0;
   }
 
+  /* CAREER PATH NUDGE */
+  .career-nudge {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem 2rem; margin-top: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem;
+  }
+  .career-nudge-left {}
+  .career-nudge-label {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 0.4rem;
+  }
+  .career-nudge-title {
+    font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: var(--text-strong); margin-bottom: 0.25rem; line-height: 1.4;
+  }
+  .career-nudge-desc {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); line-height: 1.65;
+  }
+  .career-nudge-btn {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--sage);
+    border: 1px solid rgba(74,122,106,0.35); background: rgba(74,122,106,0.06);
+    padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none;
+    transition: all 0.15s; white-space: nowrap; flex-shrink: 0;
+  }
+  .career-nudge-btn:hover { background: rgba(74,122,106,0.12); border-color: rgba(74,122,106,0.55); }
+
   /* BOTTOM CTA */
   .cta-box {
     background: var(--surface); border: 1px solid var(--border);
@@ -743,7 +770,7 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">코딩을 전혀 몰라도 되나요?</div>
-        <div class="faq-a">네. 다만 이 멤버십은 '코딩을 전혀 모르는 분'보다 '시작은 했는데 완주를 못 한 분'에게 가장 잘 맞습니다. 완전 입문이라면 무료 강의로 먼저 시작해보시길 권합니다.</div>
+        <div class="faq-a">됩니다. 코드를 한 줄도 써본 적 없는 분도 함께합니다. 아이디어를 구조로 바꾸는 것부터 같이 시작하면 됩니다. 다만 "막히면 물어보는" 구조이기 때문에, 진행하면서 배우겠다는 의지가 있는 분이라면 배경과 관계없이 괜찮습니다.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">하루 얼마나 시간을 써야 하나요?</div>
@@ -812,8 +839,23 @@
 
         <button class="waitlist-btn" type="submit">얼리버드 신청 →</button>
       </form>
-      <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다. 얼리버드 가격으로 가장 먼저 안내드리겠습니다.</div>
+      <div class="waitlist-success" id="waitlistSuccess">신청 완료됐습니다.<br>48시간 내로 이메일 드리겠습니다. 받은편지함을 확인해주세요.<br><span style="opacity:0.5;font-size:0.6rem;">스팸함에 들어가 있는 경우도 있습니다</span></div>
       <div class="waitlist-privacy">이메일은 멤버십 안내 외에 사용하지 않습니다</div>
+    </div>
+  </div>
+
+  <!-- CAREER PATH NUDGE -->
+  <div class="section reveal">
+    <div class="career-nudge">
+      <div class="career-nudge-left">
+        <div class="career-nudge-label">다른 목표라면</div>
+        <div class="career-nudge-title">iOS 개발자로 직군을 바꾸고 싶다면</div>
+        <div class="career-nudge-desc">
+          앱 출시가 아니라 취업·전직이 목표라면 별도 페이지가 있습니다.<br>
+          포트폴리오 → 채용 지원까지 다른 로드맵으로 운영됩니다.
+        </div>
+      </div>
+      <a href="join-career.html" class="career-nudge-btn">직군 전환 경로 보기 →</a>
     </div>
   </div>
 
