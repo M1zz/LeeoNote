@@ -160,6 +160,21 @@ const APPS_DATA = {
       "descEn": "Interactively explore customer problems and solutions across Korea's industry ecosystem. 13 sectors visualized as forward/reverse trees and network graphs.",
       "hint": "탐색기 바로가기",
       "hintEn": "Open Explorer"
+    },
+    {
+      "id": "swift-code-snapshot",
+      "name": "Swift Code Snapshot",
+      "nameEn": "Swift Code Snapshot",
+      "url": "https://m1zz.github.io/swift-code-snapshot/",
+      "type": "row",
+      "badge": "Developer Tool · Snapshot",
+      "badgeColor": "blue",
+      "gradient": "135deg,#4a9eff,#2563eb",
+      "icon": "📸",
+      "desc": "Swift 코드를 아름다운 스냅샷 이미지로 만드는 도구. 블로그, 발표, SNS 공유에 활용.",
+      "descEn": "Turn Swift code into beautiful snapshot images. Perfect for blog posts, presentations, and social media.",
+      "hint": "스냅샷 만들기",
+      "hintEn": "Create Snapshot"
     }
   ],
   "iosApps": [
