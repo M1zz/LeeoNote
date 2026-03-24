@@ -4,82 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>솔로 빌더스 · 멤버 아카이브</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>페이지 준비 중</title>
 <style>
-  :root {
-    --bg: #F7F6F2; --surface: #FFFFFF; --border: rgba(0,0,0,0.08);
-    --text: #3A3530; --text-strong: #1A1714; --muted: #8A8380; --subtle: #BFBCB5;
-    --accent: #7060A0; --sage: #4A7A6A;
-  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; }
-  .container { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; }
-  .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  h1 { font-size: 1.6rem; font-weight: 700; color: var(--text-strong); margin-bottom: 0.5rem; }
-  .sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.7; }
-  .section { margin-bottom: 3rem; }
-  .section-title { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 0.5rem; text-decoration: none; color: inherit; display: block; transition: border-color 0.2s; }
-  .card:hover { border-color: var(--accent); }
-  .card-title { font-size: 0.9rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem; }
-  .card-desc { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); }
-  .weekly-item { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.35rem; }
-  .weekly-title { font-size: 0.85rem; color: var(--text-strong); }
-  .weekly-date { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--subtle); }
-  .empty { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--subtle); padding: 1.5rem; text-align: center; border: 1px dashed var(--border); border-radius: 8px; }
-  .footer { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--subtle); text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F7F6F2;
+    font-family: -apple-system, 'Noto Sans KR', sans-serif;
+    color: #3A3530;
+  }
+  .container {
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+  p { font-size: 1rem; color: #8A8380; }
 </style>
 </head>
 <body>
 <div class="container">
-
-  <div class="tag">Solo Builders · Members Only</div>
-  <h1>솔로 빌더스 아카이브</h1>
-  <p class="sub">멤버 전용 공간입니다. 이 링크는 외부에 공유하지 말아주세요.</p>
-
-  <!-- 매주 할 것 -->
-  <div class="section">
-    <div class="section-title">매주 할 것</div>
-    <a class="card" href="https://tally.so/r/pbVE2Z" target="_blank">
-      <div class="card-title">📋 주간 체크인 제출</div>
-      <div class="card-desc">매주 일요일까지 · 2~3분 · 피드백은 화요일까지</div>
-    </a>
-  </div>
-
-  <!-- 가이드 -->
-  <div class="section">
-    <div class="section-title">가이드</div>
-    <a class="card" href="app-store-checklist.html">
-      <div class="card-title">🚀 App Store 출시 가이드</div>
-      <div class="card-desc">등록 → 심사 → 리젝 대응 · 단계별 체크리스트</div>
-    </a>
-    <a class="card" href="monetization-worksheet.html">
-      <div class="card-title">💰 수익화 워크시트</div>
-      <div class="card-desc">무료↔유료 경계 설계 · 인앱결제 · 구독 모델 템플릿</div>
-    </a>
-  </div>
-
-  <!-- 위클리 녹화 -->
-  <div class="section">
-    <div class="section-title">빌더스 위클리 녹화</div>
-    <div class="empty">5월 1기 시작 후 업데이트됩니다</div>
-    <!-- 예시: 아래 형태로 추가
-    <div class="weekly-item">
-      <span class="weekly-title">Week 1 — Xcode 프로젝트 세팅과 첫 화면</span>
-      <span class="weekly-date">2026.05.08</span>
-    </div>
-    -->
-  </div>
-
-  <!-- 자주 막히는 곳 -->
-  <div class="section">
-    <div class="section-title">자주 막히는 곳 해결 모음</div>
-    <div class="empty">위클리에서 다룬 주제가 여기에 쌓입니다</div>
-  </div>
-
-  <div class="footer">Solo Builders 1기 · 2026.05 · Leeo</div>
-
+  <h1>페이지 준비 중입니다</h1>
+  <p>잠시 후 다시 방문해 주세요.</p>
 </div>
 </body>
 </html>
