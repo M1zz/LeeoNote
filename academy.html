@@ -3,31 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>아카데미 — 리이오의 연습장</title>
+<meta name="description" content="함께 공부할 수 있는 자료들. 무료 강의와 커리큘럼.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
+  .stage {
+    margin: 2.5rem 0;
+  }
+  .stage-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--ink-faint);
   }
-  .container {
-    text-align: center;
-    padding: 2rem;
+  .stage-icon { font-size: 1.2rem; }
+  .stage-title { font-size: 1.15rem; font-weight: 700; color: var(--ink); }
+  .stage-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-mute);
+    margin-left: auto;
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+
+  .curriculum-feature {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 1.6rem 1.8rem;
+    margin-bottom: 2rem;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-deep);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .curriculum-feature:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(120,100,60,0.1);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .curriculum-feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+  .curriculum-feature p {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+  .curriculum-feature .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+    letter-spacing: 0.06em;
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html" class="active">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Academy</div>
+    <h1 class="page-title">아카데미</h1>
+    <p class="page-sub">혼자 익히기 좋은 자료들을 모아 두었습니다. 무료로 열어 둔 강의, 커리큘럼, 영상 재생목록.</p>
+  </section>
+
+  <section class="container">
+    <a class="curriculum-feature" href="https://m1zz.github.io/cs-curriculum-repo/" target="_blank" rel="noopener">
+      <h3>📑 개발자리 컴퓨터 공학 커리큘럼</h3>
+      <p>App-First 관점으로 정리한 Top-Down CS 커리큘럼. 어디부터 봐야 할지 막막할 때 좋은 지도가 됩니다.</p>
+      <div class="meta">8 stages · 28 chapters · 200+ topics</div>
+    </a>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">~ Roadmap</div>
+    <h2 class="section-title">단계별 학습 지도</h2>
+    <p class="section-desc">막막할 때 옆에 펼쳐 두는 지도. 각 정거장은 GitHub Pages 자료로 연결됩니다.</p>
+
+    <ol class="list-plain" style="counter-reset:step;">
+      <li><a href="https://m1zz.github.io/cs-swiftUI/" target="_blank" rel="noopener">CS × SwiftUI</a> — App-First 관점의 CS</li>
+      <li><a href="https://m1zz.github.io/swift-data-structures" target="_blank" rel="noopener">Swift 자료구조</a></li>
+      <li><a href="https://m1zz.github.io/iOSArchLab" target="_blank" rel="noopener">iOS Architecture Lab</a> — MVC · MVVM · Clean</li>
+      <li><a href="https://m1zz.github.io/ios-concept-lab/" target="_blank" rel="noopener">iOS Concept Lab</a> — 핵심 개념</li>
+      <li><a href="https://m1zz.github.io/network" target="_blank" rel="noopener">iOS Network</a> — URLSession · REST · JSON</li>
+      <li><a href="https://m1zz.github.io/ios-concurrency-performance" target="_blank" rel="noopener">iOS Concurrency &amp; Performance</a></li>
+      <li><a href="https://m1zz.github.io/ios-distribution" target="_blank" rel="noopener">iOS Distribution</a> — 인증서 · TestFlight · 심사</li>
+      <li><a href="https://m1zz.github.io/ios-operation" target="_blank" rel="noopener">iOS Operation</a> — 크래시 분석 · 모니터링</li>
+      <li><a href="https://m1zz.github.io/dev-math" target="_blank" rel="noopener">Dev Math</a> — 개발자 수학</li>
+    </ol>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ Inflearn</div>
+    <h2 class="section-title">인프런에 무료로 올린 강의</h2>
+    <p class="section-desc">필요한 분들이 부담 없이 들어가실 수 있게 무료로 열어 두었습니다.</p>
+
+    <div class="stage">
+      <div class="stage-head">
+        <span class="stage-icon">🌱</span>
+        <span class="stage-title">입문</span>
+      </div>
+      <ul class="list-plain">
+        <li>개발을 위한 프로그래밍적 사고 기르기 <span class="tag tag--free">free</span></li>
+        <li>개발자 용어 부스러기 주워먹기 <span class="tag tag--free">free</span></li>
+        <li>AI와 함께하는 코딩 체험 <span class="tag tag--free">free</span></li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head">
+        <span class="stage-icon">🐦</span>
+        <span class="stage-title">Swift 기초</span>
+      </div>
+      <ul class="list-plain">
+        <li>UI와 함께 배우는 Swift — 기초편 <span class="tag tag--free">free</span></li>
+        <li>UI와 함께 배우는 Swift — 레벨 2 <span class="tag tag--free">free</span></li>
+        <li>UI와 함께 배우는 Swift — 레벨 3 <span class="tag tag--free">free</span></li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head">
+        <span class="stage-icon">🧩</span>
+        <span class="stage-title">SwiftUI</span>
+      </div>
+      <ul class="list-plain">
+        <li>한 조각씩 배우는 SwiftUI — 입문편 <span class="tag tag--free">free</span></li>
+        <li>한 조각씩 배우는 SwiftUI — 레벨 2 <span class="tag tag--free">free</span></li>
+        <li>한 조각씩 배우는 SwiftUI — 레벨 3 <span class="tag tag--free">free</span></li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head">
+        <span class="stage-icon">🛠️</span>
+        <span class="stage-title">클론코딩</span>
+      </div>
+      <ul class="list-plain">
+        <li>계산기앱으로 시작해보는 SwiftUI <span class="tag tag--free">free</span></li>
+        <li>간단하게 만들어 보는 iOS 설정앱 <span class="tag tag--free">free</span></li>
+        <li>앱 시작하기로 첫 앱 만들어 보기 <span class="tag tag--free">free</span></li>
+        <li>일정 관리 앱 만들기 <span class="tag tag--free">free</span></li>
+        <li>게임처럼 공부하는 Git 던전 <span class="tag tag--free">free</span></li>
+      </ul>
+    </div>
+
+    <div class="mt-2">
+      <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">인프런 강의 모두 보기 →</a>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ YouTube</div>
+    <h2 class="section-title">개발자리 채널 재생목록</h2>
+    <p class="section-desc">긴 영상은 어렵게 느껴진다면 짧은 클립부터 펴 보세요.</p>
+
+    <div class="stage">
+      <div class="stage-head"><span class="stage-icon">🌱</span><span class="stage-title">입문</span></div>
+      <ul class="list-plain">
+        <li>[Lv.0] 스위프트 유치원</li>
+        <li>Swift Coding Class</li>
+        <li>성장부스팅</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head"><span class="stage-icon">🪟</span><span class="stage-title">클론코딩</span></div>
+      <ul class="list-plain">
+        <li>[Lv.1] App Dev Tutorial SwiftUI</li>
+        <li>[Lv.1] 클론코딩 — 계산기앱</li>
+        <li>[Lv.1] 클론코딩 — 키패드앱</li>
+        <li>[Lv.2] SwiftUI Swift 문법 기초</li>
+        <li>[Lv.2] 클론코딩 — 설정앱</li>
+        <li>[Lv.2] 클론코딩 — 팁앱</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head"><span class="stage-icon">⛰️</span><span class="stage-title">심화</span></div>
+      <ul class="list-plain">
+        <li>[Lv.2] 기능단위 도움말</li>
+        <li>[Lv.3] 따라해요 UIKit</li>
+        <li>[Lv.3] 클론코딩 — 날씨앱</li>
+        <li>[Lv.3] 하나씩 꺼내먹는 SwiftUI</li>
+        <li>Network 뽀개보기</li>
+        <li>HIG를 모조리 읽어보기</li>
+        <li>SwiftUI를 공부하고 싶으신 분</li>
+      </ul>
+    </div>
+
+    <div class="stage">
+      <div class="stage-head"><span class="stage-icon">🧭</span><span class="stage-title">커리어</span></div>
+      <ul class="list-plain">
+        <li>앱 시작하기</li>
+        <li>지속 가능한 앱을 만드는 방법</li>
+      </ul>
+    </div>
+
+    <div class="mt-2">
+      <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">YouTube 채널에서 보기 →</a>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ Challenges</div>
+    <h2 class="section-title">함께 했던 챌린지</h2>
+    <p class="section-desc">짧은 기간 동안 같이 모여 무언가를 만들어 본 시간들입니다.</p>
+    <ul class="list-plain">
+      <li>AI와 함께하는 코딩 체험 챌린지 — 1기 · 2기</li>
+      <li>일정 관리 앱 만들기 챌린지 — 1기 · 2기</li>
+      <li>코딩 퍼즐 미션 클리어 챌린지 — 1기</li>
+      <li>랜덤 뽑기 앱 만들기 챌린지 — 1기</li>
+    </ul>
+  </section>
+
+  <p class="center handwritten container" style="font-size:1.4rem; color: var(--ink-faint); margin-top: 3rem;">배움은 계속됩니다 · learning never stops</p>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 같이 배우면 더 멀리 갑니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>

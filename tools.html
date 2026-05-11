@@ -3,31 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>도구 — 리이오의 연습장</title>
+<meta name="description" content="직접 기획하고 만든 작은 도구들. 웹 도구, iOS 앱, macOS 앱.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
+  .phase {
+    margin: 2.5rem 0;
+    position: relative;
+  }
+  .phase-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--ink-faint);
   }
-  .container {
-    text-align: center;
-    padding: 2rem;
+  .phase-num {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    color: var(--accent);
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+  .phase-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .phase-desc {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-left: auto;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  @media (max-width: 700px) { .tool-grid { grid-template-columns: 1fr; } }
+  .tool {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--paper-deep);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+  }
+  .tool:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(120,100,60,0.1);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .tool-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    line-height: 1.4;
+  }
+  .tool-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .tool-desc {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
+  .tool-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html" class="active">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Tools &amp; Apps</div>
+    <h1 class="page-title">도구</h1>
+    <p class="page-sub">배우다가 막혔던 자리에서 직접 만들어 본 작은 도구들입니다. 누구나 자유롭게 둘러보고 써 보세요.</p>
+  </section>
+
+  <section class="container">
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">01</span>
+        <span class="phase-name">배우다</span>
+        <span class="phase-desc">~ 배우는 사람을 위한 자료</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool" href="https://m1zz.github.io/ClaudeCode101/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">📘</span>Claude Code 101</div>
+          <div class="tool-desc">비개발자도 따라 할 수 있는 한국어 입문 가이드. 터미널 기초부터 실전 앱 만들기까지.</div>
+          <div class="tool-meta">guide · 11 modules</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/HIGLab/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🔬</span>HIGLab</div>
+          <div class="tool-desc">Apple 핵심 프레임워크 50개를 코드로 실습하는 학습 플랫폼.</div>
+          <div class="tool-meta">learning lab · 50 frameworks</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/apple-platform-guide/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🍎</span>Apple 유니버셜 앱 확장 전략</div>
+          <div class="tool-desc">iOS 앱을 macOS, iPadOS, visionOS로 확장하는 길잡이.</div>
+          <div class="tool-meta">guide · apple platform</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/apple-component-gallery/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🧩</span>Apple Component Gallery</div>
+          <div class="tool-desc">SwiftUI와 UIKit UI 컴포넌트를 한눈에 둘러보는 갤러리.</div>
+          <div class="tool-meta">reference · swiftui · uikit</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">02</span>
+        <span class="phase-name">실험하다</span>
+        <span class="phase-desc">~ 손으로 만져 보는 시각화</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool" href="https://m1zz.github.io/ios-concept-lab/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🧪</span>iOS 개념 시각화 LAB</div>
+          <div class="tool-desc">ARC, async/await, MVVM 같은 핵심 개념을 인터랙티브하게 익혀 봅니다.</div>
+          <div class="tool-meta">lab · 13 concepts</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/cs-visualizer/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">💻</span>CS Visualizer</div>
+          <div class="tool-desc">이진수부터 고급 알고리즘까지 — 컴퓨터 공학 개념을 시각화로 체험.</div>
+          <div class="tool-meta">visualization · 14 chapters</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/iOSArchLab" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🏛️</span>iOSArchLab</div>
+          <div class="tool-desc">MVC, MVVM, TCA 등 iOS 앱 아키텍처를 코드로 비교하며 배웁니다.</div>
+          <div class="tool-meta">architecture · ios</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/tech-interview-app" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🎯</span>기술 면접 트레이너</div>
+          <div class="tool-desc">알고리즘 · DB · 네트워크 · OS · 시스템 설계 100문항을 5단계 능동 학습으로.</div>
+          <div class="tool-meta">trainer · 100 questions</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">03</span>
+        <span class="phase-name">만들다</span>
+        <span class="phase-desc">~ App Store에 올린 작은 앱들</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool" href="https://apps.apple.com/us/app/clip-keyboard-quick-phrases/id1543660502" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">⌨️</span>ClipKeyboard</div>
+          <div class="tool-desc">자주 쓰는 문구를 키보드에서 바로 입력하는 커스텀 키보드.</div>
+          <div class="tool-meta">iOS · productivity</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/Rereminder/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">⏰</span>Rereminder</div>
+          <div class="tool-desc">타이머가 끝나기 전에 미리 알려주는 도우미. Apple Watch 연동.</div>
+          <div class="tool-meta">iOS · watchOS</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/LeaveWise/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🌴</span>LeaveWise</div>
+          <div class="tool-desc">스마트 연차 관리. 황금연휴 추천, 반차 관리, 홈 위젯.</div>
+          <div class="tool-meta">iOS · lifestyle</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/PixelMe/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🖼️</span>Pixel MeMe</div>
+          <div class="tool-desc">사진을 픽셀 아트로 변환. 9가지 레트로 팔레트, GIF 애니메이션.</div>
+          <div class="tool-meta">iOS · creative</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/Klosed/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🛒</span>Klosed</div>
+          <div class="tool-desc">대형마트 휴무일 알리미. 위젯과 D-Day 알림으로 확인.</div>
+          <div class="tool-meta">iOS · utility</div>
+        </a>
+        <a class="tool" href="https://github.com/M1zz/SprintCommander" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">📋</span>Sprint Commander</div>
+          <div class="tool-desc">칸반 · 간트 · 번다운을 한 화면에. macOS Native · CloudKit 동기화.</div>
+          <div class="tool-meta">macOS · open source</div>
+        </a>
+      </div>
+      <p class="muted small mt-2 center">~ 그 외에 작은 앱들이 더 있어요. 차근차근 노트에 옮겨 올게요.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">04</span>
+        <span class="phase-name">나누다</span>
+        <span class="phase-desc">~ 누군가에게 도움이 되었으면 하는 것들</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool" href="https://mentee-quiz-app.vercel.app" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🧬</span>학습 유형 진단</div>
+          <div class="tool-desc">15개 질문 5가지 차원으로 본인의 학습 유형을 짚어 봅니다.</div>
+          <div class="tool-meta">diagnostic · 32 types</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/ai-privacy-risk-scanner/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🔐</span>AI Privacy Risk Scanner</div>
+          <div class="tool-desc">AI 자동화의 개인정보 위험 요소를 점검해 봅니다.</div>
+          <div class="tool-meta">privacy · ai risk</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/industry-explorer/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">🗺️</span>Industry Explorer</div>
+          <div class="tool-desc">한국 산업 생태계의 문제와 솔루션 관계를 인터랙티브하게 탐색.</div>
+          <div class="tool-meta">explorer · 13 industries</div>
+        </a>
+        <a class="tool" href="https://m1zz.github.io/swift-code-snapshot/" target="_blank" rel="noopener">
+          <div class="tool-name"><span class="tool-icon">📸</span>Swift Code Snapshot</div>
+          <div class="tool-desc">Swift 코드를 아름다운 스냅샷 이미지로. 블로그, 발표, SNS용.</div>
+          <div class="tool-meta">snapshot · developer tool</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="scribble-divider">
+      <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+    </div>
+
+    <p class="center handwritten" style="font-size:1.4rem; color: var(--ink-faint);">계속 만드는 중 · still building...</p>
+
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 작은 도구 하나가, 누군가의 막힘을 푼다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>

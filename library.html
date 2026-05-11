@@ -3,31 +3,208 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
-  }
-  .container {
-    text-align: center;
-    padding: 2rem;
-  }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
-</style>
+<title>서재 — 리이오의 연습장</title>
+<meta name="description" content="읽고, 쓰고, 추천하는 책들을 모아둔 서재.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html" class="active">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Library</div>
+    <h1 class="page-title">서재</h1>
+    <p class="page-sub">읽고, 쓰고, 추천하는 책들을 모아둔 서재입니다. 책장에서 한 권 꺼내듯 둘러보세요.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">~ Recommended</div>
+    <h2 class="section-title">⭐ 추천하는 책</h2>
+    <p class="section-desc">한 번쯤 꼭 읽어 보시기를 바라는 책들입니다.</p>
+    <ul class="list-plain">
+      <li><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=%ED%95%A8%EA%BB%98+%EC%9E%90%EB%9D%BC%EA%B8%B0" target="_blank" rel="noopener">함께 자라기</a> · 김창준</li>
+      <li><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=1%EB%A7%8C+%EC%8B%9C%EA%B0%84%EC%9D%98+%EC%9E%AC%EB%B0%9C%EA%B2%AC" target="_blank" rel="noopener">1만 시간의 재발견</a> · 안데르스 에릭슨</li>
+      <li><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=%EC%99%84%EB%B2%BD%ED%95%9C+%EA%B3%B5%EB%B6%80%EB%B2%95" target="_blank" rel="noopener">완벽한 공부법</a></li>
+      <li><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=%EB%A7%88%EC%9D%8C%EA%B0%80%EB%A9%B4" target="_blank" rel="noopener">마음가면</a></li>
+      <li><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=%EB%A7%88%EC%9D%B8%EB%93%9C%EC%85%8B" target="_blank" rel="noopener">마인드셋</a> · 캐럴 드웩</li>
+    </ul>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ Bookshelves</div>
+    <h2 class="section-title">📖 주제별 책꽂이</h2>
+    <p class="section-desc">한 주제씩 천천히 읽어 보시면, 같은 이야기가 다른 책에서도 메아리치는 걸 들으실 수 있습니다.</p>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">📚</span><span class="shelf-title">배우고 가르치기</span></div>
+      <ul class="list-plain">
+        <li>함께 자라기</li>
+        <li>1만 시간의 재발견</li>
+        <li>탤런트 코드</li>
+        <li>실용주의 사고와 학습</li>
+        <li>침묵으로 가르치기</li>
+        <li>학습은 어떻게 이루어지나</li>
+        <li>어떻게 공부할 것인가</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        울트라러닝 · 딥 워크 · 아웃라이어
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">💼</span><span class="shelf-title">코칭 &amp; 컨설팅</span></div>
+      <ul class="list-plain">
+        <li>완벽한 컨설팅</li>
+        <li>성과향상을 위한 코칭 리더십</li>
+        <li>컨설팅의 비밀</li>
+        <li>조직 변화의 긍정 혁명</li>
+        <li>해결중심 단기코칭</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        하이 아웃풋 매니지먼트 · 팀이 빠지는 5가지 함정
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">🎯</span><span class="shelf-title">대화와 설득</span></div>
+      <ul class="list-plain">
+        <li>우리는 어떻게 마음을 움직이는가</li>
+        <li>설득의 심리학</li>
+        <li>결정적 순간의 대화</li>
+        <li>불의 화법</li>
+        <li>대화의 심리학</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        어떻게 원하는 것을 얻는가 · 결코 양보하지 마라
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">🔄</span><span class="shelf-title">변화 만들기</span></div>
+      <ul class="list-plain">
+        <li>인플루엔서</li>
+        <li>넛지</li>
+        <li>스위치</li>
+        <li>습관의 힘</li>
+        <li>의지력의 재발견</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        아주 작은 습관의 힘 · 행동설계의 힘
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">🧠</span><span class="shelf-title">의사결정 &amp; 직관</span></div>
+      <ul class="list-plain">
+        <li>이기는 결정의 제1원칙</li>
+        <li>제7의 감각</li>
+        <li>증거경영</li>
+        <li>헤일로 이펙트</li>
+        <li>대체 뭐가 문제야</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        생각에 관한 생각 · 예측 가능한 비이성 · 블랙 스완
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">🌱</span><span class="shelf-title">사람 이해하기</span></div>
+      <ul class="list-plain">
+        <li>성격의 탄생</li>
+        <li>전진의 법칙</li>
+        <li>사티어 모델</li>
+        <li>강점이 독이 되는 리더십 함정</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        EQ 감성지능 · 타인의 마음
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">🤝</span><span class="shelf-title">애자일 &amp; 팀</span></div>
+      <ul class="list-plain">
+        <li>익스트림 프로그래밍</li>
+        <li>스크럼과 XP</li>
+        <li>티밍</li>
+        <li>성공적인 팀의 5가지 조건</li>
+        <li>안티프래질</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        린 스타트업 · 피닉스 프로젝트 · 팀 토폴로지
+      </div>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header"><span class="shelf-icon">📊</span><span class="shelf-title">성과 &amp; 조직</span></div>
+      <ul class="list-plain">
+        <li>성과주의의 혁신</li>
+        <li>회사를 살리는 성과경영</li>
+        <li>당신이 회사에서 보지 못하는 90%의 진실</li>
+        <li>영속 성장 기업의 비밀 6</li>
+      </ul>
+      <div class="callout mt-1">
+        <div class="callout-label">곁들여 읽으면 좋은 책</div>
+        OKR · 좋은 기업을 넘어 위대한 기업으로 · 드라이브
+      </div>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ My notes</div>
+    <h2 class="section-title">✍️ 리이오가 쓴 글</h2>
+    <p class="section-desc">개발하면서, 가르치면서 정리해 본 짧은 글들입니다.</p>
+    <ul class="list-plain">
+      <li>주니어 개발자가 해봐야 할 100가지 실수</li>
+      <li>시니어 개발자에게 잘 질문하는 법</li>
+      <li>실패 이력서 — 탈락과 거절로 쓰는 커리어</li>
+      <li>밉지않게 코드리뷰 하는 법</li>
+      <li>가장 실용적인 디버깅 워크북</li>
+      <li>stash 그만 하세요 — AI 시대의 브랜치 관리법</li>
+      <li>야근 안 하고 인정받는 업무 보고 방법</li>
+      <li>개발자가 말하는 방법</li>
+    </ul>
+    <p class="muted small mt-2">짧은 글 하나하나에 담아두고 싶었던 이야기들입니다. 부족한 부분은 계속 다듬어 가는 중이에요.</p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 읽은 것은 잊혀도, 옮겨 적은 것은 남는다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>

@@ -3,31 +3,374 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>리이오의 연습장</title>
+<meta name="description" content="배우고, 기록하고, 나누는 연습장. 서재 · 생각 · 철학 · 도구 모음.">
+<meta property="og:title" content="리이오의 연습장">
+<meta property="og:description" content="배우면 기록하고, 기록하면 나눕니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+  /* index-only */
+  .hero {
+    padding: 4rem 0 3rem;
+    position: relative;
   }
-  .container {
+  .hero-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    transform: rotate(-1.5deg);
+    display: inline-block;
+  }
+  .hero-title {
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+    line-height: 1.85;
+  }
+  .hero-sign {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--ink-faint);
+    margin-top: 1.6rem;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  .seeds-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .seeds-card {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    padding: 1rem 0.8rem;
     text-align: center;
-    padding: 2rem;
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+  .seeds-letter {
+    font-family: 'Caveat', cursive;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .seeds-word {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .seeds-sub {
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    margin-top: 0.2rem;
+    line-height: 1.4;
+  }
+  @media (max-width: 700px) {
+    .seeds-grid { grid-template-columns: repeat(5, 1fr); gap: 0.3rem; }
+    .seeds-card { padding: 0.7rem 0.3rem; }
+    .seeds-letter { font-size: 1.6rem; }
+    .seeds-word { font-size: 0.65rem; }
+    .seeds-sub { display: none; }
+  }
+
+  .paradigm {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin: 2rem 0;
+  }
+  .paradigm-side {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .paradigm-arrow {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--ink-mute);
+    transform: rotate(2deg);
+  }
+  .paradigm-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+  }
+  .paradigm-flow {
+    font-size: 0.92rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  @media (max-width: 600px) {
+    .paradigm { grid-template-columns: 1fr; }
+    .paradigm-arrow { transform: rotate(90deg); margin: 0 auto; }
+  }
+
+  .destinations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  @media (max-width: 600px) {
+    .destinations { grid-template-columns: 1fr; }
+  }
+
+  .recent-posts li {
+    padding: 0.65rem 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .roots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .root-item {
+    padding: 0.6rem 0.8rem;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  .root-name {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .root-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-mute);
+    margin-left: 0.3rem;
+  }
+  .root-idea {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 0.2rem;
+  }
+  @media (max-width: 600px) { .roots { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero container fade-in">
+    <div class="hero-eyebrow">~ 천천히 오신 것을 환영합니다</div>
+    <h1 class="hero-title">
+      교육은 <span class="strike">전달</span>이 아니라<br>
+      스스로 <span class="highlight">발생</span>하는 것이다.
+    </h1>
+    <p class="hero-sub">
+      가르치는 사람은 지식을 전수하지 않습니다. 질문과 상황, 활동을 설계하고
+      그 안에서 배우는 사람이 스스로 학습해내는 것을 돕습니다.
+    </p>
+    <div class="hero-sign">— Leeo</div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">두 가지 풍경</div>
+    <h2 class="section-title">전달식 교육 vs. 학습 발생</h2>
+    <p class="section-desc">교육자가 무엇을 하는 사람인가에 대한 그림이 달라집니다.</p>
+
+    <div class="paradigm">
+      <div class="paradigm-side">
+        <div class="paradigm-label">예전 그림</div>
+        <div class="paradigm-flow">교육자 → 지식 → 학습자</div>
+      </div>
+      <div class="paradigm-arrow">⇢</div>
+      <div class="paradigm-side">
+        <div class="paradigm-label">지금 그림</div>
+        <div class="paradigm-flow">교육자 → 경험 설계 → 학습 발생</div>
+      </div>
+    </div>
+
+    <p class="muted small">
+      파울루 프레이리는 첫 번째 모델을 ‘은행 저금식 교육(banking model)’이라고 비판했습니다.
+      두 번째 모델은 배우는 사람을 ‘담을 그릇’이 아니라 ‘발견하는 사람’으로 봅니다.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">S · E · E · D · S</div>
+    <h2 class="section-title">학습이 자라나는 다섯 단계</h2>
+    <p class="section-desc">‘씨앗’이라는 이름을 따왔습니다. 배우는 사람 안에서 무언가가 자라나기를 바라는 마음입니다.</p>
+
+    <div class="seeds-grid">
+      <div class="seeds-card"><div class="seeds-letter">S</div><div class="seeds-word">Situation</div><div class="seeds-sub">상황 던지기</div></div>
+      <div class="seeds-card"><div class="seeds-letter">E</div><div class="seeds-word">Explore</div><div class="seeds-sub">자유 탐색</div></div>
+      <div class="seeds-card"><div class="seeds-letter">E</div><div class="seeds-word">Encounter</div><div class="seeds-sub">힌트와 비계</div></div>
+      <div class="seeds-card"><div class="seeds-letter">D</div><div class="seeds-word">Discover</div><div class="seeds-sub">스스로 발견</div></div>
+      <div class="seeds-card"><div class="seeds-letter">S</div><div class="seeds-word">Share</div><div class="seeds-sub">옆 사람에게</div></div>
+    </div>
+
+    <div class="callout mt-2">
+      <div class="callout-label">메모</div>
+      가르친 것은 잊혀도, 스스로 발견한 것은 오래 남는다. 그래서 가르치지 않으려고 더 많이 고민합니다.
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">생각의 뿌리</div>
+    <h2 class="section-title">참고하는 사람들</h2>
+    <p class="section-desc">처음 들으면 어렵게 들리지만, 곱씹어 보면 모두 ‘스스로 배우게 하는 일’에 대한 이야기입니다.</p>
+
+    <div class="roots">
+      <div class="root-item"><span class="root-name">Freire</span><span class="root-year">1968</span><div class="root-idea">대화와 문제 제기</div></div>
+      <div class="root-item"><span class="root-name">Dewey</span><span class="root-year">1938</span><div class="root-idea">경험에 의한 학습</div></div>
+      <div class="root-item"><span class="root-name">Papert</span><span class="root-year">1980</span><div class="root-idea">만드는 과정의 학습</div></div>
+      <div class="root-item"><span class="root-name">Bruner</span><span class="root-year">1960</span><div class="root-idea">발견 학습과 비계</div></div>
+      <div class="root-item"><span class="root-name">Rogers</span><span class="root-year">1969</span><div class="root-idea">촉진자로서의 교사</div></div>
+      <div class="root-item"><span class="root-name">Vygotsky</span><span class="root-year">1978</span><div class="root-idea">근접발달영역(ZPD)</div></div>
+      <div class="root-item" style="grid-column:1/-1"><span class="root-name">Resnick</span><span class="root-year">2017</span><div class="root-idea">4P — Projects · Passion · Peers · Play</div></div>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">둘러보기</div>
+    <h2 class="section-title">연습장의 칸들</h2>
+    <p class="section-desc">아무 곳이나 펴 보셔도 됩니다.</p>
+
+    <div class="destinations">
+      <a class="index-card" href="philosophy.html">
+        <span class="index-card-icon">✎</span>
+        <div class="index-card-title">철학</div>
+        <div class="index-card-desc">가르치는 일에 대해 오래 생각해온 것들.</div>
+        <div class="index-card-arrow">읽으러 가기 →</div>
+      </a>
+      <a class="index-card" href="library.html">
+        <span class="index-card-icon">📖</span>
+        <div class="index-card-title">서재</div>
+        <div class="index-card-desc">읽고, 쓰고, 추천하는 책들.</div>
+        <div class="index-card-arrow">책장 열기 →</div>
+      </a>
+      <a class="index-card" href="thoughts.html">
+        <span class="index-card-icon">💭</span>
+        <div class="index-card-title">생각</div>
+        <div class="index-card-desc">강연과 글로 남긴 생각들.</div>
+        <div class="index-card-arrow">엿보러 가기 →</div>
+      </a>
+      <a class="index-card" href="academy.html">
+        <span class="index-card-icon">🎓</span>
+        <div class="index-card-title">아카데미</div>
+        <div class="index-card-desc">함께 공부할 수 있는 자료들.</div>
+        <div class="index-card-arrow">자료 보기 →</div>
+      </a>
+      <a class="index-card" href="tools.html" style="grid-column:1/-1">
+        <span class="index-card-icon">🔧</span>
+        <div class="index-card-title">도구</div>
+        <div class="index-card-desc">직접 기획하고 만든 작은 도구들. 누구나 자유롭게 써 보세요.</div>
+        <div class="index-card-arrow">서랍 열기 →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">근황</div>
+    <h2 class="section-title">최근 쓴 글</h2>
+    <ul class="list-dated recent-posts" id="recentPosts">
+      <li><span class="date">로딩 중...</span><span class="item-title muted">잠시만요</span></li>
+    </ul>
+    <div class="mt-2">
+      <a href="thoughts.html" class="handwritten" style="font-size:1.1rem;">전체 글 보러 가기 →</a>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">연락</div>
+    <h2 class="section-title">편지함</h2>
+    <p class="section-desc">언제든 가볍게 인사를 보내주셔도 좋습니다.</p>
+    <ul class="list-plain">
+      <li><a href="mailto:leeo@kakao.com">leeo@kakao.com</a> · 이메일</li>
+      <li><a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub @M1zz</a> · 코드</li>
+      <li><a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube @Leeo25</a> · 영상</li>
+      <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">Substack</a> · 블로그</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 배우면 기록하고, 기록하면 나눕니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+<script>
+(async function loadRecent() {
+  const list = document.getElementById('recentPosts');
+  const fallback = [
+    { title: 'Claude Code 101 — 한국어 입문 가이드를 만든 이유', date: '2026.04.20' },
+    { title: '코드는 AI가 짠다. 그럼 나는 뭘 해야할까?', date: '2026.03.12' },
+    { title: "공부에는 왕도가 없다, 하지만 '나만의 길'은 있다", date: '2026.02.04' },
+    { title: '되돌아보니 실패로 이루어져있던 나의 성장', date: '2026.01.18' }
+  ];
+  const render = (items) => {
+    list.innerHTML = items.slice(0, 4).map(it => {
+      const href = it.link ? `href="${it.link}" target="_blank" rel="noopener"` : '';
+      return `<li><span class="date">${it.date}</span><a class="item-title" ${href}>${it.title}</a></li>`;
+    }).join('');
+  };
+  try {
+    const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://leeo25.substack.com/feed');
+    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    const data = await res.json();
+    const doc = new DOMParser().parseFromString(data.contents, 'text/xml');
+    const items = [...doc.querySelectorAll('item')].slice(0, 4).map(item => {
+      const pub = new Date(item.querySelector('pubDate').textContent);
+      const date = `${pub.getFullYear()}.${String(pub.getMonth()+1).padStart(2,'0')}.${String(pub.getDate()).padStart(2,'0')}`;
+      return {
+        title: item.querySelector('title').textContent,
+        link: item.querySelector('link').textContent,
+        date
+      };
+    });
+    if (items.length) render(items); else render(fallback);
+  } catch (e) {
+    render(fallback);
+  }
+})();
+</script>
+
 </body>
 </html>

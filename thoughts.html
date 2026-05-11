@@ -3,31 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>생각 — 리이오의 연습장</title>
+<meta name="description" content="강연과 글로 남긴 생각들.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
   }
-  .container {
-    text-align: center;
-    padding: 2rem;
+  @media (max-width: 700px) { .talks-grid { grid-template-columns: 1fr; } }
+  .talk {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-bottom: 1px solid var(--paper-deep);
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+  .talk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(120,100,60,0.1);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .talk-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--paper-warm);
+    object-fit: cover;
+    display: block;
+  }
+  .talk-body { padding: 0.9rem 1.1rem; }
+  .talk-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.45;
+    margin-bottom: 0.3rem;
+  }
+  .talk-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html" class="active">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Writings & Talks</div>
+    <h1 class="page-title">생각</h1>
+    <p class="page-sub">SyncSwift, adiOS, let us: Go!, 데이터야놀자 등 다양한 컨퍼런스와 블로그에 남긴 생각들입니다.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">~ Writings</div>
+    <h2 class="section-title">내가 한 생각</h2>
+    <p class="section-desc">주제별로 묶어 보았습니다.</p>
+
+    <div class="shelf">
+      <div class="shelf-header">
+        <span class="shelf-icon">🤖</span>
+        <span class="shelf-title">AI 시대의 개발자</span>
+        <span class="shelf-count">3</span>
+      </div>
+      <ul class="list-plain">
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">그 프롬프트, 보내기 전에 한 번만 읽어보세요</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">Claude Code 101 — 한국어 입문 가이드를 만든 이유</a></li>
+      </ul>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header">
+        <span class="shelf-icon">🌱</span>
+        <span class="shelf-title">배움과 성장</span>
+        <span class="shelf-count">4</span>
+      </div>
+      <ul class="list-plain">
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">면접에서 떨어진 다음 날, 저는 그 탈락을 ‘기록’하기 시작했습니다</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">되돌아보니 실패로 이루어져있던 나의 성장</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">책도 봤고 강의도 들었는데 왜 개발 실력이 안 늘까</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">공부에는 왕도가 없다, 하지만 ‘나만의 길’은 있다</a></li>
+      </ul>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header">
+        <span class="shelf-icon">📱</span>
+        <span class="shelf-title">iOS &amp; Apple</span>
+        <span class="shelf-count">2</span>
+      </div>
+      <ul class="list-plain">
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">더 좋은 앱을 만들고 싶어서, HIG를 시각화하기 시작했습니다</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">HIGLab — Apple 기술의 지도를 손에 넣다</a></li>
+      </ul>
+    </div>
+
+    <div class="shelf">
+      <div class="shelf-header">
+        <span class="shelf-icon">✉️</span>
+        <span class="shelf-title">만들고 전달하기</span>
+        <span class="shelf-count">2</span>
+      </div>
+      <ul class="list-plain">
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">“나는 누구에게, 무엇을, 어떻게 전달할 것인가?”</a></li>
+        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">‘잘 만들기’보다 ‘잘 닿기’가 어려운 이유</a></li>
+      </ul>
+    </div>
+
+    <div class="mt-2">
+      <a href="https://leeo25.substack.com" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">블로그 전체 글 보기 →</a>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ Talks</div>
+    <h2 class="section-title">컨퍼런스에서 한 이야기</h2>
+    <p class="section-desc">발표 자료보다 사람을 더 자주 떠올리게 됐던 자리들입니다.</p>
+
+    <div class="talks-grid">
+      <a class="talk" href="https://www.youtube.com/watch?v=TDgDZTrJCoM" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/TDgDZTrJCoM/hqdefault.jpg" alt="Widget 세상으로 가는 입구가 여깁니다">
+        <div class="talk-body">
+          <div class="talk-title">Widget 세상으로 가는 입구가 여깁니다</div>
+          <div class="talk-meta">SyncSwift · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=IAA0rG6ieLE" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/IAA0rG6ieLE/hqdefault.jpg" alt="데이터를 저장하는데, DB는 너무 어렵지 않나요?">
+        <div class="talk-body">
+          <div class="talk-title">데이터를 저장하는데, DB는 너무 어렵지 않나요?</div>
+          <div class="talk-meta">데이터야놀자 · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=V6d_f9q2EUg" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/V6d_f9q2EUg/hqdefault.jpg" alt="iOS 개발 이렇게 시작하는거 아니에요?">
+        <div class="talk-body">
+          <div class="talk-title">iOS 개발 이렇게 시작하는거 아니에요?</div>
+          <div class="talk-meta">adiOS · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=loJeC6vZUlo" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/loJeC6vZUlo/hqdefault.jpg" alt="let us: Go! 2022 여름">
+        <div class="talk-body">
+          <div class="talk-title">let us: Go! 2022 여름</div>
+          <div class="talk-meta">let us: Go! · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=5UVvRsKEsDI" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/5UVvRsKEsDI/hqdefault.jpg" alt="코드를 짜면서 겪은 오해의 순간들">
+        <div class="talk-body">
+          <div class="talk-title">코드를 짜면서 겪은 오해의 순간들</div>
+          <div class="talk-meta">adiOS · 2021</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=diodVQ0yO_Y" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/diodVQ0yO_Y/hqdefault.jpg" alt="402A 키노트">
+        <div class="talk-body">
+          <div class="talk-title">402A 키노트</div>
+          <div class="talk-meta">402A</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-2 center">
+      <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">YouTube 채널에서 더 보기 →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>

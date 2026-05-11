@@ -1,0 +1,691 @@
+/* ============================================================
+   리이오의 연습장 — 종이 / 노트북 무드
+   따뜻한 베이지, 손글씨 헤딩, 줄노트 분위기
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  --paper: #F4EDDA;        /* 본문 종이 */
+  --paper-warm: #ECE3C9;   /* 약간 진한 종이 */
+  --paper-deep: #DDD0AC;   /* 종이 모서리 */
+  --card: #FFFBEF;         /* 카드 표면 */
+  --card-hover: #FAF3DC;
+  --ink: #2A2620;          /* 진한 잉크 */
+  --ink-soft: #4F4738;     /* 본문 잉크 */
+  --ink-faint: #8C8267;    /* 흐린 잉크 */
+  --ink-mute: #B8AC8A;     /* 아주 흐린 잉크 */
+  --rule: #C9BD96;         /* 줄노트 라인 */
+  --rule-faint: rgba(139, 124, 80, 0.18);
+  --accent: #8B5A2B;       /* 세피아 */
+  --accent-soft: #B58657;  /* 옅은 세피아 */
+  --accent-tint: rgba(139, 90, 43, 0.12);
+  --sage: #5F7B5A;         /* 잎사귀 */
+  --rose: #8B5A60;         /* 빛바랜 장미 */
+  --indigo: #455B7C;       /* 잉크 블루 */
+  --highlight: rgba(232, 200, 88, 0.32); /* 하이라이터 */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: 'Gowun Batang', 'Noto Serif KR', 'Noto Sans KR', serif;
+  font-weight: 400;
+  line-height: 1.85;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* 종이 질감 — 미세한 노이즈 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 35%, rgba(139,90,43,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 65%, rgba(95,123,90,0.035) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+/* 줄노트 라인 (옵션 클래스) */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    var(--rule-faint) 31px,
+    var(--rule-faint) 32px
+  );
+}
+
+/* ============================================================
+   타이포그래피
+   ============================================================ */
+
+.handwritten {
+  font-family: 'Caveat', 'Gaegu', cursive;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.serif {
+  font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+a:hover { border-bottom-color: var(--accent); }
+
+/* 하이라이터 효과 */
+.highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--highlight) 55%);
+  padding: 0 0.1em;
+}
+
+/* 가위표 */
+.strike {
+  position: relative;
+  display: inline-block;
+}
+.strike::after {
+  content: '';
+  position: absolute;
+  left: -2%; right: -2%;
+  top: 52%;
+  height: 2px;
+  background: var(--accent);
+  transform: rotate(-2deg);
+  opacity: 0.7;
+}
+
+/* ============================================================
+   레이아웃
+   ============================================================ */
+
+.container {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.container--wide {
+  max-width: 1000px;
+}
+
+main { position: relative; z-index: 1; }
+
+/* ============================================================
+   상단 네비게이션
+   ============================================================ */
+
+.topbar {
+  padding: 2rem 0 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: 'Gowun Batang', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.brand:hover { color: var(--accent); border-bottom: none; }
+.brand-mark {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.topnav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.topnav a {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-family: 'Gowun Batang', serif;
+  position: relative;
+  padding-bottom: 2px;
+}
+.topnav a:hover {
+  color: var(--ink);
+  border-bottom: 1px dashed var(--accent-soft);
+}
+.topnav a.active {
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--accent);
+}
+
+@media (max-width: 600px) {
+  .topbar-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .topnav { gap: 1rem; }
+  .topnav a { font-size: 0.85rem; }
+}
+
+/* ============================================================
+   페이지 헤더 (타이틀 + 부제)
+   ============================================================ */
+
+.page-head {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px dashed var(--rule);
+  margin-bottom: 3rem;
+}
+
+.page-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+
+.page-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.page-sub {
+  font-size: 1.05rem;
+  color: var(--ink-faint);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.page-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.08em;
+  margin-top: 1.2rem;
+}
+
+/* ============================================================
+   섹션
+   ============================================================ */
+
+section {
+  padding: 2.5rem 0;
+}
+
+.section-tag {
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+  display: inline-block;
+  transform: rotate(-1deg);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-desc {
+  color: var(--ink-faint);
+  margin-bottom: 1.8rem;
+  font-size: 0.95rem;
+}
+
+.section-divider {
+  border: none;
+  text-align: center;
+  margin: 3rem 0;
+  color: var(--ink-mute);
+}
+.section-divider::before {
+  content: '· · ·';
+  letter-spacing: 0.8em;
+  font-size: 1.2rem;
+}
+
+/* ============================================================
+   카드 / 노트 블록
+   ============================================================ */
+
+.note {
+  background: var(--card);
+  border: 1px solid var(--paper-deep);
+  border-radius: 4px;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  box-shadow: 0 1px 0 var(--paper-deep), 0 4px 12px rgba(120, 100, 60, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 var(--paper-deep), 0 8px 20px rgba(120, 100, 60, 0.1);
+}
+
+a.note { display: block; color: inherit; border-bottom: none; }
+a.note:hover { border-bottom: none; }
+
+.note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.45;
+}
+
+.note-desc {
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+  line-height: 1.65;
+}
+
+.note-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+  margin-top: 0.7rem;
+}
+
+/* 카드 그리드 */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 700px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* 사이드 곡선 카드 — 모서리 접힌 종이 효과 */
+.foldnote {
+  background: var(--card);
+  border: 1px solid var(--paper-deep);
+  border-radius: 4px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.foldnote::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 22px; height: 22px;
+  background: linear-gradient(225deg, var(--paper-warm) 50%, var(--paper-deep) 50%);
+  border-bottom-left-radius: 4px;
+}
+
+/* ============================================================
+   목록 (책 목록, 글 목록 등)
+   ============================================================ */
+
+.list-plain {
+  list-style: none;
+  padding: 0;
+}
+.list-plain li {
+  padding: 0.4rem 0;
+  border-bottom: 1px dotted var(--rule);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.list-plain li:last-child { border-bottom: none; }
+.list-plain li::before {
+  content: '·';
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.list-plain a {
+  color: var(--ink-soft);
+  border-bottom: none;
+}
+.list-plain a:hover {
+  color: var(--accent);
+  border-bottom: 1px dashed var(--accent-soft);
+}
+
+.list-dated {
+  list-style: none;
+  padding: 0;
+}
+.list-dated li {
+  padding: 0.55rem 0;
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px dotted var(--rule);
+}
+.list-dated li:last-child { border-bottom: none; }
+.list-dated .date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-mute);
+  flex-shrink: 0;
+  width: 90px;
+  padding-top: 0.2rem;
+}
+.list-dated .item-title {
+  flex: 1;
+  color: var(--ink-soft);
+  border-bottom: none;
+  font-size: 0.95rem;
+}
+.list-dated .item-title:hover { color: var(--accent); }
+
+/* ============================================================
+   카테고리 책꽂이
+   ============================================================ */
+
+.shelf {
+  margin-bottom: 2rem;
+}
+.shelf-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1.5px solid var(--ink-faint);
+}
+.shelf-icon { font-size: 1.1rem; }
+.shelf-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.shelf-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-mute);
+  margin-left: auto;
+}
+
+/* ============================================================
+   인용 / 풀쿼트
+   ============================================================ */
+
+.quote {
+  font-family: 'Gowun Batang', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--ink);
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 2rem 0;
+  line-height: 1.7;
+}
+
+.quote-cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+.quote-cite::before { content: '— '; }
+
+/* ============================================================
+   콜아웃 / 메모 박스
+   ============================================================ */
+
+.callout {
+  background: var(--card);
+  border: 1px solid var(--paper-deep);
+  border-left: 4px solid var(--sage);
+  border-radius: 0 4px 4px 0;
+  padding: 1rem 1.3rem;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.callout--warm { border-left-color: var(--accent); }
+.callout--rose { border-left-color: var(--rose); }
+.callout--ink { border-left-color: var(--indigo); }
+
+.callout-label {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+
+/* ============================================================
+   배지 / 태그
+   ============================================================ */
+
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  background: var(--accent-tint);
+  color: var(--accent);
+  border: 1px solid var(--accent-soft);
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+
+.tag--sage { background: rgba(95,123,90,0.12); color: var(--sage); border-color: rgba(95,123,90,0.3); }
+.tag--rose { background: rgba(139,90,96,0.12); color: var(--rose); border-color: rgba(139,90,96,0.3); }
+.tag--ink { background: rgba(69,91,124,0.12); color: var(--indigo); border-color: rgba(69,91,124,0.3); }
+.tag--free {
+  background: transparent;
+  color: var(--ink-faint);
+  border: 1px dashed var(--ink-mute);
+}
+
+/* ============================================================
+   링크 행 (글 목록 등)
+   ============================================================ */
+
+.linkrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.linkrow:last-child { border-bottom: none; }
+.linkrow a {
+  color: var(--ink-soft);
+  flex: 1;
+  border-bottom: none;
+  font-size: 0.95rem;
+}
+.linkrow a:hover { color: var(--accent); }
+.linkrow .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--ink-mute);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   페이지 인덱스 (랜딩 카드)
+   ============================================================ */
+
+.index-card {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--paper-deep);
+  border-radius: 4px;
+  padding: 1.5rem 1.8rem;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--paper-deep);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 0 var(--paper-deep);
+}
+.index-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 0 var(--paper-deep), 0 6px 16px rgba(120,100,60,0.1);
+  border-bottom-color: var(--accent-soft);
+}
+
+.index-card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.index-card-title {
+  font-family: 'Gowun Batang', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.index-card-desc {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  line-height: 1.55;
+}
+.index-card-arrow {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-top: 0.6rem;
+}
+
+/* ============================================================
+   푸터
+   ============================================================ */
+
+footer {
+  margin-top: 5rem;
+  padding: 3rem 0 2.5rem;
+  border-top: 1px dashed var(--rule);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.footer-quote {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--ink-faint);
+  margin-bottom: 0.6rem;
+  transform: rotate(-0.5deg);
+  display: inline-block;
+}
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-mute);
+  letter-spacing: 0.1em;
+}
+.footer-copy a {
+  color: var(--ink-mute);
+  border-bottom: none;
+}
+.footer-copy a:hover { color: var(--accent); }
+
+/* ============================================================
+   유틸리티
+   ============================================================ */
+
+.center { text-align: center; }
+.muted { color: var(--ink-faint); }
+.small { font-size: 0.85rem; }
+.tiny { font-size: 0.72rem; }
+.mt-1 { margin-top: 0.8rem; }
+.mt-2 { margin-top: 1.6rem; }
+.mt-3 { margin-top: 2.4rem; }
+.mb-1 { margin-bottom: 0.8rem; }
+.mb-2 { margin-bottom: 1.6rem; }
+.mb-3 { margin-bottom: 2.4rem; }
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 손그림 구분선 */
+.scribble-divider {
+  text-align: center;
+  margin: 3rem 0;
+  position: relative;
+}
+.scribble-divider svg {
+  width: 80px; height: 14px;
+  stroke: var(--ink-faint);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+
+/* 표지 모서리 클립 */
+.bookmark {
+  position: absolute;
+  top: 0; right: 1.5rem;
+  width: 24px; height: 34px;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+  opacity: 0.85;
+}

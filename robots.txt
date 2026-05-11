@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /solo-builders/
-
 Sitemap: https://m1zz.github.io/LeeoNote/sitemap.xml

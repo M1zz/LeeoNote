@@ -3,31 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>편지함 — 리이오의 연습장</title>
+<meta name="description" content="막혔을 때, 가볍게 편지를 보내주세요. 함께 이야기 나누는 자리.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 4px;
+    padding: 1.4rem 1.6rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--paper-deep);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .container {
-    text-align: center;
-    padding: 2rem;
+  .contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(120,100,60,0.08);
+    border-bottom: 1px solid var(--paper-deep);
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+  .contact-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .contact-body { flex: 1; }
+  .contact-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .contact-desc {
+    font-size: 0.86rem;
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="philosophy.html">철학</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Letters</div>
+    <h1 class="page-title">편지함</h1>
+    <p class="page-sub">막혔을 때, 묻고 싶을 때. 정답을 약속드릴 수는 없지만, 같이 한 번 생각해 볼 수는 있습니다.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">~ 환영하는 질문들</div>
+    <h2 class="section-title">이런 이야기, 좋아합니다</h2>
+    <p class="section-desc">정해진 카테고리는 없습니다. 다만 자주 받았던 질문들을 적어두면 본인 상황을 비춰보기 쉬울 것 같아서요.</p>
+
+    <ul class="list-plain">
+      <li><strong>커리어</strong> — 개발자로 직군을 바꿔 보려는데 어디서부터 시작해야 할지 막막할 때</li>
+      <li><strong>앱 출시</strong> — 아이디어는 있는데 설계가 안 떠오를 때, 혹은 막힌 코드 앞에서</li>
+      <li><strong>코드 리뷰</strong> — 내가 쓴 코드가 괜찮은지 봐줄 사람이 없을 때</li>
+      <li><strong>학습 방향</strong> — 책도 보고 강의도 들었는데 늘지 않는 것 같을 때</li>
+      <li><strong>그 외</strong> — 정확히 뭐가 막혔는지 말로 못 풀겠는데, 막혀 있는 게 분명할 때</li>
+    </ul>
+
+    <div class="callout callout--warm mt-2">
+      <div class="callout-label">메모</div>
+      어떤 질문을 해야 할지 모르겠다고 미루지 마세요. ‘질문이 정리되지 않았다’는 그 상태부터 함께 풀어 볼 수 있습니다.
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">~ Reach out</div>
+    <h2 class="section-title">편지를 부치는 곳</h2>
+    <p class="section-desc">어디로 보내셔도 좋습니다. 답장은 조금 늦을 수 있어요.</p>
+
+    <a class="contact-card" href="mailto:leeo@kakao.com">
+      <span class="contact-icon">✉️</span>
+      <div class="contact-body">
+        <div class="contact-name">이메일</div>
+        <div class="contact-desc">leeo@kakao.com — 길게 쓰고 싶으신 이야기는 메일이 좋아요.</div>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">
+      <span class="contact-icon">💬</span>
+      <div class="contact-body">
+        <div class="contact-name">카카오톡 오픈채팅</div>
+        <div class="contact-desc">짧게 묻고 싶을 때 편하게 들러주세요.</div>
+      </div>
+    </a>
+
+    <a class="contact-card" href="https://github.com/M1zz" target="_blank" rel="noopener">
+      <span class="contact-icon">🐙</span>
+      <div class="contact-body">
+        <div class="contact-name">GitHub</div>
+        <div class="contact-desc">코드 관련 이야기라면 이슈로 남겨주셔도 좋아요.</div>
+      </div>
+    </a>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 막혔다는 것은, 다음 한 걸음의 시작이에요.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>

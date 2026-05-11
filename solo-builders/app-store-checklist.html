@@ -3,31 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>페이지 준비 중</title>
+<title>App Store 출시 체크리스트 — 리이오의 연습장</title>
+<meta name="description" content="앱을 처음 출시하는 사람을 위한 단계별 체크리스트.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Caveat:wght@400;500;600&family=Gaegu:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
+  .phase {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.8rem;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .phase-num {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .phase-title {
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .phase ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0;
+  }
+  .phase ul li {
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F7F6F2;
-    font-family: -apple-system, 'Noto Sans KR', sans-serif;
-    color: #3A3530;
+    align-items: flex-start;
+    gap: 0.6rem;
   }
-  .container {
-    text-align: center;
-    padding: 2rem;
+  .phase ul li::before {
+    content: '☐';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-top: 1px;
   }
-  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-  p { font-size: 1rem; color: #8A8380; }
+  .phase-tip {
+    margin-top: 1rem;
+    padding: 0.7rem 1rem;
+    background: var(--paper-warm);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .phase-tip strong {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-right: 0.3rem;
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>페이지 준비 중입니다</h1>
-  <p>잠시 후 다시 방문해 주세요.</p>
-</div>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">~ 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../philosophy.html">철학</a>
+      <a href="../library.html">서재</a>
+      <a href="../thoughts.html">생각</a>
+      <a href="../academy.html">아카데미</a>
+      <a href="../tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">~ Solo Building Notes</div>
+    <h1 class="page-title">🚀 App Store 출시 체크리스트</h1>
+    <p class="page-sub">앱을 처음 출시하는 사람을 위한 단계별 노트입니다. 위에서부터 천천히, 한 줄씩 짚어가 주세요.</p>
+    <p class="muted small mt-1"><a href="index.html">← 솔로 빌딩 노트로 돌아가기</a></p>
+  </section>
+
+  <section class="container">
+
+    <div class="phase">
+      <div class="phase-num">Phase 1</div>
+      <h2 class="phase-title">출시 전 준비</h2>
+      <ul>
+        <li>Apple Developer Program 가입 (연간 등록 비용 별도)</li>
+        <li>App Store Connect에 접속할 수 있는지 확인</li>
+        <li>번들 ID 결정 — 한 번 정하면 바꾸기 어려워요</li>
+        <li>앱 이름 (30자 이내) 정하기</li>
+        <li>부제목 정하기</li>
+        <li>카테고리 선택</li>
+        <li>개인정보 처리방침 URL 준비</li>
+      </ul>
+      <div class="phase-tip">
+        <strong>tip</strong>
+        개인정보 처리방침은 GitHub Pages에 마크다운 한 페이지만 올려도 충분합니다. 너무 어렵게 시작하지 마세요.
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 2</div>
+      <h2 class="phase-title">앱 빌드 &amp; 업로드</h2>
+      <ul>
+        <li>Signing &amp; Capabilities 설정 확인</li>
+        <li>앱 아이콘 (1024×1024, 투명 영역 없이)</li>
+        <li>Launch Screen 준비</li>
+        <li>버전 정하기 (예: 1.0.0)</li>
+        <li>빌드 번호는 1부터 시작</li>
+        <li>실기기에서 한 번 더 테스트</li>
+        <li>Archive → Distribute → App Store Connect</li>
+        <li>‘처리 중’이 ‘준비됨’으로 바뀔 때까지 기다리기</li>
+      </ul>
+      <div class="phase-tip">
+        <strong>tip</strong>
+        Signing 문제로 한 번씩 막힙니다. 차분히 Apple Developer 계정과 Bundle ID, Profile을 다시 확인해 보세요.
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 3</div>
+      <h2 class="phase-title">App Store 메타데이터</h2>
+      <ul>
+        <li>스크린샷 준비 (6.7" iPhone 기준, 3~5장)</li>
+        <li>설명의 첫 3줄에 가장 중요한 이야기를 담기</li>
+        <li>키워드 (100자 이내)</li>
+        <li>지원 URL 입력</li>
+        <li>연령 등급 설정</li>
+        <li>가격 정책 선택 — 무료/유료</li>
+        <li>출시할 국가 선택</li>
+      </ul>
+      <div class="phase-tip">
+        <strong>tip</strong>
+        스크린샷은 Figma나 Canva 템플릿으로 출발하면 빨라요. 디자인이 자신 없어도 ‘설명문 + 화면’ 단순 조합이 의외로 잘 통합니다.
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 4</div>
+      <h2 class="phase-title">심사 제출</h2>
+      <ul>
+        <li>업로드한 빌드 선택</li>
+        <li>심사 메모 + 테스트 계정 (필요할 경우) 작성</li>
+        <li>‘심사를 위해 제출’ 누르기</li>
+        <li>‘심사 대기 중’ 상태 확인</li>
+      </ul>
+      <div class="phase-tip">
+        <strong>tip</strong>
+        첫 심사는 보통 24~48시간 정도 걸립니다. 마음의 준비를 하면서, 그 시간을 두 번째 아이디어 적는 데 써 보세요.
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 5</div>
+      <h2 class="phase-title">리젝이 와도 괜찮습니다</h2>
+      <ul>
+        <li>리젝 사유 천천히 읽기</li>
+        <li>가이드라인 번호 확인하기</li>
+        <li>해당 Apple 문서 찾아 읽기</li>
+        <li>빌드 수정 후 다시 업로드</li>
+        <li>Resolution Center로 소통하기</li>
+      </ul>
+      <p class="muted small mt-1">자주 만나는 사유: 2.1 성능 · 4.3 스팸·복제 · 5.1.1 개인정보 · 3.1.1 인앱결제 · 2.3 메타데이터</p>
+      <div class="phase-tip">
+        <strong>note</strong>
+        리젝은 실패가 아닙니다. 첫 출시에서 한두 번은 거의 누구나 만납니다. 한 번 풀어보면 그 다음부터는 훨씬 수월해요.
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">Phase 6</div>
+      <h2 class="phase-title">출시 그 다음 날</h2>
+      <ul>
+        <li>‘판매 준비됨’ 상태 확인</li>
+        <li>App Store에서 직접 검색해 보기</li>
+        <li>가까운 3~5명에게 직접 권하기</li>
+        <li>크래시 리포트 한 번 들여다보기</li>
+        <li>첫 리뷰가 달리면 답글 하나 남기기</li>
+        <li>축하 한마디 적어두기 — 이 순간은 한 번뿐이에요 🎉</li>
+      </ul>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 출시는 끝이 아니라 시작입니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
 </body>
 </html>
