@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프레임워크 — 리이오의 연습장</title>
+<meta name="description" content="HypoLoop · 가설순환학습 — 팀 프로젝트 안에서 개인의 학습을 의도적으로 설계하는 교육 프레임워크.">
+<meta property="og:title" content="HypoLoop · 가설순환학습">
+<meta property="og:description" content="실패를 허용하지 않습니다. 요구합니다.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* framework-only */
+  .fw-hero-title {
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+    color: var(--ink);
+    margin-bottom: 1.1rem;
+  }
+  .fw-name {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.1rem;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* 블랙 배너 */
+  .fw-banner {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 2.4rem 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .fw-banner-big {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .fw-banner-sub {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+  }
+
+  /* 원칙 리스트 */
+  .principles { list-style: none; padding: 0; margin: 1rem 0 0; counter-reset: p; }
+  .principles li {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .principles li:last-child { border-bottom: none; }
+  .principles li::before {
+    counter-increment: p;
+    content: counter(p, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink-mute);
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+    width: 2rem;
+  }
+  .principle-name { font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+  .principle-desc { color: var(--ink-faint); font-size: 0.92rem; margin-top: 0.15rem; }
+
+  /* 기둥 그리드 */
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+  @media (max-width: 600px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .pillar:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .pillar-k {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .pillar-name { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.35rem; }
+  .pillar-desc { font-size: 0.9rem; color: var(--ink-faint); line-height: 1.55; }
+
+  /* 단계 */
+  .steps { list-style: none; padding: 0; margin: 1rem 0 0; counter-reset: s; }
+  .steps li {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    counter-increment: s;
+    content: counter(s);
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+    background: var(--ink);
+    width: 1.9rem; height: 1.9rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-body { padding-top: 0.15rem; }
+  .step-title { font-weight: 700; color: var(--ink); }
+  .step-desc { color: var(--ink-faint); font-size: 0.9rem; margin-top: 0.1rem; }
+
+  /* 템플릿 코드 블록 */
+  .fw-template {
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    line-height: 2;
+    color: var(--ink-soft);
+    letter-spacing: -0.01em;
+  }
+  .fw-template b { color: var(--ink); background: #fff; padding: 0.05em 0.35em; border-radius: 3px; border: 1px solid var(--paper-deep); font-weight: 500; }
+
+  .fw-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.4rem;
+    border-radius: 100px;
+    border-bottom: none;
+    transition: opacity 0.18s;
+  }
+  .fw-cta:hover { opacity: 0.82; border-bottom: none; color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="framework.html" class="active">프레임워크</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head" style="border-bottom:none; margin-bottom:1rem;">
+    <div class="fw-name">HypoLoop · 가설순환학습</div>
+    <h1 class="fw-hero-title">교육 프레임워크</h1>
+    <p class="page-sub">가르치는 일을 하나의 시스템으로 옮겨 적은 것이 <em>HypoLoop</em>입니다. 팀 프로젝트 안에서 개인의 학습을 <em>의도적으로 설계</em>하는 학습 프레임워크예요.</p>
+  </section>
+
+  <section class="container" style="padding-top:1rem;">
+    <div class="fw-banner">
+      <div class="fw-banner-big">실패를 허용하지 않습니다.<br>요구합니다.</div>
+      <div class="fw-banner-sub">깨지지 않는 가설은 배움이 아니라 경고 신호입니다.</div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Why</div>
+    <h2 class="section-title">왜 챌린지만으로는 부족한가</h2>
+    <p class="section-desc">문제를 주고 만들게 하면 결과물은 나옵니다. 하지만 ‘무엇을 배웠는지’는 우연에 맡겨집니다.</p>
+    <p>많은 챌린지·프로젝트 학습은 산출물에 집중하느라 개인의 학습이 뒷전으로 밀립니다. 역할이 굳어지고(잘하는 사람이 계속 잘하는 부분을), 목표가 전치되고(배움 대신 완성), 배움은 우발적으로만 일어납니다.</p>
+    <p class="quote">
+      HypoLoop은 산출물이 아니라 <em>학습</em>을 설계 대상으로 삼습니다. 팀의 결과물은 수단이고, 충돌하면 개인의 학습이 먼저입니다.
+      <span class="quote-cite">가설순환학습의 출발점</span>
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Principles</div>
+    <h2 class="section-title">다섯 가지 원칙</h2>
+    <p class="section-desc">프레임워크 전체를 한 장으로 줄이면 이 다섯 문장입니다.</p>
+    <ul class="principles">
+      <li>
+        <div>
+          <div class="principle-name">학습이 목적</div>
+          <div class="principle-desc">팀 산출물은 수단. 충돌하면 개인 학습을 우선한다.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="principle-name">가설이 엔진</div>
+          <div class="principle-desc">가설 → 질문 → 탐구 → 평가. 가설이 깨지는 순간이 최대 학습 지점.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="principle-name">구조는 프랙탈</div>
+          <div class="principle-desc">팀 층과 개인 층이 같은 사이클로 순환한다. 개인 챌린지는 팀 챌린지에 중첩.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="principle-name">실패는 요구됨</div>
+          <div class="principle-desc">생산적 실패 + 심리적 안전. 깨지지 않는 가설은 경고 신호다.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="principle-name">혈통이 진정성</div>
+          <div class="principle-desc">계층 트리가 모든 작은 챌린지를 궁극의 진짜 문제와 연결한다.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Pillars</div>
+    <h2 class="section-title">네 개의 기둥</h2>
+    <p class="section-desc">원칙을 실제로 굴러가게 만드는 네 개의 장치입니다.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-k">01 / Engine</div>
+        <div class="pillar-name">가설 엔진</div>
+        <div class="pillar-desc">배우기 전에 지금의 이해로 가설을 먼저 세우고, 검증 행동으로 깨뜨립니다.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-k">02 / Structure</div>
+        <div class="pillar-name">프랙탈 중첩</div>
+        <div class="pillar-desc">팀 층과 개인 층이 같은 사이클을 반복 — 개인 챌린지가 팀 챌린지 안에 겹칩니다.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-k">03 / Tree</div>
+        <div class="pillar-name">챌린지 계층 트리</div>
+        <div class="pillar-desc">가장 작은 도전까지 궁극의 진짜 문제로 이어지는 혈통을 유지합니다.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-k">04 / Delta</div>
+        <div class="pillar-name">학습 델타 평가</div>
+        <div class="pillar-desc">완성도가 아니라 ‘이해가 얼마나 바뀌었는가(변화량)’로 학습을 평가합니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Playbook</div>
+    <h2 class="section-title">여섯 단계로 운영합니다</h2>
+    <p class="section-desc">한 사이클을 도는 실전 순서입니다.</p>
+    <ul class="steps">
+      <li><div class="step-body"><div class="step-title">진짜 문제를 궁극 챌린지로 세웁니다</div><div class="step-desc">누구를 위한, 왜 중요한 문제인지부터 못박습니다.</div></div></li>
+      <li><div class="step-body"><div class="step-title">도전 가능한 크기까지 계층적으로 쪼갭니다</div><div class="step-desc">궁극 챌린지 → 하위 챌린지 → 오늘의 챌린지.</div></div></li>
+      <li><div class="step-body"><div class="step-title">각자 “못하는 것”을 고릅니다</div><div class="step-desc">잘하는 것이 아니라, 배워야 할 것을 개인 챌린지로.</div></div></li>
+      <li><div class="step-body"><div class="step-title">배우기 전에, 지금의 이해로 가설을 씁니다</div><div class="step-desc">틀려도 괜찮습니다. 틀릴수록 배움이 큽니다.</div></div></li>
+      <li><div class="step-body"><div class="step-title">동료가 한 가지 질문을 던집니다</div><div class="step-desc">“이 가설이 깨지면, 너는 뭘 알게 되는데?”</div></div></li>
+      <li><div class="step-body"><div class="step-title">가설을 깨뜨리고, 변화량을 회고합니다</div><div class="step-desc">이해가 어떻게 바뀌었는지 — 그 델타가 학습의 증거입니다.</div></div></li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Template</div>
+    <h2 class="section-title">가설 문장 템플릿</h2>
+    <p class="section-desc">이 세 줄만 채우면 오늘 바로 시작할 수 있습니다.</p>
+    <div class="fw-template">
+      나는 지금 <b>대상 X</b>를 <b>이렇게 이해/예상</b>한다.<br>
+      <b>검증 행동 Y</b>를 해보면 이 이해가 맞는지 드러날 것이다.<br>
+      이 가설이 깨지면 나는 <b>알게 될 것</b>을 알게 된다.
+    </div>
+    <div class="callout mt-2">
+      <div class="callout-label">동료 검증 질문</div>
+      “이 가설이 깨지면, 너는 뭘 알게 되는데?”
+    </div>
+  </section>
+
+  <div class="scribble-divider container"><svg viewBox="0 0 80 14"></svg></div>
+
+  <section class="container center">
+    <h2 class="section-title" style="justify-content:center;">더 깊이 들어가기</h2>
+    <p class="section-desc" style="margin-left:auto;margin-right:auto;">도출 과정, 인터랙티브 시각화, 8단계 플레이북과 FAQ까지 — 전체 문서를 따로 정리해 두었습니다.</p>
+    <p><a class="fw-cta" href="https://m1zz.github.io/HypoLoop/" target="_blank" rel="noopener">HypoLoop 전체 보기 →</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 깨지는 가설이, 가장 크게 가르칩니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
