@@ -56,6 +56,23 @@
     display: inline-block;
   }
 
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.4rem;
+    border-radius: 100px;
+    border-bottom: none;
+    transition: opacity 0.18s;
+  }
+  .hero-cta:hover { opacity: 0.82; border-bottom: none; color: #fff; }
+
   .seeds-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -201,6 +218,7 @@
     </a>
     <nav class="topnav">
       <a href="framework.html">프레임워크</a>
+      <a href="solo-learning.html">학습설계</a>
       <a href="library.html">서재</a>
       <a href="thoughts.html">생각</a>
       <a href="academy.html">아카데미</a>
@@ -230,8 +248,8 @@
 
   <section class="container">
     <div class="section-tag">두 가지 풍경</div>
-    <h2 class="section-title">전달식 교육 vs. 학습 발생</h2>
-    <p class="section-desc">교육자가 무엇을 하는 사람인가에 대한 그림이 달라집니다.</p>
+    <h2 class="section-title">배우는 곳의 모습이 달라져야 합니다</h2>
+    <p class="section-desc">세상은 이전보다 더 빠르게 변하고 있습니다.</p>
 
     <div class="paradigm">
       <div class="paradigm-side">
@@ -249,6 +267,8 @@
       파울루 프레이리는 첫 번째 모델을 ‘은행 저금식 교육(banking model)’이라고 비판했습니다.
       두 번째 모델은 배우는 사람을 ‘담을 그릇’이 아니라 ‘발견하는 사람’으로 봅니다.
     </p>
+
+    <div class="mt-2 mb-3" style="display:flex; align-items:flex-start;"><a class="hero-cta" href="solo-learning.html">우리가 설계할 경험 보러 가기 →</a></div>
   </section>
 
   <section class="container">
@@ -302,6 +322,12 @@
         <div class="index-card-desc">가르치는 일을 시스템으로 옮긴 HypoLoop · 가설순환학습.</div>
         <div class="index-card-arrow">살펴보기 →</div>
       </a>
+      <a class="index-card" href="solo-learning.html">
+        <span class="index-card-icon">🌱</span>
+        <div class="index-card-title">학습설계</div>
+        <div class="index-card-desc">혼자 배우는 사람을 위한 4주 학습 경험 설계도.</div>
+        <div class="index-card-arrow">설계도 펼치기 →</div>
+      </a>
       <a class="index-card" href="library.html">
         <span class="index-card-icon">📖</span>
         <div class="index-card-title">서재</div>
@@ -320,7 +346,7 @@
         <div class="index-card-desc">함께 공부할 수 있는 자료들.</div>
         <div class="index-card-arrow">자료 보기 →</div>
       </a>
-      <a class="index-card" href="tools.html" style="grid-column:1/-1">
+      <a class="index-card" href="tools.html">
         <span class="index-card-icon">🔧</span>
         <div class="index-card-title">도구</div>
         <div class="index-card-desc">직접 기획하고 만든 작은 도구들. 누구나 자유롭게 써 보세요.</div>
