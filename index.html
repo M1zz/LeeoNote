@@ -85,9 +85,21 @@
     border-radius: 6px;
     padding: 1.3rem 0.8rem;
     text-align: center;
-    transition: border-color 0.18s, transform 0.18s;
+    font-family: var(--sans);
+    width: 100%;
+    cursor: pointer;
+    transition: border-color 0.18s, transform 0.18s, background 0.18s;
   }
   .seeds-card:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .seeds-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .seeds-card.is-active {
+    background: var(--ink);
+    border-color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .seeds-card.is-active .seeds-letter,
+  .seeds-card.is-active .seeds-word { color: #fff; }
+  .seeds-card.is-active .seeds-sub { color: rgba(255, 255, 255, 0.6); }
   .seeds-letter {
     font-family: var(--sans);
     font-weight: 900;
@@ -96,17 +108,63 @@
     color: var(--ink);
     line-height: 1;
     margin-bottom: 0.4rem;
+    transition: color 0.18s;
   }
   .seeds-word {
     font-size: 0.78rem;
     font-weight: 700;
     color: var(--ink);
+    transition: color 0.18s;
   }
   .seeds-sub {
     font-size: 0.7rem;
     color: var(--ink-faint);
     margin-top: 0.25rem;
     line-height: 1.4;
+    transition: color 0.18s;
+  }
+
+  /* SEEDS 상세 패널 */
+  .seeds-panel { margin-top: 0.9rem; }
+  .seeds-panel-hint {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.6rem;
+    display: none;
+  }
+  .seeds-panel.is-interactive .seeds-panel-hint { display: block; }
+  .seeds-detail {
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-deep);
+    border-left: 3px solid var(--ink);
+    border-radius: 0 6px 6px 0;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+  .seeds-panel.is-interactive .seeds-detail { display: none; margin-bottom: 0; }
+  .seeds-panel.is-interactive .seeds-detail.is-shown {
+    display: block;
+    animation: fadeIn 0.28s ease;
+  }
+  .seeds-detail-title {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.45rem;
+  }
+  .seeds-detail p {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin: 0;
+  }
+  @media (min-width: 701px) {
+    .seeds-panel.is-interactive .seeds-detail { min-height: 6.2rem; }
   }
   @media (max-width: 700px) {
     .seeds-grid { grid-template-columns: repeat(5, 1fr); gap: 0.3rem; }
@@ -276,12 +334,36 @@
     <h2 class="section-title">학습이 자라나는 다섯 단계</h2>
     <p class="section-desc">‘씨앗’이라는 이름을 따왔습니다. 배우는 사람 안에서 무언가가 자라나기를 바라는 마음입니다.</p>
 
-    <div class="seeds-grid">
-      <div class="seeds-card"><div class="seeds-letter">S</div><div class="seeds-word">Situation</div><div class="seeds-sub">상황 던지기</div></div>
-      <div class="seeds-card"><div class="seeds-letter">E</div><div class="seeds-word">Explore</div><div class="seeds-sub">자유 탐색</div></div>
-      <div class="seeds-card"><div class="seeds-letter">E</div><div class="seeds-word">Encounter</div><div class="seeds-sub">힌트와 비계</div></div>
-      <div class="seeds-card"><div class="seeds-letter">D</div><div class="seeds-word">Discover</div><div class="seeds-sub">스스로 발견</div></div>
-      <div class="seeds-card"><div class="seeds-letter">S</div><div class="seeds-word">Share</div><div class="seeds-sub">옆 사람에게</div></div>
+    <div class="seeds-grid" id="seedsGrid">
+      <button class="seeds-card" type="button" data-seed="situation" aria-controls="seed-situation"><div class="seeds-letter">S</div><div class="seeds-word">Situation</div><div class="seeds-sub">상황 던지기</div></button>
+      <button class="seeds-card" type="button" data-seed="explore" aria-controls="seed-explore"><div class="seeds-letter">E</div><div class="seeds-word">Explore</div><div class="seeds-sub">자유 탐색</div></button>
+      <button class="seeds-card" type="button" data-seed="encounter" aria-controls="seed-encounter"><div class="seeds-letter">E</div><div class="seeds-word">Encounter</div><div class="seeds-sub">힌트와 비계</div></button>
+      <button class="seeds-card" type="button" data-seed="discover" aria-controls="seed-discover"><div class="seeds-letter">D</div><div class="seeds-word">Discover</div><div class="seeds-sub">스스로 발견</div></button>
+      <button class="seeds-card" type="button" data-seed="share" aria-controls="seed-share"><div class="seeds-letter">S</div><div class="seeds-word">Share</div><div class="seeds-sub">옆 사람에게</div></button>
+    </div>
+
+    <div class="seeds-panel" id="seedsPanel">
+      <div class="seeds-panel-hint">카드에 올려 보세요 · 모바일에서는 탭</div>
+      <div class="seeds-detail" id="seed-situation" data-seed="situation">
+        <div class="seeds-detail-title">S · Situation — 상황 던지기</div>
+        <p>설명보다 상황을 먼저 놓습니다. “뒤로 가기 버튼은 어떻게 동작할까요?” 질문 하나면 충분합니다. 배울 이유가 생기기 전에는 아무것도 가르치지 않습니다.</p>
+      </div>
+      <div class="seeds-detail" id="seed-explore" data-seed="explore">
+        <div class="seeds-detail-title">E · Explore — 자유 탐색</div>
+        <p>정답을 확인하기 전에 각자의 방식으로 손을 움직이는 시간입니다. 여기서 나온 틀린 답이 다음 단계의 재료가 됩니다. 그래서 이 구간에서는 정정하지 않고 기다립니다.</p>
+      </div>
+      <div class="seeds-detail" id="seed-encounter" data-seed="encounter">
+        <div class="seeds-detail-title">E · Encounter — 힌트와 비계</div>
+        <p>막힌 자리에서만 개입합니다. 답이 아니라 다음 한 걸음만큼의 힌트 — 비고츠키가 말한 근접발달영역(ZPD) 위에 잠깐 놓았다가 걷어내는 발판입니다.</p>
+      </div>
+      <div class="seeds-detail" id="seed-discover" data-seed="discover">
+        <div class="seeds-detail-title">D · Discover — 스스로 발견</div>
+        <p>“아, 그래서였구나”가 나오는 순간입니다. 가르쳐서 안 것과 스스로 알아낸 것은 남는 기간이 다릅니다. 앞의 세 단계는 전부 이 순간을 만들기 위한 준비입니다.</p>
+      </div>
+      <div class="seeds-detail" id="seed-share" data-seed="share">
+        <div class="seeds-detail-title">S · Share — 옆 사람에게</div>
+        <p>말로 옮기지 못하면 아직 내 것이 아닙니다. 설명하는 동안 이해의 절반이 다시 정리되고, 듣는 사람은 방금 그 길을 지나온 사람의 언어로 배웁니다.</p>
+      </div>
     </div>
 
     <div class="callout mt-2">
@@ -319,7 +401,7 @@
       <a class="index-card" href="framework.html">
         <span class="index-card-icon">◐</span>
         <div class="index-card-title">프레임워크</div>
-        <div class="index-card-desc">가르치는 일을 시스템으로 옮긴 HypoLoop · 가설순환학습.</div>
+        <div class="index-card-desc">가르치는 일을 시스템으로 옮긴 QuestLoop · 질문순환학습.</div>
         <div class="index-card-arrow">살펴보기 →</div>
       </a>
       <a class="index-card" href="solo-learning.html">
@@ -386,6 +468,35 @@
 </footer>
 
 <script>
+(function seedsPanel() {
+  var grid = document.getElementById('seedsGrid');
+  var panel = document.getElementById('seedsPanel');
+  if (!grid || !panel) return;
+  var cards = [].slice.call(grid.querySelectorAll('.seeds-card'));
+  var details = [].slice.call(panel.querySelectorAll('.seeds-detail'));
+  panel.classList.add('is-interactive');
+
+  function activate(key) {
+    cards.forEach(function (card) {
+      var on = card.getAttribute('data-seed') === key;
+      card.classList.toggle('is-active', on);
+      card.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    details.forEach(function (detail) {
+      detail.classList.toggle('is-shown', detail.getAttribute('data-seed') === key);
+    });
+  }
+
+  cards.forEach(function (card) {
+    var key = card.getAttribute('data-seed');
+    ['mouseenter', 'focus', 'click'].forEach(function (evt) {
+      card.addEventListener(evt, function () { activate(key); });
+    });
+  });
+
+  activate(cards[0].getAttribute('data-seed'));
+})();
+
 (async function loadRecent() {
   const list = document.getElementById('recentPosts');
   const fallback = [
