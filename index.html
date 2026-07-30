@@ -233,6 +233,10 @@
     padding: 0.7rem 0;
     border-bottom: 1px solid var(--rule);
   }
+  .recent-posts .item-title:hover {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
 
   .roots {
     display: grid;
@@ -441,7 +445,10 @@
     <div class="section-tag">근황</div>
     <h2 class="section-title">최근 쓴 글</h2>
     <ul class="list-dated recent-posts" id="recentPosts">
-      <li><span class="date">로딩 중...</span><span class="item-title muted">잠시만요</span></li>
+      <li><span class="date">2026.06.27</span><a class="item-title" href="https://leeo25.substack.com/p/5e5" target="_blank" rel="noopener">손을 쓰지 않는 메트로놈으로 시작, 그리고 모두를 위한 앱에 관한 생각</a></li>
+      <li><span class="date">2026.05.10</span><a class="item-title" href="https://leeo25.substack.com/p/a91" target="_blank" rel="noopener">시간을 아껴보고자 만든 도구들</a></li>
+      <li><span class="date">2026.04.21</span><a class="item-title" href="https://leeo25.substack.com/p/ff5" target="_blank" rel="noopener">나라는 개발자가 세상을 바라보는 방식</a></li>
+      <li><span class="date">2026.04.16</span><a class="item-title" href="https://leeo25.substack.com/p/78f" target="_blank" rel="noopener">개발을 배우려고 대학교에 가는게 맞을까? 라는 생각이드는 요즘</a></li>
     </ul>
     <div class="mt-2">
       <a href="thoughts.html" class="handwritten" style="font-size:1.1rem;">전체 글 보러 가기 →</a>
@@ -498,22 +505,37 @@
 })();
 
 (async function loadRecent() {
+  // 글 목록은 data/posts.json이 원본입니다. 새 글을 쓰면 이 파일에 추가해 주세요.
+  // Substack RSS는 CORS 프록시가 필요해 자주 실패하므로, 로컬 목록을 먼저 그리고
+  // 프록시가 살아 있을 때만 최신 글로 조용히 교체합니다.
   const list = document.getElementById('recentPosts');
+  const blog = 'https://leeo25.substack.com';
   const fallback = [
-    { title: 'Claude Code 101 — 한국어 입문 가이드를 만든 이유', date: '2026.04.20' },
-    { title: '코드는 AI가 짠다. 그럼 나는 뭘 해야할까?', date: '2026.03.12' },
-    { title: "공부에는 왕도가 없다, 하지만 '나만의 길'은 있다", date: '2026.02.04' },
-    { title: '되돌아보니 실패로 이루어져있던 나의 성장', date: '2026.01.18' }
+    { title: '손을 쓰지 않는 메트로놈으로 시작, 그리고 모두를 위한 앱에 관한 생각', link: blog + '/p/5e5', date: '2026.06.27' },
+    { title: '시간을 아껴보고자 만든 도구들', link: blog + '/p/a91', date: '2026.05.10' },
+    { title: '나라는 개발자가 세상을 바라보는 방식', link: blog + '/p/ff5', date: '2026.04.21' },
+    { title: '개발을 배우려고 대학교에 가는게 맞을까? 라는 생각이드는 요즘', link: blog + '/p/78f', date: '2026.04.16' }
   ];
+  const escape = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   const render = (items) => {
     list.innerHTML = items.slice(0, 4).map(it => {
-      const href = it.link ? `href="${it.link}" target="_blank" rel="noopener"` : '';
-      return `<li><span class="date">${it.date}</span><a class="item-title" ${href}>${it.title}</a></li>`;
+      const href = escape(it.link || blog);
+      return `<li><span class="date">${escape(it.date)}</span>` +
+        `<a class="item-title" href="${href}" target="_blank" rel="noopener">${escape(it.title)}</a></li>`;
     }).join('');
   };
+
+  render(fallback);
+
   try {
-    const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://leeo25.substack.com/feed');
-    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    const res = await fetch('data/posts.json', { cache: 'no-cache' });
+    const items = await res.json();
+    if (Array.isArray(items) && items.length) render(items);
+  } catch (e) { /* 로컬 목록 유지 */ }
+
+  try {
+    const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent(blog + '/feed');
+    const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
     const data = await res.json();
     const doc = new DOMParser().parseFromString(data.contents, 'text/xml');
     const items = [...doc.querySelectorAll('item')].slice(0, 4).map(item => {
@@ -525,10 +547,8 @@
         date
       };
     });
-    if (items.length) render(items); else render(fallback);
-  } catch (e) {
-    render(fallback);
-  }
+    if (items.length) render(items);
+  } catch (e) { /* 프록시 실패 — 로컬 목록 유지 */ }
 })();
 </script>
 
