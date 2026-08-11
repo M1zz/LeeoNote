@@ -11,8 +11,33 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://m1zz.github.io/LeeoNote/ai-learning.html</loc>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://m1zz.github.io/LeeoNote/solo-learning.html</loc>
     <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/learning-design/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/learning-design/triangulation.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/learning-design/yajang.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/philosophy.html</loc>
+    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
@@ -46,12 +71,17 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://m1zz.github.io/LeeoNote/solo-builders/index.html</loc>
+    <loc>https://m1zz.github.io/LeeoNote/solo-builders/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://m1zz.github.io/LeeoNote/solo-builders/app-store-checklist.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/solo-builders/monetization-worksheet.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>

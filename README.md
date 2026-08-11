@@ -12,7 +12,10 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 
 | 페이지 | 무엇이 적혀 있는지 |
 | --- | --- |
-| [철학](https://m1zz.github.io/LeeoNote/philosophy.html) | 가르치는 일에 대해 오래 생각해온 6편의 짧은 글 |
+| [프레임워크](https://m1zz.github.io/LeeoNote/framework.html) | 질문고리 학습 — 팀 프로젝트 안에서 개인의 학습을 설계하는 프레임워크 |
+| [AI학습](https://m1zz.github.io/LeeoNote/ai-learning.html) | 지형 · 경로 · 장비 — AI를 마지막에 배치하는 학습 설계 (본편 + 부록 2편) |
+| [학습설계](https://m1zz.github.io/LeeoNote/solo-learning.html) | 혼자 배우는 사람을 위한 4주 학습 경험 설계도 |
+| [철학](https://m1zz.github.io/LeeoNote/philosophy.html) | 가르치는 일에 대해 오래 생각해온 글 — 여는 글과 6편의 짧은 글 |
 | [서재](https://m1zz.github.io/LeeoNote/library.html) | 주제별로 정리한 책꽂이 8개와 추천 도서 |
 | [생각](https://m1zz.github.io/LeeoNote/thoughts.html) | 블로그 글 모음과 컨퍼런스 발표 영상 |
 | [아카데미](https://m1zz.github.io/LeeoNote/academy.html) | 무료 강의 · 커리큘럼 지도 · YouTube 재생목록 |
@@ -38,6 +41,9 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 ```
 .
 ├─ index.html              메인
+├─ framework.html          질문고리 학습
+├─ ai-learning.html        지형 · 경로 · 장비 (AI 학습 설계 소개)
+├─ solo-learning.html      4주 학습 설계도
 ├─ philosophy.html         교육 철학 에세이
 ├─ library.html            책 서재
 ├─ thoughts.html           블로그 + 컨퍼런스
@@ -45,6 +51,10 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 ├─ tools.html              만든 도구들
 ├─ mentoring.html          편지함
 ├─ join.html               혼자 만들기
+├─ learning-design/        지형 · 경로 · 장비 원문 3종
+│   ├─ index.html              본편 — 세 단계 + 60분 워크시트
+│   ├─ triangulation.html      부록 A · 삼각측량 (우선순위 · AI 위임 경계)
+│   └─ yajang.html             부록 B · 야장 (템플릿 6 · 액티비티 10 · 워크숍)
 ├─ solo-builders/
 │   ├─ index.html              솔로 빌딩 노트
 │   ├─ app-store-checklist.html  App Store 출시 가이드
