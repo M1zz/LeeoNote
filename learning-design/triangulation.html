@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>삼각측량 — 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계</title>
+<meta name="description" content="부록 A · 삼각측량 — 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
+<meta property="og:title" content="삼각측량 — 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계">
+<meta property="og:description" content="부록 A · 삼각측량 — 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/triangulation.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --card:#F6F6F6;
+  --ink:#0A0A0A;
+  --ink-60:#6E6E6E;
+  --ink-40:#9A9A9A;
+  --teal:#6E6E6E;
+  --fluoro:#0A0A0A;
+  --blue:#0A0A0A;
+  --rule:#EAEAEA;
+  --rule-strong:#E4E4E4;
+  --display:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --body:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+  --max:1120px;
+  --rail:132px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.75;
+  letter-spacing:-.01em;word-break:keep-all;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to right,rgba(0,0,0,0) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(0,0,0,0) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
+/* ─────────────────────────────────────────────
+   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   ───────────────────────────────────────────── */
+.sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
+  background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px)}
+.sitebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.sitebar-brand{font-family:var(--display);font-size:1.05rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--ink);text-decoration:none;display:inline-flex;align-items:baseline;gap:.55rem}
+.sitebar-brand span{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--ink-40);font-weight:400}
+.sitenav{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center}
+.sitenav a{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-60);text-decoration:none;padding-bottom:2px;transition:color .18s}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a.active{color:var(--ink);border-bottom:2px solid var(--ink)}
+
+.docbar{background:var(--card);border-bottom:1px solid var(--rule)}
+.docbar .wrap{display:flex;gap:18px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.docbar a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-40);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;
+  transition:color .16s,border-color .16s;white-space:nowrap}
+.docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
+
+.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
+.site-foot a{color:var(--ink-40)}
+.site-foot a:hover{color:var(--ink)}
+
+@media(max-width:600px){
+  .sitebar .wrap{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .sitenav{gap:1rem}
+  .sitenav a{font-size:.66rem}
+  .docbar .wrap{gap:12px}
+  .docbar a{font-size:10px;letter-spacing:.06em}
+}
+@media print{.sitebar,.docbar{display:none}}
+
+/* 리소 오버프린트(색 어긋남) 효과 해제 — 모노크롬에서는 번짐으로 보임 */
+.op::before,.op::after{content:none!important}
+/* 형광 마커 → 연습장 반전 마커 */
+mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+
+.op{position:relative;display:inline-block;z-index:0}
+.op::before,.op::after{content:attr(data-t);position:absolute;left:0;top:0;z-index:-1;pointer-events:none;user-select:none}
+.op::before{color:var(--fluoro);transform:translate(-5px,4px)}
+.op::after{color:var(--blue);transform:translate(4px,-3px);opacity:.55}
+
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,8.6vw,96px);line-height:.94;letter-spacing:-.045em;margin:.18em 0 .1em}
+h2{font-family:var(--display);font-weight:900;font-size:clamp(27px,4.4vw,44px);line-height:1.12;letter-spacing:-.035em;margin:0 0 .35em}
+h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.4vw,23px);line-height:1.3;letter-spacing:-.025em;margin:0 0 .4em}
+h4{font-family:var(--body);font-weight:600;font-size:16px;margin:0 0 .3em;letter-spacing:-.015em}
+p{margin:0 0 1.05em}
+.lede{font-size:clamp(17px,2.1vw,20px);line-height:1.72;max-width:62ch}
+.muted{color:var(--ink-60)}
+.small{font-size:14.5px;line-height:1.65}
+mark{background:linear-gradient(transparent 58%,transparent 58%);padding:0 .1em}
+strong{font-weight:600}
+
+/* hero */
+.hero{padding:44px 0 8px}
+.hero-top{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule-strong);padding-bottom:12px}
+.hero h1{margin-top:26px}
+.hero-sub{display:grid;grid-template-columns:1fr;gap:20px;margin:24px 0 32px}
+@media(min-width:820px){.hero-sub{grid-template-columns:1.15fr .85fr;gap:44px}}
+.hero-meta{border-left:2px solid var(--fluoro);padding-left:16px}
+.hero-meta dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.hero-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);padding-top:4px}
+.hero-meta dd{margin:0;color:var(--ink-60)}
+
+.diagram{border:1px solid var(--rule-strong);background:var(--card);margin:28px 0 0}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption{border-top:1px solid var(--rule);padding:11px 15px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-60);line-height:1.6}
+
+section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44px}
+.sec{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:900px){.sec{grid-template-columns:var(--rail) 1fr;gap:0 40px}}
+.rail{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40);line-height:1.7}
+.rail b{display:block;color:var(--fluoro);font-weight:600}
+.rail .tick{display:block;margin-top:10px}
+.body-col{min-width:0}
+.sec-head{margin-bottom:26px}
+
+.card{background:var(--card);border:1px solid var(--rule-strong);padding:20px 19px;margin-top:26px}
+.card h4{margin-bottom:.4em}
+
+/* four sub-skills */
+.subs{display:grid;grid-template-columns:1fr;border:1px solid var(--ink);margin-top:26px}
+@media(min-width:700px){.subs{grid-template-columns:1fr 1fr}}
+.subs > div{background:var(--card);padding:18px 17px;border-top:1px solid var(--rule-strong)}
+@media(min-width:700px){
+  .subs > div:nth-child(-n+2){border-top:0}
+  .subs > div:nth-child(even){border-left:1px solid var(--rule-strong)}
+}
+.subs .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:6px}
+.subs h4{font-size:16px}
+.subs p{margin:0;font-size:14px;line-height:1.62;color:var(--ink-60)}
+.subs .fail{margin-top:9px;font-size:13px;color:var(--fluoro);font-weight:500}
+
+/* drills */
+.drills{list-style:none;margin:26px 0 0;padding:0;counter-reset:d}
+.drills > li{counter-increment:d;position:relative;padding:20px 0 20px 58px;border-top:1px solid var(--rule)}
+.drills > li:last-child{border-bottom:1px solid var(--rule)}
+.drills > li::before{
+  content:"D" counter(d);position:absolute;left:0;top:20px;
+  font-family:var(--mono);font-weight:600;font-size:12px;color:var(--ink);
+  border:1px solid var(--ink);padding:3px 6px;line-height:1;
+}
+.drills h4{font-size:17px}
+.drills .spec{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:7px}
+.drills p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-60)}
+.drills .ex{margin-top:10px;font-family:var(--mono);font-size:12.5px;line-height:1.62;color:var(--teal);border-left:2px solid var(--fluoro);padding-left:11px}
+
+.safeuse{list-style:none;margin:22px 0 0;padding:0;counter-reset:su}
+.safeuse > li{counter-increment:su;position:relative;padding:18px 0 18px 52px;border-top:1px solid var(--rule)}
+.safeuse > li:last-child{border-bottom:1px solid var(--rule)}
+.safeuse > li::before{
+  content:counter(su,decimal-leading-zero);position:absolute;left:0;top:18px;
+  font-family:var(--mono);font-weight:600;font-size:12px;color:var(--paper);
+  background:var(--ink);padding:4px 7px;line-height:1;
+}
+.safeuse h4{font-size:16.5px}
+.safeuse p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-60)}
+
+/* ledger table */
+.ledger{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}
+.ledger th,.ledger td{text-align:left;padding:11px 10px;border:1px solid var(--rule-strong);vertical-align:top;line-height:1.55}
+.ledger th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);background:var(--card);font-weight:600}
+.ledger td{background:var(--card);color:var(--ink-60)}
+.ledger td:first-child{color:var(--ink);font-weight:500;width:22%}
+@media(max-width:640px){.ledger,.ledger tbody,.ledger tr,.ledger td,.ledger th{display:block;width:auto}
+  .ledger thead{display:none}
+  .ledger tr{margin-bottom:14px;border:1px solid var(--ink)}
+  .ledger td{border:0;border-bottom:1px solid var(--rule)}
+  .ledger td:first-child{width:auto;font-weight:600}
+  .ledger td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);margin-bottom:3px}
+  .ledger td:first-child::before{content:none}
+}
+
+/* criteria */
+.crit{margin-top:26px;border-top:1px solid var(--ink)}
+.crit-row{display:grid;grid-template-columns:1fr;gap:5px 24px;padding:16px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:820px){.crit-row{grid-template-columns:170px 1fr 92px;align-items:start}}
+.crit-row .n{font-weight:600;font-size:15.5px;letter-spacing:-.015em}
+.crit-row .n small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);font-weight:500}
+.crit-row .d{font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.crit-row .w{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.06em}
+
+/* scorecard */
+.sc{border:2px solid var(--ink);background:var(--card);margin-top:28px;overflow:hidden}
+.sc-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:2px solid var(--ink)}
+.sc-head .t{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.03em}
+.sc-head .c{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+.sc-scroll{overflow-x:auto}
+table.scg{border-collapse:collapse;width:100%;min-width:660px;font-size:14px}
+table.scg th,table.scg td{padding:9px 8px;border-bottom:1px solid var(--rule);text-align:center;vertical-align:middle}
+table.scg th{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-40);font-weight:600;line-height:1.35;border-bottom:1px solid var(--ink)}
+table.scg th:first-child,table.scg td:first-child{text-align:left;width:30%;min-width:170px}
+table.scg th small{display:block;color:var(--fluoro);letter-spacing:.06em}
+.sc input[type=text]{
+  width:100%;border:0;border-bottom:1px dashed var(--rule-strong);background:transparent;
+  font-family:var(--body);font-size:14px;color:var(--ink);padding:5px 2px;
+}
+.sc input[type=text]:focus{outline:none;border-bottom-color:var(--fluoro);background:#FFFFFF}
+.sc select{
+  font-family:var(--mono);font-size:13px;border:1px solid var(--rule-strong);
+  background:#fff;color:var(--ink);padding:4px 5px;
+}
+.sc select:focus-visible{outline:2px solid var(--fluoro);outline-offset:1px}
+.tot{font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.03em}
+.rank{font-family:var(--mono);font-size:11px;color:var(--fluoro);font-weight:600}
+.del{border:0;background:transparent;color:var(--ink-40);cursor:pointer;font-family:var(--mono);font-size:15px;line-height:1;padding:4px 6px}
+.del:hover{color:var(--fluoro)}
+.sc-foot{padding:13px 16px;border-top:1px solid var(--ink);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sc-note{padding:0 16px 15px;font-size:13px;line-height:1.6;color:var(--ink-40)}
+
+.btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:10px 15px;cursor:pointer;line-height:1;transition:opacity .15s}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{opacity:.82}
+.btn:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+
+/* ladder */
+.ladder{margin-top:26px;border:1px solid var(--ink)}
+.rung{display:grid;grid-template-columns:1fr;gap:3px 22px;padding:16px 17px;background:var(--card);border-top:1px solid var(--rule)}
+.rung:first-child{border-top:0}
+@media(min-width:760px){.rung{grid-template-columns:86px 1fr 1fr}}
+.rung .lv{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-.04em;color:var(--fluoro)}
+.rung .st{font-weight:600;font-size:15.5px}
+.rung .st span{display:block;font-size:13.5px;font-weight:400;color:var(--ink-60);margin-top:3px;line-height:1.55}
+.rung .nx{font-size:13.5px;line-height:1.58;color:var(--ink-60)}
+.rung .nx b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px;font-weight:600}
+
+/* delegation spectrum */
+.spec-note{margin-top:8px}
+.deleg{margin-top:26px;border-top:1px solid var(--ink)}
+.drow{display:grid;grid-template-columns:1fr;gap:5px 22px;padding:15px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:860px){.drow{grid-template-columns:1.05fr 118px 1.35fr;align-items:start}}
+.drow .task{font-weight:600;font-size:15px;letter-spacing:-.015em}
+.drow .why{font-size:14px;line-height:1.62;color:var(--ink-60)}
+.badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid;padding:4px 7px;display:inline-block;line-height:1;font-weight:600;white-space:nowrap;
+}
+.b-full{color:var(--blue);border-color:var(--blue)}
+.b-part{color:var(--teal);border-color:var(--teal)}
+.b-none{color:var(--fluoro);border-color:var(--fluoro);background:rgba(0,0,0,.04)}
+
+.two{display:grid;grid-template-columns:1fr;margin-top:26px;border:1px solid var(--ink)}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.two > div{padding:20px 18px;background:var(--card)}
+.two > div + div{border-top:1px solid var(--ink)}
+@media(min-width:760px){.two > div + div{border-top:0;border-left:1px solid var(--ink)}}
+.two .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:block}
+.two ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.two li{margin-bottom:6px}
+
+.gate{margin-top:28px;border:2px solid var(--ink);padding:22px 20px;background:var(--card)}
+.gate .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:10px}
+.gate .rule-text{font-family:var(--display);font-weight:900;font-size:clamp(20px,3.4vw,30px);letter-spacing:-.035em;line-height:1.2;margin:0}
+
+.forbid{margin-top:26px;background:var(--card);border:1px solid var(--rule-strong);border-left:3px solid var(--ink);border-radius:0 6px 6px 0;padding:20px 18px}
+.forbid h4{color:var(--fluoro);font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.forbid ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.7}
+.forbid li{margin-bottom:7px}
+
+.prompt{margin-top:22px;border:1px solid var(--rule-strong);background:var(--card)}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--rule)}
+.prompt-head .t{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.copy{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:5px 9px;cursor:pointer;line-height:1}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.copy:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+.prompt pre{margin:0;padding:15px 14px;font-family:var(--mono);font-size:12.8px;line-height:1.72;white-space:pre-wrap;overflow-wrap:anywhere}
+
+.plan{margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+@media(min-width:820px){.plan{grid-template-columns:repeat(4,1fr)}}
+.plan > div{padding:15px 13px;border-left:1px solid var(--rule)}
+.plan > div:first-child{border-left:0}
+@media(max-width:819px){.plan > div:nth-child(3){border-left:0}
+  .plan > div:nth-child(n+3){border-top:1px solid var(--rule)}}
+.plan .w{font-family:var(--display);font-weight:900;font-size:23px;letter-spacing:-.04em;color:var(--fluoro);line-height:1}
+.plan .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);margin:7px 0 5px}
+.plan p{margin:0;font-size:13.5px;line-height:1.56;color:var(--ink-60)}
+
+.caveat{margin-top:26px;border-left:3px solid var(--blue);padding:4px 0 4px 16px;font-size:14.5px;line-height:1.7;color:var(--ink-60)}
+
+footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
+footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media print{
+  body::before{display:none}
+  body{background:#fff;font-size:11pt}
+  .copy,.sc-foot{display:none}
+  section{page-break-inside:avoid;border-top:1px solid #999}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="sitebar">
+  <div class="wrap">
+    <a class="sitebar-brand" href="../index.html">리이오의 연습장 <span>리이오가 배우고 기록하는 곳</span></a>
+    <nav class="sitenav">
+      <a href="../framework.html">프레임워크</a>
+      <a href="../ai-learning.html" class="active">AI학습</a>
+      <a href="../solo-learning.html">학습설계</a>
+      <a href="../library.html">서재</a>
+      <a href="../thoughts.html">생각</a>
+      <a href="../academy.html">아카데미</a>
+      <a href="../tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="docbar">
+  <div class="wrap">
+      <a href="../ai-learning.html">소개</a>
+      <a href="index.html">본편 · 지형·경로·장비</a>
+      <a href="triangulation.html" class="is-current">부록 A · 삼각측량</a>
+      <a href="yajang.html">부록 B · 야장</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">부록 A · Station 01 확장 — 우선순위 판단</span>
+      <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
+    </div>
+
+    <h1><span class="op" data-t="삼각측량">삼각측량</span></h1>
+
+    <div class="hero-sub">
+      <div>
+        <p class="lede">무엇부터 배울지 정하는 일은 <strong>지형만으로도, 내 위치만으로도</strong> 되지 않는다. 두 개의 관측점에서 각각 방위를 재야 한 점이 정해진다. AI는 그중 하나만 가지고 있다.</p>
+        <p class="small muted">이 문서는 두 가지를 다룬다. 우선순위 판단 능력을 실제로 훈련하는 여섯 가지 드릴, 그리고 그 능력 중 어디까지 AI에게 넘겨도 되는지의 경계선.</p>
+      </div>
+      <div class="hero-meta">
+        <dl>
+          <dt>전제</dt><dd>「지형·경로·장비」 단계 01을 한 번 이상 돌려본 상태</dd>
+          <dt>훈련 단위</dt><dd>학습 1건당 예측 3줄 + 사후 대조 10분</dd>
+          <dt>가시 효과</dt><dd>누적 10건부터 자기 편향 패턴이 드러남</dd>
+          <dt>결론 미리</dt><dd>후보 생성은 위임, 순위와 버림은 위임 불가</dd>
+        </dl>
+      </div>
+    </div>
+
+    <figure class="diagram reveal" style="margin:0">
+      <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="두 개의 관측점에서 각각 시선을 뻗어 한 점을 결정하는 삼각측량 다이어그램. 왼쪽 관측점은 AI가 아는 영역 지형, 오른쪽 관측점은 나만 아는 내 위치이며, 두 시선이 만나는 지점이 다음에 배울 것이다.">
+        <defs>
+          <pattern id="fog" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="2.2" opacity=".16"/>
+          </pattern>
+        </defs>
+
+        <rect x="0" y="0" width="1000" height="400" fill="url(#fog)"/>
+
+        <!-- faint contours -->
+        <g fill="none" stroke="#9A9A9A" stroke-width="1" opacity=".26">
+          <path d="M-40 320 C 140 280, 220 350, 340 316 S 560 226, 690 268 S 880 318, 1040 258"/>
+          <path d="M-40 276 C 132 236, 232 306, 348 272 S 562 186, 696 226 S 884 276, 1040 214"/>
+          <path d="M-40 232 C 124 192, 244 262, 356 228 S 566 144, 702 182 S 888 232, 1040 170"/>
+          <path d="M-40 188 C 116 148, 254 216, 364 184 S 570 100, 708 138 S 892 188, 1040 126"/>
+        </g>
+
+        <!-- sight lines -->
+        <g stroke="#0A0A0A" stroke-width="1.6" opacity=".85" stroke-dasharray="7 7">
+          <line x1="176" y1="292" x2="500" y2="128"/>
+          <line x1="824" y1="292" x2="500" y2="128"/>
+        </g>
+        <!-- baseline -->
+        <line x1="176" y1="292" x2="824" y2="292" stroke="#0A0A0A" stroke-width="1.2" opacity=".35"/>
+
+        <!-- angle arcs -->
+        <path d="M 216 292 A 40 40 0 0 0 196 258" fill="none" stroke="#6E6E6E" stroke-width="1.6"/>
+        <path d="M 784 292 A 40 40 0 0 1 804 258" fill="none" stroke="#0A0A0A" stroke-width="1.6"/>
+
+        <!-- target -->
+        <circle cx="500" cy="128" r="26" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.8"/>
+        <circle cx="500" cy="128" r="6" fill="#0A0A0A"/>
+        <text x="500" y="84" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="24" font-weight="900" fill="#0A0A0A">다음에 배울 것</text>
+        <text x="500" y="176" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" letter-spacing="1.6" fill="rgba(10,10,10,.6)">두 방위가 만나는 곳에서만 정해진다</text>
+
+        <!-- station A -->
+        <g>
+          <rect x="86" y="292" width="180" height="74" fill="#FFFFFF" stroke="#6E6E6E" stroke-width="2.4"/>
+          <text x="176" y="322" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="20" font-weight="900" fill="#6E6E6E">영역의 지형</text>
+          <text x="176" y="346" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(10,10,10,.6)">AI가 잘 아는 쪽</text>
+          <circle cx="176" cy="292" r="7" fill="#6E6E6E"/>
+        </g>
+
+        <!-- station B -->
+        <g>
+          <rect x="734" y="292" width="180" height="74" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.4"/>
+          <text x="824" y="322" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="20" font-weight="900" fill="#0A0A0A">내 위치</text>
+          <text x="824" y="346" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0A0A0A">나만 아는 쪽</text>
+          <circle cx="824" cy="292" r="7" fill="#0A0A0A"/>
+        </g>
+
+        <text x="500" y="286" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="2" fill="rgba(10,10,10,.45)">BASELINE — 관측점 사이의 거리를 내가 알고 있어야 한다</text>
+      </svg>
+      <figcaption>관측점 하나로는 방향만 나오고 거리가 나오지 않는다. AI에게 전면 위임한다는 것은 관측점 하나로 좌표를 찍는 일이다.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ══════════ WHAT IT IS ══════════ -->
+<section id="what">
+  <div class="wrap sec">
+    <div class="rail"><b>A1</b>정체<span class="tick">무슨 능력인가</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>"무엇부터"는<br>하나의 능력이 아니다</h2>
+        <p class="lede">훈련이 안 되는 이유는 대개 <mark>네 개의 다른 능력을 한 덩어리로 보기 때문</mark>이다. 각각 고장 나는 방식도, 고치는 방법도 다르다.</p>
+      </div>
+
+      <p>먼저 분류부터. 이것은 <strong>지식형이 아니라 판단형</strong>이다. 우선순위 판단법을 설명하는 글을 아무리 많이 읽어도 능력은 늘지 않는다. 판단형은 예외 없이 <strong>예측 → 결과 → 대조</strong>의 피드백으로만 자라고, 이 능력도 예외가 아니다. 즉 <em>학습 설계 능력 자체가 학습 루프의 대상</em>이다.</p>
+
+      <div class="subs">
+        <div>
+          <span class="k">SUB 1</span>
+          <h4>좁히기 — 목표를 판정 가능하게 만들기</h4>
+          <p>"잘하고 싶다"를 "이걸 만들어 배포한다"로 바꾸는 능력. 이게 안 되면 나머지 셋이 전부 작동하지 않는다.</p>
+          <div class="fail">고장 신호: 목표가 계속 형용사로 끝난다</div>
+        </div>
+        <div>
+          <span class="k">SUB 2</span>
+          <h4>재기 — 내가 어디까지 모르는지 아는 것</h4>
+          <p>메타인지 보정. 스스로 "안다"고 느끼는 감각과 실제 인출 가능성 사이의 오차를 줄이는 능력.</p>
+          <div class="fail">고장 신호: 읽을 땐 쉬웠는데 막상 못 쓴다</div>
+        </div>
+        <div>
+          <span class="k">SUB 3</span>
+          <h4>고르기 — 지금의 병목을 지목하기</h4>
+          <p>후보 20개 중 지금 나를 실제로 막고 있는 하나를 고르는 능력. 순위 매기기의 본체.</p>
+          <div class="fail">고장 신호: 목록만 늘어나고 착수가 안 된다</div>
+        </div>
+        <div>
+          <span class="k">SUB 4</span>
+          <h4>멈추기 — 충분하다고 판정하기</h4>
+          <p>어디까지 파고 어디서 다음으로 넘어갈지 정하는 능력. 가장 훈련이 안 되어 있는 항목.</p>
+          <div class="fail">고장 신호: 한 주제에서 몇 주씩 머무른다</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>넷 중 무엇이 고장 났는지 30초 만에 가르기</h4>
+        <p class="small muted" style="margin:0">최근에 흐지부지된 학습 하나를 떠올린다. <strong>목표를 한 문장으로 못 쓰겠다</strong>면 SUB 1. <strong>목표는 뚜렷한데 어디서부터 손대야 할지 모르겠다</strong>면 SUB 3. <strong>계속 배우는데 결과물이 안 나온다</strong>면 SUB 4. <strong>다 안다고 생각했는데 결과물에서 무너졌다</strong>면 SUB 2. 훈련은 고장 난 하나만 골라서 한다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DRILLS ══════════ -->
+<section id="drills">
+  <div class="wrap sec">
+    <div class="rail"><b>A2</b>훈련<span class="tick">여섯 가지 드릴</span><span class="tick">D1·D2 우선</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>이 능력을<br>실제로 늘리는 법</h2>
+        <p class="lede">전부 하지 않는다. <mark>D1과 D2 두 개만</mark> 습관으로 만들면 나머지는 선택이다.</p>
+      </div>
+
+      <ol class="drills">
+        <li>
+          <div class="spec">핵심 · 학습 1건당 3줄 · SUB 2·3</div>
+          <h4>예측 장부</h4>
+          <p>학습을 시작하기 <strong>전에</strong> 세 줄을 적어 둔다. 그리고 끝난 뒤 실제와 대조한다. 이 한 가지가 우선순위 판단 훈련의 8할이다. 판단은 결과와 짝지어지지 않으면 절대 교정되지 않는데, 대부분의 사람은 자기가 뭘 예측했는지조차 기록하지 않아서 평생 교정 기회를 못 얻는다.</p>
+          <div class="ex">1. 가장 오래 걸릴 항목은 ___ 이다<br>2. 배웠지만 결국 안 쓸 항목은 ___ 이다<br>3. 첫 번째로 막힐 지점은 ___ 이다</div>
+          <p class="small" style="margin-top:11px;color:var(--ink-60)">누적 10건이 넘으면 개인 편향이 드러난다. "나는 문법·문서형 항목의 난이도를 항상 과대평가하고, 통합·연결 작업은 항상 과소평가한다" 같은 문장이 나오면 그때부터 예측이 급격히 좋아진다.</p>
+        </li>
+
+        <li>
+          <div class="spec">핵심 · 30분 타임박스 · SUB 3</div>
+          <h4>병목 탐침 — 배우기 전에 먼저 부딪히기</h4>
+          <p>학습 계획을 세우기 전에 <strong>준비 없이 30분간 만들어 본다.</strong> 목적은 완성이 아니라 <strong>실제로 막히는 지점을 채집하는 것</strong>이다. 그 다음 상상으로 만든 목록과 실제로 막힌 목록을 나란히 놓는다. 이 두 목록의 차이가 훈련 신호 전부다.</p>
+          <div class="ex">상상한 병목: 상태 관리, 애니메이션<br>실제 병목: 빌드 설정, 데이터 모델 이름 짓기<br>→ 나는 화려한 항목을 병목으로 착각하는 경향이 있다</div>
+          <p class="small" style="margin-top:11px;color:var(--ink-60)">이 드릴이 강력한 이유는 우선순위 판단의 근본 문제가 <strong>정보 부족</strong>이기 때문이다. 지형을 상상으로 그리는 대신 30분 걸어보고 그린다.</p>
+        </li>
+
+        <li>
+          <div class="spec">주 1회 · SUB 3·4</div>
+          <h4>버림 훈련 — 강제로 70% 자르기</h4>
+          <p>후보 목록에서 <strong>반드시 70%를 지운다.</strong> 남길 수 있는 것은 30%뿐이라는 제약을 먼저 걸고 고른다. 그리고 지운 항목 중 나중에 실제로 필요해진 것을 표시해 둔다. 이것이 <strong>버림 정확도</strong>이고, 대부분의 사람은 이 지표를 평생 한 번도 재보지 않는다.</p>
+          <p class="small" style="margin-top:10px;color:var(--ink-60)">실제로 재보면 버린 것 중 다시 필요해지는 비율은 생각보다 훨씬 낮다. 이 사실을 데이터로 확인하는 것 자체가 다음번 버림을 과감하게 만든다.</p>
+        </li>
+
+        <li>
+          <div class="spec">1회 60분 · SUB 1·3</div>
+          <h4>역사 복기 — 끝난 학습을 다시 설계하기</h4>
+          <p>이미 끝난 학습 세 개를 골라, <strong>지금 아는 것을 가지고 다시 순서를 짠다면</strong> 어떻게 할지 적는다. 결과를 이미 알고 있으므로 정답이 확보된 상태에서의 훈련이고, 그래서 가장 값싸다. 새 학습을 기다릴 필요 없이 오늘 바로 열 번을 돌릴 수 있다.</p>
+          <div class="ex">각 항목: 실제로 쓴 순서 / 지금이라면 바꿀 순서 / 바꾸는 이유 한 줄</div>
+        </li>
+
+        <li>
+          <div class="spec">목차를 볼 때마다 · SUB 3</div>
+          <h4>순서 훔치기 — 목차에서 내용 말고 순서를 읽기</h4>
+          <p>잘 만들어진 커리큘럼을 볼 때 <strong>"왜 B가 A 다음인가"를 먼저 추측하고</strong> 그다음 확인한다. 대부분의 좋은 순서에는 이유가 있다. 의존성일 수도, 동기 부여일 수도, 실패 비용일 수도 있다. 이유를 맞히는 연습이 곧 순서 설계 연습이다.</p>
+        </li>
+
+        <li>
+          <div class="spec">착수 직전 5분 · SUB 1·3</div>
+          <h4>5분 변론 — 왜 이것부터인지 말로 하기</h4>
+          <p>학습을 시작하기 직전, 누군가에게 <strong>"왜 하필 이것부터 하는가"</strong>를 소리 내어 설명한다. 30초 안에 근거가 안 나오면 우선순위가 아니라 그냥 눈에 먼저 띈 항목을 고른 것이다. 말이 막히는 지점이 판단이 비어 있는 지점이다.</p>
+        </li>
+      </ol>
+
+      <h3 style="margin-top:40px">예측 장부 서식</h3>
+      <table class="ledger">
+        <thead>
+          <tr><th>항목</th><th>착수 전 내 예측</th><th>AI에게 물었다면 그 답</th><th>실제 결과</th><th>차이에서 배운 규칙</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>가장 오래 걸릴 항목</td>
+            <td data-l="내 예측">동시성 처리</td>
+            <td data-l="AI 답">동시성 처리</td>
+            <td data-l="실제">데이터 마이그레이션</td>
+            <td data-l="배운 규칙">둘 다 "어려워 보이는 것"을 골랐다. 실제 병목은 지루한 쪽에 있었다</td>
+          </tr>
+          <tr>
+            <td>결국 안 쓸 항목</td>
+            <td data-l="내 예측">고급 애니메이션</td>
+            <td data-l="AI 답">(버릴 항목을 지목하지 않음)</td>
+            <td data-l="실제">예측 적중</td>
+            <td data-l="배운 규칙">AI는 버림을 제안하지 않는다. 이 칸은 내가 채워야 한다</td>
+          </tr>
+          <tr>
+            <td>첫 번째 막힘</td>
+            <td data-l="내 예측">API 설계</td>
+            <td data-l="AI 답">환경 설정</td>
+            <td data-l="실제">환경 설정</td>
+            <td data-l="배운 규칙">초반 마찰을 나는 계속 과소평가한다. 첫 항목은 항상 셋업으로</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small muted" style="margin-top:12px">세 번째 열이 이 서식의 핵심이다. AI에게 물어보되 <strong>내 답을 먼저 쓰고, 셋을 나란히 놓는다.</strong> 이렇게 하면 AI를 쓰면서도 훈련이 계속된다. 뒤에서 다룰 위임 문제의 실질적인 해답이 이 한 칸에 들어 있다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CRITERIA + SCORECARD ══════════ -->
+<section id="criteria">
+  <div class="wrap sec">
+    <div class="rail"><b>A3</b>기준<span class="tick">무엇으로 고르나</span><span class="tick">계산기 포함</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>순위를 매기는<br>다섯 개의 축</h2>
+        <p class="lede">초심자는 대개 <mark>"자주 쓰는가" 하나만</mark> 본다. 그런데 초반에 실제로 지배적인 축은 다른 둘이다.</p>
+      </div>
+
+      <div class="crit">
+        <div class="crit-row">
+          <div class="n">의존성<small>Dependency</small></div>
+          <div class="d">이것을 모르면 다음 것을 아예 시작할 수 없는가. 선행 관계가 있는 항목은 순위를 논할 필요 없이 먼저다. 다만 진짜 의존인지, 관행일 뿐인지 구별해야 한다.</div>
+          <div class="w">가중치 ×3</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">불확실성 축소<small>Information value</small></div>
+          <div class="d">이걸 배우고 나면 <strong>나머지 계획이 크게 바뀌는가.</strong> 계획을 흔들 수 있는 항목일수록 먼저 해야 한다. 나중에 배우면 그 사이에 세운 계획이 통째로 낭비되기 때문이다. 초반에 가장 과소평가되는 축.</div>
+          <div class="w">가중치 ×3</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">되돌림 비용<small>Irreversibility</small></div>
+          <div class="d">잘못 익히면 나중에 고치기 어려운가. 구조적 결정, 발음, 손버릇, 초기 데이터 모델이 여기 해당한다. 되돌리기 쉬운 것은 대충 배우고 넘어가도 된다.</div>
+          <div class="w">가중치 ×2</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">빈도 × 실패비용<small>Frequency</small></div>
+          <div class="d">자주 마주치고, 틀렸을 때 비싼가. 가장 직관적인 축이라 대부분 이것만 본다. 중요하지만 단독으로는 순서를 정하지 못한다.</div>
+          <div class="w">가중치 ×2</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">되먹임 속도<small>Feedback speed</small></div>
+          <div class="d">배운 것이 맞았는지 <strong>빨리 알 수 있는가.</strong> 확인이 느린 항목을 초반에 넣으면 잘못된 이해가 오래 굳는다. 같은 조건이면 빨리 채점되는 것부터.</div>
+          <div class="w">가중치 ×1</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>가중치는 고정값이 아니다</h4>
+        <p class="small muted" style="margin:0">위 배분은 <strong>영역 진입 초반</strong>을 가정한 값이다. 지형을 모를수록 불확실성 축소가 지배하고, 지형이 익숙해질수록 빈도와 되돌림 비용 쪽으로 무게가 옮겨간다. 숙련 구간에서는 대체로 의존성 ×1, 불확실성 ×1, 되돌림 ×3, 빈도 ×3 정도가 된다. 이 가중치를 자기 상황에 맞게 조정할 수 있게 되는 것이 곧 SUB 3의 숙달이다.</p>
+      </div>
+
+      <!-- interactive scorecard -->
+      <div class="sc reveal">
+        <div class="sc-head">
+          <span class="t">병목 스코어카드</span>
+          <span class="c">0 없음 · 1 낮음 · 2 중간 · 3 높음</span>
+        </div>
+        <div class="sc-scroll">
+          <table class="scg">
+            <thead>
+              <tr>
+                <th>후보 항목</th>
+                <th>의존성<small>×3</small></th>
+                <th>불확실성<small>×3</small></th>
+                <th>되돌림<small>×2</small></th>
+                <th>빈도<small>×2</small></th>
+                <th>되먹임<small>×1</small></th>
+                <th>합계</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="scBody"></tbody>
+          </table>
+        </div>
+        <div class="sc-foot">
+          <button class="btn ghost" type="button" id="scAdd">항목 추가</button>
+          <button class="btn" type="button" id="scSort">순위 계산</button>
+          <button class="btn ghost" type="button" id="scReset">초기화</button>
+        </div>
+        <p class="sc-note">점수를 매기는 행위 자체가 훈련이다. 합계가 비슷하게 나온다면 후보를 너무 추상적으로 잡은 것이므로 더 작게 쪼갠다. 계산 결과가 직관과 어긋나면 계산을 믿지 말고 <strong>왜 어긋났는지</strong>를 적는다 — 그 문장이 이 표보다 값지다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LADDER ══════════ -->
+<section id="ladder">
+  <div class="wrap sec">
+    <div class="rail"><b>A4</b>숙련도<span class="tick">L0 → L4</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>지금 어디에 있고<br>다음 신호는 무엇인가</h2>
+        <p class="lede">위임해도 되는지의 답은 레벨에 따라 달라진다. <mark>L1 이전에는 위임이 도움이 되고, L1 이후에는 해가 된다.</mark></p>
+      </div>
+
+      <div class="ladder">
+        <div class="rung">
+          <div class="lv">L0</div>
+          <div class="st">따라간다<span>남이 짜준 순서를 그대로 소화한다. 왜 이 순서인지는 묻지 않는다.</span></div>
+          <div class="nx"><b>다음 신호</b>커리큘럼을 보다가 "이건 왜 여기 있지?"라는 의문이 생긴다</div>
+        </div>
+        <div class="rung">
+          <div class="lv">L1</div>
+          <div class="st">설명한다<span>주어진 순서의 이유를 사후적으로 설명할 수 있다. 아직 스스로 짜지는 못한다.</span></div>
+          <div class="nx"><b>다음 신호</b>"내 상황에서는 3번을 먼저 해야 할 것 같은데"라는 판단이 생긴다</div>
+        </div>
+        <div class="rung">
+          <div class="lv">L2</div>
+          <div class="st">고쳐 쓴다<span>남의 커리큘럼을 내 목표·배경에 맞게 재배열하고 잘라낸다.</span></div>
+          <div class="nx"><b>다음 신호</b>참고할 커리큘럼이 없는 주제에서도 착수할 수 있다</div>
+        </div>
+        <div class="rung">
+          <div class="lv">L3</div>
+          <div class="st">처음부터 짠다<span>지도가 없는 영역에서 종착 산출물과 관문 질문을 스스로 만들어 낸다.</span></div>
+          <div class="nx"><b>다음 신호</b>남의 학습이 막힌 이유를 순서 문제로 진단할 수 있다</div>
+        </div>
+        <div class="rung">
+          <div class="lv">L4</div>
+          <div class="st">진단한다<span>타인의 학습 설계를 보고 병목과 잘못된 순서를 지목한다. 멘토링의 실질.</span></div>
+          <div class="nx"><b>유지 조건</b>새 영역에 정기적으로 진입해 예측 장부를 계속 쓴다</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>레벨은 도메인마다 따로 매겨진다 — 다만 완전히 따로는 아니다</h4>
+        <p class="small muted" style="margin:0">iOS 개발에서 L3인 사람이 언어 학습에서는 L1일 수 있다. 영역 지식이 판단의 재료이기 때문이다. 하지만 <strong>예측 장부를 쓰는 습관, 버림에 대한 감각, 불확실성 축소를 먼저 보는 시선</strong>은 도메인을 건너 이동한다. 그래서 이 능력의 훈련은 몇 번째 도메인부터 눈에 띄게 빨라진다. 이 <strong>전이성</strong>이 다음 절의 위임 문제에서 결정적인 변수가 된다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DELEGATION ══════════ -->
+<section id="delegation">
+  <div class="wrap sec">
+    <div class="rail"><b>A5</b>위임<span class="tick">어디까지 넘기나</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>AI에게<br>맡겨도 되는가</h2>
+        <p class="lede">짧은 답: <mark>후보를 만드는 일은 넘겨도 되고, 순위를 정하고 버리는 일은 넘기면 안 된다.</mark> 긴 답은 세 가지 축으로 갈린다.</p>
+      </div>
+
+      <h3>축 1 — 맥락이 어디에 있는가</h3>
+      <p>우선순위는 <strong>지형 × 내 위치</strong>의 함수다. AI는 지형 쪽에서 압도적으로 강하다. 영역의 용어, 표준적 학습 순서, 흔한 함정을 나보다 훨씬 넓게 알고 있다. 그러나 <strong>내 위치</strong>는 원리적으로 모른다. 내가 이미 무엇을 몸으로 익혔는지, 어떤 설명 방식에서 막히는지, 이번 학습에 실제로 쓸 수 있는 시간이 얼마인지, 3년 뒤 무엇이 되려는지. 이 정보가 없으면 방위 하나로 좌표를 찍는 셈이 된다.</p>
+
+      <h3 style="margin-top:32px">축 2 — 오판이 조용한가 시끄러운가</h3>
+      <p>순서를 잘못 정하면 시간이 낭비되지만 <strong>금방 드러나고 복구된다.</strong> 반면 <strong>무엇을 버릴지</strong>를 잘못 정하면 아무 일도 일어나지 않는다. 배우지 않은 것은 존재를 알리지 않기 때문이다. 이 오판은 몇 년 뒤에야 "그때 그걸 배웠어야 했는데"로 드러난다. <strong>조용한 오판일수록 위임 위험이 크다.</strong></p>
+
+      <h3 style="margin-top:32px">축 3 — 그 판단이 내가 기르려는 능력 자체인가</h3>
+      <p>여기가 진짜 문제다. 우선순위 판단은 <strong>전이성이 가장 높은 메타 능력</strong>이다. 도메인 지식은 영역이 바뀌면 대부분 버려지지만, 무엇부터 배울지 정하는 감각은 남는다. 이걸 위임하면 매번 새 도메인에 들어갈 때마다 다시 위임해야 한다. <strong>도메인 지식은 축적되는데 학습 설계 능력은 제자리에 머무는 상태</strong>가 되고, 이 상태는 스스로 감지되지 않는다. 학습은 계속 진행되고 있으니까.</p>
+
+      <div class="gate">
+        <span class="lbl">Core</span>
+        <p class="rule-text">AI에게 순위를 맡기면 학습 속도는 오르고 학습 설계 능력은 정체한다. 갈림길은 위임 여부가 아니라, 위임하면서 대조를 남기느냐다.</p>
+      </div>
+
+      <h3 style="margin-top:40px">작업별 위임 경계선</h3>
+      <div class="deleg">
+        <div class="drow">
+          <div class="task">영역의 용어·하위 주제 열거</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">답이 아니라 검증할 목록이다. 틀려도 손해가 적고, 틀린 항목이 오히려 좋은 관문 질문이 된다. 이름을 모르면 검색조차 못 하는 상태를 벗어나는 가장 빠른 길.</div>
+        </div>
+        <div class="drow">
+          <div class="task">선행 의존 관계 그리기</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">단, 반드시 검증한다. 실제 의존이 아니라 관행상의 순서를 의존으로 제시하는 경우가 잦다. "이거 없이 저걸 하면 정확히 무엇이 안 되는가"를 되물어 확인한다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">흔한 오해·함정 목록</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">집합적 경험이 축적된 영역이고 AI가 특히 강하다. 여기서 나온 항목은 대체로 그대로 TYPE D(안다고 착각함) 후보가 된다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">표준 커리큘럼 초안</div>
+          <div><span class="badge b-part">초안만</span></div>
+          <div class="why">받되 채택하지 않는다. 평균적 초심자를 가정한 순서이므로, 내 강점 위를 다시 지나가고 내 진짜 구멍은 건너뛴다. 초안은 재료이지 결정이 아니다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">내 상황에서의 병목 지목</div>
+          <div><span class="badge b-part">증거 제공 시</span></div>
+          <div class="why">내가 실제로 막힌 기록(30분 탐침 결과, 실패 로그, 내가 쓴 코드)을 붙여 주면 유용한 지목이 가능하다. 그 증거를 만드는 일은 위임할 수 없고, 그게 이 작업의 어려운 절반이다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">후보 사이의 순위 결정</div>
+          <div><span class="badge b-none">위임 불가</span></div>
+          <div class="why">가중치가 내 목표·시간·3년 뒤 계획의 함수다. AI는 이 함수를 모르고, 알려줘도 내 것과 다른 근사치를 쓴다. 순위는 내가 매기고 AI에게는 반론만 시킨다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">무엇을 버릴지 결정</div>
+          <div><span class="badge b-none">위임 불가</span></div>
+          <div class="why">기회비용은 내 삶의 함수다. 게다가 AI는 구조적으로 버림을 잘 제안하지 않는다 — 포괄적인 답이 더 안전한 답이기 때문이다. 목록은 늘려주지만 줄여주지는 않는다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">충분히 배웠는지 판정</div>
+          <div><span class="badge b-none">위임 불가</span></div>
+          <div class="why">판정 근거가 내 인출 결과에만 있다. AI의 "잘 이해하셨습니다"는 내 대화 내용에 대한 반응이지 내 인출 가능성에 대한 증거가 아니다.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:40px">위임했을 때 실제로 생기는 세 가지 고장</h3>
+      <div class="subs">
+        <div>
+          <span class="k">FAILURE 1</span>
+          <h4>평균으로의 회귀</h4>
+          <p>AI가 주는 순서는 "일반적인 초심자"의 순서다. 내 강점 구간을 다시 지나가느라 시간을 쓰고, 내 특유의 구멍은 목록에 아예 등장하지 않는다.</p>
+          <div class="fail">징후: 계획의 앞부분이 지루하다</div>
+        </div>
+        <div>
+          <span class="k">FAILURE 2</span>
+          <h4>목록 팽창</h4>
+          <p>요청하면 언제나 포괄적인 목록이 돌아온다. 우선순위의 본질은 버림인데, 버림은 위험한 답이라 잘 나오지 않는다. 결과적으로 할 일만 늘어난다.</p>
+          <div class="fail">징후: 물어볼수록 목록이 길어진다</div>
+        </div>
+        <div>
+          <span class="k">FAILURE 3</span>
+          <h4>확신 신호의 평탄화</h4>
+          <p>확실한 것과 논쟁적인 것이 같은 어조로 온다. 그런데 순서 판단은 정확히 그 논쟁 지점에 걸려 있다. 어디가 갈리는 지점인지를 따로 물어야 한다.</p>
+          <div class="fail">징후: 반대 의견을 들어본 적이 없다</div>
+        </div>
+        <div>
+          <span class="k">FAILURE 4</span>
+          <h4>대조 기록의 소멸</h4>
+          <p>가장 조용한 고장. 내 예측이 애초에 없었으므로 대조할 것도 없고, 따라서 다음 학습에서도 판단이 늘지 않는다. 속도는 오르는데 능력은 그대로다.</p>
+          <div class="fail">징후: 3년째 매번 AI에게 순서를 묻고 있다</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:40px">그래서 어떻게 쓰는가 — 위임의 안전한 형태</h3>
+      <p>답을 받는 위임 대신 <strong>재료를 받는 위임</strong>으로 바꾼다. 세 단계면 된다.</p>
+
+      <ol class="safeuse">
+          <li>
+            <h4>후보와 근거만 요구한다</h4>
+            <p>"순서를 정해 달라"가 아니라 <strong>"후보 항목과 각각의 판단 근거를 달라"</strong>고 요구한다. 순위 칸은 비워 둔 채로 받는다.</p>
+          </li>
+          <li>
+            <h4>순위는 내가 매기고, 그다음 반론을 시킨다</h4>
+            <p>AI를 심판이 아니라 <strong>반대편 변호인</strong>으로 세운다. "내 순서가 틀렸다면 그 이유 3개"를 요구하면, 내 판단을 유지한 채로 사각지대만 얻을 수 있다.</p>
+          </li>
+          <li>
+            <h4>세 열을 남긴다</h4>
+            <p>예측 장부에 <strong>내 판단 / AI 판단 / 실제 결과</strong>를 나란히 기록한다. 이것이 위임하면서 동시에 훈련하는 유일한 형태다. 누적되면 "어떤 종류의 판단에서 AI가 나보다 낫고 어떤 종류에서 못한가"라는, 위임 자체를 정교하게 만드는 지식이 생긴다.</p>
+          </li>
+      </ol>
+
+      <div class="two">
+        <div>
+          <span class="k" style="color:var(--teal)">위임해도 되는 상황</span>
+          <ul>
+            <li>완전 초입 — 판단할 재료 자체가 없을 때. 첫 지도는 받아도 된다</li>
+            <li>일회성·저가치 주제 — 능력 훈련 대상이 아닌 학습</li>
+            <li>마감이 걸린 실무 — 지금 필요한 건 학습이 아니라 완수다</li>
+            <li>L0 구간 — 이 시기에는 좋은 순서를 <strong>경험하는 것</strong>이 훈련이다</li>
+          </ul>
+        </div>
+        <div>
+          <span class="k" style="color:var(--fluoro)">위임하면 안 되는 상황</span>
+          <ul>
+            <li>앞으로 반복해서 들어갈 도메인 — 매번 위임하게 된다</li>
+            <li>그 영역의 판단자가 되어야 할 때 — 멘토, 리드, 교육자</li>
+            <li>이미 L1 이상 — 위임은 여기서부터 퇴행으로 작동한다</li>
+            <li>버림을 결정할 때 — 어느 레벨에서도 예외 없음</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="forbid">
+        <h4>이 절의 금지 목록</h4>
+        <ul>
+          <li><strong>"뭐부터 배워야 해?"로 대화를 시작하기</strong> — 내 후보 목록을 먼저 쓴 뒤에 묻는다.</li>
+          <li><strong>받은 순서를 그대로 채택하기</strong> — 최소한 항목 하나는 옮기거나 지운다. 그 이유를 한 줄 적는다.</li>
+          <li><strong>버릴 항목을 AI에게 고르게 하기</strong> — 구조적으로 못 하는 일을 시키는 것이다.</li>
+          <li><strong>예측 없이 물어보기</strong> — 내 예측이 없으면 그 대화는 훈련이 아니라 소비다.</li>
+        </ul>
+      </div>
+
+      <h3 style="margin-top:40px">그대로 쓰는 프롬프트</h3>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">01 · 후보만 받기 (순위 없이)</span><button class="copy" type="button">복사</button></div>
+        <pre>[영역]에서 [종착 산출물]을 만들려 한다. 내 배경은 [배경]이고 쓸 수 있는 시간은 [시간]이다.
+
+순서는 정하지 마라. 다음만 달라.
+· 후보 항목 12개 (한 줄씩)
+· 각 항목마다: 이걸 모르면 구체적으로 무엇이 막히는가
+· 각 항목마다: 이 판단이 확실한지 / 사람마다 갈리는지 표시
+
+순위 매기기는 내가 한다. 추천이나 권장 순서를 덧붙이지 마라.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">02 · 내 순서에 대한 반론 요청</span><button class="copy" type="button">복사</button></div>
+        <pre>내가 정한 학습 순서다:
+1. [항목] — 이유: [내 근거]
+2. [항목] — 이유: [내 근거]
+3. [항목] — 이유: [내 근거]
+
+동의하지 말고 반론만 하라.
+· 이 순서가 실패하는 구체적 시나리오 2개
+· 내가 뒤로 미룬 것 중 앞으로 와야 할 가능성이 있는 것 1개와 그 조건
+· 내 근거 중 사실 관계가 틀린 부분
+
+대안 순서를 제시하지는 마라. 내가 다시 정하겠다.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">03 · 버림 목록 검증 (제안이 아니라 검증)</span><button class="copy" type="button">복사</button></div>
+        <pre>이번 학습에서 다음 항목들을 배우지 않기로 했다:
+[버릴 항목 목록]
+
+각 항목에 대해 다음만 답하라.
+· 이걸 건너뛰었을 때 나중에 겪게 될 구체적 증상
+· 그 증상이 나타나는 시점 (즉시 / 몇 주 뒤 / 몇 년 뒤)
+· 나중에 배워도 늦지 않은가, 아니면 되돌리기 비싼가
+
+"그래도 배우는 게 좋습니다" 같은 결론은 쓰지 마라. 결정은 내가 한다.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">04 · 내 편향 찾기 (장부 10건 누적 후)</span><button class="copy" type="button">복사</button></div>
+        <pre>내 예측 장부 기록이다. 각 행은 [예측 / 실제 / 차이]다.
+"""
+[장부 붙여넣기]
+"""
+
+내 예측이 빗나가는 방향에 반복되는 패턴이 있는지만 찾아라.
+· 내가 체계적으로 과대평가하는 종류
+· 내가 체계적으로 과소평가하는 종류
+· 각각의 근거가 된 행 번호
+
+조언은 하지 말고 패턴만 지목하라.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 4-WEEK PLAN ══════════ -->
+<section id="plan">
+  <div class="wrap sec">
+    <div class="rail"><b>A6</b>실행<span class="tick">4주</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>4주 훈련 일정</h2>
+        <p class="lede">새 학습을 기다릴 필요 없다. <mark>1주차는 이미 끝난 학습으로 시작한다.</mark></p>
+      </div>
+
+      <div class="plan">
+        <div>
+          <div class="w">W1</div>
+          <div class="l">역사 복기</div>
+          <p>끝난 학습 3개를 다시 설계한다. 정답이 이미 있으므로 가장 값싼 훈련. 여기서 자기 편향의 초안이 나온다.</p>
+        </div>
+        <div>
+          <div class="w">W2</div>
+          <div class="l">탐침 + 장부 개시</div>
+          <p>새 주제 하나에 준비 없이 30분 부딪힌다. 착수 전 예측 3줄을 반드시 먼저 적는다.</p>
+        </div>
+        <div>
+          <div class="w">W3</div>
+          <div class="l">버림 훈련</div>
+          <p>후보의 70%를 자른다. 자른 목록은 지우지 말고 보관해서 나중에 버림 정확도를 잰다.</p>
+        </div>
+        <div>
+          <div class="w">W4</div>
+          <div class="l">3열 대조</div>
+          <p>같은 판단을 AI에게도 시키고 내 판단·AI 판단·실제를 나란히 놓는다. 위임 경계선이 여기서 개인화된다.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4>4주 뒤에 남는 것</h4>
+        <p class="small muted" style="margin:0">잘 정리된 커리큘럼이 아니라 <strong>내 판단의 편향에 대한 서너 문장</strong>이 남는다. "나는 화려한 항목을 병목으로 착각한다", "초반 마찰을 항상 과소평가한다", "AI는 내 대신 버려주지 않는다" 같은 문장들. 이 문장들이 다음 도메인에서도 그대로 작동하고, 그게 이 훈련의 전부다.</p>
+      </div>
+
+      <div class="caveat">
+        <strong>범위에 대해.</strong> 여기 실린 훈련법들은 예측-피드백 기반 판단 학습, 메타인지 보정, 사전 시험 효과 같은 확립된 원리에서 도출한 것이지만, 이 4주 프로그램 자체가 실험으로 검증된 것은 아니다. AI 위임에 대한 판단도 마찬가지로 확정된 연구 결과가 아니라 — 도구 접근이 수행은 올리되 미지원 상태의 수행은 떨어뜨릴 수 있다는 관찰과, 위 세 축의 추론에 근거한 <strong>설계상의 권고</strong>다. 자기 장부의 데이터가 쌓이면 그쪽을 우선한다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3 style="max-width:26ch">방위 하나로는 방향밖에 나오지 않는다.</h3>
+        <p class="small muted" style="max-width:56ch;margin-top:10px">AI는 지형을 안다. 내 위치는 나만 안다. 두 관측점 사이의 거리를 재는 일 — 그것이 훈련의 이름이다.</p>
+      </div>
+      <div class="sig">삼각측량 · 부록 A<br>Prioritization &amp; Delegation<br>Rev. 2026.08</div>
+    </div>
+    <div class="site-foot">© 2026 Leeo · 개발자리 · <a href="../index.html">리이오의 연습장</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var targets = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    targets.forEach(function(el){ io.observe(el); });
+  }
+
+  // ── copy buttons ──
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var text = btn.closest(".prompt").querySelector("pre").textContent;
+      var done = function(){
+        var prev = btn.textContent;
+        btn.textContent = "복사됨";
+        setTimeout(function(){ btn.textContent = prev; }, 1400);
+      };
+      function fallback(){
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "복사 실패"; }
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    });
+  });
+
+  // ── scorecard ──
+  var WEIGHTS = [3, 3, 2, 2, 1];
+  var SEED = [
+    { name: "데이터 모델 설계", s: [3, 3, 3, 2, 1] },
+    { name: "화면 애니메이션",   s: [0, 1, 1, 1, 3] },
+    { name: "빌드·배포 설정",   s: [2, 2, 1, 3, 2] }
+  ];
+  var rows = SEED.map(function(r){ return { name: r.name, s: r.s.slice() }; });
+  var body = document.getElementById("scBody");
+
+  function total(r){
+    return r.s.reduce(function(sum, v, i){ return sum + v * WEIGHTS[i]; }, 0);
+  }
+
+  function render(){
+    body.innerHTML = "";
+    var sorted = rows.slice().sort(function(a, b){ return total(b) - total(a); });
+    rows.forEach(function(r, idx){
+      var tr = document.createElement("tr");
+
+      var tdName = document.createElement("td");
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.value = r.name;
+      inp.placeholder = "후보 항목 이름";
+      inp.setAttribute("aria-label", "후보 항목 이름");
+      inp.addEventListener("input", function(){ r.name = inp.value; });
+      tdName.appendChild(inp);
+      tr.appendChild(tdName);
+
+      r.s.forEach(function(v, i){
+        var td = document.createElement("td");
+        var sel = document.createElement("select");
+        sel.setAttribute("aria-label", "기준 " + (i + 1) + " 점수");
+        [0, 1, 2, 3].forEach(function(n){
+          var o = document.createElement("option");
+          o.value = String(n); o.textContent = String(n);
+          if (n === v) o.selected = true;
+          sel.appendChild(o);
+        });
+        sel.addEventListener("change", function(){
+          r.s[i] = parseInt(sel.value, 10);
+          update();
+        });
+        td.appendChild(sel);
+        tr.appendChild(td);
+      });
+
+      var tdTot = document.createElement("td");
+      tdTot.className = "totcell";
+      var rank = sorted.indexOf(r) + 1;
+      tdTot.innerHTML = '<span class="tot">' + total(r) + '</span><br><span class="rank">' + rank + '순위</span>';
+      tr.appendChild(tdTot);
+
+      var tdDel = document.createElement("td");
+      var del = document.createElement("button");
+      del.className = "del"; del.type = "button"; del.textContent = "×";
+      del.setAttribute("aria-label", "행 삭제");
+      del.addEventListener("click", function(){
+        rows.splice(idx, 1);
+        if (!rows.length) rows.push({ name: "", s: [0,0,0,0,0] });
+        render();
+      });
+      tdDel.appendChild(del);
+      tr.appendChild(tdDel);
+
+      body.appendChild(tr);
+    });
+  }
+
+  function update(){
+    var sorted = rows.slice().sort(function(a, b){ return total(b) - total(a); });
+    var cells = body.querySelectorAll(".totcell");
+    rows.forEach(function(r, i){
+      if (!cells[i]) return;
+      cells[i].innerHTML = '<span class="tot">' + total(r) + '</span><br><span class="rank">' + (sorted.indexOf(r) + 1) + '순위</span>';
+    });
+  }
+
+  document.getElementById("scAdd").addEventListener("click", function(){
+    rows.push({ name: "", s: [0, 0, 0, 0, 0] });
+    render();
+    var inputs = body.querySelectorAll('input[type=text]');
+    if (inputs.length) inputs[inputs.length - 1].focus();
+  });
+
+  document.getElementById("scSort").addEventListener("click", function(){
+    rows.sort(function(a, b){ return total(b) - total(a); });
+    render();
+  });
+
+  document.getElementById("scReset").addEventListener("click", function(){
+    rows = SEED.map(function(r){ return { name: r.name, s: r.s.slice() }; });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

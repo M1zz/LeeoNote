@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지형 · 경로 · 장비 — 스스로 설계하는 학습</title>
+<meta name="description" content="지형 · 경로 · 장비 — 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
+<meta property="og:title" content="지형 · 경로 · 장비 — 스스로 설계하는 학습">
+<meta property="og:description" content="지형 · 경로 · 장비 — 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   TOKENS — riso survey / field-manual palette
+   ───────────────────────────────────────────── */
+:root{
+  --paper:#FFFFFF;
+  --card:#F6F6F6;
+  --ink:#0A0A0A;
+  --ink-60:#6E6E6E;
+  --ink-40:#9A9A9A;
+  --teal:#6E6E6E;
+  --fluoro:#0A0A0A;
+  --blue:#0A0A0A;
+  --rule:#EAEAEA;
+  --rule-strong:#E4E4E4;
+
+  --display:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --body:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+
+  --max:1120px;
+  --rail:132px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16.5px;
+  line-height:1.75;
+  letter-spacing:-.01em;
+  word-break:keep-all;
+}
+
+/* paper grain: faint survey grid */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to right,rgba(0,0,0,0) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(0,0,0,0) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
+/* ─────────────────────────────────────────────
+   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   ───────────────────────────────────────────── */
+.sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
+  background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px)}
+.sitebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.sitebar-brand{font-family:var(--display);font-size:1.05rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--ink);text-decoration:none;display:inline-flex;align-items:baseline;gap:.55rem}
+.sitebar-brand span{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--ink-40);font-weight:400}
+.sitenav{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center}
+.sitenav a{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-60);text-decoration:none;padding-bottom:2px;transition:color .18s}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a.active{color:var(--ink);border-bottom:2px solid var(--ink)}
+
+.docbar{background:var(--card);border-bottom:1px solid var(--rule)}
+.docbar .wrap{display:flex;gap:18px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.docbar a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-40);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;
+  transition:color .16s,border-color .16s;white-space:nowrap}
+.docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
+
+.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
+.site-foot a{color:var(--ink-40)}
+.site-foot a:hover{color:var(--ink)}
+
+@media(max-width:600px){
+  .sitebar .wrap{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .sitenav{gap:1rem}
+  .sitenav a{font-size:.66rem}
+  .docbar .wrap{gap:12px}
+  .docbar a{font-size:10px;letter-spacing:.06em}
+}
+@media print{.sitebar,.docbar{display:none}}
+
+/* 리소 오버프린트(색 어긋남) 효과 해제 — 모노크롬에서는 번짐으로 보임 */
+.op::before,.op::after{content:none!important}
+/* 형광 마커 → 연습장 반전 마커 */
+mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+
+/* ─────────────────────────────────────────────
+   SIGNATURE — misregistration overprint
+   ───────────────────────────────────────────── */
+.op{position:relative;display:inline-block;z-index:0}
+.op::before,.op::after{
+  content:attr(data-t);position:absolute;left:0;top:0;z-index:-1;
+  pointer-events:none;user-select:none;
+}
+.op::before{color:var(--fluoro);transform:translate(-5px,4px)}
+.op::after{color:var(--blue);transform:translate(4px,-3px);opacity:.55}
+
+/* ─────────────────────────────────────────────
+   TYPE
+   ───────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
+}
+h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(46px,9.2vw,104px);line-height:.92;
+  letter-spacing:-.045em;margin:.18em 0 .1em;
+}
+h2{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(27px,4.4vw,44px);line-height:1.12;
+  letter-spacing:-.035em;margin:0 0 .35em;
+}
+h3{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(19px,2.4vw,23px);line-height:1.3;
+  letter-spacing:-.025em;margin:0 0 .4em;
+}
+h4{
+  font-family:var(--body);font-weight:600;font-size:16px;
+  margin:0 0 .3em;letter-spacing:-.015em;
+}
+p{margin:0 0 1.05em}
+.lede{font-size:clamp(17px,2.1vw,20px);line-height:1.72;color:var(--ink);max-width:62ch}
+.muted{color:var(--ink-60)}
+.small{font-size:14.5px;line-height:1.65}
+strong{font-weight:600}
+mark{background:linear-gradient(transparent 58%,transparent 58%);color:inherit;padding:0 .1em}
+a{color:var(--blue);text-underline-offset:3px}
+
+/* ─────────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────────── */
+.hero{padding:44px 0 8px;position:relative;overflow:hidden}
+.hero-top{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--rule-strong);padding-bottom:12px}
+.hero h1{margin-top:26px}
+.hero-sub{display:grid;grid-template-columns:1fr;gap:20px;margin:26px 0 34px}
+@media(min-width:820px){.hero-sub{grid-template-columns:1.15fr .85fr;gap:44px}}
+.hero-meta{border-left:2px solid var(--fluoro);padding-left:16px}
+.hero-meta dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.hero-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);padding-top:4px}
+.hero-meta dd{margin:0;color:var(--ink-60)}
+
+.map-frame{
+  position:relative;border:1px solid var(--rule-strong);background:var(--card);
+  padding:0;margin:0 0 8px;overflow:hidden;
+}
+.map-frame svg{display:block;width:100%;height:auto}
+.map-legend{
+  display:flex;flex-wrap:wrap;gap:6px 20px;padding:11px 15px;
+  border-top:1px solid var(--rule);font-family:var(--mono);
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-60);
+}
+.map-legend span{display:inline-flex;align-items:center;gap:7px}
+.swatch{width:11px;height:11px;display:inline-block;border:1px solid var(--ink)}
+
+/* station cards under the map */
+.stations{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--rule-strong);border-top:0;background:var(--card)}
+@media(min-width:760px){.stations{grid-template-columns:repeat(3,1fr)}}
+.station-card{padding:18px 17px;border-top:1px solid var(--rule)}
+@media(min-width:760px){
+  .station-card{border-top:0;border-left:1px solid var(--rule)}
+  .station-card:first-child{border-left:0}
+}
+.station-card .num{
+  font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.16em;
+  color:var(--fluoro);display:block;margin-bottom:7px;
+}
+.station-card h3{margin-bottom:.25em}
+.station-card p{margin:0;font-size:14.5px;line-height:1.62;color:var(--ink-60)}
+
+/* ─────────────────────────────────────────────
+   SECTION SHELL — field-book margin rail
+   ───────────────────────────────────────────── */
+section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44px}
+section:first-of-type{border-top:0}
+.sec{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:900px){
+  .sec{grid-template-columns:var(--rail) 1fr;gap:0 40px}
+}
+.rail{
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-40);line-height:1.7;
+}
+.rail b{display:block;color:var(--fluoro);font-weight:600}
+.rail .tick{display:block;margin-top:10px;color:var(--ink-40)}
+.body-col{min-width:0}
+.sec-head{margin-bottom:26px}
+
+/* ─────────────────────────────────────────────
+   COMPONENTS
+   ───────────────────────────────────────────── */
+.card{background:var(--card);border:1px solid var(--rule-strong);padding:20px 19px}
+.card + .card{margin-top:-1px}
+
+.steps{list-style:none;margin:26px 0 0;padding:0;counter-reset:step}
+.steps > li{
+  counter-increment:step;position:relative;
+  padding:19px 0 19px 58px;border-top:1px solid var(--rule);
+}
+.steps > li:last-child{border-bottom:1px solid var(--rule)}
+.steps > li::before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:0;top:19px;
+  font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.06em;
+  color:var(--ink);border:1px solid var(--ink);padding:3px 6px;line-height:1;
+}
+.steps h4{font-size:17px}
+.steps p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-60)}
+.steps .ex{
+  margin-top:9px;font-family:var(--mono);font-size:12.5px;line-height:1.6;
+  color:var(--teal);border-left:2px solid var(--fluoro);padding-left:11px;
+}
+
+.quad{display:grid;grid-template-columns:1fr;border:1px solid var(--ink);margin:26px 0 0}
+@media(min-width:640px){.quad{grid-template-columns:1fr 1fr}}
+.quad > div{padding:17px 16px;border-top:1px solid var(--rule-strong);background:var(--card)}
+@media(min-width:640px){
+  .quad > div:nth-child(-n+2){border-top:0}
+  .quad > div:nth-child(even){border-left:1px solid var(--rule-strong)}
+}
+.quad .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:6px}
+.quad h4{font-size:15.5px}
+.quad p{margin:0;font-size:14px;line-height:1.6;color:var(--ink-60)}
+.quad .act{margin-top:9px;font-size:13px;font-weight:600;color:var(--teal)}
+.quad .danger{background:rgba(0,0,0,.06)}
+
+.split{display:grid;grid-template-columns:1fr;gap:0;margin:26px 0 0;border:1px solid var(--ink)}
+@media(min-width:760px){.split{grid-template-columns:1fr 1fr}}
+.split > div{padding:20px 18px;background:var(--card)}
+.split > div + div{border-top:1px solid var(--ink)}
+@media(min-width:760px){.split > div + div{border-top:0;border-left:1px solid var(--ink)}}
+.split .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:block}
+.split ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.split li{margin-bottom:5px}
+.split .ratio{font-family:var(--display);font-weight:900;font-size:40px;letter-spacing:-.04em;line-height:1;margin-top:14px}
+
+.diagram{border:1px solid var(--rule-strong);background:var(--card);margin:28px 0 0}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption{
+  border-top:1px solid var(--rule);padding:11px 15px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-60);
+}
+
+.timeline{margin:26px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(2,1fr)}
+@media(min-width:700px){.timeline{grid-template-columns:repeat(4,1fr)}}
+.timeline > div{padding:15px 13px;border-left:1px solid var(--rule)}
+.timeline > div:first-child{border-left:0}
+@media(max-width:699px){.timeline > div:nth-child(3){border-left:0;border-top:1px solid var(--rule)}
+  .timeline > div:nth-child(4){border-top:1px solid var(--rule)}}
+.timeline .d{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.04em;color:var(--fluoro);line-height:1}
+.timeline .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);margin:7px 0 5px}
+.timeline p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-60)}
+
+/* AI roles */
+.roles{margin:28px 0 0;border:1px solid var(--ink)}
+.role{display:grid;grid-template-columns:1fr;gap:2px 20px;padding:17px 17px;border-top:1px solid var(--rule);background:var(--card)}
+.role:first-child{border-top:0}
+@media(min-width:780px){.role{grid-template-columns:190px 1fr}}
+.role .who{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em}
+.role .when{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-top:3px}
+.role p{margin:0;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+
+.forbid{margin:26px 0 0;background:var(--card);border:1px solid var(--rule-strong);border-left:3px solid var(--ink);border-radius:0 6px 6px 0;padding:20px 18px}
+.forbid h4{color:var(--fluoro);font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.forbid ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.7}
+.forbid li{margin-bottom:6px}
+
+.gate{
+  margin:26px 0 0;border:2px solid var(--ink);padding:22px 20px;background:var(--card);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;
+}
+.gate .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40)}
+.gate .rule-text{font-family:var(--display);font-weight:900;font-size:clamp(21px,3.6vw,32px);letter-spacing:-.035em;line-height:1.15}
+
+/* prompts */
+.prompt{margin:22px 0 0;border:1px solid var(--rule-strong);background:var(--card)}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--rule)}
+.prompt-head .t{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.copy{
+  font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--ink);color:var(--ink);
+  padding:5px 9px;cursor:pointer;line-height:1;transition:background .15s,color .15s;
+}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.copy:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+.prompt pre{
+  margin:0;padding:15px 14px;font-family:var(--mono);font-size:12.8px;line-height:1.72;
+  white-space:pre-wrap;color:var(--ink);overflow-wrap:anywhere;
+}
+
+/* evidence rows */
+.ev{margin:28px 0 0;border-top:1px solid var(--ink)}
+.ev-row{display:grid;grid-template-columns:1fr;gap:6px 26px;padding:17px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:860px){.ev-row{grid-template-columns:1fr 1.35fr .7fr;align-items:start}}
+.ev-row .what{font-weight:600;font-size:15.5px;letter-spacing:-.015em}
+.ev-row .why{font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.ev-row .src{font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--teal)}
+
+.caveat{margin:24px 0 0;border-left:3px solid var(--blue);padding:4px 0 4px 16px;font-size:14.5px;line-height:1.7;color:var(--ink-60)}
+
+/* fit / misfit */
+.fit{display:grid;grid-template-columns:1fr;gap:0;margin:26px 0 0;border:1px solid var(--ink)}
+@media(min-width:760px){.fit{grid-template-columns:1fr 1fr}}
+.fit > div{padding:20px 18px;background:var(--card)}
+.fit > div + div{border-top:1px solid var(--ink)}
+@media(min-width:760px){.fit > div + div{border-top:0;border-left:1px solid var(--ink)}}
+.fit ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.fit li{margin-bottom:6px}
+
+table.fail{width:100%;border-collapse:collapse;margin:26px 0 0;font-size:14.5px}
+table.fail th,table.fail td{text-align:left;padding:13px 12px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.6}
+table.fail th{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40);border-bottom:1px solid var(--ink);font-weight:600}
+table.fail td:first-child{font-weight:600;padding-right:20px;width:36%}
+table.fail td:last-child{color:var(--ink-60)}
+@media(max-width:640px){
+  table.fail thead{display:none}
+  table.fail tr{display:block;border-bottom:1px solid var(--ink);padding:12px 0}
+  table.fail td{display:block;border:0;padding:2px 0;width:auto!important}
+  table.fail td:first-child{width:auto;padding-right:0}
+}
+
+/* worksheet */
+.sheet{border:2px solid var(--ink);background:var(--card);margin:28px 0 0}
+.sheet-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:15px 18px;border-bottom:2px solid var(--ink)}
+.sheet-head .t{font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.03em}
+.sheet-head .c{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+.field{padding:15px 18px;border-bottom:1px solid var(--rule)}
+.field:last-child{border-bottom:0}
+.field .q{font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:8px}
+.field .hint{font-size:13px;color:var(--ink-40);margin-top:7px;line-height:1.55}
+.blank{
+  display:block;min-height:44px;border:1px dashed var(--rule-strong);background:#FFFFFF;
+  padding:9px 11px;font-family:var(--body);font-size:14.5px;line-height:1.6;color:var(--ink);
+}
+.blank:focus{outline:2px solid var(--fluoro);outline-offset:1px;background:#fff}
+.blank:empty::before{content:attr(data-ph);color:var(--ink-40)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.btn{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:10px 15px;cursor:pointer;line-height:1;transition:opacity .15s;
+}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{opacity:.82}
+.btn:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+
+footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
+footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  #route{stroke-dasharray:none!important;stroke-dashoffset:0!important;animation:none!important}
+}
+
+@media print{
+  body::before{display:none}
+  body{background:#fff;font-size:11pt}
+  .copy,.tools{display:none}
+  section{page-break-inside:avoid;border-top:1px solid #999}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="sitebar">
+  <div class="wrap">
+    <a class="sitebar-brand" href="../index.html">리이오의 연습장 <span>리이오가 배우고 기록하는 곳</span></a>
+    <nav class="sitenav">
+      <a href="../framework.html">프레임워크</a>
+      <a href="../ai-learning.html" class="active">AI학습</a>
+      <a href="../solo-learning.html">학습설계</a>
+      <a href="../library.html">서재</a>
+      <a href="../thoughts.html">생각</a>
+      <a href="../academy.html">아카데미</a>
+      <a href="../tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="docbar">
+  <div class="wrap">
+      <a href="../ai-learning.html">소개</a>
+      <a href="index.html" class="is-current">본편 · 지형·경로·장비</a>
+      <a href="triangulation.html">부록 A · 삼각측량</a>
+      <a href="yajang.html">부록 B · 야장</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">Self-Directed Learning Design · Field Manual</span>
+      <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
+    </div>
+
+    <h1><span class="op" data-t="지형">지형</span>·<span class="op" data-t="경로">경로</span>·<span class="op" data-t="장비">장비</span></h1>
+
+    <div class="hero-sub">
+      <div>
+        <p class="lede">배워야 한다는 건 확실한데 <strong>무엇을</strong> 배워야 할지 모르는 상태에서 출발해, <strong>어떻게</strong> 배울지를 정하고, 마지막에 <strong>AI를 어디에 놓을지</strong>를 결정한다. 이 순서를 뒤집으면 AI가 학습을 대신해 버리고, 배운 것은 남지 않는다.</p>
+        <p class="small muted">이 문서는 세 단계의 절차, 각 단계의 산출물, 그 설계가 왜 유효한지에 대한 연구 근거, 그리고 60분 안에 끝내는 워크시트로 이루어져 있다.</p>
+      </div>
+      <div class="hero-meta">
+        <dl>
+          <dt>대상</dt><dd>정해진 커리큘럼이 없는 주제를 혼자 파고들어야 하는 사람</dd>
+          <dt>소요</dt><dd>설계 60분 · 루프당 기록 5분</dd>
+          <dt>산출물</dt><dd>학습 지도 · 관문 질문 세트 · AI 배치도</dd>
+          <dt>핵심 규칙</dt><dd>내 답을 쓰기 전에는 AI에게 묻지 않는다</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- ── survey map: the thesis ── -->
+    <figure class="map-frame reveal" style="margin:0">
+      <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="세 개의 관측 지점을 잇는 경로가 그려진 등고선 지도. 지점 1은 지형 파악, 지점 2는 경로 설계, 지점 3은 장비 배치.">
+        <defs>
+          <clipPath id="mapclip"><rect x="0" y="0" width="1000" height="380"/></clipPath>
+          <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="2.2" opacity=".22"/>
+          </pattern>
+        </defs>
+
+        <g clip-path="url(#mapclip)">
+          <!-- unknown territory wash (left = fog) -->
+          <rect x="0" y="0" width="330" height="380" fill="url(#hatch)"/>
+
+          <!-- contour lines -->
+          <g fill="none" stroke="#9A9A9A" stroke-width="1.1" opacity=".38">
+            <path d="M-40 300 C 120 250, 180 330, 300 296 S 520 200, 640 246 S 860 300, 1040 236"/>
+            <path d="M-40 262 C 110 214, 190 292, 306 258 S 520 166, 646 210 S 862 264, 1040 198"/>
+            <path d="M-40 224 C 104 178, 198 254, 312 220 S 520 132, 652 174 S 864 228, 1040 160"/>
+            <path d="M-40 186 C 98 142, 206 216, 318 182 S 522 98, 658 138 S 866 192, 1040 122"/>
+            <path d="M-40 148 C 92 106, 214 178, 324 144 S 524 64, 664 102 S 868 156, 1040 84"/>
+            <path d="M-40 110 C 86 70, 222 140, 330 106 S 526 30, 670 66 S 870 120, 1040 46"/>
+            <path d="M-40 338 C 126 286, 172 368, 294 334 S 518 234, 634 282 S 858 336, 1040 274"/>
+          </g>
+
+          <!-- closed ridge near station 3 -->
+          <g fill="none" stroke="#9A9A9A" stroke-width="1.1" opacity=".5">
+            <path d="M772 176 C 826 150, 892 168, 900 208 C 908 250, 848 274, 800 262 C 754 250, 730 200, 772 176 Z"/>
+            <path d="M792 194 C 828 178, 872 190, 876 214 C 880 240, 844 254, 814 246 C 786 238, 768 210, 792 194 Z"/>
+          </g>
+
+          <!-- margin ticks -->
+          <g stroke="#0A0A0A" stroke-width="1" opacity=".45">
+            <line x1="0" y1="14" x2="1000" y2="14"/>
+            <line x1="0" y1="366" x2="1000" y2="366"/>
+            <g>
+              <line x1="120" y1="14" x2="120" y2="24"/><line x1="240" y1="14" x2="240" y2="24"/>
+              <line x1="360" y1="14" x2="360" y2="24"/><line x1="480" y1="14" x2="480" y2="24"/>
+              <line x1="600" y1="14" x2="600" y2="24"/><line x1="720" y1="14" x2="720" y2="24"/>
+              <line x1="840" y1="14" x2="840" y2="24"/><line x1="960" y1="14" x2="960" y2="24"/>
+              <line x1="120" y1="356" x2="120" y2="366"/><line x1="240" y1="356" x2="240" y2="366"/>
+              <line x1="360" y1="356" x2="360" y2="366"/><line x1="480" y1="356" x2="480" y2="366"/>
+              <line x1="600" y1="356" x2="600" y2="366"/><line x1="720" y1="356" x2="720" y2="366"/>
+              <line x1="840" y1="356" x2="840" y2="366"/><line x1="960" y1="356" x2="960" y2="366"/>
+            </g>
+          </g>
+
+          <!-- route -->
+          <path id="route" d="M150 300 C 240 258, 268 190, 380 176 C 486 162, 540 236, 636 216 C 726 198, 748 154, 830 152"
+                fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="14 10"/>
+
+          <!-- stations -->
+          <g>
+            <circle cx="150" cy="300" r="19" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.6"/>
+            <text x="150" y="307" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="17" font-weight="600" fill="#0A0A0A">1</text>
+
+            <circle cx="490" cy="196" r="19" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.6"/>
+            <text x="490" y="203" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="17" font-weight="600" fill="#0A0A0A">2</text>
+
+            <circle cx="830" cy="152" r="19" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.6"/>
+            <text x="830" y="159" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="17" font-weight="600" fill="#0A0A0A">3</text>
+          </g>
+
+          <!-- summit flag = terminal artifact -->
+          <g>
+            <line x1="866" y1="212" x2="866" y2="164" stroke="#6E6E6E" stroke-width="2.4"/>
+            <path d="M866 166 L 906 176 L 866 188 Z" fill="#6E6E6E"/>
+            <text x="866" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="1.6" fill="#6E6E6E">종착 산출물</text>
+          </g>
+
+          <text x="24" y="52" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2" fill="#0A0A0A">모르는 것을 모르는 구역</text>
+          <text x="24" y="72" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.4" fill="rgba(10,10,10,.55)">UNKNOWN UNKNOWNS</text>
+        </g>
+      </svg>
+      <div class="map-legend">
+        <span><i class="swatch" style="background:repeating-linear-gradient(45deg,rgba(10,10,10,.55) 0 2px,transparent 2px 5px)"></i> 미측량 구역</span>
+        <span><i class="swatch" style="background:#0A0A0A;border-color:#0A0A0A"></i> 학습 경로</span>
+        <span><i class="swatch" style="background:#FFFFFF"></i> 관측 지점</span>
+        <span><i class="swatch" style="background:#6E6E6E;border-color:#6E6E6E"></i> 종착 산출물</span>
+      </div>
+    </figure>
+
+    <div class="stations reveal">
+      <div class="station-card">
+        <span class="num">STATION 01 / WHAT</span>
+        <h3>지형 파악</h3>
+        <p>무엇을 배워야 하는지조차 모르는 상태를, 검증 가능한 <strong>질문 목록</strong>으로 바꾼다.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">STATION 02 / HOW</span>
+        <h3>경로 설계</h3>
+        <p>지식형과 판단형을 갈라 각각 다른 연습으로 배분하고, 반복 가능한 <strong>루프</strong>를 만든다.</p>
+      </div>
+      <div class="station-card">
+        <span class="num">STATION 03 / WITH</span>
+        <h3>장비 배치</h3>
+        <p>AI를 루프의 <strong>특정 지점에만</strong> 배치한다. 기본 상태는 꺼짐.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ PREMISE ══════════ -->
+<section id="premise">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>00</b>
+      전제
+      <span class="tick">왜 이 순서인가</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>순서가 뒤집히면<br>학습이 아니라 소비가 된다</h2>
+        <p class="lede">혼자 하는 학습이 실패하는 지점은 대개 노력의 양이 아니라 <mark>결정의 순서</mark>다.</p>
+      </div>
+
+      <p>흔한 실패 경로는 이렇다. 무엇을 배울지 정하지 않은 채 강의를 고르고, 어떤 방식으로 익힐지 정하지 않은 채 AI를 켠다. 그러면 AI는 가장 잘하는 일을 한다. <strong>내가 아직 만들어보지 않은 답을 먼저 만들어 주는 것.</strong> 결과는 매끄럽고, 진도는 빠르고, 남는 것은 없다.</p>
+
+      <p>세 단계는 각각 다음 단계의 <em>판단 기준</em>을 만들어 준다. 단계 1이 만든 관문 질문이 없으면 단계 2에서 무엇을 연습할지 고를 수 없고, 단계 2가 만든 루프가 없으면 단계 3에서 AI를 어디에 끼워 넣을지 정할 수 없다. 그래서 이 순서는 취향이 아니라 의존 관계다.</p>
+
+      <div class="split">
+        <div>
+          <span class="k" style="color:var(--fluoro)">뒤집힌 순서</span>
+          <h3>도구 → 방법 → 목표</h3>
+          <ul>
+            <li>AI에게 "무엇부터 배워야 해?"로 시작</li>
+            <li>받은 커리큘럼을 읽어 내려감</li>
+            <li>막히면 다시 물어보고 답을 받음</li>
+            <li>다 읽었지만 스스로 만들지는 못함</li>
+          </ul>
+        </div>
+        <div>
+          <span class="k" style="color:var(--teal)">설계된 순서</span>
+          <h3>목표 → 방법 → 도구</h3>
+          <ul>
+            <li>끝에 존재할 산출물을 먼저 선언</li>
+            <li>그 산출물을 막는 질문 목록을 만듦</li>
+            <li>질문마다 예측을 먼저 쓰고 검증</li>
+            <li>AI는 채점·반례·연결에만 투입</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATION 01 ══════════ -->
+<section id="station-1">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>01</b>
+      지형 파악
+      <span class="tick">WHAT · 60분</span>
+      <span class="tick">산출물: 관문 질문</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>무엇을 배워야 할지<br>모를 때 하는 일</h2>
+        <p class="lede">이 단계의 목표는 커리큘럼을 완성하는 것이 아니다. <mark>검색할 수 있는 상태</mark>가 되는 것이다.</p>
+      </div>
+
+      <p>모르는 것을 모르는 상태의 본질적인 문제는 <strong>검색이 이름을 요구한다</strong>는 데 있다. 개념의 이름을 모르면 질문을 만들 수 없고, 질문이 없으면 답을 평가할 수도 없다. 그래서 첫 단계에서 해야 할 일은 지식을 얻는 것이 아니라 <strong>모르는 것들에 이름을 붙여 목록으로 만드는 것</strong>이다.</p>
+
+      <ol class="steps">
+        <li>
+          <h4>종착 산출물을 선언한다</h4>
+          <p>"OO를 이해한다"는 목표는 도달 여부를 판정할 수 없어서 목표가 아니다. 학습이 끝났을 때 <strong>세상에 존재하게 될 물건이나 행동</strong>으로 바꾼다. 만들어서 배포한 것, 남에게 설명해서 통과한 것, 혼자서 내린 판단.</p>
+          <div class="ex">✗ SwiftData를 이해한다<br>✓ 오프라인 우선 동기화가 되는 앱을 App Store에 올린다</div>
+        </li>
+        <li>
+          <h4>산출물에서 거꾸로 결정 지점을 뽑는다</h4>
+          <p>그 산출물을 만드는 도중 <strong>반드시 마주치게 될 갈림길</strong>을 나열한다. "여기서 무언가를 선택해야 하는데 무엇을 기준으로 골라야 할지 모르겠다"는 지점이 곧 학습 항목이다. 목차가 아니라 막힘에서 출발한다.</p>
+        </li>
+        <li>
+          <h4>서로 다른 출처 3개의 목차를 겹쳐 본다</h4>
+          <p>공식 문서의 목차, 정평 있는 책의 목차, 실무자가 쓴 로드맵. 이 셋의 <strong>교집합은 핵심</strong>이고, 하나에만 있는 항목은 선택 사항이거나 특정 관점의 편향이다. 내용을 읽지 말고 목차만 본다. 20분이면 끝난다.</p>
+        </li>
+        <li>
+          <h4>무지를 네 칸으로 분류한다</h4>
+          <p>모른다는 상태는 균질하지 않다. 종류마다 처방이 다르므로 반드시 나눈다. 특히 마지막 칸이 가장 위험하다.</p>
+        </li>
+        <li>
+          <h4>항목마다 관문 질문을 하나씩 쓴다</h4>
+          <p>"이걸 알게 되면 답할 수 있게 되는 질문"을 한 문장으로 적는다. 이 목록이 <strong>학습 계획이자 동시에 시험지</strong>가 된다. 나중에 진도를 재는 유일한 기준도 이것이다. 15~30개면 충분하다.</p>
+          <div class="ex">"동기화 충돌이 났을 때 어떤 기준으로 승자를 정하고, 그 선택이 틀렸을 때 무슨 증상으로 드러나는가?"</div>
+        </li>
+      </ol>
+
+      <h3 style="margin-top:38px">무지의 네 칸</h3>
+      <div class="quad">
+        <div>
+          <span class="tag">TYPE A</span>
+          <h4>이름은 알고, 쓸 줄은 모름</h4>
+          <p>용어는 들어봤고 대략 무슨 뜻인지도 아는데 직접 해본 적은 없다.</p>
+          <div class="act">→ 곧바로 루프 대상. 가장 진도가 잘 나간다.</div>
+        </div>
+        <div>
+          <span class="tag">TYPE B</span>
+          <h4>이름조차 모름</h4>
+          <p>존재 자체를 몰라서 질문을 만들 수 없다. 검색이 원천적으로 불가능한 영역.</p>
+          <div class="act">→ 목차 겹쳐보기와 AI 지도 제작으로만 노출된다.</div>
+        </div>
+        <div>
+          <span class="tag">TYPE C</span>
+          <h4>알 필요가 없음</h4>
+          <p>영역에는 존재하지만 내 종착 산출물과 무관하다. 지금은 버린다.</p>
+          <div class="act">→ 버렸다는 사실을 기록한다. 나중에 다시 안 뒤진다.</div>
+        </div>
+        <div class="danger">
+          <span class="tag" style="color:var(--fluoro)">TYPE D · 위험</span>
+          <h4>안다고 착각함</h4>
+          <p>설명을 읽고 이해했다고 느꼈지만 인출해 본 적이 없다. 실패는 실전에서만 드러난다.</p>
+          <div class="act" style="color:var(--fluoro)">→ 자료를 덮고 백지에 써보는 것으로만 검출된다.</div>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:14px">D는 스스로 발견되지 않는다. 그래서 이 단계의 마지막 동작은 항상 "자료를 덮고 지금 아는 것을 다 써보기"여야 한다. 여기서 안 써지는 것이 실제 출발선이다.</p>
+
+      <div class="card" style="margin-top:28px">
+        <h4>출구 조건</h4>
+        <p class="small muted" style="margin:0">관문 질문 15~30개가 존재하고, 각각 <strong>지금 / 나중 / 버림</strong> 중 하나로 표시되어 있다. 완벽한 지도를 만들려다 출발을 못 하는 것이 이 단계의 유일한 실패 방식이므로, <strong>60분 타임박스</strong>를 걸고 시간이 되면 미완성인 채로 다음 단계로 넘어간다. 지도는 걸으면서 고친다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATION 02 ══════════ -->
+<section id="station-2">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>02</b>
+      경로 설계
+      <span class="tick">HOW · 반복 단위</span>
+      <span class="tick">산출물: 학습 루프</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>배우는 방식은<br>대상에 따라 갈라진다</h2>
+        <p class="lede">모든 항목을 같은 방식으로 공부하는 것이 두 번째 단계의 대표적 실패다. <mark>지식과 판단은 다른 근육</mark>이다.</p>
+      </div>
+
+      <p>관문 질문 목록을 손에 들었다면, 각 질문에 하나씩 표시를 붙인다. 이 질문의 답은 <strong>고정되어 있는가</strong>, 아니면 <strong>상황에 따라 달라지는가</strong>. 이 한 번의 분류가 이후 시간 배분 전체를 결정한다.</p>
+
+      <div class="split">
+        <div>
+          <span class="k" style="color:var(--blue)">KNOWLEDGE</span>
+          <h3>지식형</h3>
+          <p class="small muted" style="margin:0">답이 하나로 고정되고 검색으로 확인된다. API 이름, 문법, 옵션, 절차, 용어 정의.</p>
+          <ul>
+            <li>연습 방법: 무자료 인출 + 간격 반복</li>
+            <li>도구 대체 가능성: 높음 — 참조하면 된다</li>
+            <li>암기 기준: <strong>"막혔을 때 검색어를 떠올릴 수 있을 만큼"</strong>만</li>
+          </ul>
+          <div class="ratio" style="color:var(--blue)">20%</div>
+          <p class="small muted" style="margin:4px 0 0">전체 학습 시간 중 배분</p>
+        </div>
+        <div>
+          <span class="k" style="color:var(--fluoro)">JUDGMENT</span>
+          <h3>판단형</h3>
+          <p class="small muted" style="margin:0">상황에 따라 정답이 바뀐다. 언제 이 구조를 쓰는가, 어디까지 추상화하는가, 무엇을 포기하는가.</p>
+          <ul>
+            <li>연습 방법: 사례 대조 + 조건을 바꾼 변이 연습</li>
+            <li>도구 대체 가능성: 낮음 — 맥락이 내 쪽에 있다</li>
+            <li>숙달 기준: <strong>"왜 다른 선택지를 버렸는지"</strong> 말할 수 있을 때</li>
+          </ul>
+          <div class="ratio" style="color:var(--fluoro)">80%</div>
+          <p class="small muted" style="margin:4px 0 0">전체 학습 시간 중 배분</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:40px">반복 단위: 네 박자 루프</h3>
+      <p>학습을 시간이 아니라 <strong>루프 횟수</strong>로 관리한다. "3시간 공부했다"는 아무것도 말해주지 않지만 "루프 6회를 돌았고 그중 4회에서 예측이 빗나갔다"는 정확한 정보다.</p>
+
+      <figure class="diagram reveal">
+        <svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="예측, 시도, 대조, 수정의 네 단계가 원형으로 순환하는 학습 루프 다이어그램">
+          <defs>
+            <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#0A0A0A"/>
+            </marker>
+          </defs>
+
+          <!-- circular arrows -->
+          <g fill="none" stroke="#0A0A0A" stroke-width="2" opacity=".55" marker-end="url(#arw)">
+            <path d="M 262 118 A 150 150 0 0 1 400 118"/>
+            <path d="M 468 178 A 150 150 0 0 1 468 306"/>
+            <path d="M 400 366 A 150 150 0 0 1 262 366"/>
+            <path d="M 194 306 A 150 150 0 0 1 194 178"/>
+          </g>
+
+          <!-- nodes -->
+          <g>
+            <rect x="216" y="34" width="228" height="76" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.4"/>
+            <text x="330" y="64" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="23" font-weight="900" fill="#0A0A0A">예측</text>
+            <text x="330" y="90" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="rgba(10,10,10,.62)">자료 보기 전에 내 답을 쓴다</text>
+          </g>
+          <g>
+            <rect x="440" y="196" width="192" height="76" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.4"/>
+            <text x="536" y="226" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="23" font-weight="900" fill="#0A0A0A">시도</text>
+            <text x="536" y="252" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="rgba(10,10,10,.62)">가장 작은 단위로 실행</text>
+          </g>
+          <g>
+            <rect x="216" y="360" width="228" height="76" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.4"/>
+            <text x="330" y="390" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="23" font-weight="900" fill="#0A0A0A">대조</text>
+            <text x="330" y="416" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="rgba(10,10,10,.62)">내 답과 실제의 차이를 적는다</text>
+          </g>
+          <g>
+            <rect x="12" y="196" width="192" height="76" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.4"/>
+            <text x="108" y="226" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="23" font-weight="900" fill="#0A0A0A">수정</text>
+            <text x="108" y="252" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="rgba(10,10,10,.62)">차이를 규칙으로 승격</text>
+          </g>
+
+          <!-- center -->
+          <circle cx="330" cy="234" r="74" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-dasharray="5 6"/>
+          <text x="330" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#0A0A0A">1 LOOP</text>
+          <text x="330" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1" fill="rgba(10,10,10,.55)">25~50분</text>
+          <text x="330" y="270" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="1" fill="rgba(10,10,10,.55)">관문 질문 1개</text>
+        </svg>
+        <figcaption>루프 1회 = 관문 질문 1개. 한 자리에서 결과를 볼 수 없다면 질문이 너무 큰 것이므로 쪼갠다.</figcaption>
+      </figure>
+
+      <div class="card" style="margin-top:28px">
+        <h4>예측 단계를 건너뛰면 나머지가 전부 무너진다</h4>
+        <p class="small muted" style="margin:0">틀린 답이라도 <strong>먼저 만들어 본 답</strong>이 있어야 대조가 성립한다. 예측 없이 정답부터 읽으면 뇌는 "그렇지, 알고 있었어"라는 신호를 만들어내고, 이 신호는 실제 인출 가능성과 거의 무관하다. 예측은 정확할 필요가 없다. 존재하기만 하면 된다.</p>
+      </div>
+
+      <h3 style="margin-top:40px">간격: 같은 항목을 네 번 만난다</h3>
+      <div class="timeline">
+        <div>
+          <div class="d">D+1</div>
+          <div class="l">1차 인출</div>
+          <p>자료를 덮고 백지에 재구성. 여기서 대부분 무너진다. 정상이다.</p>
+        </div>
+        <div>
+          <div class="d">D+3</div>
+          <div class="l">2차 인출</div>
+          <p>조건을 하나 바꿔서 다시 묻는다. 같은 질문을 반복하지 않는다.</p>
+        </div>
+        <div>
+          <div class="d">D+7</div>
+          <div class="l">교차 배치</div>
+          <p>다른 항목들과 섞어서 무작위 순서로. 어떤 도구를 꺼낼지부터 판단하게 만든다.</p>
+        </div>
+        <div>
+          <div class="d">D+21</div>
+          <div class="l">전이 확인</div>
+          <p>실제 산출물 안에서 쓴다. 여기서 되면 학습은 끝난 것으로 본다.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:28px">
+        <h4>난이도 조절: 초심자와 숙련자는 반대로 간다</h4>
+        <p class="small muted" style="margin:0">완전히 처음인 영역에서는 <strong>완성된 예제를 먼저 읽고 따라 만드는 쪽</strong>이 스스로 헤매는 것보다 빠르다. 배경 지식이 없으면 헤매는 시간의 대부분이 학습이 아니라 부하이기 때문이다. 반대로 어느 정도 감이 잡힌 뒤에도 계속 예제를 따라가면 그때부터는 진전이 멈춘다. 전환 시점은 하나의 신호로 판단한다. <strong>예측이 자주 맞기 시작하면 예제를 치우고 문제부터 받는다.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STATION 03 ══════════ -->
+<section id="station-3">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>03</b>
+      장비 배치
+      <span class="tick">WITH · AI</span>
+      <span class="tick">산출물: 배치도</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>AI는 학습의 대체재가<br>아니라 루프의 부품이다</h2>
+        <p class="lede">질문은 "AI를 쓸 것인가"가 아니다. <mark>루프의 네 박자 중 어디에 꽂을 것인가</mark>이다.</p>
+      </div>
+
+      <p>AI를 학습에 쓸 때 발생하는 손상은 대부분 한 가지 패턴에서 나온다. <strong>예측 단계를 AI가 가져가는 것.</strong> 내가 답을 만들기 전에 AI가 답을 주면 루프의 나머지 세 박자가 전부 무의미해진다. 대조할 내 답이 없기 때문이다. 그래서 배치의 원칙은 단순하다. AI의 기본 상태는 꺼짐이고, <strong>내가 무언가를 이미 만들어 낸 뒤에만 켜진다.</strong></p>
+
+      <div class="gate">
+        <span class="lbl">Gate Rule</span>
+        <span class="rule-text">내 답을 쓰기 전에는<br>프롬프트를 열지 않는다.</span>
+      </div>
+
+      <figure class="diagram reveal" style="margin-top:32px">
+        <svg viewBox="0 0 660 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="학습 루프의 네 단계 위에 AI의 다섯 가지 역할이 배치된 다이어그램. 예측 단계는 AI 금지 구역으로 표시되어 있다.">
+          <defs>
+            <pattern id="ban" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="#0A0A0A" stroke-width="3" opacity=".3"/>
+            </pattern>
+            <marker id="arw2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9A9A9A"/>
+            </marker>
+          </defs>
+
+          <!-- lane label -->
+          <text x="16" y="26" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="rgba(10,10,10,.5)">LOOP</text>
+          <text x="16" y="264" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="2" fill="#9A9A9A">AI 배치</text>
+
+          <!-- loop lane -->
+          <line x1="86" y1="106" x2="644" y2="106" stroke="#0A0A0A" stroke-width="1.5" opacity=".35"/>
+
+          <!-- stage 1: 예측 (forbidden) -->
+          <rect x="86" y="52" width="126" height="108" fill="url(#ban)" stroke="#0A0A0A" stroke-width="2.2"/>
+          <text x="149" y="94" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="21" font-weight="900" fill="#0A0A0A">예측</text>
+          <text x="149" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0A0A0A">AI 금지</text>
+          <text x="149" y="140" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(10,10,10,.55)">여기는 나 혼자</text>
+
+          <!-- stage 2 -->
+          <rect x="228" y="52" width="126" height="108" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.2"/>
+          <text x="291" y="102" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="21" font-weight="900" fill="#0A0A0A">시도</text>
+          <text x="291" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(10,10,10,.55)">막힐 때만 힌트</text>
+
+          <!-- stage 3 -->
+          <rect x="370" y="52" width="126" height="108" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.2"/>
+          <text x="433" y="102" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="21" font-weight="900" fill="#0A0A0A">대조</text>
+          <text x="433" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9A9A9A">AI 주력 구간</text>
+
+          <!-- stage 4 -->
+          <rect x="512" y="52" width="126" height="108" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.2"/>
+          <text x="575" y="102" text-anchor="middle" font-family="Noto Sans KR, sans-serif" font-size="21" font-weight="900" fill="#0A0A0A">수정</text>
+          <text x="575" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#9A9A9A">AI 보조</text>
+
+          <!-- connectors -->
+          <g stroke="#9A9A9A" stroke-width="1.6" fill="none" marker-end="url(#arw2)" opacity=".8">
+            <path d="M291 292 L 291 166"/>
+            <path d="M395 292 L 424 166"/>
+            <path d="M500 292 L 442 166"/>
+            <path d="M575 292 L 575 166"/>
+          </g>
+
+          <!-- role chips -->
+          <g font-family="JetBrains Mono, monospace" font-size="12.5">
+            <rect x="236" y="296" width="112" height="34" fill="#F6F6F6" stroke="#9A9A9A" stroke-width="1.6"/>
+            <text x="292" y="318" text-anchor="middle" fill="#0A0A0A">힌트 제공자</text>
+
+            <rect x="342" y="340" width="112" height="34" fill="#F6F6F6" stroke="#9A9A9A" stroke-width="1.6"/>
+            <text x="398" y="362" text-anchor="middle" fill="#0A0A0A">시험관</text>
+
+            <rect x="448" y="296" width="112" height="34" fill="#F6F6F6" stroke="#9A9A9A" stroke-width="1.6"/>
+            <text x="504" y="318" text-anchor="middle" fill="#0A0A0A">반례 생성기</text>
+
+            <rect x="522" y="340" width="112" height="34" fill="#F6F6F6" stroke="#9A9A9A" stroke-width="1.6"/>
+            <text x="578" y="362" text-anchor="middle" fill="#0A0A0A">번역기</text>
+          </g>
+
+          <!-- cartographer: before the loop -->
+          <g>
+            <rect x="24" y="296" width="150" height="34" fill="#F6F6F6" stroke="#6E6E6E" stroke-width="1.6"/>
+            <text x="99" y="318" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#6E6E6E">지도 제작자</text>
+            <text x="99" y="352" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(10,10,10,.55)">단계 01에서만</text>
+            <path d="M99 292 L 99 200 L 149 200" stroke="#6E6E6E" stroke-width="1.6" fill="none" stroke-dasharray="4 4"/>
+          </g>
+
+          <text x="16" y="392" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(10,10,10,.45)">접지기(출처 검증)는 전 구간에서 상시 작동</text>
+        </svg>
+        <figcaption>AI는 루프 전체를 감싸지 않는다. 예측 구간은 비워 두고, 대조 구간에 가장 무겁게 투입한다.</figcaption>
+      </figure>
+
+      <h3 style="margin-top:38px">다섯 가지 배치</h3>
+      <div class="roles">
+        <div class="role">
+          <div><div class="who">지도 제작자</div><div class="when">단계 01 · 마음껏 사용</div></div>
+          <p>영역의 용어 목록, 하위 주제, 입문자가 흔히 놓치는 지점, 서로 대립하는 학파를 뽑아낸다. 이 단계의 결과물은 <strong>답이 아니라 검증할 목록</strong>이므로 AI가 틀려도 손해가 적다. 오히려 틀린 항목이 나중에 좋은 관문 질문이 된다.</p>
+        </div>
+        <div class="role">
+          <div><div class="who">힌트 제공자</div><div class="when">시도 · 막혔을 때만</div></div>
+          <p>답이 아니라 <strong>다음 한 걸음만</strong> 요구한다. "정답을 주지 말고, 내가 놓친 조건 하나만 지목해 달라." 힌트 단계를 명시적으로 요구하는 것이 이 역할의 전부다.</p>
+        </div>
+        <div class="role">
+          <div><div class="who">시험관</div><div class="when">대조 · 내 답 제출 후</div></div>
+          <p>내가 쓴 답을 먼저 붙여 넣고 채점을 요청한다. 관문 질문 목록을 주고 무작위로 물어보게 만드는 용도로도 쓴다. <strong>제출 전에는 절대 켜지 않는다.</strong></p>
+        </div>
+        <div class="role">
+          <div><div class="who">반례 생성기</div><div class="when">대조 · 내 설명이 통과한 직후</div></div>
+          <p>맞았다고 판정된 순간이 가장 위험하다. "내 설명이 깨지는 상황 3개"를 요구해 <strong>경계 조건</strong>을 강제로 노출시킨다. 판단형 항목에서는 이 역할이 학습의 대부분을 담당한다.</p>
+        </div>
+        <div class="role">
+          <div><div class="who">번역기</div><div class="when">수정 · 규칙으로 승격할 때</div></div>
+          <p>새로 배운 것을 <strong>내가 이미 잘 아는 영역의 언어</strong>로 다시 진술하게 한다. 연결이 만들어지면 인출 단서가 늘어나고, 어색한 번역은 내 이해가 얕은 지점을 정확히 가리킨다.</p>
+        </div>
+        <div class="role">
+          <div><div class="who">접지기</div><div class="when">전 구간 · 상시</div></div>
+          <p>주장마다 원문·문서·명세로 되돌린다. AI의 요약을 <strong>원문의 대체물이 아니라 원문으로 가는 색인</strong>으로만 쓴다. 이 역할이 빠지면 나머지 네 개가 전부 오염된다.</p>
+        </div>
+      </div>
+
+      <div class="forbid">
+        <h4>금지 목록</h4>
+        <ul>
+          <li><strong>첫 답을 AI에게 시키기</strong> — 예측이 사라지면 루프가 성립하지 않는다.</li>
+          <li><strong>요약본으로 원문 대체하기</strong> — 요약은 색인이지 자료가 아니다.</li>
+          <li><strong>코드를 통째로 받고 통과시키기</strong> — 동작하는 것과 배운 것은 별개다. 한 줄씩 왜 필요한지 말할 수 없으면 아직 안 배운 것이다.</li>
+          <li><strong>"내가 이해한 게 맞아?"라고 묻기</strong> — 이해 여부는 인출로만 판정된다. AI의 "맞습니다"는 근거가 아니다.</li>
+          <li><strong>진도를 AI 대화량으로 재기</strong> — 진도는 관문 질문 중 무자료로 답한 개수로만 잰다.</li>
+        </ul>
+      </div>
+
+      <h3 style="margin-top:40px">그대로 쓰는 프롬프트</h3>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">01 · 지도 제작자 — 단계 01</span><button class="copy" type="button">복사</button></div>
+        <pre>나는 [영역]을 처음 배운다. 최종 목표는 [종착 산출물]을 직접 만드는 것이다.
+
+설명하지 말고 목록만 달라.
+1) 이 목표에 도달하기까지 반드시 마주치는 결정 지점 10개
+2) 각 결정에서 쓰이는 핵심 용어 (이름만)
+3) 입문자가 흔히 잘못 알고 있는 것 5개
+4) 이 영역에서 전문가들 사이에 의견이 갈리는 지점 3개
+
+각 항목은 한 줄. 내가 검증할 목록을 만드는 중이니 정답은 쓰지 마라.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">02 · 시험관 — 대조 단계</span><button class="copy" type="button">복사</button></div>
+        <pre>[관문 질문]에 대한 내 답이다:
+"""
+[내가 자료 없이 쓴 답]
+"""
+
+다음 형식으로만 응답하라.
+· 맞은 것: (내 답 중 정확한 부분)
+· 빠진 것: (반드시 있었어야 하는데 없는 것)
+· 틀린 것: (사실과 다른 부분과 그 이유)
+· 다음 한 걸음: (내가 지금 확인해야 할 것 한 가지)
+
+보충 설명이나 추가 강의는 하지 마라. 위 네 줄이면 된다.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">03 · 반례 생성기 — 통과 직후</span><button class="copy" type="button">복사</button></div>
+        <pre>내 이해는 이렇다: "[내 설명]"
+
+이 설명이 무너지는 상황 3개를 만들어라.
+· 각각 구체적인 조건과 함께
+· 첫 번째는 흔한 경우, 두 번째는 드물지만 실제로 일어나는 경우,
+  세 번째는 내 설명이 애초에 잘못된 전제 위에 있는 경우
+
+정답은 알려주지 말고 상황만 제시하라. 내가 먼저 답해보겠다.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head"><span class="t">04 · 접지기 — 상시</span><button class="copy" type="button">복사</button></div>
+        <pre>방금 설명에서 사실 주장만 분리해서 나열하라.
+각 주장마다 다음을 표시하라.
+
+[문서] 공식 문서·명세에 명시된 것 → 어느 문서 어느 항목인지
+[통념] 널리 쓰이지만 출처가 불명확한 것
+[추정] 네가 추론한 것
+
+[추정]으로 표시된 항목은 내가 직접 실험해서 확인하겠다.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EVIDENCE ══════════ -->
+<section id="evidence">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>유효성</b>
+      VALIDITY
+      <span class="tick">왜 작동하는가</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>각 설계 요소가<br>어디에서 왔는가</h2>
+        <p class="lede">이 절차의 구성 요소는 새로 만든 것이 아니라, <mark>학습과학에서 반복 검증된 효과들</mark>을 순서대로 배열한 것이다.</p>
+      </div>
+
+      <div class="ev">
+        <div class="ev-row">
+          <div class="what">종착 산출물부터 역산</div>
+          <div class="why">평가 기준을 학습 활동보다 먼저 정하면 활동이 목표에 정렬된다. 교육과정 설계의 표준 절차인 백워드 디자인의 핵심 주장이다.</div>
+          <div class="src">Wiggins &amp; McTighe<br>Understanding by Design</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">관문 질문을 먼저 작성</div>
+          <div class="why">답을 모르는 상태에서 먼저 질문을 받으면, 이후 같은 내용을 학습할 때 파지가 향상된다. 틀린 답을 생성하는 것 자체가 후속 학습을 준비시킨다.</div>
+          <div class="src">Pretesting effect<br>Richland, Kornell &amp; Kao (2009)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">예측 → 대조 (자료 보기 전 내 답)</div>
+          <div class="why">스스로 만들어 낸 답은 읽기만 한 답보다 잘 기억되고, 자기 설명을 붙이면 이해의 깊이가 올라간다. 예측의 정확도가 아니라 생성 행위 자체가 효과의 원천이다.</div>
+          <div class="src">Generation effect ·<br>Self-explanation, Chi 외 (1989)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">자료를 덮고 무자료 인출</div>
+          <div class="why">같은 시간을 다시 읽기에 쓰는 것보다 인출 시험에 쓰는 편이 장기 파지에서 뚜렷하게 우월하다. 학습과학에서 가장 견고하게 재현된 결과 중 하나다.</div>
+          <div class="src">Testing effect<br>Roediger &amp; Karpicke (2006)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">D+1 / 3 / 7 / 21 간격</div>
+          <div class="why">같은 총량을 몰아서 하는 것보다 간격을 두고 분산하는 편이 파지에 유리하며, 필요한 간격은 목표 유지 기간에 따라 늘어난다.</div>
+          <div class="src">Spacing effect 메타분석<br>Cepeda 외 (2006)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">D+7의 교차 배치</div>
+          <div class="why">한 종류만 몰아서 연습하면 "무엇을 쓸지" 고르는 연습이 빠진다. 섞어서 연습하면 진행 중 성적은 나빠 보이지만 나중 수행은 좋아진다.</div>
+          <div class="src">Interleaving<br>Rohrer &amp; Taylor (2007)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">예제 우선 → 문제 우선 전환</div>
+          <div class="why">배경 지식이 없을 때는 완성 예제가 효율적이지만, 숙련도가 올라가면 같은 예제가 오히려 방해가 된다. 그래서 전환 시점을 신호로 관리한다.</div>
+          <div class="src">Cognitive load ·<br>Expertise reversal, Kalyuga 외 (2003)</div>
+        </div>
+        <div class="ev-row">
+          <div class="what">"안다고 착각함" 칸을 분리</div>
+          <div class="why">읽을 때의 매끄러움을 이해로 오인하는 경향은 체계적이며 스스로 교정되지 않는다. 판정을 느낌이 아니라 인출 결과에 넘기는 이유다.</div>
+          <div class="src">Illusion of fluency ·<br>Bjork, Dunlosky &amp; Kornell (2013)</div>
+        </div>
+        <div class="ev-row" style="border-bottom:2px solid var(--ink)">
+          <div class="what" style="color:var(--fluoro)">AI 게이트 규칙</div>
+          <div class="why">고등학생 약 1,000명 대상 현장 실험에서, GPT-4 접근은 연습 중 성적을 크게 끌어올렸다(일반 인터페이스 48%, 튜터형 127%). 그러나 접근을 없앤 시험에서는 일반 인터페이스를 쓴 집단이 아예 쓰지 않은 집단보다 17% 낮았고, 힌트 방식의 가드레일을 넣은 튜터형에서는 이 손실이 대부분 사라졌다. <strong>도구의 유무가 아니라 설계가 결과를 갈랐다.</strong></div>
+          <div class="src">Bastani 외,<br>PNAS (2025)</div>
+        </div>
+      </div>
+
+      <div class="caveat">
+        <strong>정직한 한계.</strong> 위 근거들은 각 <em>구성 요소</em>가 통제된 조건에서 효과를 보였다는 뜻이지, 이 세 단계를 묶은 절차 전체가 실험적으로 검증되었다는 뜻은 아니다. 효과 크기는 과제·숙련도·측정 시점에 따라 크게 달라지고, 인출과 간격의 이점은 즉각적인 성적이 아니라 지연된 시험에서 나타난다. 따라서 이 문서는 성과를 보장하는 처방이 아니라 <strong>검증된 원리들과 어긋나지 않게 배열된 설계</strong>로 읽는 편이 정확하다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ USEFULNESS ══════════ -->
+<section id="usefulness">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>유용성</b>
+      UTILITY
+      <span class="tick">언제 쓰고 언제 안 쓰나</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>모든 학습에<br>쓸 필요는 없다</h2>
+        <p class="lede">설계 비용이 60분이므로, <mark>총 학습 시간이 10시간을 넘길 주제</mark>에서만 회수된다.</p>
+      </div>
+
+      <div class="fit">
+        <div>
+          <span class="k eyebrow" style="color:var(--teal)">잘 맞는 경우</span>
+          <ul>
+            <li>정해진 커리큘럼이 없는 주제 — 새 도메인, 신기술, 비주류 분야</li>
+            <li>직무 전환이나 역할 확장처럼 목표는 뚜렷한데 경로가 없는 경우</li>
+            <li>이미 여러 번 읽었는데 계속 못 쓰겠는 개념 (D 유형이 쌓인 상태)</li>
+            <li>혼자 하고 피드백 줄 사람이 없는 상황 — AI가 시험관 역할을 대신할 수 있다</li>
+            <li>외국어처럼 지식형과 판단형이 뚜렷이 섞여 있는 학습</li>
+          </ul>
+        </div>
+        <div>
+          <span class="k eyebrow" style="color:var(--fluoro)">안 맞는 경우</span>
+          <ul>
+            <li>범위가 확정된 시험 — 기출 반복이 더 빠르다</li>
+            <li>30분이면 끝날 단발성 궁금증 — 그냥 찾아보면 된다</li>
+            <li>완전 초심자의 첫 1~2주 — 잘 만들어진 강의를 순서대로 따라가는 편이 낫다</li>
+            <li>마감이 임박한 실무 과제 — 이때 필요한 건 학습이 아니라 완수다. AI를 마음껏 쓰고, 학습은 마감 후에 되돌아와서 한다</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="margin-top:40px">흔한 실패와 처방</h3>
+      <table class="fail">
+        <thead>
+          <tr><th>증상</th><th>처방</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>단계 1에서 못 빠져나온다. 계속 지도만 그린다.</td>
+            <td>60분 타임박스를 강제한다. 관문 질문이 15개면 미완성이어도 출발한다. 지도는 루프를 돌면서 고치는 것이 원래 설계다.</td>
+          </tr>
+          <tr>
+            <td>루프가 끝나지 않는다. 하나에 며칠씩 걸린다.</td>
+            <td>관문 질문이 너무 크다. "한 자리에서 결과를 볼 수 있는가"를 기준으로 쪼갠다. 쪼갤 수 없다면 아직 앞 항목을 안 배운 것이다.</td>
+          </tr>
+          <tr>
+            <td>예측 단계를 자꾸 건너뛴다.</td>
+            <td>예측을 종이나 별도 파일에 손으로 쓰게 만든다. 물리적 마찰이 있으면 건너뛰기 어렵다. 예측 없이 연 프롬프트는 그 루프를 무효 처리한다.</td>
+          </tr>
+          <tr>
+            <td>AI 대화는 길었는데 남은 게 없다.</td>
+            <td>대화 로그가 아니라 <strong>규칙 목록</strong>만 남긴다. 루프마다 "다음에 ~할 때는 ~한다" 한 줄. 이것 외에는 전부 버려도 된다.</td>
+          </tr>
+          <tr>
+            <td>D+7에서 아무것도 기억나지 않는다.</td>
+            <td>정상이다. 여기서 무너지는 것이 이 일정의 목적이다. 다시 채우는 과정이 학습이고, 무너지지 않았다면 간격이 너무 촘촘했던 것이다.</td>
+          </tr>
+          <tr>
+            <td>진도가 안 나가는 것 같아 불안하다.</td>
+            <td>진도 지표를 바꾼다. 읽은 분량이 아니라 <strong>무자료로 답한 관문 질문 개수 / 전체</strong>. 이 숫자만 본다.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="split" style="margin-top:34px">
+        <div>
+          <span class="k" style="color:var(--ink-40)">비용</span>
+          <h3>60분 + 루프당 5분</h3>
+          <p class="small muted" style="margin:8px 0 0">초기 설계 60분, 이후에는 루프마다 기록 5분. 학습 시간 자체는 늘지 않고, 기존 학습 시간의 배치만 바뀐다.</p>
+        </div>
+        <div>
+          <span class="k" style="color:var(--ink-40)">회수</span>
+          <h3>버릴 것을 먼저 안다</h3>
+          <p class="small muted" style="margin:8px 0 0">가장 큰 이득은 빨리 배우는 것이 아니라, <strong>배우지 않아도 되는 것을 초반에 잘라내는 것</strong>이다. 단계 1의 TYPE C가 그 역할을 한다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WORKSHEET ══════════ -->
+<section id="worksheet">
+  <div class="wrap sec">
+    <div class="rail">
+      <b>부록</b>
+      WORKSHEET
+      <span class="tick">60분 · 인쇄 가능</span>
+    </div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>지금 채우는<br>한 장짜리 설계표</h2>
+        <p class="lede">아래 칸을 눌러 직접 입력할 수 있다. 다 채우면 인쇄하거나 텍스트로 내려받아 학습 노트 첫 장에 붙인다.</p>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-head">
+          <span class="t">학습 설계표</span>
+          <span class="c">STATION 01 → 02 → 03</span>
+        </div>
+
+        <div class="field">
+          <span class="q">01-A · 종착 산출물</span>
+          <div class="blank" contenteditable="true" data-ph="학습이 끝났을 때 존재하게 될 물건 또는 행동 (동사로 끝낼 것)"></div>
+          <div class="hint">"이해한다"로 끝나면 다시 쓴다. 판정 가능해야 한다.</div>
+        </div>
+
+        <div class="field">
+          <span class="q">01-B · 반드시 마주칠 결정 지점 (3개 이상)</span>
+          <div class="blank" contenteditable="true" data-ph="무엇을 기준으로 골라야 할지 모르겠는 갈림길들"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">01-C · 무지의 분류 — 지금 / 나중 / 버림</span>
+          <div class="blank" contenteditable="true" data-ph="지금: … / 나중: … / 버림: …"></div>
+          <div class="hint">버림 항목을 적는 것이 이 칸의 진짜 목적이다.</div>
+        </div>
+
+        <div class="field">
+          <span class="q">01-D · 관문 질문 (첫 5개)</span>
+          <div class="blank" contenteditable="true" data-ph="1. …  2. …  3. …  4. …  5. …" style="min-height:76px"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">02-A · 지식형 / 판단형 배분</span>
+          <div class="blank" contenteditable="true" data-ph="지식형으로 분류한 질문 번호 / 판단형으로 분류한 질문 번호"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">02-B · 루프 1회의 크기</span>
+          <div class="blank" contenteditable="true" data-ph="한 자리에서 끝낼 수 있는 단위는 무엇인가 (분 단위 + 검증 방법)"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">02-C · 인출 일정</span>
+          <div class="blank" contenteditable="true" data-ph="D+1 / D+3 / D+7 / D+21 각각 언제, 무엇을 무자료로 확인하는가"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">03-A · AI를 켜는 조건</span>
+          <div class="blank" contenteditable="true" data-ph="어떤 상태가 되어야 프롬프트를 여는가 (내 답이 존재할 것)"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">03-B · 이번 학습에서 쓸 AI 역할</span>
+          <div class="blank" contenteditable="true" data-ph="지도 제작자 / 힌트 제공자 / 시험관 / 반례 생성기 / 번역기 / 접지기 중 선택"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">03-C · 이번 학습의 금지 사항 (내가 하기 쉬운 것)</span>
+          <div class="blank" contenteditable="true" data-ph="예: 막히면 3분 안에 프롬프트를 여는 습관 → 15분 규칙으로 대체"></div>
+        </div>
+
+        <div class="field">
+          <span class="q">진도 지표</span>
+          <div class="blank" contenteditable="true" data-ph="무자료로 답한 관문 질문 ___ / 전체 ___"></div>
+        </div>
+      </div>
+
+      <div class="tools">
+        <button class="btn" type="button" id="download">텍스트로 내려받기</button>
+        <button class="btn ghost" type="button" id="print">인쇄하기</button>
+        <button class="btn ghost" type="button" id="clear">비우기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3 style="max-width:24ch">배우는 방법을 설계하는 일 자체가, 가장 이전 가능한 학습이다.</h3>
+        <p class="small muted" style="max-width:56ch;margin-top:10px">한 번 만들어 둔 이 절차는 다음 주제에서 그대로 재사용된다. 바뀌는 것은 종착 산출물과 관문 질문뿐이다.</p>
+      </div>
+      <div class="sig">
+        지형 · 경로 · 장비<br>
+        Self-Directed Learning Design<br>
+        Rev. 2026.08
+      </div>
+    </div>
+    <div class="site-foot">© 2026 Leeo · 개발자리 · <a href="../index.html">리이오의 연습장</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ── scroll reveal ──
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var targets = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(function(el){ io.observe(el); });
+  }
+
+  // ── route line draws itself once ──
+  var route = document.getElementById("route");
+  if (route && !reduce) {
+    try {
+      var len = route.getTotalLength();
+      route.style.strokeDasharray = len + " " + len;
+      route.style.strokeDashoffset = len;
+      route.getBoundingClientRect();
+      route.style.transition = "stroke-dashoffset 1.9s cubic-bezier(.25,.7,.3,1) .25s";
+      route.style.strokeDashoffset = "0";
+      setTimeout(function(){ route.style.strokeDasharray = "14 10"; }, 2300);
+    } catch (err) { /* leave the static dashed line */ }
+  }
+
+  // ── copy prompt blocks ──
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var block = btn.closest(".prompt").querySelector("pre");
+      var text = block.textContent;
+      var done = function(){
+        var prev = btn.textContent;
+        btn.textContent = "복사됨";
+        setTimeout(function(){ btn.textContent = prev; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); done(); }
+        catch (e) { btn.textContent = "복사 실패"; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+
+  // ── worksheet tools ──
+  var printBtn = document.getElementById("print");
+  if (printBtn) printBtn.addEventListener("click", function(){ window.print(); });
+
+  var clearBtn = document.getElementById("clear");
+  if (clearBtn) clearBtn.addEventListener("click", function(){
+    if (!window.confirm("입력한 내용을 모두 지운다. 계속할까?")) return;
+    document.querySelectorAll(".blank").forEach(function(b){ b.textContent = ""; });
+  });
+
+  var dl = document.getElementById("download");
+  if (dl) dl.addEventListener("click", function(){
+    var lines = ["학습 설계표 — 지형·경로·장비", ""];
+    document.querySelectorAll("#worksheet .field").forEach(function(f){
+      var label = f.querySelector(".q").textContent.trim();
+      var value = f.querySelector(".blank").textContent.trim();
+      lines.push("[" + label + "]");
+      lines.push(value.length ? value : "(비어 있음)");
+      lines.push("");
+    });
+    var blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "learning-design-worksheet.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  });
+})();
+</script>
+</body>
+</html>

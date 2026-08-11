@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 학습 — 리이오의 연습장</title>
+<meta name="description" content="지형 · 경로 · 장비 — 무엇을 배울지 정하고, 어떻게 배울지 정한 다음, 마지막에 AI를 배치하는 학습 설계.">
+<meta property="og:title" content="지형 · 경로 · 장비">
+<meta property="og:description" content="AI는 학습의 대체재가 아니라 루프의 부품이다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/ai-learning.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* ai-learning-only */
+  .ai-name {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.1rem;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .ai-hero-title {
+    font-size: clamp(2.4rem, 6.4vw, 4.1rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1.1rem;
+  }
+
+  .ai-banner {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 2.4rem 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .ai-banner-big {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .ai-banner-sub { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* 뒤집힌 순서 / 설계된 순서 */
+  .flip { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1rem; }
+  @media (max-width: 640px) { .flip { grid-template-columns: 1fr; } }
+  .flip-col {
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.3rem 1.4rem;
+  }
+  .flip-col.is-good { background: var(--ink); border-color: var(--ink); }
+  .flip-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.3rem;
+  }
+  .flip-col.is-good .flip-label { color: rgba(255,255,255,0.5); }
+  .flip-flow {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .flip-col.is-good .flip-flow { color: #fff; border-bottom-color: rgba(255,255,255,0.18); }
+  .flip-col ol { margin: 0; padding-left: 1.1rem; }
+  .flip-col li { font-size: 0.9rem; color: var(--ink-faint); line-height: 1.6; margin-bottom: 0.35rem; }
+  .flip-col li:last-child { margin-bottom: 0; }
+  .flip-col.is-good li { color: rgba(255,255,255,0.72); }
+  .flip-col li b { color: var(--ink); font-weight: 700; }
+  .flip-col.is-good li b { color: #fff; }
+
+  /* 세 정거장 */
+  .stations { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+  @media (max-width: 760px) { .stations { grid-template-columns: 1fr; } }
+  .station {
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .station:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .station-k {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .station-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.35rem; }
+  .station-desc { font-size: 0.9rem; color: var(--ink-faint); line-height: 1.55; margin-bottom: 0.8rem; }
+  .station-out {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    padding-top: 0.6rem;
+  }
+
+  /* 무지의 네 칸 */
+  .quad { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; margin-top: 1rem; }
+  @media (max-width: 600px) { .quad { grid-template-columns: 1fr; } }
+  .quad-cell {
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.1rem 1.2rem;
+  }
+  .quad-cell.is-danger { background: var(--ink); border-color: var(--ink); }
+  .quad-k {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.35rem;
+  }
+  .quad-cell.is-danger .quad-k { color: rgba(255,255,255,0.5); }
+  .quad-name { font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.3rem; }
+  .quad-cell.is-danger .quad-name { color: #fff; }
+  .quad-fix { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.55; }
+  .quad-cell.is-danger .quad-fix { color: rgba(255,255,255,0.7); }
+
+  /* 지식형 / 판단형 */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 1rem; }
+  @media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+  .split-col { border: 1px solid var(--paper-deep); border-radius: 8px; padding: 1.3rem 1.4rem; }
+  .split-pct {
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .split-pct span { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin-left: 0.5rem; }
+  .split-name { font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin: 0.7rem 0 0.4rem; }
+  .split-col dl { margin: 0.7rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 0.8rem; font-size: 0.85rem; }
+  .split-col dt { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); padding-top: 0.25rem; }
+  .split-col dd { margin: 0; color: var(--ink-faint); line-height: 1.55; }
+
+  /* 네 박자 루프 */
+  .beats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 1rem; }
+  @media (max-width: 700px) { .beats { grid-template-columns: repeat(2, 1fr); } }
+  .beat {
+    border: 1px solid var(--paper-deep);
+    border-radius: 8px;
+    padding: 1.1rem 1rem;
+    text-align: center;
+  }
+  .beat.is-off { background: var(--ink); border-color: var(--ink); }
+  .beat-n { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; color: var(--ink-mute); }
+  .beat.is-off .beat-n { color: rgba(255,255,255,0.5); }
+  .beat-name { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; color: var(--ink); margin: 0.35rem 0 0.3rem; }
+  .beat.is-off .beat-name { color: #fff; }
+  .beat-ai { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-faint); line-height: 1.5; }
+  .beat.is-off .beat-ai { color: #fff; }
+
+  /* 게이트 규칙 */
+  .gate {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 1.8rem 1.6rem;
+    text-align: center;
+    margin-top: 1.4rem;
+  }
+  .gate-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.7rem;
+  }
+  .gate-rule { font-size: clamp(1.2rem, 3.2vw, 1.6rem); font-weight: 900; letter-spacing: -0.03em; color: var(--ink); line-height: 1.35; }
+  .gate-sub { font-size: 0.88rem; color: var(--ink-faint); margin-top: 0.6rem; }
+
+  /* 역할 목록 */
+  .roles { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .roles li { padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+  .roles li:last-child { border-bottom: none; }
+  .role-head { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+  .role-name { font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+  .role-when {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.12rem 0.6rem;
+  }
+  .role-desc { font-size: 0.9rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.3rem; }
+
+  /* 비교 표 */
+  .cmp-scroll { overflow-x: auto; margin-top: 1rem; }
+  .cmp { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 560px; }
+  .cmp th, .cmp td { text-align: left; padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .cmp thead th {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    border-bottom: 1px solid var(--ink);
+  }
+  .cmp tbody th { font-weight: 700; color: var(--ink-faint); font-size: 0.8rem; width: 7.5rem; }
+  .cmp td { color: var(--ink-soft); }
+  .cmp td b { color: var(--ink); }
+
+  /* 원문 카드 */
+  .docs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; margin-top: 1rem; }
+  @media (max-width: 760px) { .docs { grid-template-columns: 1fr; } }
+
+  .ai-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.4rem;
+    border-radius: 100px;
+    border-bottom: none;
+    transition: opacity 0.18s;
+  }
+  .ai-cta:hover { opacity: 0.82; border-bottom: none; color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록하는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="framework.html">프레임워크</a>
+      <a href="ai-learning.html" class="active">AI학습</a>
+      <a href="solo-learning.html">학습설계</a>
+      <a href="library.html">서재</a>
+      <a href="thoughts.html">생각</a>
+      <a href="academy.html">아카데미</a>
+      <a href="tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head" style="border-bottom:none; margin-bottom:1rem;">
+    <div class="ai-name">지형 · 경로 · 장비</div>
+    <h1 class="ai-hero-title">AI를<br>마지막에 놓습니다</h1>
+    <p class="page-sub">무엇을 배울지 정하고, 어떻게 배울지 정한 <em>다음에</em> AI를 배치하는 학습 설계입니다. 정해진 커리큘럼이 없는 주제를 혼자 파고들어야 하는 사람을 위해 썼습니다.</p>
+  </section>
+
+  <section class="container" style="padding-top:1rem;">
+    <div class="ai-banner">
+      <div class="ai-banner-big">AI의 기본 상태는<br>꺼짐입니다.</div>
+      <div class="ai-banner-sub">AI는 학습의 대체재가 아니라 루프의 부품 — 내가 무언가를 이미 만들어 낸 뒤에만 켜집니다.</div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Why</div>
+    <h2 class="section-title">순서가 뒤집히면 학습이 아니라 소비가 됩니다</h2>
+    <p class="section-desc">혼자 하는 학습이 실패하는 지점은 대개 노력의 양이 아니라 결정의 순서입니다.</p>
+    <p>흔한 실패 경로는 이렇습니다. 무엇을 배울지 정하지 않은 채 강의를 고르고, 어떤 방식으로 익힐지 정하지 않은 채 AI를 켭니다. 그러면 AI는 가장 잘하는 일을 합니다 — <em>내가 아직 만들어보지 않은 답을 먼저 만들어 주는 것.</em> 결과는 매끄럽고, 진도는 빠르고, 남는 것은 없습니다.</p>
+
+    <div class="flip">
+      <div class="flip-col">
+        <div class="flip-label">뒤집힌 순서</div>
+        <div class="flip-flow">도구 → 방법 → 목표</div>
+        <ol>
+          <li>AI에게 “무엇부터 배워야 해?”로 시작</li>
+          <li>받은 커리큘럼을 읽어 내려감</li>
+          <li>막히면 다시 물어보고 답을 받음</li>
+          <li><b>다 읽었지만 스스로 만들지는 못함</b></li>
+        </ol>
+      </div>
+      <div class="flip-col is-good">
+        <div class="flip-label">설계된 순서</div>
+        <div class="flip-flow">목표 → 방법 → 도구</div>
+        <ol>
+          <li>끝에 존재할 산출물을 먼저 선언</li>
+          <li>그 산출물을 막는 질문 목록을 만듦</li>
+          <li>질문마다 예측을 먼저 쓰고 검증</li>
+          <li><b>AI는 채점 · 반례 · 연결에만 투입</b></li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="quote mt-2">
+      세 단계는 각각 <em>다음 단계의 판단 기준</em>을 만들어 줍니다. 단계 1이 만든 관문 질문이 없으면 단계 2에서 무엇을 연습할지 고를 수 없고, 단계 2가 만든 루프가 없으면 단계 3에서 AI를 어디에 끼워 넣을지 정할 수 없습니다. 그래서 이 순서는 취향이 아니라 의존 관계입니다.
+      <span class="quote-cite">지형 · 경로 · 장비 — 전제</span>
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Stations</div>
+    <h2 class="section-title">세 개의 정거장</h2>
+    <p class="section-desc">설계에 60분, 이후에는 루프마다 기록 5분. 학습 시간 자체는 늘지 않고 배치만 바뀝니다.</p>
+
+    <div class="stations">
+      <div class="station">
+        <div class="station-k">01 / What</div>
+        <div class="station-name">지형 파악</div>
+        <div class="station-desc">무엇을 배워야 하는지조차 모르는 상태를 검증 가능한 질문 목록으로 바꿉니다.</div>
+        <div class="station-out">산출물 — 관문 질문 15~30개</div>
+      </div>
+      <div class="station">
+        <div class="station-k">02 / How</div>
+        <div class="station-name">경로 설계</div>
+        <div class="station-desc">지식형과 판단형을 갈라 다른 연습으로 배분하고, 반복 가능한 루프를 만듭니다.</div>
+        <div class="station-out">산출물 — 네 박자 학습 루프</div>
+      </div>
+      <div class="station">
+        <div class="station-k">03 / With</div>
+        <div class="station-name">장비 배치</div>
+        <div class="station-desc">AI를 루프의 특정 지점에만 배치합니다. 기본 상태는 꺼짐.</div>
+        <div class="station-out">산출물 — AI 배치도</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Station 01</div>
+    <h2 class="section-title">모르는 것에 이름을 붙입니다</h2>
+    <p class="section-desc">이 단계의 목표는 커리큘럼을 완성하는 것이 아니라 <em>검색할 수 있는 상태</em>가 되는 것입니다.</p>
+    <p>모르는 것을 모르는 상태의 본질적인 문제는 검색이 이름을 요구한다는 데 있습니다. 개념의 이름을 모르면 질문을 만들 수 없고, 질문이 없으면 답을 평가할 수도 없습니다.</p>
+
+    <div class="callout mt-2">
+      <div class="callout-label">종착 산출물부터</div>
+      <span class="strike">SwiftData를 이해한다</span> → <b>오프라인 우선 동기화가 되는 앱을 App Store에 올린다</b><br>
+      <span class="small muted">“이해한다”로 끝나는 목표는 도달 여부를 판정할 수 없어서 목표가 아닙니다.</span>
+    </div>
+
+    <h3 class="mt-3" style="font-size:1.1rem;">무지의 네 칸</h3>
+    <p class="section-desc">모른다는 상태는 균질하지 않습니다. 종류마다 처방이 다르므로 반드시 나눕니다.</p>
+    <div class="quad">
+      <div class="quad-cell">
+        <div class="quad-k">Type A</div>
+        <div class="quad-name">이름은 알고, 쓸 줄은 모름</div>
+        <div class="quad-fix">→ 곧바로 루프 대상. 가장 진도가 잘 나갑니다.</div>
+      </div>
+      <div class="quad-cell">
+        <div class="quad-k">Type B</div>
+        <div class="quad-name">이름조차 모름</div>
+        <div class="quad-fix">→ 목차 겹쳐보기와 AI 지도 제작으로만 노출됩니다.</div>
+      </div>
+      <div class="quad-cell">
+        <div class="quad-k">Type C</div>
+        <div class="quad-name">알 필요가 없음</div>
+        <div class="quad-fix">→ 버립니다. 버렸다는 사실을 기록해 나중에 다시 뒤지지 않습니다.</div>
+      </div>
+      <div class="quad-cell is-danger">
+        <div class="quad-k">Type D · 위험</div>
+        <div class="quad-name">안다고 착각함</div>
+        <div class="quad-fix">→ 자료를 덮고 백지에 써보는 것으로만 검출됩니다.</div>
+      </div>
+    </div>
+    <p class="small muted mt-2">D는 스스로 발견되지 않습니다. 그래서 이 단계의 마지막 동작은 항상 “자료를 덮고 지금 아는 것을 다 써보기”여야 합니다. <b>여기서 안 써지는 것이 실제 출발선입니다.</b></p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Station 02</div>
+    <h2 class="section-title">지식과 판단은 다른 근육입니다</h2>
+    <p class="section-desc">모든 항목을 같은 방식으로 공부하는 것이 두 번째 단계의 대표적 실패입니다.</p>
+
+    <div class="split">
+      <div class="split-col">
+        <div class="split-pct">20%<span>학습 시간</span></div>
+        <div class="split-name">지식형 — 답이 하나로 고정</div>
+        <dl>
+          <dt>연습</dt><dd>무자료 인출 + 간격 반복</dd>
+          <dt>대체</dt><dd>높음 — 참조하면 됩니다</dd>
+          <dt>기준</dt><dd>“막혔을 때 검색어를 떠올릴 수 있을 만큼”만</dd>
+        </dl>
+      </div>
+      <div class="split-col">
+        <div class="split-pct">80%<span>학습 시간</span></div>
+        <div class="split-name">판단형 — 상황에 따라 답이 바뀜</div>
+        <dl>
+          <dt>연습</dt><dd>사례 대조 + 조건을 바꾼 변이 연습</dd>
+          <dt>대체</dt><dd>낮음 — 맥락이 내 쪽에 있습니다</dd>
+          <dt>기준</dt><dd>“왜 다른 선택지를 버렸는지” 말할 수 있을 때</dd>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="mt-3" style="font-size:1.1rem;">네 박자 루프 — 1회 25~50분, 관문 질문 1개</h3>
+    <p class="section-desc">학습을 시간이 아니라 루프 횟수로 관리합니다. “3시간 공부했다”는 아무것도 말해주지 않지만 “루프 6회를 돌았고 그중 4회에서 예측이 빗나갔다”는 정확한 정보입니다.</p>
+    <div class="beats">
+      <div class="beat is-off">
+        <div class="beat-n">Beat 01</div>
+        <div class="beat-name">예측</div>
+        <div class="beat-ai">AI 금지</div>
+      </div>
+      <div class="beat">
+        <div class="beat-n">Beat 02</div>
+        <div class="beat-name">시도</div>
+        <div class="beat-ai">막힐 때만 힌트</div>
+      </div>
+      <div class="beat">
+        <div class="beat-n">Beat 03</div>
+        <div class="beat-name">대조</div>
+        <div class="beat-ai">AI 주력 구간</div>
+      </div>
+      <div class="beat">
+        <div class="beat-n">Beat 04</div>
+        <div class="beat-name">수정</div>
+        <div class="beat-ai">AI 보조</div>
+      </div>
+    </div>
+
+    <p class="quote mt-2">
+      예측 없이 정답부터 읽으면 뇌는 “그렇지, 알고 있었어”라는 신호를 만들어내고, 이 신호는 실제 인출 가능성과 거의 무관합니다. <em>예측은 정확할 필요가 없습니다. 존재하기만 하면 됩니다.</em>
+      <span class="quote-cite">예측 단계를 건너뛰면 나머지가 전부 무너진다</span>
+    </p>
+
+    <h3 class="mt-3" style="font-size:1.1rem;">같은 항목을 네 번 만납니다</h3>
+    <ul class="list-plain">
+      <li><b>D+1</b> · 1차 인출 — 자료를 덮고 백지에 재구성. 여기서 대부분 무너집니다. 정상입니다.</li>
+      <li><b>D+3</b> · 2차 인출 — 조건을 하나 바꿔서 다시 묻습니다.</li>
+      <li><b>D+7</b> · 교차 배치 — 다른 항목들과 섞어 무작위 순서로. 어떤 도구를 꺼낼지부터 판단하게 만듭니다.</li>
+      <li><b>D+21</b> · 전이 확인 — 실제 산출물 안에서 씁니다. 여기서 되면 학습은 끝난 것으로 봅니다.</li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Station 03</div>
+    <h2 class="section-title">질문은 “AI를 쓸 것인가”가 아닙니다</h2>
+    <p class="section-desc">루프의 네 박자 중 <em>어디에 꽂을 것인가</em>입니다.</p>
+    <p>AI를 학습에 쓸 때 발생하는 손상은 대부분 한 가지 패턴에서 나옵니다 — 예측 단계를 AI가 가져가는 것. 내가 답을 만들기 전에 AI가 답을 주면 루프의 나머지 세 박자가 전부 무의미해집니다. 대조할 내 답이 없기 때문입니다.</p>
+
+    <div class="gate">
+      <div class="gate-label">Gate Rule</div>
+      <div class="gate-rule">내 답을 쓰기 전에는<br>프롬프트를 열지 않는다.</div>
+      <div class="gate-sub">AI는 루프 전체를 감싸지 않습니다. 예측 구간은 비워 두고, 대조 구간에 가장 무겁게 투입합니다.</div>
+    </div>
+
+    <h3 class="mt-3" style="font-size:1.1rem;">다섯 가지 배치, 그리고 상시 하나</h3>
+    <ul class="roles">
+      <li>
+        <div class="role-head"><span class="role-name">지도 제작자</span><span class="role-when">단계 01 · 마음껏</span></div>
+        <div class="role-desc">용어 목록, 하위 주제, 입문자가 흔히 놓치는 지점을 뽑아냅니다. 결과물이 답이 아니라 <em>검증할 목록</em>이라 AI가 틀려도 손해가 적고, 오히려 틀린 항목이 나중에 좋은 관문 질문이 됩니다.</div>
+      </li>
+      <li>
+        <div class="role-head"><span class="role-name">힌트 제공자</span><span class="role-when">시도 · 막혔을 때만</span></div>
+        <div class="role-desc">답이 아니라 다음 한 걸음만 요구합니다. “정답을 주지 말고, 내가 놓친 조건 하나만 지목해 달라.”</div>
+      </li>
+      <li>
+        <div class="role-head"><span class="role-name">시험관</span><span class="role-when">대조 · 내 답 제출 후</span></div>
+        <div class="role-desc">내가 쓴 답을 먼저 붙여 넣고 채점을 요청합니다. <b>제출 전에는 절대 켜지 않습니다.</b></div>
+      </li>
+      <li>
+        <div class="role-head"><span class="role-name">반례 생성기</span><span class="role-when">대조 · 통과 직후</span></div>
+        <div class="role-desc">맞았다고 판정된 순간이 가장 위험합니다. “내 설명이 깨지는 상황 3개”를 요구해 경계 조건을 강제로 노출시킵니다. 판단형 항목에서는 이 역할이 학습의 대부분을 담당합니다.</div>
+      </li>
+      <li>
+        <div class="role-head"><span class="role-name">번역기</span><span class="role-when">수정 · 규칙으로 승격할 때</span></div>
+        <div class="role-desc">새로 배운 것을 내가 이미 잘 아는 영역의 언어로 다시 진술하게 합니다. 어색한 번역은 내 이해가 얕은 지점을 정확히 가리킵니다.</div>
+      </li>
+      <li>
+        <div class="role-head"><span class="role-name">접지기</span><span class="role-when">전 구간 · 상시</span></div>
+        <div class="role-desc">주장마다 원문 · 문서 · 명세로 되돌립니다. AI의 요약을 원문의 대체물이 아니라 <em>원문으로 가는 색인</em>으로만 씁니다. 이 역할이 빠지면 나머지 다섯이 전부 오염됩니다.</div>
+      </li>
+    </ul>
+
+    <div class="callout callout--warm mt-3">
+      <div class="callout-label">금지 목록</div>
+      첫 답을 AI에게 시키기 · 요약본으로 원문 대체하기 · 코드를 통째로 받고 통과시키기 · “내가 이해한 게 맞아?”라고 묻기 · 진도를 AI 대화량으로 재기<br>
+      <span class="small muted">진도는 <b>무자료로 답한 관문 질문 개수</b>로만 잽니다.</span>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Validity</div>
+    <h2 class="section-title">왜 이렇게 배치했는가</h2>
+    <p class="section-desc">새로 만든 절차가 아니라, 학습과학에서 반복 검증된 효과들을 순서대로 배열한 것입니다.</p>
+    <ul class="list-plain">
+      <li><b>종착 산출물부터 역산</b> — 백워드 디자인 · Wiggins &amp; McTighe</li>
+      <li><b>관문 질문을 먼저 작성</b> — Pretesting effect · Richland, Kornell &amp; Kao (2009)</li>
+      <li><b>예측 → 대조</b> — Generation effect · Self-explanation, Chi 외 (1989)</li>
+      <li><b>자료를 덮고 무자료 인출</b> — Testing effect · Roediger &amp; Karpicke (2006)</li>
+      <li><b>D+1 / 3 / 7 / 21 간격</b> — Spacing effect 메타분석 · Cepeda 외 (2006)</li>
+      <li><b>D+7의 교차 배치</b> — Interleaving · Rohrer &amp; Taylor (2007)</li>
+      <li><b>예제 우선 → 문제 우선 전환</b> — Expertise reversal · Kalyuga 외 (2003)</li>
+      <li><b>“안다고 착각함” 칸을 분리</b> — Illusion of fluency · Bjork, Dunlosky &amp; Kornell (2013)</li>
+    </ul>
+
+    <div class="callout mt-3">
+      <div class="callout-label">게이트 규칙의 근거</div>
+      고등학생 약 1,000명 대상 현장 실험에서 GPT-4 접근은 연습 중 성적을 크게 끌어올렸습니다(일반 인터페이스 48%, 튜터형 127%). 그러나 <b>접근을 없앤 시험에서는 일반 인터페이스를 쓴 집단이 아예 쓰지 않은 집단보다 17% 낮았고</b>, 힌트 방식의 가드레일을 넣은 튜터형에서는 이 손실이 대부분 사라졌습니다. 도구의 유무가 아니라 <em>설계</em>가 결과를 갈랐습니다.<br>
+      <span class="small muted">Bastani 외, PNAS (2025)</span>
+    </div>
+
+    <p class="small muted mt-2">정직한 한계 — 위 근거들은 각 <em>구성 요소</em>가 통제된 조건에서 효과를 보였다는 뜻이지, 이 세 단계를 묶은 절차 전체가 실험적으로 검증되었다는 뜻은 아닙니다. 성과를 보장하는 처방이 아니라 <b>검증된 원리들과 어긋나지 않게 배열된 설계</b>로 읽는 편이 정확합니다.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Utility</div>
+    <h2 class="section-title">언제 쓰고, 언제 안 쓰나</h2>
+    <p class="section-desc">설계 비용이 60분이므로 총 학습 시간이 10시간을 넘길 주제에서만 회수됩니다.</p>
+    <div class="grid-2">
+      <div>
+        <div class="callout-label">잘 맞는 경우</div>
+        <ul class="list-plain">
+          <li>정해진 커리큘럼이 없는 주제 — 새 도메인, 신기술</li>
+          <li>목표는 뚜렷한데 경로가 없는 경우</li>
+          <li>여러 번 읽었는데 계속 못 쓰겠는 개념 (D 유형 누적)</li>
+          <li>혼자 하고 피드백 줄 사람이 없는 상황</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout-label">안 맞는 경우</div>
+        <ul class="list-plain">
+          <li>범위가 확정된 시험 — 기출 반복이 더 빠릅니다</li>
+          <li>30분이면 끝날 단발성 궁금증</li>
+          <li>완전 초심자의 첫 1~2주</li>
+          <li>마감이 임박한 실무 — 지금 필요한 건 학습이 아니라 완수입니다</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small muted mt-2">가장 큰 이득은 빨리 배우는 것이 아니라, <b>배우지 않아도 되는 것을 초반에 잘라내는 것</b>입니다.</p>
+  </section>
+
+  <div class="scribble-divider container"><svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg></div>
+
+  <section class="container">
+    <div class="section-tag">Compare</div>
+    <h2 class="section-title">질문고리 학습과 무엇이 다른가</h2>
+    <p class="section-desc">이 연습장에는 학습 프레임워크가 둘 있습니다. 쓰는 자리가 다릅니다.</p>
+
+    <div class="cmp-scroll">
+      <table class="cmp">
+        <thead>
+          <tr><th></th><th>질문고리 학습</th><th>지형 · 경로 · 장비</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>쓰는 자리</th><td>팀 프로젝트 안에서 개인의 학습</td><td>커리큘럼 없는 주제를 혼자</td></tr>
+          <tr><th>엔진</th><td>질문 → <b>가설</b> → 탐구 → 평가</td><td><b>예측</b> → 시도 → 대조 → 수정</td></tr>
+          <tr><th>단위</th><td>사이클 — 팀 가설 안에 중첩</td><td>루프 — 25~50분, 관문 질문 1개</td></tr>
+          <tr><th>판정 기준</th><td>학습 델타 (Δ이해)</td><td>무자료로 답한 관문 질문 개수</td></tr>
+          <tr><th>대조 상대</th><td><b>동료</b> — “이 가설이 깨지면 넌 뭘 알게 되는데?”</td><td><b>AI</b> — 단, 내 답을 제출한 뒤에만</td></tr>
+          <tr><th>AI</th><td>다루지 않음</td><td>세 번째 단계 전체가 AI 배치</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="quote mt-2">
+      두 프레임워크의 <em>가설</em>과 <em>예측</em>은 사실 같은 물건입니다. 자료를 보기 전에 내 답을 먼저 만들어 두는 것, 그리고 그것이 깨지는 순간을 학습의 증거로 삼는 것. 질문고리가 “깨지지 않는 가설은 경고 신호”라고 말하고, 지형·경로·장비가 “D+7에 무너지지 않았다면 간격이 너무 촘촘했던 것”이라고 말하는 것은 같은 이야기입니다.
+      <span class="quote-cite">차이는 누가 대조 상대인가</span>
+    </p>
+    <p>팀도 동료도 없을 때 그 자리를 AI로 대체하되, 그냥 대체하면 AI가 예측 단계까지 먹어버리므로 게이트 규칙으로 막습니다. 그래서 지형·경로·장비는 <a href="framework.html">질문고리 학습</a>의 솔로 버전이자 AI 확장판으로 읽어도 좋습니다.</p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Documents</div>
+    <h2 class="section-title">전체 문서 세 편</h2>
+    <p class="section-desc">이 페이지는 요약입니다. 워크시트 · 스코어카드 · 타이머가 들어 있는 원문은 아래에 있습니다.</p>
+
+    <div class="docs">
+      <a class="index-card" href="learning-design/index.html">
+        <span class="index-card-icon">🧭</span>
+        <div class="index-card-title">본편 · 지형 · 경로 · 장비</div>
+        <div class="index-card-desc">세 단계의 절차, 연구 근거, 60분 안에 끝내는 학습 설계표.</div>
+        <div class="index-card-arrow">펼쳐 보기 →</div>
+      </a>
+      <a class="index-card" href="learning-design/triangulation.html">
+        <span class="index-card-icon">📐</span>
+        <div class="index-card-title">부록 A · 삼각측량</div>
+        <div class="index-card-desc">무엇부터 배울지 정하는 능력의 훈련 드릴 6종과 AI 위임의 경계선.</div>
+        <div class="index-card-arrow">방위 재러 가기 →</div>
+      </a>
+      <a class="index-card" href="learning-design/yajang.html">
+        <span class="index-card-icon">📓</span>
+        <div class="index-card-title">부록 B · 야장</div>
+        <div class="index-card-desc">템플릿 6종, 액티비티 10종, 90분 워크숍 진행표.</div>
+        <div class="index-card-arrow">야장 열기 →</div>
+      </a>
+    </div>
+
+    <p class="mt-3"><a class="ai-cta" href="learning-design/index.html">본편부터 읽기 →</a></p>
+    <p class="small muted mt-2">팀 안에서 학습을 설계하려면 → <a href="framework.html">질문고리 학습</a> · 4주짜리 축소판은 → <a href="solo-learning.html">학습 설계도</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 방위 하나로는 방향밖에 나오지 않습니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
