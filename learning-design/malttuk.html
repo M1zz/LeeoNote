@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>첫 말뚝 — 문제를 세우는 법과 질문을 만드는 법</title>
+<meta name="description" content="부록 C · 첫 말뚝 — 막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문을 만들어 내는 절차.">
+<meta property="og:title" content="첫 말뚝 — 문제를 세우는 법과 질문을 만드는 법">
+<meta property="og:description" content="측량은 첫 말뚝을 박는 데서 시작한다. 그 점이 틀리면 이후의 모든 측정이 정확하게 틀린다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/malttuk.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --card:#F6F6F6;
+  --ink:#0A0A0A;
+  --ink-60:#6E6E6E;
+  --ink-40:#9A9A9A;
+  --teal:#6E6E6E;
+  --fluoro:#0A0A0A;
+  --blue:#0A0A0A;
+  --rule:#EAEAEA;
+  --rule-strong:#E4E4E4;
+  --display:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --body:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+  --max:1120px;
+  --rail:132px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.75;
+  letter-spacing:-.01em;word-break:keep-all;
+}
+.wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
+
+/* ─────────────────────────────────────────────
+   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   ───────────────────────────────────────────── */
+.sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
+  background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
+  backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px)}
+.sitebar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.sitebar-brand{font-family:var(--display);font-size:1.05rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--ink);text-decoration:none;display:inline-flex;align-items:baseline;gap:.55rem}
+.sitebar-brand span{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--ink-40);font-weight:400}
+.sitenav{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:center}
+.sitenav a{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-60);text-decoration:none;padding-bottom:2px;transition:color .18s}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a.active{color:var(--ink);border-bottom:2px solid var(--ink)}
+
+.docbar{background:var(--card);border-bottom:1px solid var(--rule)}
+.docbar .wrap{display:flex;gap:18px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.docbar a{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-40);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;
+  transition:color .16s,border-color .16s;white-space:nowrap}
+.docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
+
+.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
+.site-foot a{color:var(--ink-40)}
+.site-foot a:hover{color:var(--ink)}
+
+@media(max-width:600px){
+  .sitebar .wrap{flex-direction:column;align-items:flex-start;gap:.9rem}
+  .sitenav{gap:1rem}
+  .sitenav a{font-size:.66rem}
+  .docbar .wrap{gap:12px}
+  .docbar a{font-size:10px;letter-spacing:.06em}
+}
+@media print{.sitebar,.docbar{display:none}}
+
+/* ─────────────────────────────────────────────
+   TYPE
+   ───────────────────────────────────────────── */
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,8.6vw,96px);line-height:.94;letter-spacing:-.045em;margin:.18em 0 .1em}
+h2{font-family:var(--display);font-weight:900;font-size:clamp(27px,4.4vw,44px);line-height:1.12;letter-spacing:-.035em;margin:0 0 .35em}
+h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.4vw,23px);line-height:1.3;letter-spacing:-.025em;margin:0 0 .4em}
+h4{font-family:var(--body);font-weight:600;font-size:16px;margin:0 0 .3em;letter-spacing:-.015em}
+p{margin:0 0 1.05em}
+a{color:var(--ink);text-underline-offset:3px}
+.lede{font-size:clamp(17px,2.1vw,20px);line-height:1.72;max-width:62ch}
+.muted{color:var(--ink-60)}
+.small{font-size:14.5px;line-height:1.65}
+strong{font-weight:600}
+mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* hero */
+.hero{padding:44px 0 8px}
+.hero-top{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule-strong);padding-bottom:12px}
+.hero h1{margin-top:26px}
+.hero-sub{display:grid;grid-template-columns:1fr;gap:20px;margin:24px 0 32px}
+@media(min-width:820px){.hero-sub{grid-template-columns:1.15fr .85fr;gap:44px}}
+.hero-meta{border-left:2px solid var(--fluoro);padding-left:16px}
+.hero-meta dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.hero-meta dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);padding-top:4px}
+.hero-meta dd{margin:0;color:var(--ink-60)}
+
+.diagram{border:1px solid var(--rule-strong);background:var(--card);margin:28px 0 0}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption{border-top:1px solid var(--rule);padding:11px 15px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-60);line-height:1.6}
+
+/* section scaffold */
+section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44px}
+.sec{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:900px){.sec{grid-template-columns:var(--rail) 1fr;gap:0 40px}}
+.rail{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40);line-height:1.7}
+.rail b{display:block;color:var(--fluoro);font-weight:600}
+.rail .tick{display:block;margin-top:10px}
+.body-col{min-width:0}
+.sec-head{margin-bottom:26px}
+
+.card{background:var(--card);border:1px solid var(--rule-strong);padding:20px 19px;margin-top:26px}
+.card h4{margin-bottom:.4em}
+
+/* 전제 — 두 프레임워크의 빈칸 */
+.gapgrid{display:grid;grid-template-columns:1fr;border:1px solid var(--ink);margin-top:26px}
+@media(min-width:760px){.gapgrid{grid-template-columns:1fr 1fr}}
+.gapgrid > div{background:var(--card);padding:19px 18px;border-top:1px solid var(--rule-strong)}
+@media(min-width:760px){
+  .gapgrid > div:nth-child(-n+2){border-top:0}
+  .gapgrid > div:nth-child(even){border-left:1px solid var(--rule-strong)}
+}
+.gapgrid .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:7px}
+.gapgrid .said{font-size:14.5px;line-height:1.62;color:var(--ink);font-weight:500}
+.gapgrid .miss{margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule-strong);font-size:13.5px;line-height:1.6;color:var(--ink-60)}
+.gapgrid .miss b{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fluoro);display:block;margin-bottom:3px;font-weight:600}
+
+/* 4줄 진술 템플릿 */
+.stmt{margin-top:26px;border:2px solid var(--ink);background:var(--card)}
+.stmt-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 17px;border-bottom:2px solid var(--ink)}
+.stmt-head .t{font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.03em}
+.stmt-head .c{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+.stmt-rows{padding:6px 17px 17px}
+.stmt-row{padding:14px 0;border-bottom:1px solid var(--rule)}
+.stmt-row:last-child{border-bottom:0}
+.stmt-row .q{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;font-weight:600}
+.stmt-row .g{font-size:14px;line-height:1.6;color:var(--ink-60);margin-bottom:8px}
+.stmt-foot{padding:12px 17px;border-top:1px solid var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:var(--ink-40);line-height:1.7}
+
+.blank{display:block;min-height:42px;border:1px dashed var(--rule-strong);background:#FFFFFF;
+  padding:9px 11px;font-family:var(--body);font-size:14.5px;line-height:1.6;color:var(--ink)}
+.blank.tall{min-height:74px}
+.blank:focus{outline:2px solid var(--fluoro);outline-offset:1px;background:#fff}
+.blank:empty::before{content:attr(data-ph);color:var(--ink-40)}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:10px 15px;cursor:pointer;line-height:1;transition:opacity .15s}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{opacity:.82}
+.btn:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+
+/* 예시 대비 (전/후) */
+.beforeafter{margin-top:24px;border:1px solid var(--ink)}
+.ba-row{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:720px){.ba-row{grid-template-columns:1fr 1fr}}
+.ba-row > div{padding:16px 17px;background:var(--card);border-top:1px solid var(--rule)}
+.ba-row:first-child > div{border-top:0}
+@media(min-width:720px){.ba-row > div + div{border-left:1px solid var(--ink)}}
+.ba-row .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:6px}
+.ba-row .bad{color:var(--ink-40);text-decoration:line-through;font-size:14.5px;line-height:1.6}
+.ba-row .good{font-size:14.5px;line-height:1.62;font-weight:500}
+
+/* is / is-not */
+.isnot{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px}
+.isnot th,.isnot td{text-align:left;padding:11px 10px;border:1px solid var(--rule-strong);vertical-align:top;line-height:1.55}
+.isnot th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);background:var(--card);font-weight:600}
+.isnot td{background:var(--card);color:var(--ink-60)}
+.isnot td:first-child{color:var(--ink);font-weight:500;width:24%}
+@media(max-width:640px){.isnot,.isnot tbody,.isnot tr,.isnot td,.isnot th{display:block;width:auto}
+  .isnot thead{display:none}
+  .isnot tr{margin-bottom:14px;border:1px solid var(--ink)}
+  .isnot td{border:0;border-bottom:1px solid var(--rule)}
+  .isnot td:first-child{width:auto;font-weight:600}
+  .isnot td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);margin-bottom:3px}
+  .isnot td:first-child::before{content:none}
+}
+
+/* 리프레이밍 동작 */
+.moves{list-style:none;margin:26px 0 0;padding:0;counter-reset:mv}
+.moves > li{counter-increment:mv;position:relative;padding:18px 0 18px 56px;border-top:1px solid var(--rule)}
+.moves > li:last-child{border-bottom:1px solid var(--rule)}
+.moves > li::before{
+  content:"R" counter(mv);position:absolute;left:0;top:18px;
+  font-family:var(--mono);font-weight:600;font-size:12px;color:var(--ink);
+  border:1px solid var(--ink);padding:3px 6px;line-height:1;
+}
+.moves h4{font-size:16.5px}
+.moves p{margin:0;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.moves .ex{margin-top:9px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--teal);border-left:2px solid var(--fluoro);padding-left:11px}
+
+/* 드릴 */
+.drills{list-style:none;margin:26px 0 0;padding:0;counter-reset:d}
+.drills > li{counter-increment:d;position:relative;padding:20px 0 20px 58px;border-top:1px solid var(--rule)}
+.drills > li:last-child{border-bottom:1px solid var(--rule)}
+.drills > li::before{
+  content:"D" counter(d);position:absolute;left:0;top:20px;
+  font-family:var(--mono);font-weight:600;font-size:12px;color:var(--ink);
+  border:1px solid var(--ink);padding:3px 6px;line-height:1;
+}
+.drills h4{font-size:17px}
+.drills .spec{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:7px}
+.drills p{margin:0;font-size:15px;line-height:1.68;color:var(--ink-60)}
+.drills ol{margin:11px 0 0;padding-left:1.15em;font-size:14.5px;line-height:1.7;color:var(--ink-60)}
+.drills ol li{margin-bottom:6px}
+.drills .ex{margin-top:10px;font-family:var(--mono);font-size:12.5px;line-height:1.62;color:var(--teal);border-left:2px solid var(--fluoro);padding-left:11px}
+
+.act-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.timer{font-family:var(--mono);font-weight:600;font-size:19px;letter-spacing:.04em;color:var(--ink);min-width:64px}
+.timer.run{color:var(--fluoro)}
+.timer.done{color:var(--blue)}
+.tbtn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rule-strong);
+  background:transparent;color:var(--ink);padding:7px 11px;cursor:pointer;line-height:1}
+.tbtn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tbtn:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+
+/* 판정 4기준 */
+.crit{margin-top:26px;border-top:1px solid var(--ink)}
+.crit-row{display:grid;grid-template-columns:1fr;gap:5px 24px;padding:16px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:820px){.crit-row{grid-template-columns:186px 1fr 128px;align-items:start}}
+.crit-row .n{font-weight:600;font-size:15.5px;letter-spacing:-.015em}
+.crit-row .n small{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);font-weight:500}
+.crit-row .d{font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.crit-row .w{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.05em;line-height:1.5}
+
+/* 질문 검문소 */
+.gatehouse{border:2px solid var(--ink);background:var(--card);margin-top:28px}
+.gh-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:2px solid var(--ink)}
+.gh-head .t{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.03em}
+.gh-head .c{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+.gh-body{padding:16px}
+.gh-body input[type=text]{
+  width:100%;border:0;border-bottom:1px dashed var(--rule-strong);background:#fff;
+  font-family:var(--body);font-size:15px;color:var(--ink);padding:9px 10px;
+}
+.gh-body input[type=text]:focus{outline:none;border-bottom-color:var(--fluoro)}
+.gh-checks{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:9px}
+@media(min-width:700px){.gh-checks{grid-template-columns:1fr 1fr}}
+.gh-checks li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.55;color:var(--ink-60)}
+.gh-checks input{margin-top:4px;accent-color:var(--ink);width:15px;height:15px;flex-shrink:0}
+.gh-checks label{cursor:pointer}
+.gh-checks b{color:var(--ink);font-weight:600}
+.gh-verdict{margin-top:16px;padding-top:14px;border-top:1px solid var(--ink);display:flex;flex-wrap:wrap;gap:12px;align-items:baseline}
+.gh-score{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.04em;line-height:1}
+.gh-text{font-size:14.5px;line-height:1.6;color:var(--ink-60)}
+.gh-text b{color:var(--ink)}
+
+/* 질문 줄기 표 */
+.stems{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px}
+.stems th,.stems td{text-align:left;padding:11px 10px;border:1px solid var(--rule-strong);vertical-align:top;line-height:1.58}
+.stems th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);background:var(--card);font-weight:600}
+.stems td{background:var(--card);color:var(--ink-60)}
+.stems td:first-child{color:var(--ink);font-weight:500;width:20%}
+.stems td em{font-style:normal;font-family:var(--mono);font-size:12.5px;color:var(--ink);display:block;margin-bottom:4px}
+@media(max-width:640px){.stems,.stems tbody,.stems tr,.stems td,.stems th{display:block;width:auto}
+  .stems thead{display:none}
+  .stems tr{margin-bottom:14px;border:1px solid var(--ink)}
+  .stems td{border:0;border-bottom:1px solid var(--rule)}
+  .stems td:first-child{width:auto;font-weight:600}
+}
+
+/* 코칭 5문 */
+.five{list-style:none;margin:24px 0 0;padding:0;counter-reset:fv}
+.five > li{counter-increment:fv;position:relative;padding:14px 0 14px 52px;border-top:1px solid var(--rule)}
+.five > li:last-child{border-bottom:1px solid var(--rule)}
+.five > li::before{
+  content:counter(fv);position:absolute;left:0;top:14px;
+  font-family:var(--mono);font-weight:600;font-size:12px;color:var(--paper);
+  background:var(--ink);padding:4px 9px;line-height:1;
+}
+.five .q{font-weight:600;font-size:15.5px;letter-spacing:-.015em}
+.five .n{margin:3px 0 0;font-size:14px;line-height:1.6;color:var(--ink-60)}
+
+/* 위임 경계 */
+.deleg{margin-top:26px;border-top:1px solid var(--ink)}
+.drow{display:grid;grid-template-columns:1fr;gap:5px 22px;padding:15px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:860px){.drow{grid-template-columns:1.05fr 118px 1.35fr;align-items:start}}
+.drow .task{font-weight:600;font-size:15px;letter-spacing:-.015em}
+.drow .why{font-size:14px;line-height:1.62;color:var(--ink-60)}
+.badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid;padding:4px 7px;display:inline-block;line-height:1;font-weight:600;white-space:nowrap;
+}
+.b-full{color:var(--blue);border-color:var(--blue)}
+.b-part{color:var(--teal);border-color:var(--teal)}
+.b-none{color:var(--fluoro);border-color:var(--fluoro);background:rgba(0,0,0,.04)}
+
+.gate{margin-top:28px;border:2px solid var(--ink);padding:22px 20px;background:var(--card)}
+.gate .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-40);display:block;margin-bottom:10px}
+.gate .rule-text{font-family:var(--display);font-weight:900;font-size:clamp(20px,3.4vw,30px);letter-spacing:-.035em;line-height:1.2;margin:0}
+
+.forbid{margin-top:26px;background:var(--card);border:1px solid var(--rule-strong);border-left:3px solid var(--ink);border-radius:0 6px 6px 0;padding:20px 18px}
+.forbid h4{color:var(--fluoro);font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.forbid ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.7}
+.forbid li{margin-bottom:7px}
+
+.prompt{margin-top:22px;border:1px solid var(--rule-strong);background:var(--card)}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--rule)}
+.prompt-head .t{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.copy{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:5px 9px;cursor:pointer;line-height:1}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.copy:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
+.prompt pre{margin:0;padding:15px 14px;font-family:var(--mono);font-size:12.8px;line-height:1.72;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* 근거 */
+.ev{margin-top:26px;border-top:1px solid var(--ink)}
+.ev-row{display:grid;grid-template-columns:1fr;gap:5px 24px;padding:16px 0;border-bottom:1px solid var(--rule)}
+@media(min-width:820px){.ev-row{grid-template-columns:220px 1fr 172px;align-items:start}}
+.ev-row .el{font-weight:600;font-size:15px;letter-spacing:-.015em}
+.ev-row .ed{font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.ev-row .src{font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--teal)}
+
+.caveat{margin-top:26px;border-left:3px solid var(--blue);padding:4px 0 4px 16px;font-size:14.5px;line-height:1.7;color:var(--ink-60)}
+
+/* 60분 진행 */
+.plan{margin-top:26px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+@media(min-width:820px){.plan{grid-template-columns:repeat(4,1fr)}}
+.plan > div{padding:15px 13px;border-left:1px solid var(--rule)}
+.plan > div:first-child{border-left:0}
+@media(max-width:819px){.plan > div:nth-child(3){border-left:0}
+  .plan > div:nth-child(n+3){border-top:1px solid var(--rule)}}
+.plan .w{font-family:var(--display);font-weight:900;font-size:23px;letter-spacing:-.04em;color:var(--fluoro);line-height:1}
+.plan .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-40);margin:7px 0 5px}
+.plan p{margin:0;font-size:13.5px;line-height:1.56;color:var(--ink-60)}
+
+.two{display:grid;grid-template-columns:1fr;margin-top:26px;border:1px solid var(--ink)}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.two > div{padding:20px 18px;background:var(--card)}
+.two > div + div{border-top:1px solid var(--ink)}
+@media(min-width:760px){.two > div + div{border-top:0;border-left:1px solid var(--ink)}}
+.two .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;display:block}
+.two ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
+.two li{margin-bottom:6px}
+
+footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
+footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media print{
+  .tools,.act-foot,.gh-head .c,.copy{display:none}
+  section{page-break-inside:avoid;border-top:1px solid #CCC}
+  .blank{border:1px solid #CCC}
+}
+</style>
+</head>
+<body>
+
+<header class="sitebar">
+  <div class="wrap">
+    <a class="sitebar-brand" href="../index.html">리이오의 연습장 <span>리이오가 배우고 기록하는 곳</span></a>
+    <nav class="sitenav">
+      <a href="../framework.html">프레임워크</a>
+      <a href="../ai-learning.html" class="active">AI학습</a>
+      <a href="../solo-learning.html">학습설계</a>
+      <a href="../library.html">서재</a>
+      <a href="../thoughts.html">생각</a>
+      <a href="../academy.html">아카데미</a>
+      <a href="../tools.html">도구</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="docbar">
+  <div class="wrap">
+      <a href="../ai-learning.html">소개</a>
+      <a href="index.html">본편 · 지형·경로·장비</a>
+      <a href="triangulation.html">부록 A · 삼각측량</a>
+      <a href="yajang.html">부록 B · 야장</a>
+      <a href="malttuk.html" class="is-current">부록 C · 첫 말뚝</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">부록 C · Station 01 확장 — 문제 정의와 질문 생성</span>
+      <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
+    </div>
+
+    <h1>첫 말뚝</h1>
+
+    <div class="hero-sub">
+      <div>
+        <p class="lede">측량은 첫 말뚝을 박는 데서 시작한다. 그 점이 틀리면 이후의 모든 측정이 <strong>정확하게 틀린다</strong>. 부지런히 재고 꼼꼼히 기록해도 소용이 없다. 틀린 기준점 위에서는 정밀할수록 더 크게 빗나간다.</p>
+        <p class="lede">이 문서는 두 가지를 다룬다. 막연한 관심을 <strong>판정 가능한 문제</strong>로 바꾸는 절차, 그리고 백지에서 <strong>질문을 만들어 내는</strong> 훈련. 앞의 두 프레임워크가 “진짜 질문에서 시작한다”고 말한 뒤 건너뛴 자리다.</p>
+      </div>
+      <div class="hero-meta">
+        <dl>
+          <dt>전제</dt><dd>「지형·경로·장비」 또는 「질문고리 학습」을 한 번 이상 읽은 상태</dd>
+          <dt>소요</dt><dd>첫 바퀴 60분 · 이후 주제당 20분</dd>
+          <dt>산출물</dt><dd>문제 진술 4줄 · 질문 다발 · 승격된 관문 질문 3개</dd>
+          <dt>핵심 규칙</dt><dd>질문을 적는 동안에는 답하지 않는다</dd>
+        </dl>
+      </div>
+    </div>
+
+    <figure class="diagram reveal" style="margin:0">
+      <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="왼쪽의 안개 낀 막연한 관심 구역에서 첫 말뚝을 박고, 거기서 뻗어 나온 측선을 따라 질문 다발이 생기고, 그중 세 개가 관문 질문으로 승격되는 흐름도.">
+        <defs>
+          <pattern id="fog" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#9A9A9A" stroke-width="2" opacity=".28"/>
+          </pattern>
+        </defs>
+
+        <!-- 막연한 구역 -->
+        <rect x="0" y="0" width="270" height="300" fill="url(#fog)"/>
+        <text x="24" y="46" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2" fill="#6E6E6E">막연한 관심</text>
+        <text x="24" y="66" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.3" fill="#9A9A9A">VAGUE INTEREST</text>
+
+        <!-- 첫 말뚝 -->
+        <g>
+          <line x1="330" y1="196" x2="330" y2="108" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M330 110 L 378 122 L 330 136 Z" fill="#0A0A0A"/>
+          <circle cx="330" cy="200" r="6" fill="#0A0A0A"/>
+          <text x="330" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="1.4" fill="#0A0A0A">첫 말뚝</text>
+          <text x="330" y="250" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="1" fill="#9A9A9A">문제 진술 4줄</text>
+        </g>
+
+        <!-- 측선 -->
+        <line x1="336" y1="200" x2="930" y2="200" stroke="#0A0A0A" stroke-width="1.6"/>
+
+        <!-- 질문 다발 -->
+        <g stroke="#9A9A9A" stroke-width="1.2">
+          <line x1="430" y1="200" x2="412" y2="150"/><line x1="452" y1="200" x2="466" y2="142"/>
+          <line x1="474" y1="200" x2="458" y2="164"/><line x1="496" y1="200" x2="512" y2="156"/>
+          <line x1="518" y1="200" x2="504" y2="132"/><line x1="540" y1="200" x2="556" y2="168"/>
+          <line x1="562" y1="200" x2="548" y2="146"/><line x1="584" y1="200" x2="598" y2="158"/>
+          <line x1="430" y1="200" x2="424" y2="252"/><line x1="474" y1="200" x2="486" y2="246"/>
+          <line x1="518" y1="200" x2="510" y2="258"/><line x1="562" y1="200" x2="574" y2="248"/>
+        </g>
+        <text x="430" y="112" font-family="JetBrains Mono, monospace" font-size="12.5" letter-spacing="1.2" fill="#6E6E6E">질문 다발 — 15개 이상</text>
+        <text x="430" y="284" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="1" fill="#9A9A9A">판단 없이, 답 없이, 말한 그대로</text>
+
+        <!-- 검문소 -->
+        <line x1="660" y1="118" x2="660" y2="282" stroke="#0A0A0A" stroke-width="1.4" stroke-dasharray="7 6"/>
+        <text x="668" y="132" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.2" fill="#6E6E6E">판정 4기준</text>
+
+        <!-- 승격된 관문 질문 -->
+        <g>
+          <rect x="742" y="140" width="188" height="34" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+          <rect x="742" y="183" width="188" height="34" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+          <rect x="742" y="226" width="188" height="34" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+          <text x="836" y="162" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0A0A0A">관문 질문 1</text>
+          <text x="836" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0A0A0A">관문 질문 2</text>
+          <text x="836" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#0A0A0A">관문 질문 3</text>
+        </g>
+        <text x="836" y="112" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12.5" letter-spacing="1.2" fill="#0A0A0A">Station 02로</text>
+      </svg>
+      <figcaption>말뚝을 박아야 측선이 생기고, 측선이 있어야 질문이 어디를 향할지 정해진다. 순서를 건너뛰면 질문은 많은데 전부 같은 자리를 맴돈다.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ══════════ C0 전제 ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C0</b><span class="tick">전제</span><span class="tick">두 프레임워크의 빈칸</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>둘 다 여기서부터<br>시작한다고만 말한다</h2>
+        <p class="lede muted">앞의 문서들은 “진짜 문제”와 “관문 질문”이 이미 손에 있다고 가정한다. 그것을 어떻게 손에 넣는지는 어디에도 없다.</p>
+      </div>
+
+      <div class="gapgrid reveal">
+        <div>
+          <span class="k">질문고리 학습 · 1단계</span>
+          <div class="said">“진짜 문제를 궁극 챌린지로 세웁니다. 누구를 위한, 왜 중요한 문제인지부터 못박습니다.”</div>
+          <div class="miss"><b>말하지 않은 것</b>어떻게 못박는가. 무엇이 못박힌 상태인가. 아직 안 박힌 것을 어떻게 알아채는가.</div>
+        </div>
+        <div>
+          <span class="k">질문고리 학습 · 5단계</span>
+          <div class="said">“동료가 한 가지 질문을 던집니다 — 이 가설이 깨지면 너는 뭘 알게 되는데?”</div>
+          <div class="miss"><b>말하지 않은 것</b>좋은 질문 하나는 주어졌다. 나머지는? 그 하나가 안 통할 때 꺼낼 다음 질문은?</div>
+        </div>
+        <div>
+          <span class="k">지형·경로·장비 · Station 01</span>
+          <div class="said">“항목마다 관문 질문을 하나씩 쓴다. 15~30개면 충분하다.”</div>
+          <div class="miss"><b>말하지 않은 것</b>백지에서 15개를 어떻게 만드는가. 만든 것 중 무엇이 관문 질문 자격이 있는가.</div>
+        </div>
+        <div>
+          <span class="k">부록 B · 야장</span>
+          <div class="said">질문을 <em>쓰는</em> 액티비티 10종.</div>
+          <div class="miss"><b>말하지 않은 것</b>질문을 <em>만드는</em> 훈련은 0종. 재료가 이미 있다는 전제 위에 서 있다.</div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h4>그래서 이 문서는 목록이 아니다</h4>
+        <p class="small muted" style="margin:0">“좋은 질문 10가지” 같은 목록을 붙이면 이 연습장이 스스로 부정한 방식이 된다. 앞의 문서들이 이미 못박아 뒀다 — <strong>판단형은 설명을 읽어서 늘지 않는다. 예측 → 대조로만 자란다.</strong> 문제 정의와 질문 생성은 전형적인 판단형이다. 그래서 여기 실린 것도 전부 같은 모양이다. 먼저 내 것을 쓰고, 기준에 대보고, 차이를 규칙 한 줄로 남긴다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C1 문제 ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C1</b><span class="tick">문제</span><span class="tick">판정 가능한 지점</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>말뚝은 판정 가능한<br>지점에만 박힌다</h2>
+        <p class="lede muted">문제가 세워졌다는 것은 <strong>남이 봐도 풀렸는지 아닌지 판정할 수 있다</strong>는 뜻이다. 그 전까지는 관심이지 문제가 아니다.</p>
+      </div>
+
+      <h3>문제 진술 4줄</h3>
+      <p class="muted small">가설 3줄, 예측 3줄과 같은 형식이다. 네 칸을 채울 수 없으면 아직 문제가 아니라 주제다.</p>
+
+      <div class="beforeafter reveal">
+        <div class="ba-row">
+          <div><span class="k">문제가 아닌 것</span><div class="bad">개발자 교육을 잘하고 싶다</div></div>
+          <div><span class="k">문제인 것</span><div class="good">3개월차 주니어가 코드리뷰에서 지적받은 내용을 다음 PR에서 반복한다. 리뷰당 평균 2건. 반복이 멈추면 풀린 것으로 본다.</div></div>
+        </div>
+        <div class="ba-row">
+          <div><span class="k">문제가 아닌 것</span><div class="bad">사람들이 질문을 잘 못한다</div></div>
+          <div><span class="k">문제인 것</span><div class="good">스터디 참가자가 막혔을 때 “이거 어떻게 해요”로만 묻는다. 6명 중 5명. 각자 자기 시도를 먼저 말하기 시작하면 풀린 것으로 본다.</div></div>
+        </div>
+      </div>
+
+      <div class="stmt reveal" id="stmt">
+        <div class="stmt-head">
+          <div class="t">문제 진술 4줄</div>
+          <div class="c">칸을 눌러 직접 입력</div>
+        </div>
+        <div class="stmt-rows">
+          <div class="stmt-row">
+            <span class="q">01 · 누가</span>
+            <div class="g">역할 말고 <strong>구체적인 한 사람</strong>. “사용자”, “학습자”라고 쓰면 다시 쓴다.</div>
+            <div class="blank" contenteditable="true" data-ph="예 — 부트캠프 3개월차, 첫 취업 준비 중인 김OO" data-k="누가"></div>
+          </div>
+          <div class="stmt-row">
+            <span class="q">02 · 지금 무엇을 하고 있는가</span>
+            <div class="g">그 사람이 이미 쓰고 있는 <strong>우회 방법</strong>. 아무것도 안 하고 있다면 그건 문제가 아닐 가능성이 높다.</div>
+            <div class="blank" contenteditable="true" data-ph="예 — 막히면 AI에 붙여 넣고 나온 코드를 그대로 쓴다" data-k="지금"></div>
+          </div>
+          <div class="stmt-row">
+            <span class="q">03 · 무엇이 막히는가</span>
+            <div class="g"><strong>관찰된</strong> 증상과 빈도. 추측이면 앞에 “추정”이라고 표시하고, 이번 주 안에 확인한다.</div>
+            <div class="blank" contenteditable="true" data-ph="예 — 같은 개념을 다음 과제에서 또 못 쓴다. 최근 4개 과제 중 3개" data-k="막힘"></div>
+          </div>
+          <div class="stmt-row">
+            <span class="q">04 · 풀렸다면 무엇이 달라져 있는가</span>
+            <div class="g"><strong>판정 조건.</strong> 이 줄을 남이 읽고 “풀렸다/안 풀렸다”를 말할 수 없으면 다시 쓴다.</div>
+            <div class="blank" contenteditable="true" data-ph="예 — 자료를 덮고 그 개념을 쓴 코드를 처음부터 작성할 수 있다" data-k="판정"></div>
+          </div>
+        </div>
+        <div class="stmt-foot">04를 먼저 쓰고 01~03을 채우는 것도 좋다. 백워드 디자인과 같은 순서다.</div>
+      </div>
+
+      <h3 style="margin-top:44px">경계 그리기 — is / is-not</h3>
+      <p class="muted small">문제를 좁히는 가장 싼 방법은 <strong>어디까지가 아닌지</strong>를 적는 것이다. 나타나는 곳만 보면 원인이 과잉 추정된다.</p>
+
+      <table class="isnot reveal">
+        <thead><tr><th>축</th><th>나타난다 (IS)</th><th>나타나지 않는다 (IS NOT)</th></tr></thead>
+        <tbody>
+          <tr><td>누구에게</td><td data-l="IS">혼자 공부하는 사람</td><td data-l="IS NOT">스터디에 속한 사람</td></tr>
+          <tr><td>언제</td><td data-l="IS">새 개념을 만난 첫 주</td><td data-l="IS NOT">복습 구간</td></tr>
+          <tr><td>어디서</td><td data-l="IS">판단형 항목 (언제 무엇을 쓰는가)</td><td data-l="IS NOT">지식형 항목 (문법·API 이름)</td></tr>
+          <tr><td>얼마나</td><td data-l="IS">4번 중 3번</td><td data-l="IS NOT">항상은 아님</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted" style="margin-top:12px">오른쪽 열이 채워지는 순간 문제가 절반으로 줄어든다. “스터디에 속하면 안 나타난다”가 사실이라면, 이건 학습 능력 문제가 아니라 <strong>대조 상대의 부재</strong> 문제다. 말뚝을 옮겨야 한다.</p>
+
+      <h3 style="margin-top:44px">리프레이밍 — 더 나은 문제가 있는가</h3>
+      <p class="muted small">목적은 “진짜 문제”를 찾는 게 아니다. <strong>지금 것보다 나은 문제가 있는지 보는 것</strong>이다. 한 바퀴에 10분이면 된다.</p>
+
+      <ul class="moves reveal">
+        <li>
+          <h4>프레임을 소리 내어 읽는다</h4>
+          <p>내가 쓴 문제 진술을 그대로 읽고, 거기 이미 들어가 있는 <strong>해법의 냄새</strong>를 찾는다. 문제 안에 답이 숨어 있으면 그건 문제가 아니라 이미 내린 결정이다.</p>
+          <div class="ex">“엘리베이터가 느리다” → 안에 이미 ‘빠르게 만든다’는 해법이 들어 있다<br>“기다리는 시간이 지루하다” → 거울을 달 수 있게 된다</div>
+        </li>
+        <li>
+          <h4>빠진 것을 묻는다</h4>
+          <p>진술에 <strong>등장하지 않는 사람과 요인</strong>을 적는다. 대개 문제를 겪는 사람 본인, 또는 이미 그것을 해결한 사람이 빠져 있다.</p>
+        </li>
+        <li>
+          <h4>예외를 찾는다</h4>
+          <p>같은 조건인데 이 문제가 <strong>안 생기는 경우</strong>가 있는가. 있다면 거기서 무엇이 다른지가 문제 진술보다 값지다. is-not 표의 오른쪽 열이 여기 재료가 된다.</p>
+        </li>
+        <li>
+          <h4>목표를 한 층 올려 묻는다</h4>
+          <p>“이게 풀리면 무엇이 가능해지는가”를 세 번 반복한다. 두 번째나 세 번째 답이 원래 문제보다 나은 말뚝 자리인 경우가 많다.</p>
+        </li>
+        <li>
+          <h4>거울을 본다</h4>
+          <p>이 문제에서 <strong>내가 하고 있는 역할</strong>을 적는다. 남의 문제로만 쓰인 진술은 대개 내가 원인의 일부라는 사실을 숨기고 있다.</p>
+        </li>
+      </ul>
+
+      <div class="card reveal">
+        <h4>5 Whys는 쓰되, 한 줄만 파지 않는다</h4>
+        <p class="small muted" style="margin:0">증상에서 원인으로 내려가는 데는 유용하다. 다만 “왜”를 다섯 번 반복하면 <strong>가지가 하나뿐인 인과 사슬</strong>이 나온다. 실제 원인이 여럿이면 첫 번째로 떠오른 가설로 수렴해 버린다. 그래서 3단계쯤에서 한 번은 “<strong>다른 이유도 가능한가</strong>”를 끼워 넣고, 갈라진 가지를 버리지 말고 적어 둔다. 그 가지들이 뒤에서 질문 다발의 재료가 된다.</p>
+      </div>
+
+      <div class="card reveal">
+        <h4>좋은 분해의 테스트 — 챌린지 트리에 얹는 세 질문</h4>
+        <p class="small muted">「질문고리 학습」의 <strong>챌린지 계층 트리</strong>가 이미 분해 도구다. 여기서는 도구를 다시 만들지 않고, 잘 쪼갰는지 판정하는 기준만 얹는다. 세 개 다 통과해야 한다.</p>
+        <ol class="small muted" style="margin:12px 0 0;padding-left:1.15em;line-height:1.75">
+          <li><strong>겹치지 않는가</strong> — 두 가지가 같은 것을 다른 말로 부르고 있지 않은가</li>
+          <li><strong>빠진 게 없는가</strong> — 자식들을 다 풀면 부모가 풀리는가. 안 풀리면 빠진 가지가 있다</li>
+          <li><strong>각 가지가 검증 가능한가</strong> — 리프마다 “풀렸다”를 판정할 수 있는가. 못 하면 그 리프는 아직 문제가 아니다</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C2 질문 ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C2</b><span class="tick">질문</span><span class="tick">생성 → 판정</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>좋은 질문은 고르는 게 아니라<br>만든 다음 고르는 것이다</h2>
+        <p class="lede muted">사람들이 질문을 못 한다고 느끼는 이유는 대개 <strong>생성과 판정을 동시에</strong> 하기 때문이다. 머릿속에서 질문이 떠오르는 즉시 “이건 멍청한 질문 같은데”가 따라붙고, 그 자리에서 지워진다.</p>
+      </div>
+
+      <p>그래서 두 동작을 <strong>물리적으로 분리</strong>한다. 먼저 판단 없이 많이 만들고, 다 만든 뒤에 기준에 대본다. 이 순서를 지키는 것만으로 질문의 개수와 질이 같이 올라간다 — 개수가 늘어야 고를 것이 생기기 때문이다.</p>
+
+      <ul class="drills reveal">
+        <li>
+          <div class="spec">혼자 또는 둘이 · 4분 · 새 주제 진입 시</div>
+          <h4>질문 폭발</h4>
+          <p>목적 — <strong>답하려는 충동을 시간으로 눌러 끈다.</strong> 4분이라는 압박이 질문에 붙는 서문과 정당화를 제거한다.</p>
+          <ol>
+            <li>문제 진술 4줄을 눈에 보이게 놓는다. 이것이 과녁이다.</li>
+            <li>타이머 4분. <strong>최소 15개</strong>를 목표로 질문만 적는다.</li>
+            <li>답하지 않는다. 설명하지 않는다. “왜 이걸 묻냐면”도 쓰지 않는다.</li>
+            <li>3분 30초쯤 손이 멈춘다. <strong>거기서 짜낸 것이 이 훈련의 수확이다.</strong> 쉽게 나온 앞쪽 열 개는 대개 이미 알던 것이다.</li>
+          </ol>
+          <div class="ex">규칙 위반 신호 — 질문 옆에 괄호가 붙기 시작하면 답하고 있는 것이다. 괄호를 지우고 계속 적는다.</div>
+          <div class="act-foot"><span class="timer" data-min="4">04:00</span>
+            <button class="tbtn" type="button" data-act="start">시작</button>
+            <button class="tbtn" type="button" data-act="reset">되돌리기</button></div>
+        </li>
+        <li>
+          <div class="spec">혼자 또는 스터디 · 20분 · 관문 질문을 만들 때</div>
+          <h4>질문 한 바퀴</h4>
+          <p>목적 — 폭발로 얻은 <strong>날것의 다발을 관문 질문으로 승격</strong>시킨다. 생산 · 전환 · 선별 · 회고의 네 동작을 끊어서 한다.</p>
+          <ol>
+            <li><strong>초점 하나를 놓는다</strong>(4분) — 질문이 아닌 것으로. 문장, 그림, 코드 한 조각, 에러 메시지. 질문을 초점으로 쓰면 답이 유도된다.</li>
+            <li><strong>규칙 넷으로 생산</strong>(6분) — ⓐ 최대한 많이 ⓑ 멈춰서 토론·판단·대답하지 않기 ⓒ 말한 그대로 적기 ⓓ 진술문이 나오면 질문으로 바꾸기</li>
+            <li><strong>열고 닫기</strong>(4분) — 각 질문에 개방형/폐쇄형을 표시하고, <strong>폐쇄형 하나를 개방형으로, 개방형 하나를 폐쇄형으로</strong> 바꿔 본다. 같은 궁금증이 형태에 따라 어떻게 달라지는지 몸으로 겪는 구간이다.</li>
+            <li><strong>세 개 선별</strong>(4분) — 뒤의 판정 4기준에 대고 세 개만 남긴다. 나머지는 지우지 말고 보관한다.</li>
+            <li><strong>회고</strong>(2분) — 내가 처음에 못 떠올린 종류가 무엇이었는지 한 줄. 이 한 줄이 다음 바퀴의 재료다.</li>
+          </ol>
+          <div class="ex">폐쇄형 → 개방형 — “이 라이브러리 써도 되나요?” → “어떤 조건에서 이 라이브러리가 손해가 되나요?”<br>개방형 → 폐쇄형 — “상태 관리를 어떻게 해야 하나요?” → “이 화면에 전역 상태가 필요한가요?”</div>
+          <div class="act-foot"><span class="timer" data-min="20">20:00</span>
+            <button class="tbtn" type="button" data-act="start">시작</button>
+            <button class="tbtn" type="button" data-act="reset">되돌리기</button></div>
+        </li>
+      </ul>
+
+      <h3 style="margin-top:44px">판정 4기준</h3>
+      <p class="muted small">새로 외울 것은 없다. 넷 다 이 연습장이 이미 쓰던 말이다.</p>
+
+      <div class="crit reveal">
+        <div class="crit-row">
+          <div class="n">답이 갈리는가<small>Judgment</small></div>
+          <div class="d">검색하면 답이 하나로 나오는가, 상황에 따라 달라지는가. 지식형 질문은 관문 질문이 될 수 없다 — 참조하면 되는 것을 시험할 이유가 없다.</div>
+          <div class="w">Station 02<br>지식형 / 판단형</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">틀릴 수 있는가<small>Falsifiable</small></div>
+          <div class="d">이 질문에 내가 내놓은 답이 <strong>틀렸다고 판명될 방법</strong>이 있는가. 없다면 그것은 감상이지 질문이 아니다.</div>
+          <div class="w">질문고리<br>깨지는 가설</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">한 자리에서 확인되는가<small>Loop-sized</small></div>
+          <div class="d">25~50분 안에 답의 옳고 그름이 드러나는가. 며칠 걸린다면 질문이 너무 크다. 쪼갠다.</div>
+          <div class="w">Station 02<br>루프 1회의 크기</div>
+        </div>
+        <div class="crit-row">
+          <div class="n">계획을 바꾸는가<small>Information value</small></div>
+          <div class="d">답을 얻고 나면 <strong>이후 계획이 달라지는가.</strong> 어느 쪽 답이 나와도 다음에 할 일이 같다면, 지금 물을 질문이 아니다.</div>
+          <div class="w">부록 A<br>불확실성 축소 ×3</div>
+        </div>
+      </div>
+
+      <div class="gatehouse reveal" id="gatehouse">
+        <div class="gh-head">
+          <div class="t">질문 검문소</div>
+          <div class="c">질문 하나씩 통과시켜 본다</div>
+        </div>
+        <div class="gh-body">
+          <input type="text" id="ghQ" placeholder="검사할 질문을 적어 보세요" aria-label="검사할 질문">
+          <ul class="gh-checks">
+            <li><input type="checkbox" id="gh1" class="gh-c"><label for="gh1"><b>답이 갈린다</b> — 검색으로 하나의 답이 나오지 않는다</label></li>
+            <li><input type="checkbox" id="gh2" class="gh-c"><label for="gh2"><b>틀릴 수 있다</b> — 내 답이 틀렸음을 보일 방법이 있다</label></li>
+            <li><input type="checkbox" id="gh3" class="gh-c"><label for="gh3"><b>한 자리에서 확인된다</b> — 25~50분 안에 드러난다</label></li>
+            <li><input type="checkbox" id="gh4" class="gh-c"><label for="gh4"><b>계획을 바꾼다</b> — 답에 따라 다음 할 일이 달라진다</label></li>
+          </ul>
+          <div class="gh-verdict">
+            <span class="gh-score" id="ghScore">0 / 4</span>
+            <span class="gh-text" id="ghText">기준에 하나씩 대보세요.</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:44px">막혔을 때 꺼내는 질문 줄기</h3>
+      <p class="muted small">백지에서 질문이 안 나오는 것은 재능 문제가 아니라 <strong>시작 어절이 없어서</strong>인 경우가 대부분이다. 줄기를 주면 질문의 종류가 늘어난다.</p>
+
+      <table class="stems reveal">
+        <thead><tr><th>겨냥하는 곳</th><th>줄기</th></tr></thead>
+        <tbody>
+          <tr><td>명료화</td><td><em>“…라고 할 때 정확히 무엇을 말하는가?”</em>같은 말을 서로 다르게 쓰고 있는 지점을 드러낸다.</td></tr>
+          <tr><td>전제</td><td><em>“이 설명은 무엇이 참이라고 가정하고 있는가?”</em>가정이 드러나면 그 자리가 곧 실험할 곳이다.</td></tr>
+          <tr><td>근거</td><td><em>“이게 사실인지 어떻게 확인했는가?”</em>문서인지, 통념인지, 추정인지 가른다.</td></tr>
+          <tr><td>반례</td><td><em>“이 설명이 무너지는 경우는 언제인가?”</em>맞았다고 판정된 직후가 가장 위험한 순간이다.</td></tr>
+          <tr><td>대안</td><td><em>“다른 선택지는 무엇이었고, 왜 그것을 버렸는가?”</em>판단형 숙달의 기준 그 자체.</td></tr>
+          <tr><td>결과</td><td><em>“이대로 가면 무엇이 따라오는가?”</em>지금은 안 보이는 비용을 앞당겨 본다.</td></tr>
+          <tr><td>연결</td><td><em>“내가 이미 아는 것 중 무엇과 닮았는가? 어디서 닮음이 깨지는가?”</em>인출 단서를 늘린다.</td></tr>
+          <tr><td>메타</td><td><em>“지금 이 질문이 맞는 질문인가?”</em>말뚝 자리로 돌아가는 줄기.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:44px">동료 검증 다섯 문장</h3>
+      <p class="muted small">「질문고리 학습」의 동료 검증은 질문 하나로 되어 있다. 그 하나가 안 통할 때를 위해 다섯 문장으로 늘린다. 순서대로 묻는다.</p>
+
+      <ul class="five reveal">
+        <li><div class="q">지금 목표로 하는 상태는 무엇인가?</div><p class="n">문제 진술 4줄의 04번 칸.</p></li>
+        <li><div class="q">지금 실제 상태는 무엇인가?</div><p class="n">추측 말고 관찰. 확인해 본 적 없으면 “모른다”가 정답이다.</p></li>
+        <li><div class="q">둘 사이를 막는 것 중, 지금 다루는 것은 무엇인가?</div><p class="n">장애물은 여럿이다. 하나만 고르게 하는 것이 이 질문의 일이다.</p></li>
+        <li><div class="q">다음 한 걸음은 무엇이고, 무엇을 예상하는가?</div><p class="n">예상을 말하게 하는 것이 핵심. 예상 없는 시도는 대조가 안 된다.</p></li>
+        <li><div class="q">그 결과는 언제 같이 확인하는가?</div><p class="n">혼자라면 달력에 적는다. 날짜가 없으면 루프가 닫히지 않는다.</p></li>
+      </ul>
+      <p class="small muted" style="margin-top:14px">혼자 쓸 때는 <strong>미래의 나</strong>에게 묻는 형식으로 적어 두면 된다. 다섯 답을 적는 데 5분이면 충분하고, 넷째 칸이 비어 있으면 아직 실험이 없는 것이다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C3 AI ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C3</b><span class="tick">장비</span><span class="tick">이 단계의 AI</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>말뚝은 내가 박는다</h2>
+        <p class="lede muted">본편의 게이트 규칙이 여기서도 그대로 적용된다. 다만 이 단계에서는 지킬 것이 하나 더 있다 — <strong>질문 목록을 AI에게 먼저 받으면, 내가 못 떠올리는 질문의 종류를 영영 알 수 없게 된다.</strong></p>
+      </div>
+
+      <div class="gate reveal">
+        <span class="lbl">Gate Rule · C</span>
+        <p class="rule-text">내 질문 다발이 존재하기 전에는<br>프롬프트를 열지 않는다.</p>
+      </div>
+
+      <p style="margin-top:26px">4분이면 된다. 15개를 적고 나서 열면, AI가 준 목록에서 <strong>내 목록에 없던 종류</strong>가 눈에 들어온다. 그게 다음 바퀴에 고칠 내 편향이다. 먼저 열면 AI 목록이 내 목록이 되어 버리고, 차이가 사라지므로 배울 것도 사라진다.</p>
+
+      <div class="deleg reveal">
+        <div class="drow">
+          <div class="task">영역에서 흔히 나오는 질문 열거</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">내 다발을 먼저 만든 뒤에. 답이 아니라 대조용 목록이라 틀려도 손해가 적다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">내 문제 진술의 애매한 지점 지적</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">진술을 붙여 넣고 “판정 불가능한 부분만 지목하라”고 시킨다. 잘한다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">내 질문을 개방형/폐쇄형으로 분류</div>
+          <div><span class="badge b-full">전면 위임</span></div>
+          <div class="why">형식 판정이라 기계적이다. 다만 전환은 내가 한다 — 전환하면서 배우는 것이 이 동작의 목적이다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">리프레이밍 후보 제시</div>
+          <div><span class="badge b-part">증거 제공 시</span></div>
+          <div class="why">is/is-not 표와 실패 기록을 붙여 주면 쓸 만하다. 그 표를 만드는 일은 위임할 수 없다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">무엇이 진짜 문제인지 결정</div>
+          <div><span class="badge b-none">위임 불가</span></div>
+          <div class="why">문제 선택은 내 시간·기회비용의 함수다. AI는 그 함수를 모르고, 알려줘도 근사치를 쓴다.</div>
+        </div>
+        <div class="drow">
+          <div class="task">질문 세 개 선별</div>
+          <div><span class="badge b-none">위임 불가</span></div>
+          <div class="why">판정 4기준 중 셋이 <strong>내 현재 상태</strong>에 달려 있다. 무엇이 나에게 판단형인지, 내 루프가 얼마나 큰지, 내 계획이 무엇인지.</div>
+        </div>
+      </div>
+
+      <div class="forbid reveal">
+        <h4>금지 목록</h4>
+        <ul>
+          <li><strong>“뭘 물어봐야 할까?”로 대화를 시작하기</strong> — 내 다발이 없으면 그 대화는 훈련이 아니라 열람이다.</li>
+          <li><strong>질문을 적자마자 답 받기</strong> — 생성과 판정을 분리한 이유가 사라진다. 15개를 다 적고 연다.</li>
+          <li><strong>AI가 준 질문을 그대로 관문 질문에 올리기</strong> — 최소한 하나는 내 상황에 맞게 고쳐 쓴다. 고친 이유를 한 줄 적는다.</li>
+          <li><strong>“이 문제 정의 괜찮나요?”라고 묻기</strong> — 괜찮은지는 04번 칸으로 판정된다. AI의 “좋습니다”는 근거가 아니다.</li>
+        </ul>
+      </div>
+
+      <div class="prompt reveal">
+        <div class="prompt-head"><span class="t">01 · 진술 검문 — 내 4줄을 쓴 뒤</span><button class="copy" type="button">복사</button></div>
+<pre>내 문제 진술이다.
+"""
+누가: [01]
+지금 무엇을: [02]
+무엇이 막히는가: [03]
+풀렸다면: [04]
+"""
+평가하거나 개선안을 쓰지 마라. 다음만 지목하라.
+· 판정 불가능한 표현 (읽는 사람마다 다르게 해석될 단어)
+· 관찰이 아니라 추측인 문장
+· 04번 칸만 읽고 "풀렸다/안 풀렸다"를 말할 수 있는가 — 예/아니오와 그 이유 한 줄
+"그래도 좋은 시작입니다" 같은 말은 쓰지 마라.</pre>
+      </div>
+
+      <div class="prompt reveal">
+        <div class="prompt-head"><span class="t">02 · 다발 대조 — 내 질문 15개를 적은 뒤</span><button class="copy" type="button">복사</button></div>
+<pre>[영역]에서 [문제 진술 한 줄]을 풀려고 한다.
+아래는 내가 먼저 만든 질문 목록이다.
+"""
+[내 질문 15개]
+"""
+다음 순서로만 답하라.
+1) 내 목록에 없는 종류의 질문 8개 (한 줄씩, 답은 쓰지 마라)
+2) 그 8개가 각각 어떤 "종류"인지 한 단어로 (전제 / 근거 / 반례 / 대안 / 결과 …)
+3) 내 목록에서 반복적으로 빠져 있는 종류 두 가지
+추천이나 우선순위는 매기지 마라. 선별은 내가 한다.</pre>
+      </div>
+
+      <div class="prompt reveal">
+        <div class="prompt-head"><span class="t">03 · 리프레이밍 반론 — 내 말뚝을 옮겨야 하는지</span><button class="copy" type="button">복사</button></div>
+<pre>내가 세운 문제다: "[문제 진술]"
+이 문제가 나타나지 않는 조건은 다음과 같다: "[is-not 목록]"
+
+동의하지 말고 다음만 답하라.
+· 이 진술 안에 이미 들어가 있는 해법 전제 1개
+· 이 문제를 푸는 것이 헛수고가 되는 시나리오 2개
+· 같은 증상을 설명하는 다른 원인 2개
+대안 문제 진술을 대신 써 주지는 마라. 내가 다시 세우겠다.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C4 유효성 ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C4</b><span class="tick">유효성</span><span class="tick">왜 이렇게 배열했는가</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>어디에서 왔는가</h2>
+        <p class="lede muted">본편과 같은 방식으로, 각 구성 요소의 출처를 밝힌다.</p>
+      </div>
+
+      <div class="ev reveal">
+        <div class="ev-row">
+          <div class="el">질문을 만들게 하는 것 자체</div>
+          <div class="ed">학습자에게 질문 생성 전략을 가르친 개입 연구들을 모아 보면 이해도에서 이득이 나타났다. 중앙값 효과크기는 표준화 검사에서 .36, 실험자 제작 검사에서 .86.</div>
+          <div class="src">Rosenshine, Meister &amp; Chapman (1996)<br>Review of Educational Research</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">줄기를 주고 서로 묻게 하는 것</div>
+          <div class="ed">유도 질문 줄기를 받은 집단이 단순 토론이나 자유 질문 집단보다 비판적 사고형 질문을 더 많이 하고, 설명의 질과 성취도가 높았다.</div>
+          <div class="src">King (1994)<br>American Educational Research Journal</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">답을 모르는 상태에서 먼저 묻기</div>
+          <div class="ed">답을 모른 채 먼저 질문을 받으면 이후 같은 내용을 학습할 때 파지가 향상된다. 본편이 관문 질문을 먼저 쓰게 하는 근거와 같다.</div>
+          <div class="src">Pretesting effect<br>Richland, Kornell &amp; Kao (2009)</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">생산과 판정의 분리</div>
+          <div class="ed">질문만 생산하는 구간을 규칙으로 강제하는 현장 프로토콜. 판단·토론·응답을 금지하고, 진술문은 질문으로 바꾸게 한다.</div>
+          <div class="src">Question Formulation Technique<br>Rothstein &amp; Santana</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">4분 · 최소 15개</div>
+          <div class="ed">짧은 시간 압박이 서문과 정당화를 제거하고, 3분 30초 이후 에너지가 꺼진 뒤에 짜낸 질문이 가장 값지다는 관찰.</div>
+          <div class="src">Question Burst<br>Gregersen, HBR (2018)</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">리프레이밍을 별도 동작으로</div>
+          <div class="ed">경영진 106명 조사에서 85%가 자기 조직이 문제 진단에 약하다고 답했고, 87%가 그 비용이 크다고 했다. 진단은 저절로 되지 않는다.</div>
+          <div class="src">Wedell-Wedellsborg<br>HBR (2017)</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">is / is-not 경계</div>
+          <div class="ed">문제가 나타나는 조건만 보면 원인이 과잉 추정된다. 나타나지 않는 조건을 함께 적어 경계를 좁히는 고전적 절차.</div>
+          <div class="src">Kepner-Tregoe<br>문제 분석</div>
+        </div>
+        <div class="ev-row">
+          <div class="el">동료 검증 다섯 문장</div>
+          <div class="ed">목표 상태 · 현재 상태 · 장애물 · 다음 실험 · 확인 시점. 개선 사이클을 굴리는 코칭 질문 세트를 학습 루프에 맞춰 옮긴 것.</div>
+          <div class="src">Coaching Kata<br>Rother, Toyota Kata</div>
+        </div>
+      </div>
+
+      <div class="caveat reveal">
+        <strong>정직한 한계.</strong> 견고한 근거가 있는 것은 <em>질문 생성 훈련이 이해도를 올린다</em>는 부분이다. 그것도 대부분 독해 과제에서 측정되었다. <strong>문제 정의로의 전이는 검증된 것이 아니라 추론이다.</strong> QFT와 질문 폭발은 널리 쓰이는 현장 프로토콜이지만 통제 실험으로 확립된 절차가 아니고, 리프레이밍 조사 수치는 자기 보고다. 여기 실린 절차는 성과를 보장하는 처방이 아니라, <em>검증된 원리들과 어긋나지 않게 배열된 설계</em>로 읽는 편이 정확하다. 본인의 기록이 쌓이면 그쪽을 우선한다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C5 실행 ══════════ -->
+<section>
+  <div class="wrap sec">
+    <div class="rail"><b>C5</b><span class="tick">실행</span><span class="tick">60분 첫 바퀴</span></div>
+    <div class="body-col">
+      <div class="sec-head">
+        <h2>오늘 60분</h2>
+        <p class="lede muted">이미 하고 있는 학습 하나를 재료로 쓴다. 새 주제를 기다릴 필요가 없다.</p>
+      </div>
+
+      <div class="plan reveal">
+        <div><div class="w">15′</div><div class="l">말뚝</div><p>문제 진술 4줄을 채운다. 04번 칸부터 써도 좋다.</p></div>
+        <div><div class="w">10′</div><div class="l">경계</div><p>is / is-not 표를 채우고, 오른쪽 열이 말뚝을 옮기라고 하는지 본다.</p></div>
+        <div><div class="w">20′</div><div class="l">다발</div><p>질문 폭발 4분 → 한 바퀴로 열고 닫기 → 세 개 선별.</p></div>
+        <div><div class="w">15′</div><div class="l">대조</div><p>이제 AI를 연다. 프롬프트 01·02. 내 목록에 없던 <strong>종류</strong>를 한 줄로 남긴다.</p></div>
+      </div>
+
+      <div class="two reveal">
+        <div>
+          <span class="k">끝났을 때 손에 남는 것</span>
+          <ul>
+            <li>판정 가능한 문제 진술 한 장</li>
+            <li>관문 질문 3개 — Station 02로 바로 넘어간다</li>
+            <li>보관된 질문 다발 — 나중에 다시 꺼낸다</li>
+            <li>규칙 한 줄 — “나는 ___ 종류의 질문을 잘 못 떠올린다”</li>
+          </ul>
+        </div>
+        <div>
+          <span class="k">이 바퀴가 실패하는 방식</span>
+          <ul>
+            <li>말뚝을 완벽하게 박으려다 15분을 넘긴다 → 타임박스를 지킨다. 말뚝은 옮길 수 있다</li>
+            <li>질문 폭발에서 10개쯤에 멈춘다 → 멈춘 뒤가 본론이다</li>
+            <li>선별에서 네 개 이상 남긴다 → 세 개다. 못 자르면 문제가 아직 크다</li>
+            <li>마지막 규칙 한 줄을 안 적는다 → 그러면 다음 바퀴에 아무것도 나아지지 않는다</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tools">
+        <button class="btn" type="button" id="dl">진술 · 질문 내려받기</button>
+        <button class="btn ghost" type="button" id="pr">인쇄하기</button>
+        <button class="btn ghost" type="button" id="cl">비우기</button>
+      </div>
+      <p class="small muted" style="margin-top:12px">입력한 내용은 이 브라우저 화면에만 있습니다. 어디로도 전송되지 않으니, 남기려면 내려받거나 인쇄해 두세요.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3 style="max-width:26ch">틀린 말뚝 위에서는 정밀할수록 더 크게 빗나간다.</h3>
+        <p class="small muted" style="max-width:58ch;margin-top:10px">문제를 다시 세우는 일은 후퇴가 아니다. 측량에서 기준점을 옮기는 것은 실패가 아니라 정상적인 절차다. 다만 옮길 때마다 왜 옮겼는지 한 줄을 남긴다.</p>
+      </div>
+      <div class="sig">
+        첫 말뚝 · 부록 C<br>
+        Problem Framing &amp; Question Making<br>
+        Rev. 2026.08
+      </div>
+    </div>
+    <div class="site-foot">© 2026 Leeo · 개발자리 · <a href="../index.html">리이오의 연습장</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ── reveal ──
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var targets = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    targets.forEach(function(el){ io.observe(el); });
+  }
+
+  // ── copy buttons ──
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var text = btn.closest(".prompt").querySelector("pre").textContent;
+      var done = function(){
+        var prev = btn.textContent;
+        btn.textContent = "복사됨";
+        setTimeout(function(){ btn.textContent = prev; }, 1400);
+      };
+      function fallback(){
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "복사 실패"; }
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    });
+  });
+
+  // ── timers ──
+  function fmt(sec){
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  document.querySelectorAll(".act-foot").forEach(function(foot){
+    var el = foot.querySelector(".timer");
+    var startBtn = foot.querySelector('[data-act="start"]');
+    var resetBtn = foot.querySelector('[data-act="reset"]');
+    var total = parseInt(el.getAttribute("data-min"), 10) * 60;
+    var left = total, id = null;
+
+    function paint(){
+      el.textContent = fmt(left);
+      el.classList.toggle("run", id !== null && left > 0);
+      el.classList.toggle("done", left === 0);
+    }
+    function stop(){
+      if (id) { clearInterval(id); id = null; }
+      startBtn.textContent = "시작";
+      paint();
+    }
+    startBtn.addEventListener("click", function(){
+      if (id) { stop(); return; }
+      if (left === 0) left = total;
+      startBtn.textContent = "일시정지";
+      id = setInterval(function(){
+        left--;
+        if (left <= 0) { left = 0; clearInterval(id); id = null; startBtn.textContent = "시작"; }
+        paint();
+      }, 1000);
+      paint();
+    });
+    resetBtn.addEventListener("click", function(){ left = total; stop(); });
+    paint();
+  });
+
+  // ── 질문 검문소 ──
+  var checks = [].slice.call(document.querySelectorAll(".gh-c"));
+  var scoreEl = document.getElementById("ghScore");
+  var textEl = document.getElementById("ghText");
+  var VERDICT = [
+    "기준에 하나씩 대보세요.",
+    "<b>버립니다.</b> 이 질문으로는 루프가 돌지 않습니다. 다발에서 다른 것을 꺼내세요.",
+    "<b>버립니다.</b> 아직 질문이라기보다 관심입니다. 문제 진술로 돌아가세요.",
+    "<b>다듬습니다.</b> 빠진 기준이 하나뿐입니다. 그 기준을 채우도록 질문을 고쳐 쓰세요.",
+    "<b>관문 질문으로 승격.</b> Station 02의 루프에 넣습니다."
+  ];
+  function paintGate(){
+    var n = checks.filter(function(c){ return c.checked; }).length;
+    scoreEl.textContent = n + " / 4";
+    textEl.innerHTML = VERDICT[n];
+  }
+  checks.forEach(function(c){ c.addEventListener("change", paintGate); });
+  paintGate();
+
+  // ── 워크시트 ──
+  var blanks = [].slice.call(document.querySelectorAll(".blank"));
+
+  document.getElementById("pr").addEventListener("click", function(){ window.print(); });
+
+  document.getElementById("cl").addEventListener("click", function(){
+    if (!window.confirm("입력한 내용을 모두 지웁니다. 계속할까요?")) return;
+    blanks.forEach(function(b){ b.textContent = ""; });
+    var q = document.getElementById("ghQ");
+    if (q) q.value = "";
+    checks.forEach(function(c){ c.checked = false; });
+    paintGate();
+  });
+
+  document.getElementById("dl").addEventListener("click", function(){
+    var lines = ["첫 말뚝 — 문제 진술 4줄", "리이오의 연습장 · 부록 C", ""];
+    blanks.forEach(function(b){
+      lines.push("[" + (b.getAttribute("data-k") || "") + "]");
+      lines.push((b.textContent || "").trim() || "(비어 있음)");
+      lines.push("");
+    });
+    var q = document.getElementById("ghQ");
+    if (q && q.value.trim()) {
+      lines.push("[검문소에 올린 질문]");
+      lines.push(q.value.trim());
+      lines.push("통과 기준: " + checks.filter(function(c){ return c.checked; }).length + " / 4");
+      lines.push("");
+    }
+    var blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "malttuk-problem-statement.txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -231,8 +231,8 @@
   .cmp td b { color: var(--ink); }
 
   /* 원문 카드 */
-  .docs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; margin-top: 1rem; }
-  @media (max-width: 760px) { .docs { grid-template-columns: 1fr; } }
+  .docs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; margin-top: 1rem; }
+  @media (max-width: 700px) { .docs { grid-template-columns: 1fr; } }
 
   .ai-cta {
     display: inline-flex;
@@ -384,6 +384,11 @@
         <div class="quad-fix">→ 자료를 덮고 백지에 써보는 것으로만 검출됩니다.</div>
       </div>
     </div>
+    <div class="callout mt-3">
+      <div class="callout-label">백지에서 관문 질문 15개를 어떻게 만드나</div>
+      이 단계가 가장 막히는 자리입니다. 질문을 만드는 절차와 좋고 나쁨의 판정 기준은 → <a href="learning-design/malttuk.html"><b>부록 C · 첫 말뚝</b></a>에 따로 정리해 두었습니다.
+    </div>
+
     <p class="small muted mt-2">D는 스스로 발견되지 않습니다. 그래서 이 단계의 마지막 동작은 항상 “자료를 덮고 지금 아는 것을 다 써보기”여야 합니다. <b>여기서 안 써지는 것이 실제 출발선입니다.</b></p>
   </section>
 
@@ -583,7 +588,7 @@
 
   <section class="container">
     <div class="section-tag">Documents</div>
-    <h2 class="section-title">전체 문서 세 편</h2>
+    <h2 class="section-title">전체 문서 네 편</h2>
     <p class="section-desc">이 페이지는 요약입니다. 워크시트 · 스코어카드 · 타이머가 들어 있는 원문은 아래에 있습니다.</p>
 
     <div class="docs">
@@ -604,6 +609,12 @@
         <div class="index-card-title">부록 B · 야장</div>
         <div class="index-card-desc">템플릿 6종, 액티비티 10종, 90분 워크숍 진행표.</div>
         <div class="index-card-arrow">야장 열기 →</div>
+      </a>
+      <a class="index-card" href="learning-design/malttuk.html">
+        <span class="index-card-icon">📍</span>
+        <div class="index-card-title">부록 C · 첫 말뚝</div>
+        <div class="index-card-desc">막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 질문을 만들어 내는 절차.</div>
+        <div class="index-card-arrow">말뚝 박으러 가기 →</div>
       </a>
     </div>
 
