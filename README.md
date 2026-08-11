@@ -12,7 +12,7 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 
 | 페이지 | 무엇이 적혀 있는지 |
 | --- | --- |
-| [프레임워크](https://m1zz.github.io/LeeoNote/framework.html) | 질문고리 학습 — 팀 프로젝트 안에서 개인의 학습을 설계하는 프레임워크 |
+| [프레임워크](https://m1zz.github.io/LeeoNote/framework.html) | 질문고리 학습 — 혼자서도 팀에서도, 학습을 우연이 아니라 의도로 설계하는 프레임워크 |
 | [AI학습](https://m1zz.github.io/LeeoNote/ai-learning.html) | 지형 · 경로 · 장비 — AI를 마지막에 배치하는 학습 설계 (본편 + 부록 2편) |
 | [학습설계](https://m1zz.github.io/LeeoNote/solo-learning.html) | 혼자 배우는 사람을 위한 4주 학습 경험 설계도 |
 | [철학](https://m1zz.github.io/LeeoNote/philosophy.html) | 가르치는 일에 대해 오래 생각해온 글 — 여는 글과 6편의 짧은 글 |
