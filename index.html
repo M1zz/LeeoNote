@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>리이오의 연습장</title>
-<meta name="description" content="배우고, 기록하고, 나누는 연습장. 프레임워크 · 서재 · 생각 · 아카데미 · 도구.">
+<meta name="description" content="혼자 배우다, 가르치다, 만들다 막힌 자리에서 다음 한 걸음을 찾는 곳. 지금 막힌 문장을 고르면 갈 곳을 알려드립니다.">
 <meta property="og:title" content="리이오의 연습장">
-<meta property="og:description" content="배우면 기록하고, 기록하면 나눕니다.">
+<meta property="og:description" content="지금 어디에서 막혀 있나요? 막힌 문장을 고르면, 다음 한 걸음으로 안내합니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -19,7 +19,7 @@
 <style>
   /* index-only */
   .hero {
-    padding: 5.5rem 0 4rem;
+    padding: 5.5rem 0 3.4rem;
     position: relative;
   }
   .hero-eyebrow {
@@ -73,6 +73,220 @@
   }
   .hero-cta:hover { opacity: 0.82; border-bottom: none; color: #fff; }
 
+  /* 자기 호명 — 롤링 한 줄 */
+  .ticker {
+    margin-top: 2.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--rule);
+    max-width: 640px;
+  }
+  .ticker-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.55rem;
+  }
+  .ticker-stage { position: relative; min-height: 3.1rem; }
+  .ticker-line {
+    display: none;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+  }
+  .ticker-line.is-shown { display: block; animation: fadeIn 0.4s ease; }
+  .ticker.is-static .ticker-line:first-child { display: block; }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-line.is-shown { animation: none; }
+  }
+  @media (max-width: 600px) { .ticker-stage { min-height: 4.6rem; } }
+
+  /* ── 라우터: 지금 어디에서 막혀 있나요 ───────────────── */
+  .router { padding-top: 0.5rem; }
+
+  .track-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+  }
+  .track-tab {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 6px;
+    padding: 1.25rem 1.1rem;
+    text-align: left;
+    font-family: var(--sans);
+    cursor: pointer;
+    transition: border-color 0.18s, transform 0.18s, background 0.18s;
+  }
+  .track-tab:hover { border-color: var(--ink); transform: translateY(-3px); }
+  .track-tab:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .track-tab[aria-selected="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .track-verb {
+    font-size: 1.45rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1.1;
+    transition: color 0.18s;
+  }
+  .track-who {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+    transition: color 0.18s;
+  }
+  .track-count {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    margin-top: 0.7rem;
+    transition: color 0.18s;
+  }
+  .track-tab[aria-selected="true"] .track-verb { color: #fff; }
+  .track-tab[aria-selected="true"] .track-who { color: rgba(255,255,255,0.62); }
+  .track-tab[aria-selected="true"] .track-count { color: rgba(255,255,255,0.45); }
+  @media (max-width: 700px) {
+    .track-tabs { grid-template-columns: 1fr; gap: 0.45rem; }
+    .track-tab { padding: 0.95rem 1rem; }
+    .track-verb { font-size: 1.2rem; }
+    .track-count { display: none; }
+  }
+
+  .panel { margin-top: 1.5rem; }
+  .router.is-interactive .panel { display: none; }
+  .router.is-interactive .panel.is-shown { display: block; animation: fadeIn 0.3s ease; }
+  .panel-head {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .router:not(.is-interactive) .panel-head { margin-top: 2rem; }
+
+  .symptom {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr auto;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 1.15rem 0.9rem 1.15rem 0.2rem;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 4px;
+    transition: background 0.16s, padding-left 0.16s;
+  }
+  .symptom:hover {
+    background: var(--paper-warm);
+    padding-left: 0.7rem;
+    border-bottom-color: var(--rule);
+  }
+  .symptom:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .symptom-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+  }
+  .symptom-say {
+    display: block;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+  }
+  .symptom-fix {
+    display: block;
+    font-size: 0.86rem;
+    color: var(--ink-faint);
+    line-height: 1.65;
+    margin-top: 0.32rem;
+  }
+  .symptom-fix b { color: var(--ink-soft); font-weight: 700; }
+  .symptom-go {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    white-space: nowrap;
+    transition: color 0.16s;
+  }
+  .symptom:hover .symptom-go { color: var(--ink); }
+  @media (max-width: 700px) {
+    .symptom {
+      grid-template-columns: 2.2rem 1fr;
+      padding-right: 0.2rem;
+    }
+    .symptom-go { grid-column: 2; margin-top: 0.5rem; }
+    .symptom-say { font-size: 0.96rem; }
+  }
+
+  .panel-out {
+    margin-top: 1.1rem;
+    font-size: 0.86rem;
+    color: var(--ink-faint);
+  }
+
+  /* ── 근거 섹션 ─────────────────────────────────────── */
+  .paradigm {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: stretch;
+    margin: 2rem 0;
+  }
+  .paradigm-side {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 6px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+  }
+  .paradigm-side:last-of-type {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .paradigm-side:last-of-type .paradigm-label { color: rgba(255,255,255,0.55); }
+  .paradigm-side:last-of-type .paradigm-flow { color: #fff; }
+  .paradigm-arrow {
+    font-family: var(--mono);
+    font-size: 1.5rem;
+    color: var(--ink-mute);
+    display: flex;
+    align-items: center;
+  }
+  .paradigm-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.6rem;
+  }
+  .paradigm-flow {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  @media (max-width: 600px) {
+    .paradigm { grid-template-columns: 1fr; }
+    .paradigm-arrow { transform: rotate(90deg); margin: 0 auto; }
+  }
+
   .seeds-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -124,7 +338,6 @@
     transition: color 0.18s;
   }
 
-  /* SEEDS 상세 패널 */
   .seeds-panel { margin-top: 0.9rem; }
   .seeds-panel-hint {
     font-family: var(--mono);
@@ -174,70 +387,6 @@
     .seeds-sub { display: none; }
   }
 
-  .paradigm {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 1rem;
-    align-items: stretch;
-    margin: 2rem 0;
-  }
-  .paradigm-side {
-    background: var(--card);
-    border: 1px solid var(--paper-deep);
-    border-radius: 6px;
-    padding: 1.5rem 1.2rem;
-    text-align: center;
-  }
-  .paradigm-side:last-of-type {
-    background: var(--ink);
-    border-color: var(--ink);
-  }
-  .paradigm-side:last-of-type .paradigm-label { color: rgba(255,255,255,0.55); }
-  .paradigm-side:last-of-type .paradigm-flow { color: #fff; }
-  .paradigm-arrow {
-    font-family: var(--mono);
-    font-size: 1.5rem;
-    color: var(--ink-mute);
-    display: flex;
-    align-items: center;
-  }
-  .paradigm-label {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 0.6rem;
-  }
-  .paradigm-flow {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.55;
-  }
-  @media (max-width: 600px) {
-    .paradigm { grid-template-columns: 1fr; }
-    .paradigm-arrow { transform: rotate(90deg); margin: 0 auto; }
-  }
-
-  .destinations {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.9rem;
-  }
-  @media (max-width: 600px) {
-    .destinations { grid-template-columns: 1fr; }
-  }
-
-  .recent-posts li {
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .recent-posts .item-title:hover {
-    color: var(--ink);
-    border-bottom: 1px solid var(--ink);
-  }
-
   .roots {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -269,6 +418,37 @@
     margin-top: 0.25rem;
   }
   @media (max-width: 600px) { .roots { grid-template-columns: 1fr; } }
+
+  .recent-posts li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .recent-posts .item-title:hover {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  /* ── 전체 목차 ─────────────────────────────────────── */
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.6rem 1.2rem;
+    margin-top: 1.2rem;
+  }
+  .toc-group-title {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0.7rem;
+  }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin-bottom: 0.45rem; font-size: 0.85rem; line-height: 1.5; }
+  @media (max-width: 760px) { .toc { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { .toc { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -304,16 +484,227 @@
       만들어낼 수 있는 자리를 설계합니다.
     </p>
     <div class="hero-sign">— Leeo</div>
+
+    <div class="ticker is-static" id="ticker">
+      <div class="ticker-label">이 페이지를 여신 분은 아마</div>
+      <div class="ticker-stage">
+        <div class="ticker-line">혼자 배우는데 3주째 같은 자리에 있는 사람.</div>
+        <div class="ticker-line">설명은 다 했는데 다음 주면 아무도 기억 못 해 답답한 사람.</div>
+        <div class="ticker-line">만들고 싶은 건 있는데 첫 줄을 못 쓰고 있는 사람.</div>
+      </div>
+      <div class="mt-2"><a class="hero-cta" href="#stuck">지금 막힌 자리 찾기 ↓</a></div>
+    </div>
   </section>
 
   <div class="scribble-divider container">
     <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
   </div>
 
+  <!-- ══ 페인 포인트 라우터 ══════════════════════════ -->
+  <section class="container router" id="stuck">
+    <div class="section-tag">Start Here</div>
+    <h2 class="section-title">지금 어디에서 막혀 있나요?</h2>
+    <p class="section-desc">
+      먼저 하고 계신 일을 고르고, 그 아래에서 <b>지금 내 상태와 가장 비슷한 문장</b>을 누르세요.
+      그 문장 하나를 풀기 위해 쓴 글로 곧장 보내 드립니다. 처음부터 읽으실 필요 없습니다.
+    </p>
+
+    <div class="track-tabs" id="trackTabs" role="tablist" aria-label="막힌 자리 고르기">
+      <button class="track-tab" type="button" role="tab" id="tab-learn"
+              data-track="learn" aria-controls="panel-learn" aria-selected="true">
+        <div class="track-verb">배우다</div>
+        <div class="track-who">혼자 공부하는 사람 · 독학자 · 커리어를 바꾸는 중인 사람</div>
+        <div class="track-count">5 symptoms</div>
+      </button>
+      <button class="track-tab" type="button" role="tab" id="tab-teach"
+              data-track="teach" aria-controls="panel-teach" aria-selected="false">
+        <div class="track-verb">가르치다</div>
+        <div class="track-who">강사 · 멘토 · 스터디장 · 후배를 맡은 팀 리드</div>
+        <div class="track-count">5 symptoms</div>
+      </button>
+      <button class="track-tab" type="button" role="tab" id="tab-build"
+              data-track="build" aria-controls="panel-build" aria-selected="false">
+        <div class="track-verb">만들다</div>
+        <div class="track-who">1인 개발자 · 솔로 빌더 · 첫 출시를 앞둔 사람</div>
+        <div class="track-count">5 symptoms</div>
+      </button>
+    </div>
+
+    <!-- 배우다 -->
+    <div class="panel is-shown" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn" data-track="learn">
+      <div class="panel-head">배우다 · 이 중에 내 문장이 있나요</div>
+
+      <a class="symptom" href="learning-design/malttuk.html">
+        <span class="symptom-num">01</span>
+        <span>
+          <span class="symptom-say">“관심은 있는데, 뭘 배워야 할지부터 모르겠습니다.”</span>
+          <span class="symptom-fix"><b>문제가 아직 안 세워진 상태.</b> 막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문 15개를 만들어 내는 절차.</span>
+        </span>
+        <span class="symptom-go">첫 말뚝 →</span>
+      </a>
+
+      <a class="symptom" href="solo-learning.html">
+        <span class="symptom-num">02</span>
+        <span>
+          <span class="symptom-say">“강의를 봐도 ‘이해한 느낌’만 남고, 막상 하려면 손이 안 움직입니다.”</span>
+          <span class="symptom-fix"><b>설명 소비 루프.</b> 의지가 약해서가 아니라 설계가 비어서 무너집니다. 혼자 배울 때 무너지는 세 지점과, 그걸 메우는 4주 설계도.</span>
+        </span>
+        <span class="symptom-go">학습 설계 →</span>
+      </a>
+
+      <a class="symptom" href="ai-learning.html">
+        <span class="symptom-num">03</span>
+        <span>
+          <span class="symptom-say">“AI한테 물어보면 다 나오는데, 정작 제 실력은 안 느는 것 같습니다.”</span>
+          <span class="symptom-fix"><b>순서가 뒤집혔습니다.</b> 지형(무엇을) · 경로(어떻게)를 먼저 정하고 장비(AI)를 마지막에 놓는 배치. 언제 쓰고 언제 안 쓰는지 경계선까지.</span>
+        </span>
+        <span class="symptom-go">AI 학습 →</span>
+      </a>
+
+      <a class="symptom" href="learning-design/triangulation.html#drills">
+        <span class="symptom-num">04</span>
+        <span>
+          <span class="symptom-say">“제가 아는 게 진짜 아는 건지 확인할 방법이 없습니다.”</span>
+          <span class="symptom-fix"><b>피드백 공백 — 틀린 채로 능숙해지는 자리.</b> 혼자서도 자기 이해를 검증하는 삼각측량 드릴과 판정 기준.</span>
+        </span>
+        <span class="symptom-go">삼각측량 →</span>
+      </a>
+
+      <a class="symptom" href="academy.html">
+        <span class="symptom-num">05</span>
+        <span>
+          <span class="symptom-say">“시작은 하는데 3주째에 늘 흐지부지됩니다.”</span>
+          <span class="symptom-fix"><b>혼자서는 리듬이 안 잡힙니다.</b> 단계별 학습 지도, 무료 강의, 그리고 같이 돌았던 챌린지 기록.</span>
+        </span>
+        <span class="symptom-go">아카데미 →</span>
+      </a>
+
+      <p class="panel-out">
+        내 문장이 없다면 → <a href="mentoring.html">편지 한 통 보내주세요</a>. 어디서 막혔는지만 적어주셔도 됩니다.
+      </p>
+    </div>
+
+    <!-- 가르치다 -->
+    <div class="panel" id="panel-teach" role="tabpanel" aria-labelledby="tab-teach" data-track="teach">
+      <div class="panel-head">가르치다 · 이 중에 내 문장이 있나요</div>
+
+      <a class="symptom" href="framework.html">
+        <span class="symptom-num">01</span>
+        <span>
+          <span class="symptom-say">“설명은 분명히 다 했는데, 다음 주면 아무도 기억을 못 합니다.”</span>
+          <span class="symptom-fix"><b>전달했지 발생시키지 않았습니다.</b> 학습을 우연이 아니라 의도로 설계하는 질문고리 학습 — 다섯 원칙과 여덟 단계.</span>
+        </span>
+        <span class="symptom-go">프레임워크 →</span>
+      </a>
+
+      <a class="symptom" href="philosophy.html">
+        <span class="symptom-num">02</span>
+        <span>
+          <span class="symptom-say">“수업 내내 저만 말하고 있습니다. 어떻게 입을 다물어야 할지 모르겠습니다.”</span>
+          <span class="symptom-fix"><b>가르치지 않는 쪽이 더 어렵습니다.</b> 왜 ‘전달’이 아니라 ‘발생’인지 — 프레이리와 핀켈을 곁에 두고 쓴 여는 글.</span>
+        </span>
+        <span class="symptom-go">여는 글 →</span>
+      </a>
+
+      <a class="symptom" href="learning-design/yajang.html#templates">
+        <span class="symptom-num">03</span>
+        <span>
+          <span class="symptom-say">“워크숍을 맡았는데, 90분을 뭘로 채워야 할지 막막합니다.”</span>
+          <span class="symptom-fix"><b>빈 슬라이드 앞에서 멈춘 상태.</b> 그대로 꺼내 쓰는 템플릿 6종, 액티비티 10종, 90분 진행표.</span>
+        </span>
+        <span class="symptom-go">야장 →</span>
+      </a>
+
+      <a class="symptom" href="learning-design/malttuk.html">
+        <span class="symptom-num">04</span>
+        <span>
+          <span class="symptom-say">“첫 질문을 못 만들겠습니다. 던져도 아무도 안 물립니다.”</span>
+          <span class="symptom-fix"><b>좋은 질문에는 판정 기준이 있습니다.</b> 질문 폭발 4분 타이머, 판정 4기준, 그리고 동료 검증 다섯 문장.</span>
+        </span>
+        <span class="symptom-go">첫 말뚝 →</span>
+      </a>
+
+      <a class="symptom" href="ai-learning.html">
+        <span class="symptom-num">05</span>
+        <span>
+          <span class="symptom-say">“AI를 쓰지 말라고 할 수도, 쓰라고 할 수도 없어 난감합니다.”</span>
+          <span class="symptom-fix"><b>질문이 ‘쓸 것인가’이면 답이 안 나옵니다.</b> ‘언제·어디까지’로 바꾸는 위임 경계선과 Gate Rule.</span>
+        </span>
+        <span class="symptom-go">AI 학습 →</span>
+      </a>
+
+      <p class="panel-out">
+        내 문장이 없다면 → <a href="mentoring.html">편지 한 통 보내주세요</a>. 어떤 자리를 맡으셨는지만 적어주셔도 됩니다.
+      </p>
+    </div>
+
+    <!-- 만들다 -->
+    <div class="panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" data-track="build">
+      <div class="panel-head">만들다 · 이 중에 내 문장이 있나요</div>
+
+      <a class="symptom" href="join.html">
+        <span class="symptom-num">01</span>
+        <span>
+          <span class="symptom-say">“만들고 싶은 건 있는데, 첫 줄을 못 쓰고 있습니다.”</span>
+          <span class="symptom-fix"><b>출시까지 가는 길이 안 보여서입니다.</b> 한 사람이 첫 앱을 내는 데 걸리는 3개월을, 달마다 할 일 한 줄로 끊어 놓은 길잡이.</span>
+        </span>
+        <span class="symptom-go">혼자 만들기 →</span>
+      </a>
+
+      <a class="symptom" href="solo-builders/index.html">
+        <span class="symptom-num">02</span>
+        <span>
+          <span class="symptom-say">“만들다 말고 계속 다른 걸 새로 시작합니다.”</span>
+          <span class="symptom-fix"><b>어제와 비슷한 자리에서 또 멈추는 것 — 가장 정직한 신호입니다.</b> 혼자 만들어 출시해 본 사람의 노트.</span>
+        </span>
+        <span class="symptom-go">혼자 만드는 사람들 →</span>
+      </a>
+
+      <a class="symptom" href="solo-builders/app-store-checklist.html">
+        <span class="symptom-num">03</span>
+        <span>
+          <span class="symptom-say">“출시 직전인데, 뭘 빠뜨렸는지 모르겠어서 못 누르고 있습니다.”</span>
+          <span class="symptom-fix"><b>빠진 걸 찾는 건 기억이 아니라 목록의 일입니다.</b> 처음 출시하는 사람을 위한 6단계 체크리스트.</span>
+        </span>
+        <span class="symptom-go">출시 체크리스트 →</span>
+      </a>
+
+      <a class="symptom" href="solo-builders/monetization-worksheet.html">
+        <span class="symptom-num">04</span>
+        <span>
+          <span class="symptom-say">“냈는데 반응이 없습니다. 계속 만들 이유를 못 찾겠습니다.”</span>
+          <span class="symptom-fix"><b>속도의 문제가 아니라 지속의 문제입니다.</b> 혼자, 천천히, 오래 만들기 위해 곁에 두는 짧은 노트.</span>
+        </span>
+        <span class="symptom-go">오래 만드는 일 →</span>
+      </a>
+
+      <a class="symptom" href="tools.html">
+        <span class="symptom-num">05</span>
+        <span>
+          <span class="symptom-say">“매번 같은 자리에서 손이 느려집니다. 참고할 게 필요합니다.”</span>
+          <span class="symptom-fix"><b>막혔던 자리에서 직접 만든 것들입니다.</b> 학습 가이드, 개념 시각화 랩, SwiftUI·HIG 레퍼런스 — 전부 무료로 열려 있습니다.</span>
+        </span>
+        <span class="symptom-go">도구 서랍 →</span>
+      </a>
+
+      <p class="panel-out">
+        내 문장이 없다면 → <a href="mentoring.html">편지 한 통 보내주세요</a>. 어디서 멈췄는지만 적어주셔도 됩니다.
+      </p>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <!-- ══ 왜 처방이 전부 이렇게 생겼는가 ══════════════ -->
   <section class="container">
-    <div class="section-tag">두 가지 풍경</div>
-    <h2 class="section-title"><span>교육은 <span class="strike">전달</span>이 아니라<br>스스로 <span class="highlight">발생</span>하는 것이다.</span></h2>
-    <p class="section-desc">가르치는 사람은 지식을 전수하지 않습니다. 질문과 상황, 활동을 설계하고 그 안에서 배우는 사람이 스스로 학습해내는 것을 돕습니다.</p>
+    <div class="section-tag">Why</div>
+    <h2 class="section-title"><span>왜 처방이 전부<br><span class="strike">설명</span>이 아니라 <span class="highlight">설계</span>인가</span></h2>
+    <p class="section-desc">
+      위의 열다섯 문장은 전부 한 가지 진단을 공유합니다. 막힌 이유가 <b>의지나 재능이 아니라 구조</b>라는 것.
+      구조는 결심으로 바뀌지 않고 설계로 바뀝니다. 그래서 이 연습장에는 강의가 아니라 설계도가 놓여 있습니다.
+    </p>
 
     <div class="paradigm">
       <div class="paradigm-side">
@@ -330,20 +721,21 @@
     <p class="muted small">
       파울루 프레이리는 첫 번째 모델을 ‘은행 저금식 교육(banking model)’이라고 비판했습니다.
       두 번째 모델은 배우는 사람을 ‘담을 그릇’이 아니라 ‘발견하는 사람’으로 봅니다.
+      혼자 배울 때도 똑같습니다. 나 자신에게 강의를 틀어주는 대신, 나에게 경험을 설계해 주는 쪽으로 바꾸는 일입니다.
     </p>
 
     <p class="small muted">
       왜 ‘전달’이 아니라 ‘발생’인지, 도널드 핀켈의 『침묵으로 가르치기』를 곁에 두고
       <a href="philosophy.html">여는 글에 적어 두었습니다</a>.
     </p>
-
-    <div class="mt-2 mb-3" style="display:flex; align-items:flex-start;"><a class="hero-cta" href="solo-learning.html">우리가 설계할 경험 보러 가기 →</a></div>
   </section>
 
   <section class="container">
     <div class="section-tag">S · E · E · D · S</div>
-    <h2 class="section-title">학습이 자라나는 다섯 단계</h2>
-    <p class="section-desc">‘씨앗’이라는 이름을 따왔습니다. 배우는 사람 안에서 무언가가 자라나기를 바라는 마음입니다.</p>
+    <h2 class="section-title">모든 설계도가 도는 다섯 단계</h2>
+    <p class="section-desc">
+      ‘씨앗’에서 이름을 따왔습니다. 위의 어떤 문을 열고 들어가시든, 안에서는 이 다섯 단계가 한 바퀴 돕니다.
+    </p>
 
     <div class="seeds-grid" id="seedsGrid">
       <button class="seeds-card" type="button" data-seed="situation" aria-controls="seed-situation"><div class="seeds-letter">S</div><div class="seeds-word">Situation</div><div class="seeds-sub">상황 던지기</div></button>
@@ -397,61 +789,10 @@
       <div class="root-item"><span class="root-name">Vygotsky</span><span class="root-year">1978</span><div class="root-idea">근접발달영역(ZPD)</div></div>
       <div class="root-item" style="grid-column:1/-1"><span class="root-name">Resnick</span><span class="root-year">2017</span><div class="root-idea">4P — Projects · Passion · Peers · Play</div></div>
     </div>
-  </section>
 
-  <div class="scribble-divider container">
-    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
-  </div>
-
-  <section class="container">
-    <div class="section-tag">둘러보기</div>
-    <h2 class="section-title">연습장의 칸들</h2>
-    <p class="section-desc">아무 곳이나 펴 보셔도 됩니다.</p>
-
-    <div class="destinations">
-      <a class="index-card" href="framework.html">
-        <span class="index-card-icon">◐</span>
-        <div class="index-card-title">프레임워크</div>
-        <div class="index-card-desc">가르치는 일을 시스템으로 옮긴 질문고리 학습.</div>
-        <div class="index-card-arrow">살펴보기 →</div>
-      </a>
-      <a class="index-card" href="ai-learning.html">
-        <span class="index-card-icon">🧭</span>
-        <div class="index-card-title">AI학습</div>
-        <div class="index-card-desc">지형 · 경로 · 장비 — AI를 마지막에 놓는 학습 설계.</div>
-        <div class="index-card-arrow">배치도 보기 →</div>
-      </a>
-      <a class="index-card" href="solo-learning.html">
-        <span class="index-card-icon">🌱</span>
-        <div class="index-card-title">학습설계</div>
-        <div class="index-card-desc">혼자 배우는 사람을 위한 4주 학습 경험 설계도.</div>
-        <div class="index-card-arrow">설계도 펼치기 →</div>
-      </a>
-      <a class="index-card" href="library.html">
-        <span class="index-card-icon">📖</span>
-        <div class="index-card-title">서재</div>
-        <div class="index-card-desc">읽고, 쓰고, 추천하는 책들.</div>
-        <div class="index-card-arrow">책장 열기 →</div>
-      </a>
-      <a class="index-card" href="thoughts.html">
-        <span class="index-card-icon">💭</span>
-        <div class="index-card-title">생각</div>
-        <div class="index-card-desc">강연과 글로 남긴 생각들.</div>
-        <div class="index-card-arrow">엿보러 가기 →</div>
-      </a>
-      <a class="index-card" href="academy.html">
-        <span class="index-card-icon">🎓</span>
-        <div class="index-card-title">아카데미</div>
-        <div class="index-card-desc">함께 공부할 수 있는 자료들.</div>
-        <div class="index-card-arrow">자료 보기 →</div>
-      </a>
-      <a class="index-card" href="tools.html">
-        <span class="index-card-icon">🔧</span>
-        <div class="index-card-title">도구</div>
-        <div class="index-card-desc">직접 기획하고 만든 작은 도구들. 누구나 자유롭게 써 보세요.</div>
-        <div class="index-card-arrow">서랍 열기 →</div>
-      </a>
-    </div>
+    <p class="small muted mt-2">
+      읽은 책은 <a href="library.html">서재</a>에, 말과 글로 남긴 것은 <a href="thoughts.html">생각</a>에 모아 두었습니다.
+    </p>
   </section>
 
   <section class="container">
@@ -469,9 +810,55 @@
   </section>
 
   <section class="container">
+    <div class="section-tag">Index</div>
+    <h2 class="section-title">전체 목차</h2>
+    <p class="section-desc">막힌 자리 없이 그냥 둘러보고 싶으시면, 아무 곳이나 펴 보셔도 됩니다.</p>
+
+    <div class="toc">
+      <div>
+        <div class="toc-group-title">배우다</div>
+        <ul>
+          <li><a href="solo-learning.html">학습 설계 · 4주 설계도</a></li>
+          <li><a href="ai-learning.html">AI 학습 · 지형·경로·장비</a></li>
+          <li><a href="learning-design/index.html">필드 매뉴얼 본편</a></li>
+          <li><a href="learning-design/triangulation.html">부록 A · 삼각측량</a></li>
+          <li><a href="learning-design/malttuk.html">부록 C · 첫 말뚝</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="toc-group-title">가르치다</div>
+        <ul>
+          <li><a href="framework.html">프레임워크 · 질문고리 학습</a></li>
+          <li><a href="philosophy.html">여는 글 · 가르치는 일에 대해</a></li>
+          <li><a href="learning-design/yajang.html">부록 B · 야장 (템플릿·액티비티)</a></li>
+          <li><a href="academy.html">아카데미 · 강의와 커리큘럼</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="toc-group-title">만들다</div>
+        <ul>
+          <li><a href="join.html">혼자 만들기 · 3개월 길잡이</a></li>
+          <li><a href="solo-builders/index.html">혼자 만드는 사람들</a></li>
+          <li><a href="solo-builders/app-store-checklist.html">App Store 출시 체크리스트</a></li>
+          <li><a href="solo-builders/monetization-worksheet.html">오래 만드는 일</a></li>
+          <li><a href="tools.html">도구 · 직접 만든 것들</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="toc-group-title">곁에 두는 것</div>
+        <ul>
+          <li><a href="library.html">서재 · 읽은 책</a></li>
+          <li><a href="thoughts.html">생각 · 강연과 글</a></li>
+          <li><a href="mentoring.html">편지함 · 막혔을 때</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
     <div class="section-tag">연락</div>
     <h2 class="section-title">편지함</h2>
-    <p class="section-desc">언제든 가볍게 인사를 보내주셔도 좋습니다.</p>
+    <p class="section-desc">위 열다섯 문장 중에 내 것이 없었다면, 그 이야기를 듣고 싶습니다. 가볍게 인사만 보내주셔도 좋습니다.</p>
     <ul class="list-plain">
       <li><a href="mailto:leeo@kakao.com">leeo@kakao.com</a> · 이메일</li>
       <li><a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub @M1zz</a> · 코드</li>
@@ -488,6 +875,72 @@
 </footer>
 
 <script>
+// 히어로 — 자기 호명 한 줄 롤링
+(function heroTicker() {
+  var ticker = document.getElementById('ticker');
+  if (!ticker) return;
+  var lines = [].slice.call(ticker.querySelectorAll('.ticker-line'));
+  if (lines.length < 2) return;
+
+  ticker.classList.remove('is-static');
+  var i = 0;
+  lines[0].classList.add('is-shown');
+
+  setInterval(function () {
+    lines[i].classList.remove('is-shown');
+    i = (i + 1) % lines.length;
+    lines[i].classList.add('is-shown');
+  }, 3400);
+})();
+
+// 라우터 — 배우다 / 가르치다 / 만들다
+(function stuckRouter() {
+  var router = document.getElementById('stuck');
+  var tabs = document.getElementById('trackTabs');
+  if (!router || !tabs) return;
+
+  var buttons = [].slice.call(tabs.querySelectorAll('.track-tab'));
+  var panels = [].slice.call(router.querySelectorAll('.panel'));
+  var keys = buttons.map(function (b) { return b.getAttribute('data-track'); });
+  router.classList.add('is-interactive');
+
+  function activate(key, focusTab) {
+    if (keys.indexOf(key) === -1) return;
+    buttons.forEach(function (btn) {
+      var on = btn.getAttribute('data-track') === key;
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+      if (on && focusTab) btn.focus();
+    });
+    panels.forEach(function (panel) {
+      panel.classList.toggle('is-shown', panel.getAttribute('data-track') === key);
+    });
+  }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-track');
+      activate(key);
+      // 다른 페이지에서 #learn / #teach / #build 로 바로 들어올 수 있게
+      if (history.replaceState) history.replaceState(null, '', '#' + key);
+    });
+  });
+
+  // ← → 로 트랙 이동 (탭 패턴)
+  tabs.addEventListener('keydown', function (e) {
+    var idx = buttons.indexOf(document.activeElement);
+    if (idx === -1) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); activate(keys[(idx + 1) % keys.length], true); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); activate(keys[(idx - 1 + keys.length) % keys.length], true); }
+  });
+
+  var hash = (location.hash || '').replace('#', '');
+  activate(keys.indexOf(hash) !== -1 ? hash : keys[0]);
+  window.addEventListener('hashchange', function () {
+    activate((location.hash || '').replace('#', ''));
+  });
+})();
+
 (function seedsPanel() {
   var grid = document.getElementById('seedsGrid');
   var panel = document.getElementById('seedsPanel');
