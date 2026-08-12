@@ -168,13 +168,13 @@ main { position: relative; z-index: 1; }
 
 .topnav {
   display: flex;
-  gap: 1.4rem;
+  gap: 1rem;
   flex-wrap: wrap;
   align-items: center;
 }
 .topnav a {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-faint);
