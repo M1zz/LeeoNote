@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>성장 프레임워크 — 리이오의 연습장</title>
+<meta name="description" content="학습을 우연에 맡기지 않으려고 만든 설계 프레임워크 세 가지와, 현장에서 손에 들고 쓰는 필드 매뉴얼.">
+<meta property="og:title" content="성장 프레임워크 — 리이오의 연습장">
+<meta property="og:description" content="질문고리 학습 · 지형·경로·장비 · SEEDS 4주 설계도 — 무엇을 위한 것이고 어떤 것인지 한눈에.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/frameworks.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* frameworks-only */
+  .fw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+  }
+  .fw-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-top: 3px solid var(--ink);
+    border-radius: 0 0 8px 8px;
+    padding: 1.5rem 1.5rem 1.3rem;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  }
+  .fw-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+    border-bottom-color: var(--ink);
+    border-left-color: var(--ink);
+    border-right-color: var(--ink);
+  }
+  .fw-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  .fw-num {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-bottom: 0.8rem;
+  }
+  .fw-name {
+    font-size: 1.42rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .fw-en {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1.1rem;
+  }
+
+  /* 무엇을 위한 것인가 — 증상 인용 */
+  .fw-for {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--ink);
+    border-radius: 0 5px 5px 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  /* 어떤 것인가 */
+  .fw-what {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+  }
+  .fw-what b { color: var(--ink); font-weight: 700; }
+
+  .fw-meta {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+  .fw-tags {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+  .fw-go {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    white-space: nowrap;
+    transition: color 0.18s;
+  }
+  .fw-card:hover .fw-go { color: var(--ink); }
+
+  @media (max-width: 760px) { .fw-grid { grid-template-columns: 1fr; } }
+
+  /* 공통 사이클 배너 */
+  .fw-core {
+    margin-top: 1.4rem;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.9rem 2rem;
+    display: block;
+    border-bottom: none;
+    transition: opacity 0.18s;
+  }
+  .fw-core:hover { opacity: 0.9; color: #fff; border-bottom: none; }
+  .fw-core-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.7rem;
+  }
+  .fw-core-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .fw-core-body {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 560px;
+  }
+  .fw-core-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.2rem;
+  }
+  .fw-core-steps span {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 100px;
+    padding: 0.35rem 0.8rem;
+  }
+  @media (max-width: 600px) { .fw-core { padding: 1.5rem 1.3rem; } }
+
+  /* 부록 목록 */
+  .fw-annex { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .fw-annex li { border-top: 1px solid var(--rule); }
+  .fw-annex li:first-child { border-top: 2px solid var(--ink); }
+  .fw-annex a {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr auto;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 1rem 0.6rem 1rem 0.2rem;
+    border-bottom: none;
+    border-radius: 4px;
+    transition: background 0.16s, padding-left 0.16s;
+  }
+  .fw-annex a:hover { background: var(--paper-warm); padding-left: 0.6rem; border-bottom: none; }
+  .fw-annex-tag {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+  }
+  .fw-annex-name { font-size: 0.98rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .fw-annex-desc { font-size: 0.84rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.15rem; }
+  .fw-annex-go { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-mute); }
+  @media (max-width: 600px) {
+    .fw-annex a { grid-template-columns: 1fr; gap: 0.3rem 0; }
+    .fw-annex-go { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="about.html">ABOUT</a>
+      <a href="frameworks.html" class="active">성장 프레임워크</a>
+      <a href="tools.html">도구</a>
+      <a href="join.html">도구 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">Growth Frameworks</div>
+    <h1 class="page-title">성장을 우연에<br>맡기지 않는 설계도</h1>
+    <p class="page-sub">
+      무언가를 만들다 보면 결과물은 나오는데, 무엇을 배웠는지는 우연에 맡겨집니다.
+      그 우연을 걷어내려고 만든 것들입니다. 셋 다 같은 자리에서 나왔지만, 막힌 지점이 서로 다릅니다.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Pick one</div>
+    <h2 class="section-title">어디에서 막혀 있는지로 고르세요</h2>
+    <p class="section-desc">
+      카드 위 칸이 <b>무엇을 위한 것인지</b>, 아래 칸이 <b>어떤 것인지</b>입니다.
+    </p>
+
+    <div class="fw-grid">
+
+      <a class="fw-card" href="framework.html">
+        <div class="fw-num">01</div>
+        <div class="fw-name">질문고리 학습</div>
+        <div class="fw-en">Question Loop</div>
+        <div class="fw-for">“프로젝트는 전진하는데, 나는 배우고 있습니까?”</div>
+        <p class="fw-what">
+          <b>실패를 요구하는 학습 프레임워크.</b>
+          가설을 세우고 깨뜨리는 사이클을 돌립니다. 깨지지 않는 가설은 배움이 아니라 경고 신호로 봅니다.
+          혼자든 스터디든 팀이든 같은 사이클이고, 맨 위층에 무엇을 두는지만 바뀝니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">여덟 단계 · 다섯 원칙<br>Solo · Study · Team</div>
+          <div class="fw-go">읽기 →</div>
+        </div>
+      </a>
+
+      <a class="fw-card" href="ai-learning.html">
+        <div class="fw-num">02</div>
+        <div class="fw-name">지형 · 경로 · 장비</div>
+        <div class="fw-en">AI Last</div>
+        <div class="fw-for">“AI한테 물어보면 빠른데, 남는 게 없습니다.”</div>
+        <p class="fw-what">
+          <b>AI를 마지막에 놓는 학습 설계.</b>
+          무엇을 배울지(지형)와 어떻게 익힐지(경로)를 정한 다음에야 AI(장비)를 켭니다.
+          AI의 기본 상태는 꺼짐이고, 내가 먼저 답을 만들어 낸 뒤에만 채점·반례·연결에 투입합니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">세 개의 정거장<br>목표 → 방법 → 도구</div>
+          <div class="fw-go">읽기 →</div>
+        </div>
+      </a>
+
+      <a class="fw-card" href="solo-learning.html">
+        <div class="fw-num">03</div>
+        <div class="fw-name">SEEDS × Solo Builder</div>
+        <div class="fw-en">4-Week Blueprint</div>
+        <div class="fw-for">“강의는 다 들었는데, 실력이 늘지 않습니다.”</div>
+        <p class="fw-what">
+          <b>혼자 배우는 사람이 자신에게 하는 경험 설계.</b>
+          가르치는 사람이 하는 일 — 상황을 만들고, 질문을 던지고, 활동을 설계하는 것 — 을 나에게 옮깁니다.
+          1인 개발자가 4주 동안 밟을 순서를 미리 짜 둔 설계도입니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">4주 설계도<br>설명 소비 · 목표 전치 · 피드백 공백</div>
+          <div class="fw-go">읽기 →</div>
+        </div>
+      </a>
+
+      <a class="fw-card" href="learning-design/index.html">
+        <div class="fw-num">04</div>
+        <div class="fw-name">필드 매뉴얼</div>
+        <div class="fw-en">Field Manual</div>
+        <div class="fw-for">“원리는 알겠는데, 당장 뭘 적어야 할지 모르겠습니다.”</div>
+        <p class="fw-what">
+          <b>손에 들고 현장에서 쓰는 판본.</b>
+          위 설계들을 실제로 돌릴 때 필요한 절차와 서식을 모았습니다.
+          본편에 부록 세 권이 딸려 있고, 그대로 채워 쓰면 됩니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">본편 + 부록 A · B · C<br>템플릿 6 · 액티비티 10</div>
+          <div class="fw-go">펴 보기 →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Common core</div>
+    <h2 class="section-title">넷 다 안에서는 같은 게 돕니다</h2>
+    <p class="section-desc">
+      이름과 대상은 달라도, 열어 보면 전부 이 다섯 단계를 돌립니다.
+    </p>
+
+    <a class="fw-core" href="about.html">
+      <div class="fw-core-label">S · E · E · D · S</div>
+      <div class="fw-core-title">모든 설계도가 도는 다섯 단계</div>
+      <p class="fw-core-body">
+        상황을 먼저 던지고, 스스로 헤매게 두고, 막힌 자리에만 발판을 놓고,
+        본인이 발견하게 하고, 옆 사람에게 말하게 합니다.
+        왜 이 순서인지는 ABOUT에 적어 두었습니다.
+      </p>
+      <div class="fw-core-steps">
+        <span>S · Situation</span>
+        <span>E · Explore</span>
+        <span>E · Encounter</span>
+        <span>D · Discover</span>
+        <span>S · Share</span>
+      </div>
+    </a>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Annex</div>
+    <h2 class="section-title">필드 매뉴얼 부록</h2>
+    <p class="section-desc">본편을 읽지 않아도 따로 쓸 수 있게 떼어 두었습니다.</p>
+
+    <ul class="fw-annex">
+      <li>
+        <a href="learning-design/triangulation.html">
+          <div class="fw-annex-tag">부록 A</div>
+          <div>
+            <div class="fw-annex-name">삼각측량</div>
+            <div class="fw-annex-desc">무엇부터 배울지 정하는 능력의 훈련 드릴, 그리고 AI에 어디까지 맡길지의 경계선.</div>
+          </div>
+          <div class="fw-annex-go">→</div>
+        </a>
+      </li>
+      <li>
+        <a href="learning-design/yajang.html">
+          <div class="fw-annex-tag">부록 B</div>
+          <div>
+            <div class="fw-annex-name">야장</div>
+            <div class="fw-annex-desc">템플릿 6종 · 액티비티 10종 · 90분 워크숍 진행표. 대화 로그가 아니라 규칙 목록을 남깁니다.</div>
+          </div>
+          <div class="fw-annex-go">→</div>
+        </a>
+      </li>
+      <li>
+        <a href="learning-design/malttuk.html">
+          <div class="fw-annex-tag">부록 C</div>
+          <div>
+            <div class="fw-annex-name">첫 말뚝</div>
+            <div class="fw-annex-desc">막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문을 만들어 내는 절차.</div>
+          </div>
+          <div class="fw-annex-go">→</div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 학습은 의도될 때만 보장됩니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
