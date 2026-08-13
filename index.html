@@ -65,29 +65,6 @@
     display: inline-block;
   }
 
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--ink);
-    color: #fff;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.4rem;
-    border-radius: 100px;
-    border-bottom: none;
-    transition: opacity 0.18s;
-  }
-  .hero-cta:hover { opacity: 0.82; border-bottom: none; color: #fff; }
-
-  .hero-actions {
-    margin-top: 2.4rem;
-    padding-top: 1.6rem;
-    border-top: 1px solid var(--rule);
-    max-width: 640px;
-  }
   /* ── Who — 세 단계 사다리 ────────────────────────── */
   .ladder { list-style: none; margin: 1.4rem 0 0; padding: 0; }
   .rung {
@@ -137,54 +114,6 @@
     .rung-step { font-size: 1.1rem; }
     .rung-name { font-size: 1.08rem; }
   }
-
-  /* ── 도구 카테고리 ──────────────────────────────── */
-  .kits {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.7rem;
-    margin-top: 1.2rem;
-  }
-  .kit {
-    display: block;
-    background: var(--card);
-    border: 1px solid var(--paper-deep);
-    border-radius: 6px;
-    padding: 1.2rem 1.25rem;
-    transition: border-color 0.18s, transform 0.18s;
-  }
-  .kit:hover { border-color: var(--ink); transform: translateY(-3px); }
-  .kit:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-  .kit-name {
-    font-size: 1.12rem;
-    font-weight: 900;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
-  }
-  .kit-line {
-    font-size: 0.86rem;
-    color: var(--ink-faint);
-    line-height: 1.65;
-  }
-  .kit-apps {
-    font-size: 0.76rem;
-    color: var(--ink-mute);
-    line-height: 1.6;
-    margin-top: 0.7rem;
-    padding-top: 0.7rem;
-    border-top: 1px solid var(--rule);
-  }
-  .kit-count {
-    font-family: var(--mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    color: var(--ink-mute);
-    margin-top: 0.7rem;
-    transition: color 0.18s;
-  }
-  .kit:hover .kit-count { color: var(--ink); }
-  @media (max-width: 700px) { .kits { grid-template-columns: 1fr; } }
 
   /* ── 라우터: 지금 어디에서 막혀 있나요 ───────────────── */
   .router { padding-top: 0.5rem; }
@@ -523,9 +452,6 @@
     </div>
     <div class="hero-sign">— Leeo</div>
 
-    <div class="hero-actions">
-      <a class="hero-cta" href="#who">누구를 위한 곳인지 보기 ↓</a>
-    </div>
   </section>
 
   <div class="scribble-divider container">
@@ -560,7 +486,7 @@
           <div class="rung-name">그 과정에 필요한 도구를 얻고 싶은 사람</div>
           <div class="rung-body">
             반복을 줄이고, 안 보이던 개념을 눈에 보이게 하고, 놓치기 쉬운 걸 앞에 놓아 두는 것들.
-            <b>손이 덜 가야 머리가 남습니다.</b> 전부 무료로 열어 두었습니다.
+            <b>손이 덜 가야 머리가 남습니다.</b> 전부 무료로 경험해 볼 수 있습니다.
           </div>
           <div class="rung-say">“같은 작업을 매번 손으로 반복하고 있습니다. 정작 중요한 데 쓸 시간이 없어요.”</div>
         </div>
@@ -578,74 +504,11 @@
       </li>
     </ol>
 
-    <div class="callout callout--warm mt-3">
-      <div class="callout-label">범위 밖</div>
-      가르치는 자리에 계신 분께 쓸 만한 것도 있습니다 —
-      <a href="framework.html">질문고리 학습</a> · <a href="learning-design/yajang.html">워크숍 야장</a> · <a href="academy.html">아카데미</a>.
-      다만 이 연습장이 먼저 챙기는 건 위 세 분이고, 나머지는 <a href="#index">전체 목차</a>에 따로 두었습니다.
-    </div>
   </section>
 
   <div class="scribble-divider container">
     <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
   </div>
-
-  <!-- ══ 실천 — 그래서 만든 것들 ══════════════════════ -->
-  <section class="container">
-    <div class="section-tag">Practice</div>
-    <h2 class="section-title">그래서 만든 것들</h2>
-    <p class="section-desc">
-      <a href="about.html">지키는 세 가지</a>를 말로만 두지 않으려고 만든 도구 <b>스물일곱 개</b>입니다.
-      제가 어떻게 만들었는지가 아니라, <b>여러분이 무엇을 덜게 되는지</b>로 묶었습니다.
-    </p>
-
-    <div class="kits">
-      <a class="kit" href="tools.html#reduce">
-        <div class="kit-name">반복 줄이기</div>
-        <div class="kit-line">매번 하던 손을 한 번으로. 몸이 기억하던 걸 도구가 기억하게.</div>
-        <div class="kit-apps">ClipKeyboard · SlideSnap · Swift Code Snapshot · App Dresser</div>
-        <div class="kit-count">4 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#plan">
-        <div class="kit-name">복잡한 계획 세우기</div>
-        <div class="kit-line">머리로는 안 잡히는 일정·돈·범위를 눈에 보이는 구조로 내려놓기.</div>
-        <div class="kit-apps">Sprint Commander · Goldweek · 한국형 FIRE 계산기 · 유니버셜 확장 전략</div>
-        <div class="kit-count">4 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#see">
-        <div class="kit-name">안 보이는 걸 보기</div>
-        <div class="kit-line">글로 열 번 읽어도 안 잡히던 개념을, 손으로 움직여 보고 이해하기.</div>
-        <div class="kit-apps">iOS 개념 시각화 LAB · CS Visualizer · iOSArchLab · Industry Explorer</div>
-        <div class="kit-count">4 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#catch">
-        <div class="kit-name">놓치지 않기</div>
-        <div class="kit-line">기억력에 기대지 않기. 빠뜨리기 쉬운 것을 미리 앞에 놓아 두기.</div>
-        <div class="kit-apps">Rereminder · DontGoMart · 주니어 개발자 실수 노트 · 접근성 매뉴얼</div>
-        <div class="kit-count">4 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#start">
-        <div class="kit-name">처음 시작하기</div>
-        <div class="kit-line">첫걸음이 안 떼질 때. 아무것도 모르는 상태에서 손이 움직일 때까지.</div>
-        <div class="kit-apps">Claude Code 101 · 바이브코딩 캠프 · HIGLab · HigGym · Component Gallery</div>
-        <div class="kit-count">5 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#check">
-        <div class="kit-name">내 상태 확인하기</div>
-        <div class="kit-line">지금 어디쯤인지 스스로 판정하기. 감이 아니라 답으로.</div>
-        <div class="kit-apps">학습 유형 진단 · 기술 면접 트레이너 · AI Privacy Risk Scanner</div>
-        <div class="kit-count">3 tools →</div>
-      </a>
-      <a class="kit" href="tools.html#play">
-        <div class="kit-name">딴짓할 자리</div>
-        <div class="kit-line">쓸모와 상관없이 만든 것들. 이런 게 있어야 오래 만듭니다.</div>
-        <div class="kit-apps">Pixel MeMe · Not My Tempo · StaffSinger</div>
-        <div class="kit-count">3 tools →</div>
-      </a>
-    </div>
-
-    <p class="mt-3"><a class="hero-cta" href="tools.html">도구 스물일곱 개 전부 보기 →</a></p>
-  </section>
 
   <div class="scribble-divider container">
     <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
