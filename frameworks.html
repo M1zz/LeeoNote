@@ -117,6 +117,37 @@
 
   @media (max-width: 760px) { .fw-grid { grid-template-columns: 1fr; } }
 
+  /* 고르기 전 — 능력 축 색인으로 가는 입구 */
+  .fw-index {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0 1.1rem;
+    align-items: center;
+    margin-top: 1.4rem;
+    padding: 1.05rem 1.3rem;
+    border: 1px dashed var(--ink-mute);
+    border-radius: 8px;
+    border-bottom: 1px dashed var(--ink-mute);
+    transition: border-color 0.18s, background 0.18s;
+  }
+  .fw-index:hover { border-color: var(--ink); background: var(--paper-warm); color: var(--ink); }
+  .fw-index-k {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    white-space: nowrap;
+  }
+  .fw-index-body { font-size: 0.9rem; line-height: 1.6; color: var(--ink-faint); }
+  .fw-index-body b { color: var(--ink); font-weight: 700; }
+  .fw-index-go { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-mute); white-space: nowrap; }
+  .fw-index:hover .fw-index-go { color: var(--ink); }
+  @media (max-width: 700px) {
+    .fw-index { grid-template-columns: 1fr; gap: 0.45rem 0; }
+    .fw-index-go { display: none; }
+  }
+
   /* 공통 사이클 배너 */
   .fw-core {
     margin-top: 1.4rem;
@@ -298,6 +329,15 @@
       </a>
 
     </div>
+
+    <a class="fw-index" href="skills.html">
+      <div class="fw-index-k">Before you pick</div>
+      <div class="fw-index-body">
+        <b>어디가 막혔는지부터 모르겠다면</b> — 위 넷은 “어떤 순서로 도는가”를 말합니다.
+        그 전에 <b>무엇을 기르는 중인지</b>가 필요하다면 성장 기술 열두 칸을 먼저 보세요.
+      </div>
+      <div class="fw-index-go">성장 기술 열둘 →</div>
+    </a>
   </section>
 
   <div class="scribble-divider container">
