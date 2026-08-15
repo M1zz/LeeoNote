@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>생각 — 리이오의 연습장</title>
-<meta name="description" content="강연과 글로 남긴 생각들.">
+<meta name="description" content="한 주제를 오래 붙들고 적어 둔 고찰들. 일에 대한 것, 성장에 대한 것.">
 <meta property="og:title" content="생각 — 리이오의 연습장">
-<meta property="og:description" content="강연과 글로 남긴 생각들.">
+<meta property="og:description" content="한 주제를 오래 붙들고 적어 둔 고찰들.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/thoughts.html">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -18,53 +18,9 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="js/analytics.js"></script>
 <style>
-  .talks-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  @media (max-width: 700px) { .talks-grid { grid-template-columns: 1fr; } }
-  .talk {
-    background: var(--card);
-    border: 1px solid var(--paper-deep);
-    border-radius: 4px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border-bottom: 1px solid var(--paper-deep);
-  }
-  .talk:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(120,100,60,0.1);
-    border-bottom: 1px solid var(--paper-deep);
-  }
-  .talk-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: var(--paper-warm);
-    object-fit: cover;
-    display: block;
-  }
-  .talk-body { padding: 0.9rem 1.1rem; }
-  .talk-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.45;
-    margin-bottom: 0.3rem;
-  }
-  .talk-meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem;
-    color: var(--ink-mute);
-    letter-spacing: 0.05em;
-  }
-
-  /* ── 연구 노트 (data/notes.json 에서 렌더) ───────────── */
-  #notes[hidden] { display: none; }
-  .nt-cat { margin-top: 2rem; }
+  /* ── 고찰 목록 (data/notes.json 에서 렌더) ───────────── */
+  .nt-cat { margin-top: 2.6rem; }
+  .nt-cat:first-child { margin-top: 1.2rem; }
   .nt-cat-head {
     display: flex;
     align-items: baseline;
@@ -73,9 +29,9 @@
     border-bottom: 2px solid var(--ink);
   }
   .nt-cat-icon { font-size: 1rem; }
-  .nt-cat-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+  .nt-cat-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
   .nt-cat-count { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-mute); }
-  .nt-cat-desc { font-size: 0.85rem; color: var(--ink-faint); margin: 0.5rem 0 0; }
+  .nt-cat-desc { font-size: 0.85rem; color: var(--ink-faint); margin: 0.55rem 0 0; }
 
   .nt-row {
     display: grid;
@@ -111,6 +67,19 @@
     .nt-row { grid-template-columns: 1fr; }
     .nt-meta { order: 3; }
   }
+
+  /* 아직 올린 글이 없을 때 */
+  .nt-empty {
+    border: 1px dashed var(--ink-mute);
+    border-radius: 8px;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-top: 1.4rem;
+  }
+  .nt-empty b { color: var(--ink); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -133,139 +102,17 @@
 <main>
 
   <section class="container page-head">
-    <div class="page-eyebrow"> Writings & Talks</div>
+    <div class="page-eyebrow">Reflections</div>
     <h1 class="page-title">생각</h1>
-    <p class="page-sub">SyncSwift, adiOS, let us: Go!, 데이터야놀자 등 다양한 컨퍼런스와 블로그에 남긴 생각들입니다.</p>
-  </section>
-
-  <section class="container" id="notes" hidden>
-    <div class="section-tag">Notes</div>
-    <h2 class="section-title">연구 노트</h2>
-    <p class="section-desc">
-      아직 결론이 안 난 것들입니다. 여기 있는 글은 <em>정리된 결과</em>가 아니라 <em>지금까지의 생각</em>이고,
-      생각이 바뀌면 글도 고칩니다. 깨질 수 있는 상태로 두는 편이 정확하니까요.
+    <p class="page-sub">
+      한 주제를 오래 붙들고 적어 둔 <em>고찰</em>들입니다. 짧은 감상이 아니라,
+      같은 질문을 여러 번 되짚어 보고 남긴 것들이에요.
+      결론이 난 것도 있고 아직 아닌 것도 있어서, <em>생각이 바뀌면 글도 고칩니다.</em>
     </p>
+  </section>
+
+  <section class="container" id="notes">
     <div id="noteList"></div>
-  </section>
-
-  <section class="container">
-    <div class="section-tag"> Writings</div>
-    <h2 class="section-title">내가 한 생각</h2>
-    <p class="section-desc">주제별로 묶어 보았습니다.</p>
-
-    <div class="shelf">
-      <div class="shelf-header">
-        <span class="shelf-icon">🤖</span>
-        <span class="shelf-title">AI 시대의 개발자</span>
-        <span class="shelf-count">3</span>
-      </div>
-      <ul class="list-plain">
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">코드는 AI가 짠다. 그럼 나는 뭘 해야할까?</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">그 프롬프트, 보내기 전에 한 번만 읽어보세요</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">Claude Code 101 — 한국어 입문 가이드를 만든 이유</a></li>
-      </ul>
-    </div>
-
-    <div class="shelf">
-      <div class="shelf-header">
-        <span class="shelf-icon">🌱</span>
-        <span class="shelf-title">배움과 성장</span>
-        <span class="shelf-count">4</span>
-      </div>
-      <ul class="list-plain">
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">면접에서 떨어진 다음 날, 저는 그 탈락을 ‘기록’하기 시작했습니다</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">되돌아보니 실패로 이루어져있던 나의 성장</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">책도 봤고 강의도 들었는데 왜 개발 실력이 안 늘까</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">공부에는 왕도가 없다, 하지만 ‘나만의 길’은 있다</a></li>
-      </ul>
-    </div>
-
-    <div class="shelf">
-      <div class="shelf-header">
-        <span class="shelf-icon">📱</span>
-        <span class="shelf-title">iOS &amp; Apple</span>
-        <span class="shelf-count">2</span>
-      </div>
-      <ul class="list-plain">
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">더 좋은 앱을 만들고 싶어서, HIG를 시각화하기 시작했습니다</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">HIGLab — Apple 기술의 지도를 손에 넣다</a></li>
-      </ul>
-    </div>
-
-    <div class="shelf">
-      <div class="shelf-header">
-        <span class="shelf-icon">✉️</span>
-        <span class="shelf-title">만들고 전달하기</span>
-        <span class="shelf-count">2</span>
-      </div>
-      <ul class="list-plain">
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">“나는 누구에게, 무엇을, 어떻게 전달할 것인가?”</a></li>
-        <li><a href="https://leeo25.substack.com" target="_blank" rel="noopener">‘잘 만들기’보다 ‘잘 닿기’가 어려운 이유</a></li>
-      </ul>
-    </div>
-
-    <div class="mt-2">
-      <a href="https://leeo25.substack.com" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">블로그 전체 글 보기 →</a>
-    </div>
-  </section>
-
-  <div class="scribble-divider container">
-    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
-  </div>
-
-  <section class="container">
-    <div class="section-tag"> Talks</div>
-    <h2 class="section-title">컨퍼런스에서 한 이야기</h2>
-    <p class="section-desc">발표 자료보다 사람을 더 자주 떠올리게 됐던 자리들입니다.</p>
-
-    <div class="talks-grid">
-      <a class="talk" href="https://www.youtube.com/watch?v=TDgDZTrJCoM" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/TDgDZTrJCoM/hqdefault.jpg" alt="Widget 세상으로 가는 입구가 여깁니다">
-        <div class="talk-body">
-          <div class="talk-title">Widget 세상으로 가는 입구가 여깁니다</div>
-          <div class="talk-meta">SyncSwift · 2022</div>
-        </div>
-      </a>
-      <a class="talk" href="https://www.youtube.com/watch?v=IAA0rG6ieLE" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/IAA0rG6ieLE/hqdefault.jpg" alt="데이터를 저장하는데, DB는 너무 어렵지 않나요?">
-        <div class="talk-body">
-          <div class="talk-title">데이터를 저장하는데, DB는 너무 어렵지 않나요?</div>
-          <div class="talk-meta">데이터야놀자 · 2022</div>
-        </div>
-      </a>
-      <a class="talk" href="https://www.youtube.com/watch?v=V6d_f9q2EUg" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/V6d_f9q2EUg/hqdefault.jpg" alt="iOS 개발 이렇게 시작하는거 아니에요?">
-        <div class="talk-body">
-          <div class="talk-title">iOS 개발 이렇게 시작하는거 아니에요?</div>
-          <div class="talk-meta">adiOS · 2022</div>
-        </div>
-      </a>
-      <a class="talk" href="https://www.youtube.com/watch?v=loJeC6vZUlo" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/loJeC6vZUlo/hqdefault.jpg" alt="let us: Go! 2022 여름">
-        <div class="talk-body">
-          <div class="talk-title">let us: Go! 2022 여름</div>
-          <div class="talk-meta">let us: Go! · 2022</div>
-        </div>
-      </a>
-      <a class="talk" href="https://www.youtube.com/watch?v=5UVvRsKEsDI" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/5UVvRsKEsDI/hqdefault.jpg" alt="코드를 짜면서 겪은 오해의 순간들">
-        <div class="talk-body">
-          <div class="talk-title">코드를 짜면서 겪은 오해의 순간들</div>
-          <div class="talk-meta">adiOS · 2021</div>
-        </div>
-      </a>
-      <a class="talk" href="https://www.youtube.com/watch?v=diodVQ0yO_Y" target="_blank" rel="noopener">
-        <img class="talk-thumb" src="https://i.ytimg.com/vi/diodVQ0yO_Y/hqdefault.jpg" alt="402A 키노트">
-        <div class="talk-body">
-          <div class="talk-title">402A 키노트</div>
-          <div class="talk-meta">402A</div>
-        </div>
-      </a>
-    </div>
-
-    <div class="mt-2 center">
-      <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener" class="handwritten" style="font-size:1.15rem;">YouTube 채널에서 더 보기 →</a>
-    </div>
   </section>
 
 </main>
@@ -276,22 +123,28 @@
 </footer>
 
 <script>
-// 연구 노트 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
+// 고찰 목록 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
 // 카테고리를 늘리려면 JSON 의 categories 에 한 덩어리만 추가하면 되고, 이 파일은 손대지 않는다.
 (async function () {
-  var sec = document.getElementById('notes');
   var box = document.getElementById('noteList');
-  if (!sec || !box) return;
+  if (!box) return;
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+  var empty = '<div class="nt-empty">아직 올려 둔 고찰이 없습니다.<br><b>첫 편을 쓰는 중입니다.</b></div>';
 
   var data;
   try {
     var res = await fetch('data/notes.json', { cache: 'no-cache' });
-    if (!res.ok) return;
+    if (!res.ok) { box.innerHTML = empty; return; }
     data = await res.json();
-  } catch (e) { return; }
+  } catch (e) { box.innerHTML = empty; return; }
 
   var notes = (data && data.notes) || [];
-  if (!notes.length) return;            // 글이 없으면 섹션 자체를 내보내지 않는다
+  if (!notes.length) { box.innerHTML = empty; return; }
 
   var cats = (data && data.categories) || [];
   var known = cats.map(function (c) { return c.id; });
@@ -302,12 +155,6 @@
       cats.push({ id: n.category, name: n.category, icon: '·', desc: '' });
     }
   });
-
-  var esc = function (s) {
-    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-    });
-  };
 
   var html = '';
   cats.forEach(function (cat) {
@@ -339,9 +186,7 @@
     html += '</div>';
   });
 
-  if (!html) return;
-  box.innerHTML = html;
-  sec.hidden = false;
+  box.innerHTML = html || empty;
 })();
 </script>
 
