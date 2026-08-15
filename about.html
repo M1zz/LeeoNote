@@ -372,6 +372,59 @@
   }
   @media (max-width: 600px) { .roots { grid-template-columns: 1fr; } }
 
+  /* ── 철학 — ABOUT 소속 ─────────────────────────────── */
+  .phil-lead {
+    display: block;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.9rem 2rem;
+    margin-top: 1.4rem;
+    border-bottom: none;
+    transition: opacity 0.18s;
+  }
+  .phil-lead:hover { opacity: 0.9; color: #fff; border-bottom: none; }
+  .phil-lead-k {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .phil-lead-title {
+    font-size: clamp(1.3rem, 3.2vw, 1.75rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.28;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+  .phil-lead-body { font-size: 0.92rem; line-height: 1.75; color: rgba(255,255,255,0.7); max-width: 44rem; }
+
+  .phil-list { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .phil-list li { border-top: 1px solid var(--rule); }
+  .phil-list li:first-child { border-top: 2px solid var(--ink); }
+  .phil-list a {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr auto;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 0.95rem 0.6rem 0.95rem 0.2rem;
+    border-bottom: none;
+    border-radius: 4px;
+    transition: background 0.16s, padding-left 0.16s;
+  }
+  .phil-list a:hover { background: var(--paper-warm); padding-left: 0.6rem; border-bottom: none; }
+  .phil-num { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-mute); }
+  .phil-name { font-size: 0.97rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .phil-go { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-mute); }
+  @media (max-width: 600px) {
+    .phil-list a { grid-template-columns: 2.4rem 1fr; }
+    .phil-go { display: none; }
+    .phil-lead { padding: 1.5rem 1.3rem; }
+  }
+
 </style>
 </head>
 <body>
@@ -597,6 +650,43 @@
     <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
   </div>
 
+  <section class="container" id="philosophy">
+    <div class="section-tag">Philosophy</div>
+    <h2 class="section-title">오래 붙들고 있던 생각들</h2>
+    <p class="section-desc">
+      위에 적은 값과 방식이 어디에서 나왔는지를 글로 풀어 둔 곳입니다.
+      결론만 옮기면 표어가 되어 버려서, 왜 그렇게 생각하게 되었는지까지 같이 적었습니다.
+    </p>
+
+    <a class="phil-lead" href="philosophy.html#opening">
+      <div class="phil-lead-k">여는 글</div>
+      <div class="phil-lead-title">교육은 전달이 아니라,<br>스스로 발생하는 것이다</div>
+      <p class="phil-lead-body">
+        이 문장 하나가 나머지 전부의 출발점입니다. 프레이리의 은행 저금식 교육과
+        핀켈의 『침묵으로 가르치기』를 지나, 지금은 AI까지 입을 다물어야 하는 이유로 이어집니다.
+      </p>
+    </a>
+
+    <ul class="phil-list">
+      <li><a href="philosophy.html#p1"><span class="phil-num">01</span><span class="phil-name">가르치는 것이 아니라, 발견하게 한다</span><span class="phil-go">→</span></a></li>
+      <li><a href="philosophy.html#p2"><span class="phil-num">02</span><span class="phil-name">문제에서 출발한다, 이론에서가 아니라</span><span class="phil-go">→</span></a></li>
+      <li><a href="philosophy.html#p3"><span class="phil-num">03</span><span class="phil-name">실수는 피해야 할 것이 아니라, 해봐야 할 것이다</span><span class="phil-go">→</span></a></li>
+      <li><a href="philosophy.html#p4"><span class="phil-num">04</span><span class="phil-name">함께 자라는 것이 혼자 빠른 것보다 낫다</span><span class="phil-go">→</span></a></li>
+      <li><a href="philosophy.html#p5"><span class="phil-num">05</span><span class="phil-name">재능보다 환경, 환경보다 습관</span><span class="phil-go">→</span></a></li>
+      <li><a href="philosophy.html#p6"><span class="phil-num">06</span><span class="phil-name">배움은 끝이 없다 — 가르치는 사람도 포함해서</span><span class="phil-go">→</span></a></li>
+    </ul>
+
+    <div class="callout mt-2">
+      <div class="callout-label">여기와 「생각」의 차이</div>
+      이 칸은 <b>가르치는 일</b>에 대해 오래 정리해 둔 것들입니다.
+      요즘 붙들고 있는, 아직 결론이 안 난 것들은 <a href="thoughts.html">생각</a>에 따로 적습니다.
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
   <section class="container">
     <div class="section-tag">Next</div>
     <h2 class="section-title">그래서 무엇이 있냐면</h2>
@@ -607,9 +697,9 @@
         <div class="next-step-name">누구를 위한 곳인가</div>
         <div class="next-step-line">배우다 · 갖추다 · 만들다 — 세 칸으로 이어지는 사다리.</div>
       </a>
-      <a class="next-step" href="philosophy.html">
-        <div class="next-step-name">철학 여섯 편</div>
-        <div class="next-step-line">가르치는 일에 대해 오래 붙들고 있던 생각들.</div>
+      <a class="next-step" href="frameworks.html">
+        <div class="next-step-name">성장 프레임워크 넷</div>
+        <div class="next-step-line">위 생각을 실제로 돌아가게 만든 설계도들.</div>
       </a>
       <a class="next-step" href="tools.html">
         <div class="next-step-name">만든 것 스물일곱 개</div>
