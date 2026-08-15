@@ -63,6 +63,8 @@
     color: var(--ink-faint);
   }
   .nt-badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
+  .nt-ext { font-size: 0.72rem; color: var(--ink-mute); margin-left: 0.35rem; vertical-align: 0.08em; }
+  .nt-src { color: var(--ink-faint); }
   @media (max-width: 600px) {
     .nt-row { grid-template-columns: 1fr; }
     .nt-meta { order: 3; }
@@ -172,12 +174,17 @@
     mine.forEach(function (n) {
       var thinking = n.status !== 'settled';
       var href = n.file || ('notes/' + n.id + '.html');
-      html += '<a class="nt-row" href="' + esc(href) + '">' +
-                '<span class="nt-title">' + esc(n.title) + '</span>' +
+      var ext = /^https?:/.test(href);   // 사이트 밖에 쓴 글은 새 탭으로 연다
+      html += '<a class="nt-row" href="' + esc(href) + '"' +
+                (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
+                '<span class="nt-title">' + esc(n.title) +
+                  (ext ? '<span class="nt-ext">↗</span>' : '') +
+                '</span>' +
                 '<span class="nt-meta">' +
                   '<span class="nt-badge' + (thinking ? ' is-thinking' : '') + '">' +
                     (thinking ? '생각 중' : '정리됨') +
                   '</span>' +
+                  (n.source ? '<span class="nt-src">' + esc(n.source) + '</span>' : '') +
                   esc(n.date || '') +
                 '</span>' +
                 (n.summary ? '<span class="nt-summary">' + esc(n.summary) + '</span>' : '') +

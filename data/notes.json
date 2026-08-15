@@ -1,6 +1,7 @@
 {
   "_howto": "카테고리를 늘리려면 categories 에 { id, name, icon, desc } 한 덩어리를 추가하세요. 글을 올리려면 notes 에 한 덩어리를 추가하고 notes/<id>.html 을 만드세요. 화면 순서는 이 파일의 순서를 그대로 따릅니다.",
   "_status": "thinking = 아직 생각 중 · settled = 정리됨",
+  "_external": "사이트 밖에 쓴 글은 file 에 전체 URL 을 넣고 source 에 매체 이름을 적으세요. 새 탭으로 열리고 제목 옆에 ↗ 가 붙습니다.",
 
   "categories": [
     {
@@ -11,11 +12,22 @@
     },
     {
       "id": "growth",
-      "name": "성장에 대한 고찰",
+      "name": "학습과 성장에 대한 고찰",
       "icon": "🌱",
       "desc": "배우는 방식, 쌓이는 방식, 안 쌓이는 이유."
     }
   ],
 
-  "notes": []
+  "notes": [
+    {
+      "id": "ai-a64",
+      "title": "AI를 가지고 공부해도 아무것도 남지 않는 느낌이 드는 이유",
+      "category": "growth",
+      "date": "2026.08",
+      "status": "settled",
+      "summary": "오늘 AI에게 몇 번이나 질문하셨나요?",
+      "file": "https://leeo25.substack.com/p/ai-a64",
+      "source": "Substack"
+    }
+  ]
 }
