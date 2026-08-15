@@ -65,6 +65,40 @@
   .nt-badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
   .nt-ext { font-size: 0.72rem; color: var(--ink-mute); margin-left: 0.35rem; vertical-align: 0.08em; }
   .nt-src { color: var(--ink-faint); }
+
+  /* 태그 */
+  .nt-tags { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+  .nt-tag {
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mute);
+    background: var(--paper-warm);
+    border-radius: 100px;
+    padding: 0.14rem 0.5rem;
+  }
+  .nt-tag.is-on { background: var(--ink); color: #fff; }
+
+  /* 태그 필터 바 */
+  .nt-filter { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.4rem; }
+  .nt-filter[hidden] { display: none; }
+  .nt-chip {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    background: transparent;
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    transition: border-color 0.16s, color 0.16s, background 0.16s;
+  }
+  .nt-chip:hover { border-color: var(--ink); color: var(--ink); }
+  .nt-chip span { color: var(--ink-mute); margin-left: 0.15rem; }
+  .nt-chip.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .nt-chip.is-on span { color: rgba(255,255,255,0.6); }
+  .nt-chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   @media (max-width: 600px) {
     .nt-row { grid-template-columns: 1fr; }
     .nt-meta { order: 3; }
@@ -114,6 +148,7 @@
   </section>
 
   <section class="container" id="notes">
+    <div class="nt-filter" id="noteFilter" hidden></div>
     <div id="noteList"></div>
   </section>
 
@@ -126,9 +161,11 @@
 
 <script>
 // 고찰 목록 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
-// 카테고리를 늘리려면 JSON 의 categories 에 한 덩어리만 추가하면 되고, 이 파일은 손대지 않는다.
-(async function () {
+// 카테고리를 늘리려면 JSON 의 categories 에, 태그는 각 글의 tags 배열에 적으면 된다.
+// 이 파일은 손대지 않아도 된다.
+(function () {
   var box = document.getElementById('noteList');
+  var bar = document.getElementById('noteFilter');
   if (!box) return;
 
   var esc = function (s) {
@@ -138,62 +175,116 @@
   };
   var empty = '<div class="nt-empty">아직 올려 둔 고찰이 없습니다.<br><b>첫 편을 쓰는 중입니다.</b></div>';
 
-  var data;
-  try {
-    var res = await fetch('data/notes.json', { cache: 'no-cache' });
-    if (!res.ok) { box.innerHTML = empty; return; }
-    data = await res.json();
-  } catch (e) { box.innerHTML = empty; return; }
+  var notes = [], cats = [], active = null;   // active = 고른 태그 (null 이면 전체)
 
-  var notes = (data && data.notes) || [];
-  if (!notes.length) { box.innerHTML = empty; return; }
+  function tagsOf(n) { return Array.isArray(n.tags) ? n.tags : []; }
 
-  var cats = (data && data.categories) || [];
-  var known = cats.map(function (c) { return c.id; });
-  // JSON 에 등록 안 된 카테고리가 글에 있으면 뒤에 자동으로 붙인다
-  notes.forEach(function (n) {
-    if (n.category && known.indexOf(n.category) === -1) {
-      known.push(n.category);
-      cats.push({ id: n.category, name: n.category, icon: '·', desc: '' });
+  function renderList() {
+    var shown = active
+      ? notes.filter(function (n) { return tagsOf(n).indexOf(active) !== -1; })
+      : notes;
+
+    if (!shown.length) {
+      box.innerHTML = '<div class="nt-empty">이 태그로 걸어 둔 글이 아직 없습니다.</div>';
+      return;
     }
-  });
 
-  var html = '';
-  cats.forEach(function (cat) {
-    var mine = notes.filter(function (n) { return n.category === cat.id; });
-    if (!mine.length) return;           // 빈 카테고리는 그리지 않는다
+    var html = '';
+    cats.forEach(function (cat) {
+      var mine = shown.filter(function (n) { return n.category === cat.id; });
+      if (!mine.length) return;          // 빈 카테고리는 그리지 않는다
 
-    html += '<div class="nt-cat">';
-    html += '<div class="nt-cat-head">' +
-              '<span class="nt-cat-icon">' + esc(cat.icon || '·') + '</span>' +
-              '<span class="nt-cat-name">' + esc(cat.name) + '</span>' +
-              '<span class="nt-cat-count">' + mine.length + '</span>' +
-            '</div>';
-    if (cat.desc) html += '<p class="nt-cat-desc">' + esc(cat.desc) + '</p>';
+      html += '<div class="nt-cat">';
+      html += '<div class="nt-cat-head">' +
+                '<span class="nt-cat-icon">' + esc(cat.icon || '·') + '</span>' +
+                '<span class="nt-cat-name">' + esc(cat.name) + '</span>' +
+                '<span class="nt-cat-count">' + mine.length + '</span>' +
+              '</div>';
+      if (cat.desc) html += '<p class="nt-cat-desc">' + esc(cat.desc) + '</p>';
 
-    mine.forEach(function (n) {
-      var thinking = n.status !== 'settled';
-      var href = n.file || ('notes/' + n.id + '.html');
-      var ext = /^https?:/.test(href);   // 사이트 밖에 쓴 글은 새 탭으로 연다
-      html += '<a class="nt-row" href="' + esc(href) + '"' +
-                (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
-                '<span class="nt-title">' + esc(n.title) +
-                  (ext ? '<span class="nt-ext">↗</span>' : '') +
-                '</span>' +
-                '<span class="nt-meta">' +
-                  '<span class="nt-badge' + (thinking ? ' is-thinking' : '') + '">' +
-                    (thinking ? '생각 중' : '정리됨') +
+      mine.forEach(function (n) {
+        var thinking = n.status !== 'settled';
+        var href = n.file || ('notes/' + n.id + '.html');
+        var ext = /^https?:/.test(href);   // 사이트 밖에 쓴 글은 새 탭으로 연다
+        var tags = tagsOf(n);
+        html += '<a class="nt-row" href="' + esc(href) + '"' +
+                  (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
+                  '<span class="nt-title">' + esc(n.title) +
+                    (ext ? '<span class="nt-ext">↗</span>' : '') +
                   '</span>' +
-                  (n.source ? '<span class="nt-src">' + esc(n.source) + '</span>' : '') +
-                  esc(n.date || '') +
-                '</span>' +
-                (n.summary ? '<span class="nt-summary">' + esc(n.summary) + '</span>' : '') +
-              '</a>';
+                  '<span class="nt-meta">' +
+                    '<span class="nt-badge' + (thinking ? ' is-thinking' : '') + '">' +
+                      (thinking ? '생각 중' : '정리됨') +
+                    '</span>' +
+                    (n.source ? '<span class="nt-src">' + esc(n.source) + '</span>' : '') +
+                    esc(n.date || '') +
+                  '</span>' +
+                  (n.summary ? '<span class="nt-summary">' + esc(n.summary) + '</span>' : '') +
+                  (tags.length
+                    ? '<span class="nt-tags">' + tags.map(function (t) {
+                        return '<span class="nt-tag' + (t === active ? ' is-on' : '') + '">#' + esc(t) + '</span>';
+                      }).join('') + '</span>'
+                    : '') +
+                '</a>';
+      });
+      html += '</div>';
     });
-    html += '</div>';
-  });
 
-  box.innerHTML = html || empty;
+    box.innerHTML = html || empty;
+  }
+
+  function renderBar() {
+    if (!bar) return;
+    var count = {};
+    notes.forEach(function (n) {
+      tagsOf(n).forEach(function (t) { count[t] = (count[t] || 0) + 1; });
+    });
+    var names = Object.keys(count).sort(function (a, b) {
+      return count[b] - count[a] || a.localeCompare(b, 'ko');
+    });
+    if (!names.length) { bar.hidden = true; return; }   // 태그가 하나도 없으면 필터 자체를 감춘다
+
+    var html = '<button type="button" class="nt-chip' + (active ? '' : ' is-on') +
+               '" data-tag="">전체 <span>' + notes.length + '</span></button>';
+    names.forEach(function (t) {
+      html += '<button type="button" class="nt-chip' + (t === active ? ' is-on' : '') +
+              '" data-tag="' + esc(t) + '">#' + esc(t) + ' <span>' + count[t] + '</span></button>';
+    });
+    bar.innerHTML = html;
+    bar.hidden = false;
+  }
+
+  if (bar) {
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.nt-chip') : null;
+      if (!btn) return;
+      var t = btn.getAttribute('data-tag');
+      active = t ? (active === t ? null : t) : null;   // 같은 태그를 다시 누르면 해제
+      renderBar();
+      renderList();
+    });
+  }
+
+  fetch('data/notes.json', { cache: 'no-cache' })
+    .then(function (res) { if (!res.ok) throw new Error('no data'); return res.json(); })
+    .then(function (data) {
+      notes = (data && data.notes) || [];
+      if (!notes.length) { box.innerHTML = empty; return; }
+
+      cats = (data && data.categories) || [];
+      var known = cats.map(function (c) { return c.id; });
+      // JSON 에 등록 안 된 카테고리가 글에 있으면 뒤에 자동으로 붙인다
+      notes.forEach(function (n) {
+        if (n.category && known.indexOf(n.category) === -1) {
+          known.push(n.category);
+          cats.push({ id: n.category, name: n.category, icon: '·', desc: '' });
+        }
+      });
+
+      renderBar();
+      renderList();
+    })
+    .catch(function () { box.innerHTML = empty; });
 })();
 </script>
 
