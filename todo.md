@@ -155,15 +155,50 @@ HypoLoop(가설순환학습)을 엔진으로 두고, 그 **위에** 능력 축 �
         부록 우선 · 템플릿은 싸다) — 프레임워크 증식 방지
 - [x] 검증 — 내부 링크 12개 전수 OK · 앵커 정합 · 태그 균형 · 미정의 CSS 0
 
+- [x] `frameworks.html` 허브에 fw-index 입구 · framework.html 하단 링크 · sitemap 등재
+- [x] 이름은 **QuestLoop / 질문고리 학습**으로 확정 (HypoLoop 아님)
+
 ### 이어서 결정할 것
-- [ ] `frameworks.html` 허브에서 skills.html로 들어오는 입구 만들기
-      (지금은 어느 페이지에서도 연결 안 됨 — 고아 페이지 상태)
-- [ ] topnav 노출 여부 — 현재 4개 평면 나열(ABOUT/성장 프레임워크/도구/도구 만들기)
-- [ ] sitemap.xml 추가
-- [ ] **이름 통일** — 사이트는 「질문고리 학습」, QuestLoop 저장소는 「HypoLoop ·
-      가설순환학습」. 표기가 갈려 있음 (framework 7 · ai-learning 5 · malttuk 6 곳 등)
 - [ ] 2층 프레임워크 설계 — 새로 만들 정당성이 있는 유일한 자리
 - [ ] 2층 4칸용 템플릿 (종이 한 장짜리) — 프레임워크보다 먼저 붙일 수 있음
+- [ ] 1층 5칸 도착지가 겹침 (02·04·05가 전부 framework.html) — 앵커 필요
+- [ ] skills.html topnav 노출 여부 — 현재는 frameworks/framework 경유로만 접근
+
+---
+
+## 연구 노트 자리 신설 + 고아 페이지 복구 (2026-08-15)
+
+`thoughts.html`(생각)이 **유입 링크 0개**로 완전한 고아였음 — nav를 4개로 줄일 때
+잘려나감. 글 11편 + 발표 6건이 통째로 접근 불가 상태였던 것.
+동시에 사이트 전체에 "결론이 안 난 글"을 담을 자리가 없었음.
+질문고리 학습은 "깨질 가설을 먼저 써라"인데 정작 사이트엔 깨질 글이 0편.
+
+- [x] topnav에 「생각」 추가 — **18개 페이지 전수**
+      순서: ABOUT · 생각 · 성장 프레임워크 · 도구 · 도구 만들기
+      (사다리 3칸을 연속으로 두고, 생각은 ABOUT 옆 '사람' 영역에 배치)
+- [x] `data/notes.json` 신설 — **카테고리를 데이터로 분리**
+      categories[] 에 { id, name, icon, desc } 추가하면 페이지 수정 없이 반영
+      초기 2종: 성장에 대한 것 🌱 / 일에 대한 것 🛠
+- [x] `thoughts.html` 「연구 노트」 섹션 — notes.json 읽어 카테고리별 렌더
+      - 노트 0건이면 섹션 자체를 숨김 (빈 껍데기 노출 방지)
+      - JSON 미등록 카테고리는 뒤에 자동 편입
+      - status: thinking(생각 중·점선 배지) / settled(정리됨·실선)
+- [x] `notes/_template.html` — 노트 본문 템플릿
+      「지금 생각은 여기까지」 블랙 블록 + 「고친 자리」 changelog
+- [x] 검증 — 렌더 로직 node 실행(3건/3카테고리/미등록 편입/배지 전부 정상,
+      0건일 때 섹션 숨김 확인) · 내부 링크 222개 · nav 18개 페이지 일치 ·
+      태그 균형 · 미정의 CSS 0
+
+### 글 올리는 법
+1. `notes/<id>.html` 을 `_template.html` 복사해서 작성
+2. `data/notes.json` 의 notes[] 에 한 덩어리 추가
+   `{ id, title, category, date, status, summary }`
+3. 새 카테고리가 필요하면 categories[] 에도 한 덩어리 추가
+
+### 남은 것
+- [ ] 첫 노트 올리기 — 지금은 notes[] 가 비어 있어 섹션이 안 보임
+- [ ] `philosophy.html` 은 여전히 about.html 링크 하나뿐 — 생각 페이지에서 연결할지
+- [ ] notes/ 개별 글 sitemap 등재 (글 생기면)
 
 ---
 

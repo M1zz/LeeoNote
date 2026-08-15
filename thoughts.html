@@ -61,6 +61,56 @@
     color: var(--ink-mute);
     letter-spacing: 0.05em;
   }
+
+  /* ── 연구 노트 (data/notes.json 에서 렌더) ───────────── */
+  #notes[hidden] { display: none; }
+  .nt-cat { margin-top: 2rem; }
+  .nt-cat-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .nt-cat-icon { font-size: 1rem; }
+  .nt-cat-name { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+  .nt-cat-count { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-mute); }
+  .nt-cat-desc { font-size: 0.85rem; color: var(--ink-faint); margin: 0.5rem 0 0; }
+
+  .nt-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 1rem;
+    align-items: baseline;
+    padding: 1.05rem 0.5rem 1.05rem 0.2rem;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 4px;
+    transition: background 0.16s, padding-left 0.16s;
+  }
+  .nt-row:hover { background: var(--paper-warm); padding-left: 0.6rem; border-bottom: 1px solid var(--rule); }
+  .nt-title { font-size: 1rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .nt-summary { grid-column: 1 / -1; font-size: 0.88rem; color: var(--ink-faint); line-height: 1.6; }
+  .nt-meta {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nt-badge {
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.12rem 0.5rem;
+    color: var(--ink-faint);
+  }
+  .nt-badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
+  @media (max-width: 600px) {
+    .nt-row { grid-template-columns: 1fr; }
+    .nt-meta { order: 3; }
+  }
 </style>
 </head>
 <body>
@@ -72,6 +122,7 @@
     </a>
     <nav class="topnav">
       <a href="about.html">ABOUT</a>
+      <a href="thoughts.html" class="active">생각</a>
       <a href="frameworks.html">성장 프레임워크</a>
       <a href="tools.html">도구</a>
       <a href="join.html">도구 만들기</a>
@@ -85,6 +136,16 @@
     <div class="page-eyebrow"> Writings & Talks</div>
     <h1 class="page-title">생각</h1>
     <p class="page-sub">SyncSwift, adiOS, let us: Go!, 데이터야놀자 등 다양한 컨퍼런스와 블로그에 남긴 생각들입니다.</p>
+  </section>
+
+  <section class="container" id="notes" hidden>
+    <div class="section-tag">Notes</div>
+    <h2 class="section-title">연구 노트</h2>
+    <p class="section-desc">
+      아직 결론이 안 난 것들입니다. 여기 있는 글은 <em>정리된 결과</em>가 아니라 <em>지금까지의 생각</em>이고,
+      생각이 바뀌면 글도 고칩니다. 깨질 수 있는 상태로 두는 편이 정확하니까요.
+    </p>
+    <div id="noteList"></div>
   </section>
 
   <section class="container">
@@ -213,6 +274,76 @@
   <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
   <div class="footer-copy">© 2026 Leeo · 개발자리</div>
 </footer>
+
+<script>
+// 연구 노트 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
+// 카테고리를 늘리려면 JSON 의 categories 에 한 덩어리만 추가하면 되고, 이 파일은 손대지 않는다.
+(async function () {
+  var sec = document.getElementById('notes');
+  var box = document.getElementById('noteList');
+  if (!sec || !box) return;
+
+  var data;
+  try {
+    var res = await fetch('data/notes.json', { cache: 'no-cache' });
+    if (!res.ok) return;
+    data = await res.json();
+  } catch (e) { return; }
+
+  var notes = (data && data.notes) || [];
+  if (!notes.length) return;            // 글이 없으면 섹션 자체를 내보내지 않는다
+
+  var cats = (data && data.categories) || [];
+  var known = cats.map(function (c) { return c.id; });
+  // JSON 에 등록 안 된 카테고리가 글에 있으면 뒤에 자동으로 붙인다
+  notes.forEach(function (n) {
+    if (n.category && known.indexOf(n.category) === -1) {
+      known.push(n.category);
+      cats.push({ id: n.category, name: n.category, icon: '·', desc: '' });
+    }
+  });
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+
+  var html = '';
+  cats.forEach(function (cat) {
+    var mine = notes.filter(function (n) { return n.category === cat.id; });
+    if (!mine.length) return;           // 빈 카테고리는 그리지 않는다
+
+    html += '<div class="nt-cat">';
+    html += '<div class="nt-cat-head">' +
+              '<span class="nt-cat-icon">' + esc(cat.icon || '·') + '</span>' +
+              '<span class="nt-cat-name">' + esc(cat.name) + '</span>' +
+              '<span class="nt-cat-count">' + mine.length + '</span>' +
+            '</div>';
+    if (cat.desc) html += '<p class="nt-cat-desc">' + esc(cat.desc) + '</p>';
+
+    mine.forEach(function (n) {
+      var thinking = n.status !== 'settled';
+      var href = n.file || ('notes/' + n.id + '.html');
+      html += '<a class="nt-row" href="' + esc(href) + '">' +
+                '<span class="nt-title">' + esc(n.title) + '</span>' +
+                '<span class="nt-meta">' +
+                  '<span class="nt-badge' + (thinking ? ' is-thinking' : '') + '">' +
+                    (thinking ? '생각 중' : '정리됨') +
+                  '</span>' +
+                  esc(n.date || '') +
+                '</span>' +
+                (n.summary ? '<span class="nt-summary">' + esc(n.summary) + '</span>' : '') +
+              '</a>';
+    });
+    html += '</div>';
+  });
+
+  if (!html) return;
+  box.innerHTML = html;
+  sec.hidden = false;
+})();
+</script>
 
 </body>
 </html>

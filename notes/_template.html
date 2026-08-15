@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글 제목 — 리이오의 연습장</title>
+<meta name="description" content="한 줄 요약. data/notes.json 의 summary 와 같게 쓰면 됩니다.">
+<meta property="og:title" content="글 제목">
+<meta property="og:description" content="한 줄 요약.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/파일이름.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px dashed var(--ink-mute);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-h1 {
+    font-size: clamp(2rem, 5.2vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">도구 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>성장에 대한 것</span>
+      <span class="badge">생각 중</span>
+      <span>2026-08-15</span>
+    </div>
+    <h1 class="nt-h1">글 제목이<br>여기에 들어갑니다</h1>
+    <p class="nt-lede">
+      들어가는 한두 문장. 무엇을 붙들고 있었고 왜 적어 두는지를 먼저 말합니다.
+      결론을 여기서 미리 말하지 않아도 됩니다.
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>본문 첫 문단.</p>
+
+    <h2>첫 번째 소제목</h2>
+    <p>내용.</p>
+
+    <div class="callout">
+      <div class="callout-label">아직 모르는 것</div>
+      확실하지 않은 자리를 그냥 확실하지 않다고 적어 둡니다. 이게 이 노트의 값입니다.
+    </div>
+
+    <h2>두 번째 소제목</h2>
+    <p>내용.</p>
+
+    <p class="quote">
+      인용하고 싶은 문장.
+      <span class="quote-cite">출처</span>
+    </p>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        여기까지 온 결론을 한 문단으로. <b>이 문단은 나중에 통째로 바뀔 수 있습니다.</b>
+        바뀌면 아래 갱신 이력에 한 줄을 더합니다.
+      </div>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-08-15</div>
+        <div class="what">처음 씀.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 연구 노트 목록으로</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
