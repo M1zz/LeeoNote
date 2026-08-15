@@ -425,6 +425,79 @@
     .phil-lead { padding: 1.5rem 1.3rem; }
   }
 
+  /* ── 만든 사람 ─────────────────────────────────────── */
+  .me-lines { list-style: none; padding: 0; margin: 1.2rem 0 0; }
+  .me-lines li {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .me-lines li:last-child { border-bottom: none; }
+  .me-k {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-top: 0.3rem;
+  }
+  .me-v { color: var(--ink-soft); }
+  .me-v b { color: var(--ink); font-weight: 700; }
+  @media (max-width: 600px) { .me-lines li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .me-sub {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 2.4rem 0 0.2rem;
+  }
+
+  .talks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; margin-top: 1rem; }
+  @media (max-width: 860px) { .talks-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .talks-grid { grid-template-columns: 1fr; } }
+  .talk {
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-radius: 6px;
+    overflow: hidden;
+    color: inherit;
+    border-bottom: 1px solid var(--paper-deep);
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  }
+  .talk:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+    border-color: var(--ink);
+  }
+  .talk-thumb { width: 100%; aspect-ratio: 16/9; background: var(--paper-warm); object-fit: cover; display: block; }
+  .talk-body { padding: 0.8rem 1rem 0.9rem; }
+  .talk-title { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.45; margin-bottom: 0.3rem; }
+  .talk-meta { font-family: var(--mono); font-size: 0.63rem; color: var(--ink-mute); letter-spacing: 0.05em; }
+
+  .me-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+  }
+  .me-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.45rem 0.95rem;
+    color: var(--ink-faint);
+    transition: border-color 0.18s, color 0.18s;
+  }
+  .me-link:hover { border-color: var(--ink); color: var(--ink); }
+
 </style>
 </head>
 <body>
@@ -680,6 +753,93 @@
       <div class="callout-label">여기와 「생각」의 차이</div>
       이 칸은 <b>가르치는 일</b>에 대해 오래 정리해 둔 것들입니다.
       요즘 붙들고 있는, 아직 결론이 안 난 것들은 <a href="thoughts.html">생각</a>에 따로 적습니다.
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container" id="me">
+    <div class="section-tag">Who</div>
+    <h2 class="section-title">이걸 만든 사람</h2>
+    <p class="section-desc">
+      리이오(Leeo)라고 합니다. iOS 앱을 만들고, 가르치고, 막힌 자리마다 도구를 하나씩 만들어 왔습니다.
+      이 연습장은 그 과정에서 나온 것들을 모아 둔 곳이에요.
+    </p>
+
+    <ul class="me-lines">
+      <li>
+        <div class="me-k">만든다</div>
+        <div class="me-v">iOS · macOS 앱과 웹 도구 <b>스물일곱 개</b>. 전부 무료이고, 되도록 소스까지 열어 둡니다. → <a href="tools.html">도구</a></div>
+      </li>
+      <li>
+        <div class="me-k">가르친다</div>
+        <div class="me-v">강의와 멘토링, 그리고 그 일을 시스템으로 옮겨 적은 <b>학습 프레임워크</b>들. → <a href="frameworks.html">성장 프레임워크</a></div>
+      </li>
+      <li>
+        <div class="me-k">적는다</div>
+        <div class="me-v">한 주제를 오래 붙들고 남긴 <b>고찰</b>과, 가르치는 일에 대한 <b>철학</b>. → <a href="thoughts.html">생각</a> · <a href="philosophy.html">철학</a></div>
+      </li>
+      <li>
+        <div class="me-k">말한다</div>
+        <div class="me-v">SyncSwift · adiOS · let us: Go! · 데이터야놀자 등에서 한 <b>발표 여섯 편</b>. 아래에 모아 두었습니다.</div>
+      </li>
+    </ul>
+
+    <div class="me-sub">Talks</div>
+    <p class="section-desc">발표 자료보다 사람을 더 자주 떠올리게 됐던 자리들입니다.</p>
+
+    <div class="talks-grid">
+      <a class="talk" href="https://www.youtube.com/watch?v=TDgDZTrJCoM" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/TDgDZTrJCoM/hqdefault.jpg" alt="Widget 세상으로 가는 입구가 여깁니다" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">Widget 세상으로 가는 입구가 여깁니다</div>
+          <div class="talk-meta">SyncSwift · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=IAA0rG6ieLE" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/IAA0rG6ieLE/hqdefault.jpg" alt="데이터를 저장하는데, DB는 너무 어렵지 않나요?" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">데이터를 저장하는데, DB는 너무 어렵지 않나요?</div>
+          <div class="talk-meta">데이터야놀자 · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=V6d_f9q2EUg" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/V6d_f9q2EUg/hqdefault.jpg" alt="iOS 개발 이렇게 시작하는거 아니에요?" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">iOS 개발 이렇게 시작하는거 아니에요?</div>
+          <div class="talk-meta">adiOS · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=loJeC6vZUlo" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/loJeC6vZUlo/hqdefault.jpg" alt="let us: Go! 2022 여름" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">let us: Go! 2022 여름</div>
+          <div class="talk-meta">let us: Go! · 2022</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=5UVvRsKEsDI" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/5UVvRsKEsDI/hqdefault.jpg" alt="코드를 짜면서 겪은 오해의 순간들" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">코드를 짜면서 겪은 오해의 순간들</div>
+          <div class="talk-meta">adiOS · 2021</div>
+        </div>
+      </a>
+      <a class="talk" href="https://www.youtube.com/watch?v=diodVQ0yO_Y" target="_blank" rel="noopener">
+        <img class="talk-thumb" src="https://i.ytimg.com/vi/diodVQ0yO_Y/hqdefault.jpg" alt="402A 키노트" loading="lazy">
+        <div class="talk-body">
+          <div class="talk-title">402A 키노트</div>
+          <div class="talk-meta">402A</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="me-links">
+      <a class="me-link" href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube ↗</a>
+      <a class="me-link" href="https://leeo25.substack.com" target="_blank" rel="noopener">Substack ↗</a>
+      <a class="me-link" href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="me-link" href="mentoring.html">편지 보내기</a>
     </div>
   </section>
 
