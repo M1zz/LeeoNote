@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>성장 프레임워크 — 리이오의 연습장</title>
-<meta name="description" content="학습을 우연에 맡기지 않으려고 만든 설계 프레임워크 세 가지와, 현장에서 손에 들고 쓰는 필드 매뉴얼.">
+<meta name="description" content="배우는 축(질문고리 학습) · 고르는 축(레버 찾기) · 지키는 축(망하지 않기). 직접 만든 프레임워크 셋을 언제 꺼내는지로 정리했습니다.">
 <meta property="og:title" content="성장 프레임워크 — 리이오의 연습장">
-<meta property="og:description" content="질문고리 학습 · 지형·경로·장비 · SEEDS 4주 설계도 — 무엇을 위한 것이고 어떤 것인지 한눈에.">
+<meta property="og:description" content="푸는 법 · 고르는 법 · 지키는 법 — 축이 다른 셋. 언제 꺼내는 것인지부터 적어 두었습니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/frameworks.html">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -115,37 +115,45 @@
   }
   .fw-card:hover .fw-go { color: var(--ink); }
 
+  .fw-card--span { grid-column: 1 / -1; }
+
   @media (max-width: 760px) { .fw-grid { grid-template-columns: 1fr; } }
 
-  /* 고르기 전 — 능력 축 색인으로 가는 입구 */
-  .fw-index {
+  /* 층 지도 */
+  .fw-stack { list-style: none; margin: 1.3rem 0 0; padding: 0; }
+  .fw-stack li {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 4.2rem 1fr auto;
     gap: 0 1.1rem;
-    align-items: center;
-    margin-top: 1.4rem;
-    padding: 1.05rem 1.3rem;
-    border: 1px dashed var(--ink-mute);
-    border-radius: 8px;
-    border-bottom: 1px dashed var(--ink-mute);
-    transition: border-color 0.18s, background 0.18s;
+    align-items: baseline;
+    padding: 0.95rem 0.2rem;
+    border-top: 1px solid var(--rule);
   }
-  .fw-index:hover { border-color: var(--ink); background: var(--paper-warm); color: var(--ink); }
-  .fw-index-k {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    white-space: nowrap;
+  .fw-stack li:first-child { border-top: 2px solid var(--ink); }
+  .fw-stack li:last-child { border-bottom: 1px solid var(--rule); }
+  .fw-stack .lv {
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
   }
-  .fw-index-body { font-size: 0.9rem; line-height: 1.6; color: var(--ink-faint); }
-  .fw-index-body b { color: var(--ink); font-weight: 700; }
-  .fw-index-go { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-mute); white-space: nowrap; }
-  .fw-index:hover .fw-index-go { color: var(--ink); }
-  @media (max-width: 700px) {
-    .fw-index { grid-template-columns: 1fr; gap: 0.45rem 0; }
-    .fw-index-go { display: none; }
+  .fw-stack .tx { font-size: 0.9rem; line-height: 1.75; color: var(--ink-faint); }
+  .fw-stack .tx b { color: var(--ink); font-weight: 700; }
+  .fw-stack .go { font-family: var(--mono); font-size: 0.66rem; white-space: nowrap; }
+  .fw-stack .go a { color: var(--ink-mute); border-bottom: none; }
+  .fw-stack .go a:hover { color: var(--ink); border-bottom: 1px solid var(--ink); }
+  @media (max-width: 640px) {
+    .fw-stack li { grid-template-columns: 1fr; gap: 0.3rem 0; }
+    .fw-stack .go { margin-top: 0.2rem; }
+  }
+
+  .fw-aside {
+    font-size: 0.86rem;
+    line-height: 1.75;
+    color: var(--ink-faint);
+    margin-top: 1rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--paper-deep);
   }
 
   /* 공통 사이클 배너 */
@@ -198,34 +206,6 @@
   }
   @media (max-width: 600px) { .fw-core { padding: 1.5rem 1.3rem; } }
 
-  /* 부록 목록 */
-  .fw-annex { list-style: none; margin: 1.2rem 0 0; padding: 0; }
-  .fw-annex li { border-top: 1px solid var(--rule); }
-  .fw-annex li:first-child { border-top: 2px solid var(--ink); }
-  .fw-annex a {
-    display: grid;
-    grid-template-columns: 6.5rem 1fr auto;
-    gap: 0 1rem;
-    align-items: baseline;
-    padding: 1rem 0.6rem 1rem 0.2rem;
-    border-bottom: none;
-    border-radius: 4px;
-    transition: background 0.16s, padding-left 0.16s;
-  }
-  .fw-annex a:hover { background: var(--paper-warm); padding-left: 0.6rem; border-bottom: none; }
-  .fw-annex-tag {
-    font-family: var(--mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    color: var(--ink-mute);
-  }
-  .fw-annex-name { font-size: 0.98rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
-  .fw-annex-desc { font-size: 0.84rem; color: var(--ink-faint); line-height: 1.6; margin-top: 0.15rem; }
-  .fw-annex-go { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-mute); }
-  @media (max-width: 600px) {
-    .fw-annex a { grid-template-columns: 1fr; gap: 0.3rem 0; }
-    .fw-annex-go { display: none; }
-  }
 </style>
 </head>
 <body>
@@ -248,169 +228,168 @@
 <main>
 
   <section class="container page-head">
-    <div class="page-eyebrow">Growth Frameworks</div>
+    <div class="page-eyebrow">Growth Framework</div>
     <h1 class="page-title">성장을 우연에<br>맡기지 않는 설계도</h1>
     <p class="page-sub">
       무언가를 만들다 보면 결과물은 나오는데, 무엇을 배웠는지는 우연에 맡겨집니다.
-      그 우연을 걷어내려고 만든 것들입니다. 셋 다 같은 자리에서 나왔지만, 막힌 지점이 서로 다릅니다.
+      그 우연을 걷어내려고 만든 것이 <b>질문고리 학습</b>입니다.
+      그리고 축이 둘 더 있습니다 — <b>붙잡을 문제를 고르는</b> 쪽과, 잘되게 만드는 대신 <b>망하지 않게</b> 지키는 쪽.
     </p>
   </section>
 
   <section class="container">
-    <div class="section-tag">Pick one</div>
-    <h2 class="section-title">어디에서 막혀 있는지로 고르세요</h2>
+    <div class="section-tag">Why one</div>
+    <h2 class="section-title">배우는 쪽 프레임워크는 하나면 됩니다</h2>
     <p class="section-desc">
-      카드 위 칸이 <b>무엇을 위한 것인지</b>, 아래 칸이 <b>어떤 것인지</b>입니다.
+      필요할 때마다 이름을 하나씩 만들면 금세 열두 개가 됩니다. 그 순간 이 연습장은 못 읽는 곳이 됩니다.
+    </p>
+    <p>그래서 새로 필요한 것이 생기면 <b>이름을 만들지 않고 부록으로 메웁니다.</b>
+    기간이 필요하면 4주짜리 판을 짜고, AI가 끼어들면 어디에 놓을지를 정해 붙이는 식입니다.
+    전부 같은 엔진 위에서 도는 응용이지, 별개의 프레임워크가 아닙니다.</p>
+
+    <p>이름을 따로 가진 것은 <b>다루는 대상이 다를 때뿐</b>입니다. 질문고리가 “이 방법이 통하는가”를 다룬다면,
+    아래 둘은 각각 “이 문제가 내 손에 있는가”와 “여기서 무엇을 잃는가”를 다룹니다.</p>
+  </section>
+
+  <section class="container" id="engine">
+    <div class="section-tag">The engine</div>
+    <h2 class="section-title">안에서 도는 것은 이 네 박자입니다</h2>
+    <p class="section-desc">
+      어떤 응용을 얹든 열어 보면 전부 이것을 돌립니다. 이걸 돌리지 않으면 여기 것이 아닙니다.
+    </p>
+
+    <a class="fw-core" href="framework.html">
+      <div class="fw-core-label">The Engine · One Turn</div>
+      <div class="fw-core-title">질문 → 가설 → 탐구 → 델타</div>
+      <p class="fw-core-body">
+        먼저 내 답을 만들어 보고(가설), 그 답이 깨질 자리를 찾아가고(탐구),
+        깨진 만큼만 배운 것으로 셉니다(델타). 가설이 깨지는 순간이 최대 학습 지점입니다.
+      </p>
+      <div class="fw-core-steps">
+        <span>질문 · Question</span>
+        <span>가설 · Hypothesis</span>
+        <span>탐구 · Explore</span>
+        <span>델타 · Delta</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="container" id="pick">
+    <div class="section-tag">The framework</div>
+    <h2 class="section-title">질문고리 학습</h2>
+    <p class="section-desc">
+      먼저 <b>언제 꺼내는 것인지</b>부터 보세요. 아래 문장 중 하나가 지금 내 상태라면 이걸 펴면 됩니다.
     </p>
 
     <div class="fw-grid">
-
-      <a class="fw-card" href="framework.html">
+      <a class="fw-card fw-card--span" href="framework.html">
         <div class="fw-num">01</div>
         <div class="fw-name">질문고리 학습</div>
         <div class="fw-en">Question Loop</div>
         <div class="fw-for">“프로젝트는 전진하는데, 나는 배우고 있습니까?”</div>
         <p class="fw-what">
           <b>실패를 요구하는 학습 프레임워크.</b>
-          가설을 세우고 깨뜨리는 사이클을 돌립니다. 깨지지 않는 가설은 배움이 아니라 경고 신호로 봅니다.
-          혼자든 스터디든 팀이든 같은 사이클이고, 맨 위층에 무엇을 두는지만 바뀝니다.
+          산출물이 아니라 학습 자체를 설계 대상으로 삼습니다. 가설을 세우고 깨뜨리는 사이클을 돌리고,
+          깨지지 않는 가설은 배움이 아니라 경고 신호로 봅니다.
+          구조가 프랙탈이라 혼자든 스터디든 팀이든 같은 사이클이고, 맨 위층에 무엇을 두는지만 바뀝니다.
         </p>
         <div class="fw-meta">
           <div class="fw-tags">여덟 단계 · 다섯 원칙<br>Solo · Study · Team</div>
           <div class="fw-go">읽기 →</div>
         </div>
       </a>
-
-      <a class="fw-card" href="ai-learning.html">
-        <div class="fw-num">02</div>
-        <div class="fw-name">지형 · 경로 · 장비</div>
-        <div class="fw-en">AI Last</div>
-        <div class="fw-for">“AI한테 물어보면 빠른데, 남는 게 없습니다.”</div>
-        <p class="fw-what">
-          <b>AI를 마지막에 놓는 학습 설계.</b>
-          무엇을 배울지(지형)와 어떻게 익힐지(경로)를 정한 다음에야 AI(장비)를 켭니다.
-          AI의 기본 상태는 꺼짐이고, 내가 먼저 답을 만들어 낸 뒤에만 채점·반례·연결에 투입합니다.
-        </p>
-        <div class="fw-meta">
-          <div class="fw-tags">세 개의 정거장<br>목표 → 방법 → 도구</div>
-          <div class="fw-go">읽기 →</div>
-        </div>
-      </a>
-
-      <a class="fw-card" href="solo-learning.html">
-        <div class="fw-num">03</div>
-        <div class="fw-name">SEEDS × Solo Builder</div>
-        <div class="fw-en">4-Week Blueprint</div>
-        <div class="fw-for">“강의는 다 들었는데, 실력이 늘지 않습니다.”</div>
-        <p class="fw-what">
-          <b>혼자 배우는 사람이 자신에게 하는 경험 설계.</b>
-          가르치는 사람이 하는 일 — 상황을 만들고, 질문을 던지고, 활동을 설계하는 것 — 을 나에게 옮깁니다.
-          1인 개발자가 4주 동안 밟을 순서를 미리 짜 둔 설계도입니다.
-        </p>
-        <div class="fw-meta">
-          <div class="fw-tags">4주 설계도<br>설명 소비 · 목표 전치 · 피드백 공백</div>
-          <div class="fw-go">읽기 →</div>
-        </div>
-      </a>
-
-      <a class="fw-card" href="learning-design/index.html">
-        <div class="fw-num">04</div>
-        <div class="fw-name">필드 매뉴얼</div>
-        <div class="fw-en">Field Manual</div>
-        <div class="fw-for">“원리는 알겠는데, 당장 뭘 적어야 할지 모르겠습니다.”</div>
-        <p class="fw-what">
-          <b>손에 들고 현장에서 쓰는 판본.</b>
-          위 설계들을 실제로 돌릴 때 필요한 절차와 서식을 모았습니다.
-          본편에 부록 세 권이 딸려 있고, 그대로 채워 쓰면 됩니다.
-        </p>
-        <div class="fw-meta">
-          <div class="fw-tags">본편 + 부록 A · B · C<br>템플릿 6 · 액티비티 10</div>
-          <div class="fw-go">펴 보기 →</div>
-        </div>
-      </a>
-
     </div>
 
-    <a class="fw-index" href="skills.html">
-      <div class="fw-index-k">Before you pick</div>
-      <div class="fw-index-body">
-        <b>어디가 막혔는지부터 모르겠다면</b> — 위 넷은 “어떤 순서로 도는가”를 말합니다.
-        그 전에 <b>무엇을 기르는 중인지</b>가 필요하다면 성장 기술 열두 칸을 먼저 보세요.
-      </div>
-      <div class="fw-index-go">성장 기술 열둘 →</div>
-    </a>
-  </section>
-
-  <div class="scribble-divider container">
-    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
-  </div>
-
-  <section class="container">
-    <div class="section-tag">Common core</div>
-    <h2 class="section-title">넷 다 안에서는 같은 게 돕니다</h2>
-    <p class="section-desc">
-      이름과 대상은 달라도, 열어 보면 전부 이 다섯 단계를 돌립니다.
-    </p>
-
-    <a class="fw-core" href="about.html">
-      <div class="fw-core-label">S · E · E · D · S</div>
-      <div class="fw-core-title">모든 설계도가 도는 다섯 단계</div>
-      <p class="fw-core-body">
-        상황을 먼저 던지고, 스스로 헤매게 두고, 막힌 자리에만 발판을 놓고,
-        본인이 발견하게 하고, 옆 사람에게 말하게 합니다.
-        왜 이 순서인지는 ABOUT에 적어 두었습니다.
-      </p>
-      <div class="fw-core-steps">
-        <span>S · Situation</span>
-        <span>E · Explore</span>
-        <span>E · Encounter</span>
-        <span>D · Discover</span>
-        <span>S · Share</span>
-      </div>
-    </a>
-  </section>
-
-  <div class="scribble-divider container">
-    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
-  </div>
-
-  <section class="container">
-    <div class="section-tag">Annex</div>
-    <h2 class="section-title">필드 매뉴얼 부록</h2>
-    <p class="section-desc">본편을 읽지 않아도 따로 쓸 수 있게 떼어 두었습니다.</p>
-
-    <ul class="fw-annex">
+    <h3 class="section-title" style="font-size:1.15rem; margin-top:2.4rem;">어떤 자리에서 쓰나</h3>
+    <ul class="fw-stack">
       <li>
-        <a href="learning-design/triangulation.html">
-          <div class="fw-annex-tag">부록 A</div>
-          <div>
-            <div class="fw-annex-name">삼각측량</div>
-            <div class="fw-annex-desc">무엇부터 배울지 정하는 능력의 훈련 드릴, 그리고 AI에 어디까지 맡길지의 경계선.</div>
-          </div>
-          <div class="fw-annex-go">→</div>
-        </a>
+        <span class="lv">혼자</span>
+        <span class="tx"><b>“내 이해가 틀렸다고 말해 줄 사람이 없어, 틀린 채로 완성됩니다.”</b><br>
+        맨 위층에 내가 만들고 싶은 결과물을 두고 계층 트리로 쪼갠 뒤, 잎마다 가설 사이클을 돌립니다.
+        동료 검증 자리는 <b>미래의 나에게 남기는 기록</b>으로 대체합니다.</span>
       </li>
       <li>
-        <a href="learning-design/yajang.html">
-          <div class="fw-annex-tag">부록 B</div>
-          <div>
-            <div class="fw-annex-name">야장</div>
-            <div class="fw-annex-desc">템플릿 6종 · 액티비티 10종 · 90분 워크숍 진행표. 대화 로그가 아니라 규칙 목록을 남깁니다.</div>
-          </div>
-          <div class="fw-annex-go">→</div>
-        </a>
+        <span class="lv">스터디</span>
+        <span class="tx"><b>“모여서 진도는 나가는데, 각자 뭘 배웠는지는 흐릿합니다.”</b><br>
+        같은 사이클을 돌면서 서로의 가설에 질문 하나씩을 던져 줍니다.
+        동료 검증이 가장 싸게 붙는 자리입니다.</span>
       </li>
       <li>
-        <a href="learning-design/malttuk.html">
-          <div class="fw-annex-tag">부록 C</div>
-          <div>
-            <div class="fw-annex-name">첫 말뚝</div>
-            <div class="fw-annex-desc">막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문을 만들어 내는 절차.</div>
-          </div>
-          <div class="fw-annex-go">→</div>
-        </a>
+        <span class="lv">팀 · 교육</span>
+        <span class="tx"><b>“팀은 빨라지는데 개인은 제자리입니다.”</b><br>
+        잘하는 사람이 계속 그 부분을 맡는 <b>역할 고착</b>을 겨냥합니다.
+        맨 위층에 팀이 풀려는 문제를 두면 사이드 프로젝트 · 해커톤 · 온보딩 · 교육 과정에 그대로 얹힙니다.</span>
       </li>
     </ul>
+
+    <p class="fw-aside">
+      규모가 달라도 사이클은 하나입니다. 바뀌는 것은 <b>맨 위층에 무엇을 두는가</b>뿐이에요.
+      기간을 정해 4주로 돌리거나 AI를 끼워 배우는 응용판도 같은 엔진 위에 있습니다.
+    </p>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container" id="others">
+    <div class="section-tag">The other axes</div>
+    <h2 class="section-title">축이 다른 것 둘</h2>
+    <p class="section-desc">
+      질문고리는 <b>푸는 법</b>을 다룹니다. 그 앞뒤로 하나씩 더 있습니다 —
+      풀기 전에 <b>붙잡을 문제를 고르는</b> 것, 그리고 도는 내내 <b>덜 잃게</b> 지키는 것.
+    </p>
+
+    <div class="fw-grid">
+      <a class="fw-card fw-card--span" href="lever-loop.html">
+        <div class="fw-num">02</div>
+        <div class="fw-name">레버 찾기</div>
+        <div class="fw-en">LeverLoop</div>
+        <div class="fw-for">“이건 내가 어쩔 수 있는 문제가 아닙니다.”</div>
+        <p class="fw-what">
+          <b>영향 가능성을 채점하는 기록 프로토콜.</b>
+          통제 불가능해 보이는 것은 대개 아직 덜 쪼갠 것이라고 봅니다.
+          동사가 나올 때까지 해상도를 내리고, 움직일 수 있다는 <b>확률을 미리 적은 뒤</b> 싼 베팅으로 확인합니다.
+          분기마다 모아 보면 <b>내가 어느 영역에서 습관적으로 자기 영향력을 틀리게 보는지</b>가 한 줄로 남습니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">L · E · V · E · R · 한 바퀴 20분<br>하강 · 사전 확률 · 2시간 상한 · 편향 프로파일</div>
+          <div class="fw-go">읽기 →</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="fw-grid" style="margin-top:0.8rem;">
+      <a class="fw-card fw-card--span" href="no-fail.html">
+        <div class="fw-num">03</div>
+        <div class="fw-name">망하지 않기</div>
+        <div class="fw-en">Don’t-Fail Framework</div>
+        <div class="fw-for">“돌아보면, 그때 그 신호는 이미 있었습니다.”</div>
+        <p class="fw-what">
+          <b>피할 수 있었던 실패만 겨냥하는 프레임워크.</b>
+          착수 전 · 결정마다 · 종료 후 · 분기마다 네 개의 관문을 두고,
+          각 관문은 <b>그 시점에 켜지는 편향만</b> 막습니다. 관문마다 시간 상한이 붙어 있습니다 —
+          안 쓰는 프레임워크는 없는 것과 같아서, 마찰을 편향보다 더 경계합니다.
+        </p>
+        <div class="fw-meta">
+          <div class="fw-tags">네 개의 관문 · 30 / 5 / 20 / 30분<br>반증 · 프리모템 · 결정 저널 · 네 칸 채점</div>
+          <div class="fw-go">읽기 →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container center">
+    <p class="small muted">
+      뿌리가 되는 생각 → <a href="philosophy.html">여는 글</a><br>
+      구상 중인 운영 설계 → <a href="learning-process.html">배움의 프로세스 · 다섯 겹</a><br>
+      실제로 돌릴 때 쓰는 서식 → <a href="learning-design/index.html">필드 매뉴얼과 부록</a><br>
+      순서는 아는데 자꾸 멈춘다면 → <a href="skills.html">성장 기술 열둘</a>
+    </p>
   </section>
 
 </main>

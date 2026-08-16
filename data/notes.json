@@ -18,6 +18,18 @@
   ],
   "notes": [
     {
+      "id": "failure-curriculum",
+      "title": "실패를 공개하는 커리큘럼",
+      "category": "work",
+      "date": "2026.08",
+      "status": "thinking",
+      "summary": "가르칠 것은 앱의 성패가 아니라 검증 과정 그 자체입니다.",
+      "tags": [
+        "교육",
+        "공개"
+      ]
+    },
+    {
       "id": "ai-a64",
       "title": "AI를 가지고 공부해도 아무것도 남지 않는 느낌이 드는 이유",
       "category": "growth",

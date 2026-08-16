@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>망하지 않기 — 리이오의 연습장</title>
+<meta name="description" content="최고의 결과를 만드는 도구가 아니라, 피할 수 있었던 실패를 피하는 도구. 착수 전 · 결정마다 · 종료 후 · 분기마다 네 개의 관문으로 편향을 막는 프레임워크.">
+<meta property="og:title" content="망하지 않기 — 리이오의 연습장">
+<meta property="og:description" content="상방은 통제할 수 없지만, 하방의 대부분은 예측 가능한 편향에서 옵니다. 네 개의 관문으로 그 편향을 막습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/no-fail.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* no-fail only */
+  .nf-epigraph {
+    margin: 1.6rem 0 0;
+    padding: 1.3rem 1.5rem;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1.02rem;
+    line-height: 1.85;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .nf-epigraph span { display: block; color: rgba(255,255,255,0.62); font-weight: 400; }
+
+  /* 원리 */
+  .nf-prin { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .nf-prin li {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0 0.9rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    font-size: 0.94rem;
+    line-height: 1.8;
+    color: var(--ink-faint);
+  }
+  .nf-prin li:first-child { border-top: 2px solid var(--ink); }
+  .nf-prin li:last-child { border-bottom: 1px solid var(--rule); }
+  .nf-prin .k { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-mute); padding-top: 0.35rem; }
+  .nf-prin b { color: var(--ink); font-weight: 700; }
+
+  /* 흐름 */
+  .nf-flow { list-style: none; margin: 1.3rem 0 0; padding: 0; }
+  .nf-flow li {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr auto;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 0.85rem 0.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nf-flow li:first-child { border-top: 2px solid var(--ink); }
+  .nf-flow li:last-child { border-bottom: 1px solid var(--rule); }
+  .nf-flow .when {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+  }
+  .nf-flow .what { font-size: 0.94rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .nf-flow .what span { display: block; font-size: 0.86rem; font-weight: 400; color: var(--ink-faint); margin-top: 0.2rem; }
+  .nf-flow .cap { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-mute); white-space: nowrap; }
+  @media (max-width: 640px) {
+    .nf-flow li { grid-template-columns: 1fr; gap: 0.25rem 0; }
+  }
+
+  /* 표 */
+  .nf-table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; font-size: 0.88rem; }
+  .nf-table th, .nf-table td {
+    text-align: left;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.65;
+    vertical-align: top;
+  }
+  .nf-table thead th {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    border-bottom: 2px solid var(--ink);
+    font-weight: 500;
+  }
+  .nf-table tbody th { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .nf-table td { color: var(--ink-faint); }
+  .nf-table td b { color: var(--ink); }
+  .nf-scroll { overflow-x: auto; }
+
+  /* 게이트 */
+  .gate {
+    margin: 2.6rem 0;
+    padding: 1.6rem 1.8rem 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    scroll-margin-top: 1.5rem;
+  }
+  .gate-k {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.35rem;
+  }
+  .gate-name { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.03em; color: var(--ink); line-height: 1.35; }
+  .gate-spec { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 1.1rem; }
+  .gate-spec span {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.28rem 0.7rem;
+  }
+  .gate h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 1.5rem 0 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+  }
+  .gate h3 .aim {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    margin-left: 0.4rem;
+    font-weight: 400;
+  }
+  .gate p { font-size: 0.93rem; line-height: 1.85; color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .gate ul { list-style: none; padding: 0; margin: 0.6rem 0; }
+  .gate ul li {
+    padding: 0.3rem 0 0.3rem 1.1rem;
+    position: relative;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .gate ul li::before { content: '·'; position: absolute; left: 0.25rem; color: var(--ink-mute); }
+
+  .gate-ask {
+    margin: 0.7rem 0 1rem;
+    padding: 0.7rem 0 0.7rem 1rem;
+    border-left: 3px solid var(--ink);
+    background: var(--paper-warm);
+    border-radius: 0 5px 5px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .nf-form {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 2;
+    background: var(--paper-warm);
+    border: 1px solid var(--paper-deep);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+    margin: 0.9rem 0;
+    color: var(--ink-soft);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .nf-form b { color: var(--ink); }
+
+  .nf-note { font-size: 0.86rem; color: var(--ink-mute); line-height: 1.75; margin-top: 0.5rem; }
+
+  /* 빠른 참조 카드 */
+  .nf-ref {
+    margin-top: 1.3rem;
+    background: var(--ink);
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+    overflow-x: auto;
+  }
+  .nf-ref dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.55rem 1.2rem; }
+  .nf-ref dt {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .nf-ref dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.66);
+  }
+  @media (max-width: 620px) {
+    .nf-ref dl { grid-template-columns: 1fr; gap: 0.15rem; }
+    .nf-ref dd { margin-bottom: 0.6rem; }
+    .gate { padding: 1.3rem 1.1rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="about.html">ABOUT</a>
+      <a href="thoughts.html">생각</a>
+      <a href="frameworks.html" class="active">성장 프레임워크</a>
+      <a href="tools.html">도구</a>
+      <a href="join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">Don’t-Fail Framework</div>
+    <h1 class="page-title">망하지 않기</h1>
+    <p class="page-sub">
+      잘되게 만드는 도구가 아닙니다. <b>피할 수 있었던 실패를 피하는</b> 도구입니다.
+    </p>
+
+    <div class="nf-epigraph">
+      상방은 통제할 수 없다.
+      <span>그러나 하방의 대부분은 예측 가능한 편향에서 온다.</span>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Principles</div>
+    <h2 class="section-title">핵심 원리 셋</h2>
+
+    <ul class="nf-prin">
+      <li>
+        <span class="k">01</span>
+        <span><b>편향은 내용이 아니라 상황이 켭니다.</b> 그래서 이 프레임워크의 입력은 “무엇을 하는가”가 아니라 <b>“지금 어떤 상황인가”</b>입니다.</span>
+      </li>
+      <li>
+        <span class="k">02</span>
+        <span><b>각 관문은 그 시점에 켜지는 편향만 겨냥합니다.</b> 모든 것을 한 번에 점검하려 들지 않습니다.</span>
+      </li>
+      <li>
+        <span class="k">03</span>
+        <span><b>마찰이 편향보다 무섭습니다.</b> 안 쓰는 프레임워크는 없는 것과 같습니다. 그래서 관문마다 시간 상한이 붙어 있습니다.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Map</div>
+    <h2 class="section-title">네 개의 관문</h2>
+    <p class="section-desc">순서대로 도는 게 아니라, <b>상황이 오면 그 관문만</b> 엽니다.</p>
+
+    <ul class="nf-flow">
+      <li>
+        <span class="when">아이디어</span>
+        <span class="what">Gate 1 · 착수 전<span>시작하지 말았어야 할 것을 시작하지 않기</span></span>
+        <span class="cap">30 min</span>
+      </li>
+      <li>
+        <span class="when">진행 중</span>
+        <span class="what">Gate 2 · 결정마다<span>좋은 결정과 나쁜 결정을 구분할 수 있게 남겨 두기</span></span>
+        <span class="cap">5 min</span>
+      </li>
+      <li>
+        <span class="when">종료</span>
+        <span class="what">Gate 3 · 끝난 후<span>경험했는데 배우지 못하는 일을 막기</span></span>
+        <span class="cap">20 min</span>
+      </li>
+      <li>
+        <span class="when">분기마다</span>
+        <span class="what">Meta Gate · 패턴 리뷰<span>같은 실수를 시스템적으로 반복하지 않기</span></span>
+        <span class="cap">30 min</span>
+      </li>
+    </ul>
+
+    <div class="nf-scroll">
+      <table class="nf-table">
+        <thead>
+          <tr><th>관문</th><th>막는 최악</th><th>겨냥하는 편향</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Gate 1</th><td>시작하지 말았어야 할 것을 시작함</td><td>낙관 편향 · 계획 오류 · 확증 편향 · 가용성</td></tr>
+          <tr><th>Gate 2</th><td>좋은 결정과 나쁜 결정을 구분 못 하게 됨</td><td>결과 편향의 씨앗 · 감정적 근시</td></tr>
+          <tr><th>Gate 3</th><td>경험했는데 배우지 못함</td><td>사후 확신 편향 · 결과 편향</td></tr>
+          <tr><th>Meta</th><td>같은 실수를 시스템적으로 반복함</td><td>자기 판단 캘리브레이션 부재</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Gates</div>
+    <h2 class="section-title">관문별로 펴 보기</h2>
+
+    <!-- Gate 1 -->
+    <div class="gate" id="gate1">
+      <div class="gate-k">Gate 01</div>
+      <div class="gate-name">착수 전 관문</div>
+      <div class="gate-spec">
+        <span>시점 · 새 앱 · 강의 · 제품 · 큰 기능 · 큰 지출을 시작하기 전</span>
+        <span>상한 · 30분</span>
+        <span>통과 · 아래 넷을 다 채울 수 있을 때</span>
+      </div>
+      <p>넷 중 하나라도 못 채우겠다면, 의지가 부족한 게 아니라 <b>아이디어가 아직 덜 익은 것</b>입니다.</p>
+
+      <h3>1-1. 반증 질문 <span class="aim">확증 편향 차단</span></h3>
+      <div class="gate-ask">무엇이 관찰되면 이 아이디어가 틀린 것인가?</div>
+      <ul>
+        <li>반증 조건 1 —</li>
+        <li>반증 조건 2 —</li>
+      </ul>
+      <p class="nf-note">하나도 못 쓰겠다면 이 믿음은 검증 불가능한 상태입니다. 착수 보류.</p>
+
+      <h3>1-2. 부검 질문 <span class="aim">프리모템</span></h3>
+      <div class="gate-ask">지금이 1년 후다. 이 프로젝트는 처참하게 실패했다. 왜?</div>
+      <div class="nf-scroll">
+        <table class="nf-table">
+          <thead><tr><th>순위</th><th>실패 원인 (구체적으로)</th><th>최저비용 대비책</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><td></td><td></td></tr>
+            <tr><th>2</th><td></td><td></td></tr>
+            <tr><th>3</th><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li>“마케팅 부족” 같은 추상어 금지. <b>“출시 첫 주에 노출 채널이 하나뿐이었고, 거기서 반응이 없자 손을 놓았다”</b>처럼 서사로 씁니다.</li>
+        <li>극적인 원인만 쓰지 않습니다. 지루하지만 흔한 원인 — 질림, 우선순위 밀림, 심사 리젝, 가족 일정 — 을 반드시 포함합니다.</li>
+      </ul>
+
+      <h3>1-3. 외부 관점 <span class="aim">계획 오류 차단</span></h3>
+      <div class="gate-ask">내 과거 프로젝트라는 참조군이 있다. 감이 아니라 그 데이터를 쓴다.</div>
+      <ul>
+        <li>이번 프로젝트 예상 기간 —</li>
+        <li>비슷한 규모의 지난 프로젝트 3~5개의 (실제 소요 ÷ 예상) 비율 평균 —</li>
+        <li><b>보정된 예상 기간 = 예상 × 비율 평균</b></li>
+      </ul>
+
+      <h3>1-4. 중단 질문 <span class="aim">미래의 매몰비용을 지금 차단</span></h3>
+      <div class="gate-ask">어떤 조건이 되면 그만두는가? 감정이 개입하기 전인 지금 정한다.</div>
+      <ul>
+        <li><b>Kill Criteria</b> — 날짜와 숫자로. 예) “출시 후 90일 내 유료 전환 20건 미만이면 유지보수 모드로 전환”</li>
+        <li><b>중단 시 처리 방식</b> — 오픈소스화 / 유지보수 모드 / 완전 종료 / 다른 제품에 흡수</li>
+      </ul>
+    </div>
+
+    <!-- Gate 2 -->
+    <div class="gate" id="gate2">
+      <div class="gate-k">Gate 02</div>
+      <div class="gate-name">진행 중 결정 기록</div>
+      <div class="gate-spec">
+        <span>시점 · 되돌리기 어렵거나 자원이 크게 걸린 결정을 내릴 때마다</span>
+        <span>상한 · 5분</span>
+        <span>넘으면 · 포맷을 더 줄인다</span>
+      </div>
+
+      <div class="nf-form">날짜:
+결정:
+당시 알고 있던 것 (3줄 이내):
+핵심 가정 (1~2개):
+예상 결과와 대략적 확률:   예) 성공 60% / 애매 30% / 실패 10%
+이 결정이 ‘나빴다’고 판단할 조건:
+지금 기분 한 단어:         흥분 / 불안 / 귀찮음 / 확신 …</div>
+
+      <p><b>기록할지 말지의 기준</b> — “3개월 뒤의 내가 이 결정을 궁금해할까?” 그렇다면 기록합니다.
+      가격 책정, 외주 수락 여부, 기능 범위 확정, 마케팅 채널 선택, 발표 제안 수락 같은 것들.</p>
+
+      <p class="nf-note">기분을 한 단어로 남기는 이유는 나중에 <b>감정과 판단 품질의 상관</b>을 보기 위해서입니다. Meta Gate의 입력이 됩니다.</p>
+
+      <h3>10 / 10 / 10 <span class="aim">단기 감정이 개입하는 것 같을 때만</span></h3>
+      <div class="gate-ask">이 결정, 10분 뒤엔 어떻게 느껴질까? 10개월 뒤엔? 10년 뒤엔?</div>
+    </div>
+
+    <!-- Gate 3 -->
+    <div class="gate" id="gate3">
+      <div class="gate-k">Gate 03</div>
+      <div class="gate-name">종료 후 회고</div>
+      <div class="gate-spec">
+        <span>시점 · 프로젝트 종료 · 출시 후 첫 데이터(보통 30일) · 강의 시리즈 완료</span>
+        <span>상한 · 20분</span>
+        <span>필수 · Gate 2 기록을 먼저 읽고 시작</span>
+      </div>
+      <p>기억은 결과를 알고 나면 다시 쓰입니다. 기록 없이 회고하면 <b>사후 확신 편향에 오염된 기억</b>을 회고하게 됩니다.</p>
+
+      <h3>3-1. 결정과 결과를 분리해서 채점</h3>
+      <div class="nf-scroll">
+        <table class="nf-table">
+          <thead><tr><th></th><th>좋은 결과</th><th>나쁜 결과</th></tr></thead>
+          <tbody>
+            <tr><th>좋은 결정</th><td><b>실력.</b> 재현하라.</td><td><b>불운.</b> 프로세스 유지. 과잉 교정 금지.</td></tr>
+            <tr><th>나쁜 결정</th><td><b>요행.</b> 가장 위험한 칸. 실력으로 착각 금지.</td><td><b>학습.</b> 원인을 추출하라.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nf-note">판단 기준은 “당시 정보로 그 결정이 합리적이었는가”입니다. 결과를 아는 지금의 눈이 아니라, <b>Gate 2에 적힌 그때의 눈</b>으로 봅니다.</p>
+
+      <h3>3-2. AAR 네 문항</h3>
+      <ul>
+        <li>무엇이 일어나야 했는가? — Gate 1에 적어 둔 의도</li>
+        <li>실제로 무엇이 일어났는가?</li>
+        <li>왜 차이가 났는가?</li>
+        <li>다음에 유지할 것 하나 / 바꿀 것 하나</li>
+      </ul>
+
+      <h3>3-3. 성공했어도 합니다</h3>
+      <p>성공 회고가 실패 회고보다 값집니다. <b>재현 가능성</b>이 걸려 있기 때문입니다.</p>
+      <ul>
+        <li>이 성공에서 실력이었던 부분 —</li>
+        <li>운이었던 부분 —</li>
+        <li>다음에 재현할 수 있는 최소 단위 하나 —</li>
+      </ul>
+
+      <h3>3-4. 아카이브</h3>
+      <p>회고는 파일 하나(또는 단일 데이터베이스)에 누적합니다. 흩어 두면 Meta Gate에서 읽을 것이 없습니다.</p>
+    </div>
+
+    <!-- Meta -->
+    <div class="gate" id="gate-meta">
+      <div class="gate-k">Meta Gate</div>
+      <div class="gate-name">분기별 패턴 리뷰</div>
+      <div class="gate-spec">
+        <span>시점 · 분기마다 1회</span>
+        <span>상한 · 30분</span>
+        <span>입력 · Gate 3 아카이브 + Gate 2 저널</span>
+      </div>
+      <ul>
+        <li>나는 네 칸 중 <b>어느 칸에 자주 떨어지는가?</b></li>
+        <li>“나쁜 결정 + 좋은 결과” 칸에 있는 것을 실력이라 착각하고 있지는 않은가?</li>
+        <li>반복해서 등장하는 실패 원인이 있는가? — <b>3회 이상 나오면 편향이 아니라 시스템 문제입니다.</b> 프로세스를 고칩니다.</li>
+        <li>확률 추정은 잘 맞았는가? “성공 60%”라고 쓴 것들 중 실제로 몇 %가 성공했는가?</li>
+        <li>기분 한 단어와 결정 품질 사이에 상관이 보이는가? — “흥분” 상태의 결정이 자주 요행 칸에 있다면, 흥분은 대기 신호입니다.</li>
+      </ul>
+      <p><b>산출물은 딱 하나</b> — 다음 분기에 적용할 규칙 한 개. 예) “흥분 상태에서 내린 결정은 24시간 재우고 확정한다.”</p>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Survival</div>
+    <h2 class="section-title">이 프레임워크 자체의 프리모템</h2>
+    <p class="section-desc">
+      이것이 실패하는 1위 원인은 편향이 아니라 <b>마찰</b>입니다. 예상 실패 시나리오는 하나 — “3주 쓰고 안 씀.”
+    </p>
+    <p>그래서 여기에는 중단 조건 대신 <b>지속 조건</b>을 겁니다.</p>
+
+    <div class="callout">
+      <div class="callout-label">줄이는 것은 허용, 멈추는 것은 불허</div>
+      · 주 1회 이상 Gate 2 기록이 안 나오면 → 포맷을 절반으로 줄입니다. 결정 / 가정 / 나빴다고 판단할 조건, 세 줄만.<br>
+      · Gate 1을 건너뛴 프로젝트가 2개 연속 나오면 → Gate 1을 세 문항(반증 · 부검 하나 · 중단 조건)으로 줄입니다.<br>
+      · Meta Gate를 2분기 연속 건너뛰면 → 연 2회로 줄이되 <b>절대 0회로 만들지 않습니다.</b>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Quick card</div>
+    <h2 class="section-title">빠른 참조 카드</h2>
+    <p class="section-desc">외울 것은 이 여덟 줄이면 충분합니다.</p>
+
+    <div class="nf-ref">
+      <dl>
+        <dt>새로 시작?</dt><dd>Gate 1 (30분) · 반증 / 부검 / 외부 관점 / 중단 조건</dd>
+        <dt>큰 결정?</dt><dd>Gate 2 (5분) · 결정 / 정보 / 가정 / 확률 / 나쁨 조건 / 기분</dd>
+        <dt>끝났다?</dt><dd>Gate 3 (20분) · 저널 먼저 읽기 → 네 칸 채점 → AAR → 아카이브</dd>
+        <dt>분기 지났다?</dt><dd>Meta (30분) · 패턴 / 요행 칸 / 확률 캘리브레이션 / 규칙 하나</dd>
+        <dt>“이번엔 다르다”</dt><dd>계획 오류 경보 · 참조군 데이터를 확인한다</dd>
+        <dt>“여기까지 왔는데”</dt><dd>매몰비용 경보 · Gate 1의 중단 조건을 확인한다</dd>
+        <dt>“그럴 줄 알았어”</dt><dd>사후 확신 경보 · Gate 2 기록과 대조한다</dd>
+        <dt>“결과 좋으니 됐지”</dt><dd>결과 편향 경보 · 네 칸 채점을 한다</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="container center">
+    <p class="small muted mt-3">
+      배우는 쪽의 설계도 → <a href="framework.html">질문고리 학습</a><br>
+      기록으로 남기는 서식 → <a href="learning-design/yajang.html">야장</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 상방은 통제할 수 없지만, 하방은 대개 예측 가능합니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

@@ -91,6 +91,11 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://m1zz.github.io/LeeoNote/no-fail.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://m1zz.github.io/LeeoNote/solo-builders/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
@@ -103,6 +108,26 @@
   <url>
     <loc>https://m1zz.github.io/LeeoNote/solo-builders/monetization-worksheet.html</loc>
     <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/notes/failure-curriculum.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/solo-builders/recording-safety.html</loc>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/lever-loop.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/learning-process.html</loc>
+    <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>실패를 공개하는 커리큘럼 — 리이오의 연습장</title>
+<meta name="description" content="성공한 앱을 자랑하는 교육이 아니라, 앱이 시장과 만나는 과정 전체를 편집 없이 공개하는 교육. 그 기록 자체가 커리큘럼이 됩니다.">
+<meta property="og:title" content="실패를 공개하는 커리큘럼">
+<meta property="og:description" content="가르칠 것은 앱의 성패가 아니라 검증 과정 그 자체입니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/failure-curriculum.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px dashed var(--ink-mute);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-h1 {
+    font-size: clamp(2rem, 5.2vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 4부 구조 */
+  .ep { list-style: none; margin: 1.2rem 0 1.4rem; padding: 0; }
+  .ep li {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 0.9rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+  .ep li:first-child { border-top: 2px solid var(--ink); }
+  .ep li:last-child { border-bottom: 1px solid var(--rule); }
+  .ep .n { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--ink); padding-top: 0.25rem; }
+  .ep .t { font-size: 0.98rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .ep .d { font-size: 0.9rem; color: var(--ink-faint); line-height: 1.7; margin-top: 0.2rem; }
+
+  /* 기록 단계 */
+  .rec { margin: 1.2rem 0 1.6rem; }
+  .rec-phase {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .rec ul { list-style: none; margin: 0; padding: 0; }
+  .rec li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin: 0;
+  }
+  .rec li .why { display: block; font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.2rem; }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>일에 대한 고찰</span>
+      <span class="badge">생각 중</span>
+      <span>2026-08</span>
+    </div>
+    <h1 class="nt-h1">실패를 공개하는<br>커리큘럼</h1>
+    <p class="nt-lede">
+      성공한 앱을 자랑하는 교육이 아니라, 앱이 시장과 만나는 과정 전체를 편집 없이 공개하는 교육.
+      가르칠 것은 앱의 성패가 아니라 <b>검증 과정 그 자체</b>라고 생각하고 있습니다.
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>강의를 만들다 보면 자연스럽게 완성된 것을 보여주게 됩니다. 되는 코드, 나온 결과, 올라간 앱. 그런데 정작 배우는 사람이 막히는 자리는 그 사이에 있습니다 — <b>무엇을 만들어야 시장이 반응하는지 모르는 자리.</b> 기술은 이미 갖췄는데 다음 한 걸음을 못 떼는 상태요.</p>
+
+    <p>그 자리에 필요한 건 잘된 사례가 아니라 <b>실패의 해부</b>라고 생각합니다. “왜 이 앱은 시장에서 반응을 얻지 못했는가”를 정확히 뜯어 보여주는 교육자는 드뭅니다. 완벽한 전문가가 아니라 <b>성실한 검증자</b>로서 신뢰를 쌓는 쪽이 저에게도 맞고요.</p>
+
+    <h2>가르칠 것은 앱이 아니라 루프입니다</h2>
+
+    <p>이 생각은 새로 만든 게 아닙니다. <a href="../framework.html">질문고리 학습</a>에 이미 들어 있던 엔진 — <b>질문 → 가설 → 탐구 → 델타</b> — 를 교육 콘텐츠라는 맥락에 그대로 얹은 것입니다. 이번 주에 무엇이 참이라 믿고 움직였는지(가설), 실제로 무슨 일이 일어났는지(탐구), 그래서 무엇이 바뀌었는지(델타)를 매주 공개하면 그게 곧 커리큘럼이 됩니다.</p>
+
+    <p>중요한 건 순서입니다. 회고의 기록이 다음 가설이 되고, 그 기록이 쌓여 커리큘럼이 됩니다. 커리큘럼을 먼저 짜고 사례를 끼워 넣는 게 아니라요.</p>
+
+    <div class="callout">
+      <div class="callout-label">이미 있는 것과 겹치는 자리</div>
+      주간 회고와 분기 리뷰, 틀린 가설의 부검은 새로 만들 필요가 없습니다.
+      <a href="../no-fail.html#gate3">망하지 않기 Gate 3</a>(종료 후 20분)과 <a href="../no-fail.html#gate-meta">Meta Gate</a>(분기 30분)를 그대로 쓰면 됩니다.
+      기록 서식은 <a href="../learning-design/yajang.html">야장</a>에 이미 여섯 장 있습니다.
+    </div>
+
+    <h2>매주 같은 네 박자로</h2>
+
+    <p>주 1회, 스크린 레코딩 기반, 편집 최소화. 매 회를 같은 구조로 반복해서 <b>시청자가 형식 자체를 학습하게</b> 하려고 합니다.</p>
+
+    <ul class="ep">
+      <li>
+        <span class="n">01</span>
+        <span>
+          <span class="t">이번 주 목표</span>
+          <span class="d">이번 주의 가설을 한 문장으로 선언합니다. 무엇이 참이라고 믿고 움직이는가.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span>
+          <span class="t">시도한 것들</span>
+          <span class="d">실제 코딩과 판단 과정을 편집 없이 보여줍니다. 화면이 곧 증거입니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <span>
+          <span class="t">실패한 부분</span>
+          <span class="d">틀린 가설과 막힌 지점을 숨기지 않습니다. 이 칸이 시리즈의 정체성입니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <span>
+          <span class="t">배운 점</span>
+          <span class="d">회고를 다음 주의 가설로 전환합니다. 댓글 피드백은 다음 화에 반영합니다.</span>
+        </span>
+      </li>
+    </ul>
+
+    <h2>그래서 지금부터 남겨야 할 기록</h2>
+
+    <p>각 항목이 글 한 편이자 커리큘럼의 한 챕터가 됩니다. 뒤늦게 만들 수 없는 것들이라 <b>지금부터</b> 써 둬야 합니다.</p>
+
+    <div class="rec">
+      <div class="rec-phase">출시 전</div>
+      <ul>
+        <li>가설 문서 — 타깃 유저는 누구이고, 왜 이것이 필요한가
+          <span class="why">「가설 세우기」 챕터의 원본. 문제를 판정 가능하게 세우는 절차는 <a href="../learning-design/malttuk.html">첫 말뚝</a>을 씁니다.</span></li>
+        <li>타깃 유저 페르소나 정의서
+          <span class="why">나중에 실제 유저와 비교해 괴리를 재는 기준점</span></li>
+        <li>시장 조사 노트 — 경쟁 앱 분석, 유사 앱 리뷰에서 발견한 불만 패턴
+          <span class="why">「시장 읽기」 챕터의 실습 예제</span></li>
+        <li>베타 테스트 피드백과 사용성 세션 기록
+          <span class="why">출시 전 가설이 처음 흔들리는 지점</span></li>
+        <li>출시 계획서 — 초기 유저 확보 방법, 성공 기준 수치
+          <span class="why">계획 대비 실제를 비교할 근거. 성공 기준은 <a href="../no-fail.html#gate1">Gate 1의 중단 조건</a>과 같은 형식으로 씁니다.</span></li>
+      </ul>
+    </div>
+
+    <div class="rec">
+      <div class="rec-phase">출시 직후</div>
+      <ul>
+        <li>출시 당일 스냅샷 — 스크린샷, 설명문, 키워드를 그렇게 고른 이유
+          <span class="why">이후 모든 변경 이력의 출발점</span></li>
+        <li>첫 주 다운로드 · 유지율 · 유입 경로
+          <span class="why">가설 대비 실제 수치의 첫 대조</span></li>
+        <li>초기 리뷰 분석 — 긍정과 부정의 분류, 그리고 해석
+          <span class="why">「피드백 수집」 챕터의 라이브 자료</span></li>
+      </ul>
+    </div>
+
+    <div class="rec">
+      <div class="rec-phase">출시 후 · 반복</div>
+      <ul>
+        <li>주간 회고 — 이번 주 가설은 맞았는가, 무엇이 틀렸는가
+          <span class="why">에피소드 한 편의 대본이 됩니다</span></li>
+        <li>틀린 가설의 부검 — 어디서 착각했고, 신호를 언제 놓쳤는가
+          <span class="why">이 시리즈의 차별점이자 가장 강한 신뢰 자산</span></li>
+        <li>개선 사이클 문서 — 어떤 피드백을 왜 먼저 골랐는가
+          <span class="why">의사결정 과정 자체가 교육 콘텐츠입니다</span></li>
+        <li>기능 변경 전후의 지표 비교
+          <span class="why">「검증」 챕터의 정량 증거</span></li>
+      </ul>
+    </div>
+
+    <div class="rec">
+      <div class="rec-phase">길게 · 계속 나아가는 동안</div>
+      <ul>
+        <li>분기 대회고 — 배운 것, 버린 가설, 살아남은 가설
+          <span class="why">커리큘럼 개정의 원천</span></li>
+        <li>수익과 비용의 투명한 공개
+          <span class="why">솔로 개발자 대상 콘텐츠에서 수요가 가장 높은 정보. 태도는 <a href="../solo-builders/monetization-worksheet.html">오래 만드는 일</a>에 적어 두었습니다.</span></li>
+        <li>피벗 또는 중단 결정이 생긴다면, 그 판단의 전 과정
+          <span class="why">실패를 다루는 교육이라면 반드시 있어야 할 마지막 장</span></li>
+        <li>배우는 사람의 피드백이 앱에 반영된 사례
+          <span class="why">「함께 만들어 간다」는 말의 증거</span></li>
+      </ul>
+    </div>
+
+    <h2>신뢰는 세 가지로만 쌓입니다</h2>
+
+    <ul>
+      <li><b>투명성</b> — 실패를 숨기지 않고 그대로 기록해 공개합니다. “이 가설은 틀렸다”고 말할 수 있는 사람이 됩니다.</li>
+      <li><b>일관성</b> — 가르치는 프로세스를 스스로 따르고 그 결과를 보여줍니다. 말과 행동의 일치 말고는 토대가 없습니다.</li>
+      <li><b>시간</b> — 단발성 콘텐츠가 아니라 지속적인 과정 공개로 변화를 보여줍니다. 신뢰는 누적으로만 깊어집니다.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">먼저 해야 하는 것</div>
+      편집 없는 공개일수록 <b>녹화 전 환경 정리</b>가 먼저입니다. API 키 하나가 화면에 스치면 그날 회차 전체를 못 씁니다.
+      점검 목록은 따로 떼어 두었습니다 → <a href="../solo-builders/recording-safety.html">공개 녹화 전 점검 목록</a>
+    </div>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        커리큘럼을 먼저 만들고 사례를 끼워 넣는 대신, <b>과정을 공개하는 것 자체를 커리큘럼으로 삼으려 합니다.</b>
+        다만 이 포맷이 먹힐지도 아직 가설입니다 — 그래서 이 시도에도 같은 루프를 겁니다.
+        4주 치 데이터로 판정하고, 틀렸으면 틀렸다고 여기에 적겠습니다.
+      </div>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-08</div>
+        <div class="what">처음 씀. 루프 이름은 <b>질문고리</b>로 통일했습니다 — 별도의 엔진을 새로 두지 않기 위해서.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 고찰 목록으로</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공개 녹화 전 점검 목록 — 리이오의 연습장</title>
+<meta name="description" content="작업 화면을 편집 없이 공개하기 전에 훑는 점검 목록. 키·계정·경로·알림·커밋 히스토리 다섯 갈래.">
+<meta property="og:title" content="공개 녹화 전 점검 목록 — 리이오의 연습장">
+<meta property="og:description" content="편집 없는 공개일수록 녹화 전 환경 정리가 먼저입니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/solo-builders/recording-safety.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  .phase {
+    margin: 2.4rem 0;
+    padding: 1.5rem 1.8rem;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.35rem;
+  }
+  .phase-title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.9rem; }
+  .phase ul { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .phase ul li {
+    padding: 0.4rem 0 0.4rem 1.6rem;
+    position: relative;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .phase ul li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    top: 0.38rem;
+    color: var(--ink);
+    font-size: 1rem;
+  }
+  .phase-tip {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--ink);
+    border-radius: 0 5px 5px 0;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .phase-tip b { color: var(--ink); }
+
+  .oops {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+    margin-top: 1.4rem;
+  }
+  .oops-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .oops ol { margin: 0 0 0 1.1rem; padding: 0; }
+  .oops li { font-size: 0.94rem; line-height: 1.8; color: rgba(255,255,255,0.82); margin-bottom: 0.35rem; }
+  .oops li b { color: #fff; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow"> Solo Building Notes</div>
+    <h1 class="page-title">공개 녹화 전<br>점검 목록</h1>
+    <p class="page-sub">
+      작업 화면을 그대로 공개할 때 쓰는 목록입니다. 편집을 덜 할수록 <b>녹화 전 정리</b>가 중요해집니다 —
+      키 하나가 화면에 스치면 그 회차 전체를 못 쓰게 되니까요. 매 녹화 전에 다섯 갈래만 훑으면 됩니다.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="phase">
+      <div class="phase-num">01</div>
+      <div class="phase-title">키와 자격증명</div>
+      <ul>
+        <li>API 키 · 토큰 · 인증서가 코드, 설정 파일, 터미널 어디에도 그대로 박혀 있지 않은가</li>
+        <li>환경 변수로 빠져 있고, 그 파일이 <b>.gitignore</b>에 들어 있는가</li>
+        <li>키체인 · 비밀번호 관리자 창이 화면 전환 중에 스치지 않는가</li>
+      </ul>
+      <div class="phase-tip"><b>팁</b> — 녹화용 계정과 키를 따로 두는 편이 가장 싸게 끝납니다. 노출되어도 폐기하면 그만인 것으로만 녹화합니다.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">02</div>
+      <div class="phase-title">사용자 데이터</div>
+      <ul>
+        <li>시뮬레이터 · 콘솔 로그에 실제 사용자 이메일이나 식별자가 찍히지 않는가</li>
+        <li>테스트 계정 정보가 자동완성으로 튀어나오지 않는가</li>
+        <li>운영 데이터베이스가 아니라 <b>테스트 데이터</b>를 보고 있는가</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">03</div>
+      <div class="phase-title">내 정보가 묻어 있는 자리</div>
+      <ul>
+        <li>파일 경로 · 홈 디렉토리 이름에 실명이나 주소가 드러나지 않는가</li>
+        <li>브라우저 북마크 바, 최근 파일 목록, 프로젝트 사이드바에 사적인 이름이 없는가</li>
+        <li>계정 프로필 사진과 표시 이름이 공개해도 되는 것인가</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">04</div>
+      <div class="phase-title">화면에 끼어드는 것들</div>
+      <ul>
+        <li>알림을 껐는가 (방해 금지 모드)</li>
+        <li>메신저 · 메일 · 캘린더 창이 뒤에 열려 있지 않은가</li>
+        <li>다른 탭 제목이 탭 바에 그대로 보이지 않는가</li>
+      </ul>
+      <div class="phase-tip"><b>팁</b> — 녹화 전용 사용자 계정 또는 별도 데스크톱 공간을 하나 만들어 두면 이 칸은 매번 통과합니다.</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">05</div>
+      <div class="phase-title">저장소를 공개한다면</div>
+      <ul>
+        <li>지금 파일뿐 아니라 <b>커밋 히스토리 전체</b>에 민감 정보가 없는가</li>
+        <li>한 번이라도 올라갔던 키는 이미 노출된 것으로 보고 폐기했는가</li>
+        <li>이슈 · PR 본문, 스크린샷 첨부에 내부 정보가 남아 있지 않은가</li>
+      </ul>
+      <div class="phase-tip"><b>주의</b> — 파일에서 지워도 히스토리에는 남습니다. 지우는 것보다 <b>키를 갈아 끼우는 쪽</b>이 확실합니다.</div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="oops">
+      <div class="oops-label">이미 나갔다면</div>
+      <ol>
+        <li><b>먼저 폐기·재발급</b> — 영상을 내리는 것보다 키를 죽이는 게 빠릅니다.</li>
+        <li><b>그다음 영상 비공개</b> — 이미 받아 간 사람이 있다고 가정하고 움직입니다.</li>
+        <li><b>마지막에 기록</b> — 어디서 새어 나갔는지 한 줄 남깁니다. 다음 회차의 점검 항목이 됩니다.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="container center">
+    <p class="small muted mt-3">
+      왜 편집 없이 공개하려는지는 → <a href="../notes/failure-curriculum.html">실패를 공개하는 커리큘럼</a><br>
+      막힌 게 있다면 편지 한 통 보내주셔도 좋습니다 → <a href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 공개는 용기의 문제가 아니라 준비의 문제입니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

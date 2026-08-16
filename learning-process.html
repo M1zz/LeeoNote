@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배움의 프로세스 — 리이오의 연습장</title>
+<meta name="description" content="배움 · 훈련 · 자기화 · 체화 · 공동체 — 정보를 주는 것과 변화를 만드는 것은 다릅니다. 다섯 겹을 순환으로 엮은 운영 설계.">
+<meta property="og:title" content="배움의 프로세스 — 리이오의 연습장">
+<meta property="og:description" content="앞 단계의 불완전함이 다음 단계의 연료가 되도록 배치한 다섯 겹.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-process.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* learning-process only */
+  /* 구상 표시 */
+  .draft {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.2rem;
+    padding: 0.8rem 1rem;
+    border: 1px dashed var(--ink-mute);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink-faint);
+  }
+  .draft-badge {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--ink);
+    border-radius: 100px;
+    padding: 0.2rem 0.65rem;
+    white-space: nowrap;
+  }
+
+  .rhythm { list-style: none; margin: 1.4rem 0 0; padding: 0; }
+  .rhythm li {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 0 1rem;
+    align-items: baseline;
+    padding: 0.7rem 0.2rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    line-height: 1.7;
+  }
+  .rhythm li:first-child { border-top: 2px solid var(--ink); }
+  .rhythm li:last-child { border-bottom: 1px solid var(--rule); }
+  .rhythm .beat {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .rhythm b { color: var(--ink); }
+
+  /* 다섯 겹 */
+  .layer {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    border: 1px solid var(--paper-deep);
+    background: var(--card);
+    margin-bottom: 0.8rem;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .layer-l { padding: 1.3rem 1.3rem; border-right: 1px solid var(--paper-deep); }
+  .layer-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--ink);
+    border-radius: 100px;
+    padding: 0.2rem 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+  .layer-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.35; margin-bottom: 0.9rem; }
+  .layer-meta { list-style: none; margin: 0; padding: 0; }
+  .layer-meta li {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    padding: 0.18rem 0 0.18rem 0.7rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .layer-meta li::before { content: '·'; position: absolute; left: 0; color: var(--ink-mute); }
+
+  .layer-r { padding: 1.3rem 1.5rem; background: var(--paper-warm); }
+  .layer-desc { font-size: 0.93rem; line-height: 1.85; color: var(--ink-soft); margin-bottom: 0.9rem; }
+  .layer-note {
+    font-size: 0.86rem;
+    line-height: 1.75;
+    color: var(--ink-faint);
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--paper-deep);
+  }
+  .layer-note b { color: var(--ink); }
+  @media (max-width: 700px) {
+    .layer { grid-template-columns: 1fr; }
+    .layer-l { border-right: none; border-bottom: 1px solid var(--paper-deep); }
+  }
+
+  /* 타임라인 */
+  .tl { margin-top: 1.4rem; }
+  .tl-block { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0 1.2rem; }
+  .tl-when {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-top: 1.1rem;
+    border-top: 2px solid var(--ink);
+  }
+  .tl-body { border-top: 2px solid var(--ink); padding: 1rem 0 1.6rem; }
+  .tl-block + .tl-block .tl-when,
+  .tl-block + .tl-block .tl-body { border-top: 1px solid var(--rule); }
+  .tl-h { font-size: 1rem; font-weight: 800; color: var(--ink); margin-bottom: 0.7rem; letter-spacing: -0.02em; }
+  .tl-items { list-style: none; margin: 0; padding: 0; }
+  .tl-items li {
+    padding: 0.6rem 0 0.6rem 0.9rem;
+    border-left: 2px solid var(--paper-deep);
+    margin-bottom: 0.5rem;
+  }
+  .tl-k {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .tl-t { font-size: 0.94rem; font-weight: 700; color: var(--ink); line-height: 1.5; }
+  .tl-d { font-size: 0.87rem; color: var(--ink-faint); line-height: 1.7; margin-top: 0.15rem; }
+  @media (max-width: 600px) {
+    .tl-block { grid-template-columns: 1fr; gap: 0; }
+    .tl-when { border-top: 1px solid var(--rule); padding-top: 0.9rem; }
+    .tl-body { border-top: none; padding-top: 0.5rem; }
+  }
+
+  /* 원리 */
+  .prin { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.3rem; }
+  .prin > div {
+    border: 1px solid var(--paper-deep);
+    border-top: 3px solid var(--ink);
+    border-radius: 0 0 6px 6px;
+    padding: 1.2rem 1.3rem;
+    background: var(--card);
+  }
+  .prin-k {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.4rem;
+  }
+  .prin-t { font-size: 1rem; font-weight: 800; color: var(--ink); line-height: 1.4; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  .prin-b { font-size: 0.89rem; line-height: 1.8; color: var(--ink-faint); }
+  @media (max-width: 640px) { .prin { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="about.html">ABOUT</a>
+      <a href="thoughts.html">생각</a>
+      <a href="frameworks.html" class="active">성장 프레임워크</a>
+      <a href="tools.html">도구</a>
+      <a href="join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">Learning Process · 5 Layers</div>
+    <h1 class="page-title">배움의 프로세스</h1>
+
+    <div class="draft">
+      <span class="draft-badge">구상 중</span>
+      아직 굴려 보지 않은 설계입니다. 운영 중인 프로그램이 아니고, 신청받는 자리도 아닙니다.
+      해 보면 절반은 바뀔 것이라 생각하고 적어 둡니다.
+    </div>
+
+    <p class="page-sub">
+      정보를 주는 것과 변화를 만드는 것은 다릅니다.
+      그래서 <b>배움 · 훈련 · 자기화 · 체화 · 공동체</b> 다섯 겹을 순환으로 엮었습니다.
+      각 겹은 따로 있지 않고, <b>앞 단계의 불완전함이 다음 단계의 연료가 되도록</b> 배치되어 있습니다.
+    </p>
+
+    <ul class="rhythm">
+      <li><span class="beat">2주</span><span><b>배움의 기본 박자</b> — 오디오 한 편이 도는 주기</span></li>
+      <li><span class="beat">1~2개월</span><span><b>심화 폭발</b> — 워크숍과 코칭이 붙는 구간</span></li>
+      <li><span class="beat">연 2회</span><span><b>실천 공동체</b> — 같은 것을 실험해 온 사람들이 모이는 자리</span></li>
+    </ul>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Layers</div>
+    <h2 class="section-title">다섯 겹</h2>
+
+    <div class="layer">
+      <div class="layer-l">
+        <span class="layer-tag">배움</span>
+        <div class="layer-name">오디오 콘텐츠<br>+ 뒤늦게 오는 시각 자료</div>
+        <ul class="layer-meta">
+          <li>20분 오디오</li>
+          <li>1~2주 주기</li>
+          <li>자막 · LLM 요약 지원</li>
+          <li>시각 자료는 D+3~4</li>
+        </ul>
+      </div>
+      <div class="layer-r">
+        <div class="layer-desc">
+          산책하며 녹음한 20분. 편집을 최소화한 라이브라서 강의가 아니라 <b>생각의 흐름</b>을 듣는 쪽에 가깝습니다.
+          자막은 요약용으로 제공하지만, 진짜는 3~4일 뒤에 오는 시각 자료입니다.
+        </div>
+        <div class="layer-note">
+          <b>늦게 주는 이유</b> — 먼저 불완전한 상태로 머릿속에 구조를 그리게 하려고요.
+          자료를 받는 순간의 “아, 이렇게 생겼구나”가 기억을 단단히 고정시킵니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-l">
+        <span class="layer-tag">훈련</span>
+        <div class="layer-name">오프라인 워크숍</div>
+        <ul class="layer-meta">
+          <li>4시간 집중</li>
+          <li>1~2개월 1회</li>
+          <li>서울 시내</li>
+          <li>실전 문제풀이 중심</li>
+        </ul>
+      </div>
+      <div class="layer-r">
+        <div class="layer-desc">
+          쌓인 오디오 중 <b>파워풀 아이디어</b> 하나를 골라 네 시간 동안 훈련합니다.
+          듣는 자리가 아니라 실제 문제에 적용하는 자리입니다. <b>지식이 기능으로 바뀌는 구간</b>이에요.
+        </div>
+        <div class="layer-note">
+          주제는 미리 기획하지 않습니다. 콘텐츠가 쌓이면 자연스럽게 반복 등장하는 아이디어가 생기고, 그게 주제가 됩니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-l">
+        <span class="layer-tag">자기화</span>
+        <div class="layer-name">전문가 코칭 두 번</div>
+        <ul class="layer-meta">
+          <li>30분 × 2회</li>
+          <li>워크숍 신청 시 부여</li>
+          <li>온 · 오프라인 선택</li>
+          <li>Pre + Post 구분</li>
+        </ul>
+      </div>
+      <div class="layer-r">
+        <div class="layer-desc">
+          워크숍 <b>전</b>에는 “내 삶에서 이 주제가 막히는 지점”을 또렷하게 만들고,
+          <b>후</b>에는 배운 것을 실제 상황에 얹을 계획을 구체화합니다.
+          같은 30분이지만 질문의 방향이 완전히 달라야 값이 생깁니다.
+        </div>
+        <div class="layer-note">
+          “배울 때는 잘 됐는데 내 삶에서는 왜 어렵지?” — 이 물음을 처리하는 구간입니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-l">
+        <span class="layer-tag">체화</span>
+        <div class="layer-name">간격을 둔 인출</div>
+        <ul class="layer-meta">
+          <li>D+1 · D+7 · D+30</li>
+          <li>카드 한 벌 (앱 · 손글씨)</li>
+          <li>회당 5~10분</li>
+          <li>무자료 인출</li>
+        </ul>
+      </div>
+      <div class="layer-r">
+        <div class="layer-desc">
+          오디오를 들은 다음 날, 일주일 뒤, 한 달 뒤에 핵심 개념을 <b>자료를 덮고</b> 다시 꺼냅니다.
+          신경 쓰지 않아도 삶에 녹아드는 상태를 목표로 합니다.
+        </div>
+        <div class="layer-note">
+          기억이 흐릿한 것이 <b>고장 신호가 아니라 작동 신호</b>입니다. 어렵게 꺼낸 기억이 더 오래 남습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-l">
+        <span class="layer-tag">공동체</span>
+        <div class="layer-name">실천 공동체</div>
+        <ul class="layer-meta">
+          <li>온라인 채널 상시</li>
+          <li>클로즈드 행사 연 2회</li>
+          <li>구독자 무료 참여</li>
+          <li>실험 선언 → 결과 공유</li>
+        </ul>
+      </div>
+      <div class="layer-r">
+        <div class="layer-desc">
+          채널은 친목 공간이 아니라 <b>책임 구조체</b>입니다. “실험을 선언하고, 결과를 공유하는” 루프를 돌립니다.
+          공개 약속이 실행률을 올리고, 다른 사람의 패턴을 보는 것 자체가 학습이 됩니다.
+        </div>
+        <div class="layer-note">
+          연 2회 행사는 1년간 같은 것을 실험해 온 사람들과 다음 것을 <b>작당하는</b> 자리입니다. 모임이 아니라 실천 공동체예요.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Timeline</div>
+    <h2 class="section-title">두 달을 실제로 겪으면</h2>
+    <p class="section-desc">다섯 겹이 언제 어떻게 겹치는지, 한 사람의 두 달로 펼쳐 봅니다.</p>
+
+    <div class="tl">
+      <div class="tl-block">
+        <div class="tl-when">Week 1</div>
+        <div class="tl-body">
+          <div class="tl-h">배움의 씨앗 — 오디오 수신</div>
+          <ul class="tl-items">
+            <li>
+              <span class="tl-k">배움 · Day 1</span>
+              <span class="tl-t">오디오 20분</span>
+              <div class="tl-d">자막과 요약을 곁들여 듣고 핵심 개념 1~3개만 메모합니다. 아직 시각 자료는 없습니다.</div>
+            </li>
+            <li>
+              <span class="tl-k">체화 · D+1</span>
+              <span class="tl-t">카드 등록과 1차 인출</span>
+              <div class="tl-d">핵심 개념을 카드로 만들고 자료 없이 한 번 꺼내 봅니다. 5~10분.</div>
+            </li>
+            <li>
+              <span class="tl-k">자기화 · D+4</span>
+              <span class="tl-t">시각 자료를 받고 나서</span>
+              <div class="tl-d">“이게 내 삶에서 어떤 장면인가”를 200자 안쪽으로 적습니다.</div>
+            </li>
+            <li>
+              <span class="tl-k">공동체 · D+4</span>
+              <span class="tl-t">실험 선언</span>
+              <div class="tl-d">오디오 끝에 붙은 1주짜리 소실험을 세 문장 이하로 공개 선언합니다.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-when">Week 2</div>
+        <div class="tl-body">
+          <div class="tl-h">작은 실천과 첫 피드백</div>
+          <ul class="tl-items">
+            <li>
+              <span class="tl-k">공동체 · D+7</span>
+              <span class="tl-t">결과 공유</span>
+              <div class="tl-d">성공·실패보다 <b>무엇이 저항이었나</b>를 공유합니다. 남의 패턴을 보는 것이 절반입니다.</div>
+            </li>
+            <li>
+              <span class="tl-k">체화 · D+7</span>
+              <span class="tl-t">2차 인출</span>
+              <div class="tl-d">등록한 카드가 다시 나옵니다. 흐릿하면 정상 — 간격을 조정해 다시 세웁니다.</div>
+            </li>
+            <li>
+              <span class="tl-k">배움 · D+14</span>
+              <span class="tl-t">다음 오디오</span>
+              <div class="tl-d">2주 주기가 다시 시작됩니다. 지난 실험이 새 내용을 읽는 맥락이 됩니다.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-when">Month 1–2</div>
+        <div class="tl-body">
+          <div class="tl-h">밀도가 올라가는 구간</div>
+          <ul class="tl-items">
+            <li>
+              <span class="tl-k">자기화 · 워크숍 전</span>
+              <span class="tl-t">문제 명확화 30분</span>
+              <div class="tl-d">이 주제가 내 삶에서 왜 막히는지를 코치와 함께 구체화합니다. 워크숍에서 다룰 <b>나의 실제 문제</b>를 정의하는 자리.</div>
+            </li>
+            <li>
+              <span class="tl-k">훈련 · 워크숍 당일</span>
+              <span class="tl-t">4시간 집중 문제풀이</span>
+              <div class="tl-d">아이디어 하나를 실전 문제에 적용합니다. 지식을 기능으로 바꾸는 것이 목표.</div>
+            </li>
+            <li>
+              <span class="tl-k">자기화 · 워크숍 후</span>
+              <span class="tl-t">적용 계획 30분</span>
+              <div class="tl-d">배운 것을 내 상황에 어떻게 얹을지 정합니다. 앞 세션과 질문 방향이 완전히 달라야 합니다.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-block">
+        <div class="tl-when">연 2회</div>
+        <div class="tl-body">
+          <div class="tl-h">클로즈드 행사</div>
+          <ul class="tl-items">
+            <li>
+              <span class="tl-k">공동체</span>
+              <span class="tl-t">실천 공동체 오프라인</span>
+              <div class="tl-d">장소 실비만 부담합니다. 1년간 같은 것을 실험해 온 사람들과 다음 프로젝트를 작당하는 자리. 구독자는 무료.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-tag">Principles</div>
+    <h2 class="section-title">왜 이 순서인가</h2>
+    <p class="section-desc">겹의 배치는 취향이 아니라 의도입니다. 넷만 기억하면 됩니다.</p>
+
+    <div class="prin">
+      <div>
+        <div class="prin-k">원리 01 · 정보 지연</div>
+        <div class="prin-t">시각 자료를 3~4일 늦게 줍니다</div>
+        <div class="prin-b">불완전한 상태로 먼저 구조를 그리게 하려는 설계입니다. 자료를 받을 때의 확인과 수정이 기억을 고정시킵니다. 일정 문제가 아닙니다.</div>
+      </div>
+      <div>
+        <div class="prin-k">원리 02 · 인출 타이밍</div>
+        <div class="prin-t">체화는 잊기 직전에 발동합니다</div>
+        <div class="prin-b">D+1과 D+7은 망각이 가장 빠른 구간을 정확히 겨냥한 것입니다. 워크숍에서 나온 것은 별도 묶음으로 관리해 길게 보존합니다.</div>
+      </div>
+      <div>
+        <div class="prin-k">원리 03 · 공동체의 역할</div>
+        <div class="prin-t">채널은 책임 구조체입니다</div>
+        <div class="prin-b">친목이 아니라 “선언 → 공유” 루프를 돌리는 장치입니다. 공개 약속이 실행률을 올리고, 코칭과 겹칠 때 자기화 속도가 배가됩니다.</div>
+      </div>
+      <div>
+        <div class="prin-k">원리 04 · 코칭 분리</div>
+        <div class="prin-t">Pre와 Post는 다른 세션입니다</div>
+        <div class="prin-b">앞은 내 문제를 세우고, 뒤는 적용을 정합니다. 둘이 연속 세션처럼 운영되면 두 번 다 값이 사라집니다.</div>
+      </div>
+    </div>
+
+    <div class="callout mt-2">
+      <div class="callout-label">이미 쓰고 있던 것과의 관계</div>
+      「먼저 헤매게 두고 막힌 자리에만 발판을 놓는다」는 <a href="about.html">SEEDS</a>의 순서가 <b>원리 01</b>의 근거이고,
+      「자료를 덮고 무자료 인출 · 간격 반복」은 <a href="ai-learning.html">지형 · 경로 · 장비</a>에 이미 적어 둔 것을 이 프로세스의 <b>체화</b> 겹으로 옮긴 것입니다.
+      실험 선언과 결과 공유는 <a href="framework.html">질문고리 학습</a>의 동료 검증을 공동체 형태로 돌리는 방식이고요.
+    </div>
+  </section>
+
+  <section class="container center">
+    <p class="small muted mt-3">
+      실제로 운영 중인 것은 아직 없습니다. 굴러가고 있는 설계도는 → <a href="frameworks.html">성장 프레임워크</a><br>
+      기록 서식 → <a href="learning-design/yajang.html">야장</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 정보를 주는 것과 변화를 만드는 것은 다릅니다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
