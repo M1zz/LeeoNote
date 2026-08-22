@@ -128,6 +128,71 @@
     letter-spacing: 0.05em;
     margin-top: 0.5rem;
   }
+
+  /* 읽고 나서 가지러 가는 카드 */
+  .tool-card {
+    grid-column: 1 / -1;
+    background: var(--card);
+    border: 1px solid var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 1.3rem 1.4rem 1.2rem;
+  }
+  .tool-card .tool-name { font-size: 1.05rem; margin-bottom: 0.35rem; }
+  .tool-card .tool-desc { font-size: 0.88rem; }
+
+  .tool-read {
+    margin: 1rem 0 0.9rem;
+    padding: 0.9rem 1rem;
+    background: var(--paper-warm);
+    border-radius: 5px;
+  }
+  .tool-read-k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.4rem;
+  }
+  .tool-read-t {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 0.35rem;
+  }
+  .tool-read-d { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.75; }
+  .tool-read-d b { color: var(--ink-soft); }
+
+  .tool-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tool-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.55rem 0.95rem;
+    border-radius: 100px;
+    text-decoration: none;
+    border-bottom: none;
+    transition: opacity 0.18s, background 0.18s, color 0.18s;
+    white-space: nowrap;
+  }
+  .tool-btn--go {
+    background: var(--ink);
+    color: #fff;
+  }
+  .tool-btn--go:hover { opacity: 0.85; color: #fff; border-bottom: none; }
+  .tool-btn--sub {
+    border: 1px solid var(--paper-deep);
+    color: var(--ink-faint);
+  }
+  .tool-btn--sub:hover { border-color: var(--ink); color: var(--ink); border-bottom: 1px solid var(--ink); }
+  .tool-order {
+    font-size: 0.78rem;
+    color: var(--ink-mute);
+    margin-top: 0.7rem;
+    line-height: 1.7;
+  }
 </style>
 </head>
 <body>
@@ -178,11 +243,31 @@
       </div>
       <p class="phase-intro">머리가 붙들고 있던 걸 도구에 맡깁니다. 외우고 붙잡아 두느라 정작 생각할 자리가 없다면 이 칸을 보세요.</p>
       <div class="tool-grid">
-        <a class="tool" href="https://apps.apple.com/us/app/clip-keyboard-quick-phrases/id1543660502" target="_blank" rel="noopener">
+        <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">⌨️</span>ClipKeyboard</div>
           <div class="tool-desc">자주 쓰는 문구를 머리에 담아두지 않게. 키보드에서 바로 꺼내 쓰는 커스텀 키보드.</div>
-          <div class="tool-meta">iOS · productivity</div>
-        </a>
+
+          <div class="tool-read">
+            <div class="tool-read-k">먼저 읽고 가세요</div>
+            <div class="tool-read-t">“의지가 부족한 게 아니라 시스템이 없었네요”</div>
+            <div class="tool-read-d">
+              의지로 굴러가는 것은 의지가 떨어지면 멈춥니다.
+              그래서 하루를 뜯어 <b>결과가 이미 정해진 반복 작업</b>부터 찾았고,
+              계좌번호·주소·이메일처럼 매번 꺼내던 정보에서
+              <b>42초 걸리던 일이 1초로</b> 줄었습니다.
+              이 도구가 왜 필요했는지가 그 글에 적혀 있습니다.
+            </div>
+          </div>
+
+          <div class="tool-actions">
+            <a class="tool-btn tool-btn--go" href="https://leeo25.substack.com/p/187?r=7dpffj" target="_blank" rel="noopener">왜 만들었는지 읽기 →</a>
+            <a class="tool-btn tool-btn--sub" href="https://apps.apple.com/us/app/clip-keyboard-quick-phrases/id1543660502" target="_blank" rel="noopener">도구 가지러 가기 ↗</a>
+          </div>
+
+          <div class="tool-order">순서를 권합니다 — 어떤 반복을 덜어낼지 먼저 정하고 다음에 받는 편이, 받아 두고 안 쓰는 것보다 낫습니다.</div>
+
+          <div class="tool-meta">iOS · productivity · 읽기 5분</div>
+        </div>
       </div>
     </div>
 
