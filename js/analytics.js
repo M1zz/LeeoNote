@@ -10,10 +10,18 @@
 //  hostname 은 모두 m1zz.github.io. 프로젝트는 pathname 의
 //  첫 세그먼트로 자동 식별됩니다.
 //
-//  하이어라키
+//  하이어라키  (2026-08 사이트 구조 개편 반영)
 //  ───────────────────────────────────────────────────────────────
 //   L0 홈 (LeeoNote /)
-//    ├─ L1 철학, 서재, 생각, 도구, 편지함, 혼자 만들기
+//    ├─ L1 ABOUT ─ L2 여는 글
+//    ├─ L1 생각 ─ L2 고찰 ─ L3 <노트 id>
+//    ├─ L1 성장 프레임워크
+//    │    ├─ L2 질문고리 학습 · 레버 찾기 · 망하지 않기   (세 축)
+//    │    ├─ L2 성장 기술 열둘 · 학습 설계 · AI 학습 · 배움의 프로세스
+//    │    └─ L2 필드 매뉴얼 ─ L3 삼각측량 · 야장 · 첫 말뚝
+//    ├─ L1 도구
+//    ├─ L1 직접 만들기 ─ L2 솔로 빌딩 노트 ─ L3 각 노트
+//    ├─ L1 서재 · 편지함
 //    └─ L1 아카데미
 //         ├─ L2 Swift 자료구조   (swift-data-structures /)
 //         │    └─ L3 학습 · 치트시트 · 문제 · 면접 · 가이드
@@ -71,25 +79,68 @@
   function classifyLeeoNote(p) {
     if (p === '/' || p === '') return mk('LeeoNote', { l1: '홈', depth: 0, parent: null });
 
+    // L1 — 상단 내비게이션과 같은 층
     var topMap = {
-      '/philosophy.html':  { l1: '철학',         parent: '홈' },
-      '/library.html':     { l1: '서재',         parent: '홈' },
-      '/thoughts.html':    { l1: '생각',         parent: '홈' },
-      '/academy.html':     { l1: '아카데미',     parent: '홈' },
-      '/tools.html':       { l1: '도구',         parent: '홈' },
-      '/mentoring.html':   { l1: '편지함',       parent: '홈' },
-      '/join.html':        { l1: '혼자 만들기',  parent: '홈' },
-      '/join-career.html': { l1: '혼자 만들기',  parent: '홈' },
-      '/join-launcher.html': { l1: '혼자 만들기', parent: '홈' }
+      '/about.html':         { l1: 'ABOUT',          parent: '홈' },
+      '/thoughts.html':      { l1: '생각',            parent: '홈' },
+      '/frameworks.html':    { l1: '성장 프레임워크',  parent: '홈' },
+      '/tools.html':         { l1: '도구',            parent: '홈' },
+      '/join.html':          { l1: '직접 만들기',      parent: '홈' },
+      '/join-career.html':   { l1: '직접 만들기',      parent: '홈' },
+      '/join-launcher.html': { l1: '직접 만들기',      parent: '홈' },
+      '/academy.html':       { l1: '아카데미',        parent: '홈' },
+      '/library.html':       { l1: '서재',            parent: '홈' },
+      '/mentoring.html':     { l1: '편지함',          parent: '홈' }
     };
     if (topMap[p]) return mk('LeeoNote', Object.assign({ depth: 1 }, topMap[p]));
 
+    // ABOUT 하위 — 여는 글
+    if (p === '/philosophy.html') return mk('LeeoNote',
+      { l1: 'ABOUT', l2: '여는 글', depth: 2, parent: 'ABOUT' });
+
+    // 성장 프레임워크 하위
+    var fw = {
+      '/framework.html':        { name: '질문고리 학습',   axis: '푸는 축' },
+      '/lever-loop.html':       { name: '레버 찾기',       axis: '고르는 축' },
+      '/no-fail.html':          { name: '망하지 않기',     axis: '지키는 축' },
+      '/skills.html':           { name: '성장 기술 열둘',  axis: '능력 축' },
+      '/solo-learning.html':    { name: '학습 설계',       axis: '응용' },
+      '/ai-learning.html':      { name: 'AI 학습',        axis: '응용' },
+      '/learning-process.html': { name: '배움의 프로세스', axis: '운영 · 구상' }
+    };
+    if (fw[p]) {
+      var hf = mk('LeeoNote',
+        { l1: '성장 프레임워크', l2: fw[p].name, depth: 2, parent: '성장 프레임워크' });
+      hf.axis = fw[p].axis;
+      return hf;
+    }
+
+    // 필드 매뉴얼과 부록
+    if (p === '/learning-design/') return mk('LeeoNote',
+      { l1: '성장 프레임워크', l2: '필드 매뉴얼', depth: 2, parent: '성장 프레임워크' });
+    var annex = {
+      '/learning-design/triangulation.html': '삼각측량',
+      '/learning-design/yajang.html':        '야장',
+      '/learning-design/malttuk.html':       '첫 말뚝'
+    };
+    if (annex[p]) return mk('LeeoNote',
+      { l1: '성장 프레임워크', l2: '필드 매뉴얼', l3: annex[p], depth: 3, parent: '필드 매뉴얼' });
+
+    // 생각 하위 — 고찰 노트
+    var mn = p.match(/^\/notes\/([^/]+)\.html$/);
+    if (mn && mn[1].charAt(0) !== '_') return mk('LeeoNote',
+      { l1: '생각', l2: '고찰', l3: mn[1], depth: 3, parent: '고찰' });
+
+    // 직접 만들기 하위 — 솔로 빌딩 노트
     if (p === '/solo-builders/') return mk('LeeoNote',
-      { l1: '혼자 만들기', l2: '솔로 빌딩 노트', depth: 2, parent: '혼자 만들기' });
-    if (p === '/solo-builders/app-store-checklist.html') return mk('LeeoNote',
-      { l1: '혼자 만들기', l2: '솔로 빌딩 노트', l3: 'App Store 출시', depth: 3, parent: '솔로 빌딩 노트' });
-    if (p === '/solo-builders/monetization-worksheet.html') return mk('LeeoNote',
-      { l1: '혼자 만들기', l2: '솔로 빌딩 노트', l3: '오래 만드는 일', depth: 3, parent: '솔로 빌딩 노트' });
+      { l1: '직접 만들기', l2: '솔로 빌딩 노트', depth: 2, parent: '직접 만들기' });
+    var sb = {
+      '/solo-builders/app-store-checklist.html':   'App Store 출시',
+      '/solo-builders/monetization-worksheet.html': '오래 만드는 일',
+      '/solo-builders/recording-safety.html':       '공개 녹화 점검'
+    };
+    if (sb[p]) return mk('LeeoNote',
+      { l1: '직접 만들기', l2: '솔로 빌딩 노트', l3: sb[p], depth: 3, parent: '솔로 빌딩 노트' });
 
     return mk('LeeoNote', { l1: 'Other', depth: 99, parent: null });
   }
@@ -210,7 +261,8 @@
     section_l4: h.l4 || '(none)',
     page_depth: h.depth,
     page_parent: h.parent || '(root)',
-    page_lang: h.lang || 'ko'
+    page_lang: h.lang || 'ko',
+    fw_axis: h.axis || '(none)'
   });
 
   // ─────────────────────────────────────────────────────────────
@@ -261,6 +313,130 @@
       });
     } catch (_) {}
   });
+
+  // ─────────────────────────────────────────────────────────────
+  //  LeeoNote 전용 — 개편된 구조에 맞춘 상호작용
+  //  (다른 프로젝트에서는 선택자가 없어 아무 일도 일어나지 않는다)
+  // ─────────────────────────────────────────────────────────────
+
+  function txt(el, sel) {
+    if (!el) return '';
+    var t = sel ? el.querySelector(sel) : el;
+    return t ? (t.textContent || '').trim().replace(/\s+/g, ' ').substring(0, 80) : '';
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest) return;
+
+    // ① 홈 라우터 — 어떤 트랙 탭을 여는가
+    var tab = e.target.closest('.track-tab');
+    if (tab) {
+      gtag('event', 'router_tab', {
+        track: tab.getAttribute('data-track') || '(none)',
+        tab_label: txt(tab, '.track-verb'),
+        transport_type: 'beacon'
+      });
+      return;
+    }
+
+    // ② 홈 라우터 — 15개 증상 문장 중 무엇이 눌리는가 (안 눌리는 문장 = 잘못 쓴 문장)
+    var sym = e.target.closest('.symptom');
+    if (sym) {
+      var panel = sym.closest('[data-track]');
+      gtag('event', 'router_symptom', {
+        track: panel ? panel.getAttribute('data-track') : '(none)',
+        slot: txt(sym, '.symptom-num'),
+        symptom: txt(sym, '.symptom-say'),
+        destination: sym.getAttribute('href') || '',
+        transport_type: 'beacon'
+      });
+      return;
+    }
+
+    // ③ 도구 — 읽고 가는가, 바로 받으러 가는가
+    var btn = e.target.closest('.tool-btn');
+    if (btn) {
+      var card = btn.closest('.tool-card');
+      gtag('event', 'tool_cta', {
+        intent: btn.classList.contains('tool-btn--go') ? 'read_first' : 'get_tool',
+        tool: txt(card, '.tool-name'),
+        url: btn.href || '',
+        transport_type: 'beacon'
+      });
+      return;
+    }
+
+    // ④ 프레임워크 — 세 축 중 무엇을 여는가
+    var card = e.target.closest('.fw-card, .fw-core, .fw-index');
+    if (card) {
+      gtag('event', 'framework_open', {
+        framework: txt(card, '.fw-name') || txt(card, '.fw-core-title') || txt(card, '.fw-index-k'),
+        kind: card.classList.contains('fw-core') ? 'engine' :
+              (card.classList.contains('fw-index') ? 'side' : 'framework'),
+        url: card.href || '',
+        transport_type: 'beacon'
+      });
+      return;
+    }
+
+    // ⑤ 고찰 — 어떤 글이 열리고, 어떤 태그로 걸러 보는가
+    var row = e.target.closest('.nt-row');
+    if (row) {
+      gtag('event', 'note_open', {
+        note_title: txt(row, '.nt-title'),
+        status: txt(row, '.nt-badge'),
+        external: /^https?:/.test(row.getAttribute('href') || '') ? 'yes' : 'no',
+        transport_type: 'beacon'
+      });
+      return;
+    }
+    var chip = e.target.closest('.nt-chip');
+    if (chip) {
+      gtag('event', 'note_filter', { tag: txt(chip), transport_type: 'beacon' });
+      return;
+    }
+
+    // ⑥ 같은 페이지 안의 칸 이동 — 로드맵 일곱 칸 · 도구 카테고리 · 프레임워크 층
+    var jump = e.target.closest('.map-nav a, .kit-nav a, .fw-stack .go a, a[href^="#"]');
+    if (jump) {
+      var hash = (jump.getAttribute('href') || '').replace(/^.*#/, '');
+      if (!hash) return;
+      gtag('event', 'anchor_jump', {
+        target_id: hash,
+        label: txt(jump),
+        page_path: cleanPath,
+        section: h.l1 || '(none)',
+        transport_type: 'beacon'
+      });
+    }
+  });
+
+  // 로드맵 · 관문처럼 긴 페이지에서 어떤 칸까지 실제로 내려갔는가
+  (function () {
+    var marks = document.querySelectorAll('.stagebox[id], .gate[id], .step, .layer');
+    if (!marks.length || !('IntersectionObserver' in window)) return;
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        var key = el.id || txt(el, '.stage-name') || txt(el, '.gate-name') ||
+                  txt(el, '.step-name') || txt(el, '.layer-name');
+        if (!key || seen[key]) return;
+        seen[key] = true;
+        gtag('event', 'section_view', {
+          block: key,
+          block_label: txt(el, '.stage-name') || txt(el, '.gate-name') ||
+                       txt(el, '.step-name') || txt(el, '.layer-name'),
+          page_path: cleanPath,
+          section: h.l1 || '(none)',
+          transport_type: 'beacon'
+        });
+        io.unobserve(el);
+      });
+    }, { threshold: 0.45 });
+    Array.prototype.forEach.call(marks, function (el) { io.observe(el); });
+  })();
 
   // 스크롤 깊이
   var tracked = {};
