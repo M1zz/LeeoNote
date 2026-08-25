@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>빌드로그 — 리이오의 연습장</title>
+<meta name="description" content="만든 도구가 어떻게 바뀌어 왔는지. 무엇을 바꿨는지보다 왜 바꿨는지를 남기는 기록.">
+<meta property="og:title" content="빌드로그 — 리이오의 연습장">
+<meta property="og:description" content="무엇을 바꿨는지보다 왜 바꿨는지를 남깁니다. 도구가 자라온 시간표.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/buildlog.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="js/analytics.js"></script>
+<style>
+  /* ── 앱 필터 ───────────────────────────────────────── */
+  .bl-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 1.4rem 0 0.4rem;
+  }
+  .bl-chip {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--paper-deep);
+    background: var(--paper);
+    color: var(--ink-faint);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .bl-chip span { color: var(--ink-mute); }
+  .bl-chip:hover { border-color: var(--ink); color: var(--ink); }
+  .bl-chip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .bl-chip.is-on span { color: rgba(255, 255, 255, 0.6); }
+  .bl-chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  /* ── 타임라인 ──────────────────────────────────────── */
+  .bl-timeline { margin-top: 1.6rem; }
+  .bl-item {
+    display: grid;
+    grid-template-columns: 6.4rem 1.6rem 1fr;
+    gap: 0 0.4rem;
+  }
+  .bl-when {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    text-align: right;
+    padding-top: 1.55rem;
+    white-space: nowrap;
+  }
+  .bl-rail { position: relative; }
+  .bl-rail::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule);
+    transform: translateX(-50%);
+  }
+  .bl-item:first-child .bl-rail::before { top: 1.7rem; }
+  .bl-item:last-child .bl-rail::before { bottom: auto; height: 1.7rem; }
+  .bl-dot {
+    position: absolute;
+    left: 50%;
+    top: 1.7rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  .bl-item.is-sample .bl-dot { border-color: var(--ink-mute); border-style: dashed; }
+
+  .bl-body { padding: 1.1rem 0 2rem; min-width: 0; }
+  .bl-card {
+    border: 1px solid var(--rule);
+    background: var(--card);
+    padding: 1.2rem 1.35rem;
+  }
+  .bl-item.is-sample .bl-card { border-style: dashed; border-color: var(--paper-deep); background: var(--paper-warm); }
+
+  .bl-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .bl-app {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .bl-ver {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.14rem 0.42rem;
+    border: 1px solid var(--paper-deep);
+    border-radius: 3px;
+    color: var(--ink-faint);
+  }
+  .bl-plat {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .bl-sample {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.14rem 0.42rem;
+    border: 1px dashed var(--ink-mute);
+    border-radius: 3px;
+    color: var(--ink-mute);
+    margin-left: auto;
+  }
+  .bl-title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+  }
+  .bl-rows { margin: 0; }
+  .bl-row {
+    display: grid;
+    grid-template-columns: 6.2rem 1fr;
+    gap: 0.2rem 0.9rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .bl-row dt {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding-top: 0.18rem;
+  }
+  .bl-row dd {
+    margin: 0;
+    font-size: 0.91rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .bl-row--why dd { color: var(--ink); font-weight: 500; }
+  .bl-link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .bl-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  /* ── 비었을 때 · 안내 ───────────────────────────────── */
+  .bl-empty {
+    border: 1px dashed var(--ink-mute);
+    border-radius: 8px;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-top: 1.4rem;
+  }
+  .bl-empty b { color: var(--ink); font-weight: 700; }
+
+  @media (max-width: 640px) {
+    .bl-item { grid-template-columns: 1.4rem 1fr; }
+    .bl-rail { grid-row: 1 / span 2; grid-column: 1; }
+    .bl-when { grid-row: 1; grid-column: 2; text-align: left; padding: 1.2rem 0 0; }
+    .bl-body { grid-row: 2; grid-column: 2; padding-top: 0.35rem; }
+    .bl-item:first-child .bl-rail::before { top: 1.5rem; }
+    .bl-item:last-child .bl-rail::before { height: 1.5rem; }
+    .bl-dot { top: 1.5rem; }
+    .bl-row { grid-template-columns: 1fr; }
+    .bl-sample { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="about.html">ABOUT</a>
+      <a href="thoughts.html">생각</a>
+      <a href="frameworks.html">성장 프레임워크</a>
+      <a href="tools.html" class="active">도구</a>
+      <a href="join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container page-head">
+    <div class="page-eyebrow">Build log</div>
+    <h1 class="page-title">빌드로그</h1>
+    <p class="page-sub">
+      <a href="tools.html">도구</a>들이 어떻게 바뀌어 왔는지 남기는 자리입니다.
+      <b>무엇을 바꿨는지보다 왜 바꿨는지</b>를 적습니다 — 바꾼 것은 앱스토어에도 있지만,
+      그때 무엇을 보고 그렇게 정했는지는 여기 말고는 남지 않으니까요.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="callout callout--warm">
+      <div class="callout-label">이 로그의 규칙</div>
+      배포마다 쓰지 않습니다. <b>‘왜 바꿨는지’가 한 줄로 안 써지는 릴리즈는 여기 올리지 않습니다.</b>
+      「버그 수정 및 성능 개선」은 기록이 아니라 목록이라서요.
+    </div>
+  </section>
+
+  <section class="container" id="log">
+    <div class="bl-filter" id="blFilter" hidden></div>
+    <div id="blList"></div>
+    <p class="small muted" style="margin-top:0.4rem;">
+      ClipKeyboard는 3.0.4 이후로 마흔 번 배포됐습니다. 그중 <b>‘왜’가 한 줄로 남아 있는 일곱 개</b>만 여기 있습니다.
+      빠진 것들은 안 중요해서가 아니라, 옮겨 적을 이유가 없어서입니다. 전체 목록은 앱 안 「변경 이력」에 있어요.
+    </p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 고친 것보다, 고치기로 한 이유가 오래 남는다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+<script>
+// 빌드로그 — data/buildlog.json 을 읽어 위에서부터(최신 순) 타임라인으로 그린다.
+// 릴리즈를 올리려면 JSON 의 entries 맨 앞에 한 덩어리를 추가하면 된다. 이 파일은 손대지 않아도 된다.
+(function () {
+  var box = document.getElementById('blList');
+  var bar = document.getElementById('blFilter');
+  if (!box) return;
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+  var empty = '<div class="bl-empty">아직 남긴 기록이 없습니다.<br><b>다음 릴리즈부터 여기에 쌓입니다.</b></div>';
+
+  var entries = [], active = null;   // active = 고른 앱 (null 이면 전체)
+
+  function idOf(e) {
+    return e.appId || String(e.app || '').toLowerCase().replace(/\s+/g, '-');
+  }
+
+  function row(label, value, mod) {
+    if (!value) return '';
+    return '<div class="bl-row' + (mod ? ' ' + mod : '') + '">' +
+             '<dt>' + esc(label) + '</dt><dd>' + esc(value) + '</dd>' +
+           '</div>';
+  }
+
+  function renderList() {
+    var shown = active
+      ? entries.filter(function (e) { return idOf(e) === active; })
+      : entries;
+
+    if (!shown.length) {
+      box.innerHTML = '<div class="bl-empty">이 앱으로 남긴 기록이 아직 없습니다.</div>';
+      return;
+    }
+
+    var html = '<div class="bl-timeline">';
+    shown.forEach(function (e) {
+      html += '<div class="bl-item' + (e.sample ? ' is-sample' : '') + '">' +
+                '<div class="bl-when">' + esc(e.date || '') + '</div>' +
+                '<div class="bl-rail"><span class="bl-dot"></span></div>' +
+                '<div class="bl-body"><div class="bl-card">' +
+                  '<div class="bl-head">' +
+                    '<span class="bl-app">' + esc(e.app || '') + '</span>' +
+                    (e.version ? '<span class="bl-ver">v' + esc(e.version) + '</span>' : '') +
+                    (e.platform ? '<span class="bl-plat">' + esc(e.platform) + '</span>' : '') +
+                    (e.sample ? '<span class="bl-sample">형식 예시</span>' : '') +
+                  '</div>' +
+                  (e.title ? '<div class="bl-title">' + esc(e.title) + '</div>' : '') +
+                  '<dl class="bl-rows">' +
+                    row('바꾼 것', e.changed) +
+                    row('왜 — 본 신호', e.signal, 'bl-row--why') +
+                    row('배운 것', e.learned) +
+                    row('다음에 볼 것', e.next) +
+                  '</dl>' +
+                  (e.link
+                    ? '<a class="bl-link" href="' + esc(e.link) + '" target="_blank" rel="noopener">받으러 가기 ↗</a>'
+                    : '') +
+                '</div></div>' +
+              '</div>';
+    });
+    html += '</div>';
+    box.innerHTML = html;
+  }
+
+  function renderBar() {
+    if (!bar) return;
+    var count = {}, name = {}, order = [];
+    entries.forEach(function (e) {
+      var id = idOf(e);
+      if (!id) return;
+      if (!count[id]) { count[id] = 0; name[id] = e.app || id; order.push(id); }
+      count[id]++;
+    });
+    if (order.length < 2) { bar.hidden = true; return; }   // 앱이 하나뿐이면 필터를 감춘다
+
+    var html = '<button type="button" class="bl-chip' + (active ? '' : ' is-on') +
+               '" data-app="">전체 <span>' + entries.length + '</span></button>';
+    order.forEach(function (id) {
+      html += '<button type="button" class="bl-chip' + (id === active ? ' is-on' : '') +
+              '" data-app="' + esc(id) + '">' + esc(name[id]) + ' <span>' + count[id] + '</span></button>';
+    });
+    bar.innerHTML = html;
+    bar.hidden = false;
+  }
+
+  if (bar) {
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.bl-chip') : null;
+      if (!btn) return;
+      var id = btn.getAttribute('data-app');
+      active = id ? (active === id ? null : id) : null;   // 같은 앱을 다시 누르면 해제
+      renderBar();
+      renderList();
+    });
+  }
+
+  fetch('data/buildlog.json', { cache: 'no-cache' })
+    .then(function (res) { if (!res.ok) throw new Error('no data'); return res.json(); })
+    .then(function (data) {
+      entries = (data && data.entries) || [];
+      if (!entries.length) { box.innerHTML = empty; return; }
+
+      // tools.html 에서 buildlog.html#clipkeyboard 처럼 넘어오면 그 앱만 펼친다
+      var hash = (location.hash || '').replace('#', '').toLowerCase();
+      if (hash && entries.some(function (e) { return idOf(e) === hash; })) active = hash;
+
+      renderBar();
+      renderList();
+    })
+    .catch(function () { box.innerHTML = empty; });
+
+  window.addEventListener('hashchange', function () {
+    var hash = (location.hash || '').replace('#', '').toLowerCase();
+    active = (hash && entries.some(function (e) { return idOf(e) === hash; })) ? hash : null;
+    renderBar();
+    renderList();
+  });
+})();
+</script>
+
+</body>
+</html>
