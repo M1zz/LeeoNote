@@ -281,6 +281,70 @@
   .toc li { margin-bottom: 0.45rem; font-size: 0.85rem; line-height: 1.5; }
   @media (max-width: 760px) { .toc { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 420px) { .toc { grid-template-columns: 1fr; } }
+
+  /* ── 함께 공부하기 ─────────────────────────────────── */
+  .study-join {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.6rem;
+    align-items: center;
+    margin-top: 1.4rem;
+    padding: 1.5rem;
+    border: 1px solid var(--rule);
+    background: var(--card);
+  }
+  .study-qr {
+    display: block;
+    padding: 0.7rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+    line-height: 0;
+    transition: border-color 0.15s ease;
+  }
+  .study-qr:hover { border-color: var(--ink); }
+  .study-qr img { width: 100%; height: auto; display: block; }
+  .study-name {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.55rem;
+  }
+  .study-desc {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin: 0 0 1.1rem;
+  }
+  .study-cta {
+    display: inline-block;
+    padding: 0.62rem 1.15rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    border: 1px solid var(--ink);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .study-cta:hover { background: var(--paper); color: var(--ink); }
+  .study-hint {
+    margin-top: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+  .study-hint code {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+    word-break: break-all;
+  }
+  @media (max-width: 620px) {
+    .study-join { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 1.3rem; }
+    .study-qr { max-width: 190px; }
+  }
 </style>
 </head>
 <body>
@@ -576,6 +640,24 @@
   <div class="scribble-divider container">
     <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
   </div>
+
+  <section class="container" id="study-together">
+    <div class="section-tag"> Study together</div>
+    <h2 class="section-title">리이오와 함께 공부하기</h2>
+    <p class="section-desc">혼자 보면 한 주가 걸리는 것도, 옆에 사람이 있으면 그날 풀립니다. 카카오톡 오픈채팅에서 읽은 것 · 만든 것 · 막힌 것을 나눕니다.</p>
+
+    <div class="study-join">
+      <a class="study-qr" href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅 열기">
+        <img src="images/openchat-qr.png" alt="리이오와 함께 공부하기 카카오톡 오픈채팅 QR 코드" width="600" height="600" loading="lazy">
+      </a>
+      <div class="study-body">
+        <div class="study-name">카카오톡 오픈채팅</div>
+        <p class="study-desc">조용히 구경만 하셔도 좋고, 막힌 문장 하나만 던지고 가셔도 좋습니다. 답이 늦더라도 누군가는 같은 자리를 지나온 적이 있어요.</p>
+        <a class="study-cta" href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">오픈채팅 들어가기 →</a>
+        <div class="study-hint">휴대폰이면 버튼을, 데스크톱이면 QR을 찍어주세요 · <code>https://open.kakao.com/o/pkdN2Oli</code></div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
