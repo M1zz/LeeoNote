@@ -77,7 +77,8 @@
       "file": "notes/ai-a64.html",
       "tags": [
         "AI",
-        "학습"
+        "학습",
+        "메타인지"
       ]
     },
     {
@@ -116,7 +117,34 @@
       "file": "notes/tool-shapes-thought.html",
       "tags": [
         "도구",
-        "학습"
+        "학습",
+        "메타인지"
+      ]
+    },
+    {
+      "id": "university-or-not",
+      "title": "개발을 배우려고 대학교에 가는 게 맞을까",
+      "category": "growth",
+      "date": "2026.04",
+      "status": "settled",
+      "summary": "질문이 틀렸습니다. 대학에 가야 하나가 아니라, 내 목표가 무엇인가입니다.",
+      "file": "notes/university-or-not.html",
+      "tags": [
+        "학습",
+        "진로"
+      ]
+    },
+    {
+      "id": "three-basics",
+      "title": "책도 봤고 강의도 들었는데 왜 실력이 안 늘까",
+      "category": "growth",
+      "date": "2026.03",
+      "status": "settled",
+      "summary": "기초, 기본, 기본기. 셋 다 다른 것이고 각각 다른 방법으로만 늡니다.",
+      "file": "notes/three-basics.html",
+      "tags": [
+        "학습",
+        "메타인지"
       ]
     }
   ],

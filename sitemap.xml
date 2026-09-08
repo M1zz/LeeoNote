@@ -151,6 +151,16 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://m1zz.github.io/LeeoNote/notes/university-or-not.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/notes/three-basics.html</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://m1zz.github.io/LeeoNote/solo-builders/recording-safety.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
