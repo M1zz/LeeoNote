@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>생각 — 리이오의 연습장</title>
-<meta name="description" content="한 주제를 오래 붙들고 적어 둔 고찰들. 일에 대한 것, 성장에 대한 것.">
+<meta name="description" content="한 주제를 오래 붙들고 적어 둔 고찰들. 일, 학습과 성장, 만든 것, 접근성.">
 <meta property="og:title" content="생각 — 리이오의 연습장">
 <meta property="og:description" content="한 주제를 오래 붙들고 적어 둔 고찰들.">
 <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="js/analytics.js"></script>
 <style>
-  /* ── 고찰 목록 (data/notes.json 에서 렌더) ───────────── */
+  /* ── 생각 목록 (data/notes.json 에서 렌더) ───────────── */
   .nt-cat { margin-top: 2.6rem; }
   .nt-cat:first-child { margin-top: 1.2rem; }
   .nt-cat-head {
@@ -160,7 +160,7 @@
 </footer>
 
 <script>
-// 고찰 목록 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
+// 생각 목록 — data/notes.json 을 읽어 카테고리 순서대로 렌더한다.
 // 카테고리를 늘리려면 JSON 의 categories 에, 태그는 각 글의 tags 배열에 적으면 된다.
 // 이 파일은 손대지 않아도 된다.
 (function () {
@@ -173,7 +173,7 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   };
-  var empty = '<div class="nt-empty">아직 올려 둔 고찰이 없습니다.<br><b>첫 편을 쓰는 중입니다.</b></div>';
+  var empty = '<div class="nt-empty">아직 올려 둔 생각이 없습니다.<br><b>첫 편을 쓰는 중입니다.</b></div>';
 
   var notes = [], cats = [], active = null;   // active = 고른 태그 (null 이면 전체)
 
