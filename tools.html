@@ -193,6 +193,32 @@
     margin-top: 0.7rem;
     line-height: 1.7;
   }
+
+  /* ── 앱 배지 (data/apps.json 에서 채운다) ───────── */
+  .tool-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+  }
+  .tool-badges[hidden] { display: none; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    padding: 0.32rem 0.6rem;
+    border-radius: 100px;
+    border: 1px solid var(--paper-deep);
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .badge b { font-weight: 700; color: var(--ink-soft); }
+  /* 가장 세게 말할 수 있는 하나만 채운다 */
+  .badge.is-lead { background: var(--ink); border-color: var(--ink); color: rgba(255,255,255,0.72); }
+  .badge.is-lead b { color: #fff; }
+  .badge-star { color: var(--ink-mute); }
+  .badge.is-lead .badge-star { color: rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
@@ -249,6 +275,7 @@
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">⌨️</span>ClipKeyboard</div>
           <div class="tool-desc">자주 쓰는 문구를 머리에 담아두지 않게. 키보드에서 바로 꺼내 쓰는 커스텀 키보드.</div>
+          <div class="tool-badges" data-app="clipkeyboard" hidden></div>
 
           <div class="tool-read">
             <div class="tool-read-k">먼저 읽고 가세요</div>
@@ -356,6 +383,93 @@
   </section>
 
 </main>
+
+<script>
+// 앱 배지 — data/apps.json 을 읽어 data-app 이 붙은 자리에 채운다.
+// 숫자는 scripts/update-app-stats.py 가 갱신하고, 이 파일은 손대지 않아도 된다.
+// 값이 없는 배지는 조용히 빠진다 — 없는 숫자를 지어내지 않기 위해서.
+(function () {
+  var slots = document.querySelectorAll('.tool-badges[data-app]');
+  if (!slots.length) return;
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+
+  // 1200 → '1,200' / 10000 → '1만' / 12000 → '1.2만'
+  function human(n) {
+    if (n >= 10000) {
+      var man = n / 10000;
+      return (man >= 10 ? Math.round(man) : Math.round(man * 10) / 10) + '만';
+    }
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  // '2020.12' → 몇 해째인지. 첫해에는 연도만 말한다.
+  function yearsSince(since) {
+    var m = /^(\d{4})[.-](\d{2})$/.exec(String(since || ''));
+    if (!m) return null;
+    var y = +m[1], mo = +m[2], now = new Date();
+    var n = now.getFullYear() - y + (now.getMonth() + 1 >= mo ? 1 : 0);
+    return n >= 2 ? { year: y, nth: n } : { year: y, nth: null };
+  }
+
+  var BADGE = {
+    downloads: function (a) {
+      if (!a.downloads) return null;
+      return '<b>' + human(a.downloads) + '</b> 다운로드';
+    },
+    rating: function (a) {
+      if (!a.rating) return null;
+      return '<span class="badge-star">★</span> <b>' + a.rating + '</b>';
+    },
+    reviews: function (a) {
+      if (!a.reviews) return null;
+      return '리뷰 <b>' + human(a.reviews) + '</b>';
+    },
+    countries: function (a) {
+      if (!a.countries || a.countries < 2) return null;   // 한 나라뿐이면 자랑이 아니다
+      return '<b>' + a.countries + '</b>개국';
+    },
+    since: function (a) {
+      var y = yearsSince(a.since);
+      if (!y) return null;
+      return y.nth ? '<b>' + y.nth + '</b>년째' : y.year + '년부터';
+    }
+  };
+
+  fetch('data/apps.json', { cache: 'no-cache' })
+    .then(function (res) { if (!res.ok) throw new Error('no data'); return res.json(); })
+    .then(function (data) {
+      var by = {};
+      ((data && data.apps) || []).forEach(function (a) { by[a.id] = a; });
+
+      Array.prototype.forEach.call(slots, function (el) {
+        var app = by[el.getAttribute('data-app')];
+        if (!app) return;
+
+        var order = app.badges || ['downloads', 'rating', 'reviews', 'countries', 'since'];
+        var made = [];
+        order.forEach(function (k) {
+          var fn = BADGE[k];
+          var body = fn && fn(app);
+          if (body) made.push(body);
+        });
+        if (!made.length) return;   // 채울 게 하나도 없으면 줄 자체를 만들지 않는다
+
+        el.innerHTML = made.map(function (b, i) {
+          return '<span class="badge' + (i === 0 ? ' is-lead' : '') + '">' + b + '</span>';
+        }).join('');
+        el.hidden = false;
+
+        if (app.name) el.setAttribute('aria-label', esc(app.name) + ' 스토어 기록');
+      });
+    })
+    .catch(function () { /* 못 읽으면 배지 없이 둔다 */ });
+})();
+</script>
 
 <footer class="container">
   <div class="footer-quote">— 작은 도구 하나가, 누군가의 막힘을 푼다.</div>
