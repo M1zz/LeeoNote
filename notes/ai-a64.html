@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI를 가지고 공부해도 아무것도 남지 않는 느낌이 드는 이유 — 리이오의 연습장</title>
+<meta name="description" content="오늘 AI에게 몇 번이나 질문하셨나요? 실력이 갈리는 자리는 사용량이 아니라 전송 버튼 앞의 10초였습니다.">
+<meta property="og:title" content="AI를 가지고 공부해도 아무것도 남지 않는 느낌이 드는 이유">
+<meta property="og:description" content="오늘 AI에게 몇 번이나 질문하셨나요?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/ai-a64.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-h1 {
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 전이 A / 전이 B */
+  .shift { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 1.4rem 0 1.6rem; }
+  @media (max-width: 620px) { .shift { grid-template-columns: 1fr; } }
+  .shift-card {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.3rem 1.35rem;
+  }
+  .shift-card.is-mine { border-color: var(--ink); border-width: 2px; }
+  .shift-tag {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.55rem;
+  }
+  .shift-card.is-mine .shift-tag { color: var(--ink); }
+  .shift-move { font-size: 0.98rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .shift-desc { font-size: 0.86rem; color: var(--ink-faint); line-height: 1.7; }
+  .shift-who {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    background: var(--paper-warm);
+    border-radius: 100px;
+    padding: 0.18rem 0.6rem;
+  }
+  .shift-card.is-mine .shift-who { background: var(--ink); color: #fff; }
+
+  /* 네 가지 질문 */
+  .qs { list-style: none; padding: 0; margin: 1rem 0 1.4rem; }
+  .qs li {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0 0.9rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .qs li:last-child { border-bottom: none; }
+  .qs .n { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.35rem; }
+  .qs .q { font-size: 0.99rem; font-weight: 700; color: var(--ink); line-height: 1.6; }
+  .qs .d { display: block; font-size: 0.85rem; font-weight: 400; color: var(--ink-faint); line-height: 1.7; margin-top: 0.25rem; }
+  .qs-when {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 1.6rem 0 0.2rem;
+  }
+
+  /* 원문으로 */
+  .nt-origin {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.7rem 1.8rem;
+    margin: 2.6rem 0 0;
+    background: var(--paper-warm);
+  }
+  .nt-origin-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.6rem;
+  }
+  .nt-origin p { font-size: 0.93rem; color: var(--ink-faint); line-height: 1.75; margin-bottom: 1.1rem; }
+  .nt-origin-go {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .nt-origin-go:hover { color: #fff; border: none; opacity: 0.85; }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>학습과 성장에 대한 고찰</span>
+      <span class="badge">정리됨</span>
+      <span>2026-08</span>
+    </div>
+    <h1 class="nt-h1">AI를 가지고 공부해도<br>아무것도 남지 않는 느낌이 드는 이유</h1>
+    <p class="nt-lede">
+      오늘 AI에게 몇 번이나 질문하셨나요? 그 횟수는 실력과 거의 상관이 없었습니다.
+      갈리는 자리는 사용량이 아니라 <b>전송 버튼을 누르기 전 10초</b>였습니다.
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>분명히 하루 종일 붙들고 있었는데, 저녁에 남는 게 없는 날이 있습니다. 막힌 데마다 물었고 매번 답을 받았고 코드도 돌아갔는데, 다음 날 같은 자리에서 또 막힙니다. 시간을 안 쓴 게 아니어서 더 이상합니다.</p>
+
+    <p>그래서 <b>AI를 얼마나 쓰는가</b>를 의심하다가, 그게 아니라 <b>어떤 구조로 주고받는가</b>가 문제라는 쪽으로 생각이 옮겨 갔습니다. 같은 도구가 어떤 사람에게는 실력을 갉아먹고 어떤 사람에게는 최고의 학습 장치가 되는데, 그 차이가 사용량으로는 전혀 설명되지 않았습니다.</p>
+
+    <h2>왜 남지 않는가</h2>
+
+    <p>남지 않는 이유를 두 가지로 정리했습니다.</p>
+
+    <ul>
+      <li><b>인지 부채</b> — MIT 미디어랩 연구에서, AI의 도움을 받아 글을 쓴 참가자들은 방금 자기가 쓴 글의 내용을 잘 기억하지 못했습니다. 결과물은 남는데 기억은 안 남습니다.</li>
+      <li><b>설명 깊이의 착각</b> — 유창한 설명을 읽는 동안 뇌는 “이해에 접근할 수 있음”과 “이해하고 있음”을 구분하지 못합니다. 다 알아들었다는 감각은 진짜인데, 그 감각이 앎은 아닙니다.</li>
+    </ul>
+
+    <p>이건 감상이 아니라 실험으로도 갈립니다. 터키 고등학생 대상 수학 실험(Bastani 외, 2024)에서 <b>답을 바로 주는 AI</b>를 쓴 그룹은 연습 성적은 올랐지만 시험에서는 AI를 아예 못 쓴 학생들보다 오히려 성적이 낮았습니다. 그런데 <b>힌트와 질문으로 이끄는 튜터형 AI</b>를 쓴 그룹에서는 그 부작용이 사라졌습니다. 도구가 같아도 상호작용 구조가 결과를 뒤집습니다.</p>
+
+    <div class="callout">
+      <div class="callout-label">틀리는 게 손해가 아닌 이유</div>
+      답을 보기 전에 먼저 꺼내 보는 시도는 다시 읽는 것보다 장기 기억에 훨씬 효과적입니다(인출 연습).
+      게다가 <b>확신을 갖고 틀렸을 때 그 오류는 오히려 더 잘 교정되고 더 오래 남습니다</b>(과잉교정 효과).
+      먼저 답하고 틀리는 10초가 비용이 아니라 이득인 자리입니다.
+    </div>
+
+    <h2>AI가 공짜로 만든 것은 절반뿐입니다</h2>
+
+    <p>배움을 두 번의 전이로 나눠 보면 이 이야기가 한 번에 정리됩니다.</p>
+
+    <div class="shift">
+      <div class="shift-card">
+        <div class="shift-tag">전이 B</div>
+        <div class="shift-move">빈칸 → 앎</div>
+        <div class="shift-desc">모르는 것을 아는 상태에서, 아는 상태로. 무지의 해소.</div>
+        <span class="shift-who">AI가 거의 공짜로 만들어 줌</span>
+      </div>
+      <div class="shift-card is-mine">
+        <div class="shift-tag">전이 A</div>
+        <div class="shift-move">안개 → 빈칸</div>
+        <div class="shift-desc">모르는지도 모르는 상태에서, 모르는 것을 아는 상태로. 무지의 발견.</div>
+        <span class="shift-who">여전히 내 몫</span>
+      </div>
+    </div>
+
+    <p>AI가 싸게 만든 건 전이 B입니다. 빈칸이 정해져 있으면 채우는 건 이제 거의 비용이 들지 않습니다. 그런데 <b>어디가 빈칸인지 알아내는 일</b>은 그대로 남아 있습니다. 아무것도 안 남는 느낌은 대개 전이 B만 잔뜩 하고 전이 A는 한 번도 하지 않은 날에 옵니다.</p>
+
+    <p>이 사이트에서 <a href="../learning-design/triangulation.html">삼각측량</a>이 다루는 게 정확히 전이 A입니다 — 무엇부터 배울지 정하는 능력, 그리고 AI에게 넘겨도 되는 경계가 어디까지인지.</p>
+
+    <h2>그래서 전송 버튼 앞에서 묻는 네 가지</h2>
+
+    <p>실천은 이 네 문장이 전부입니다. 도구를 바꾸는 게 아니라 주고받는 순서를 바꿉니다.</p>
+
+    <div class="qs-when">묻기 전</div>
+    <ul class="qs">
+      <li>
+        <span class="n">01</span>
+        <span class="q">내 답은 무엇인가?
+          <span class="d">틀려도 됩니다. 오히려 확신을 갖고 틀릴수록 교정이 오래 남습니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span class="q">AI는 뭐라고 답할 것 같은가?
+          <span class="d">예측을 적어 두면 받은 답이 채점지가 됩니다.</span>
+        </span>
+      </li>
+    </ul>
+
+    <div class="qs-when">받은 후</div>
+    <ul class="qs">
+      <li>
+        <span class="n">03</span>
+        <span class="q">내 답과 AI의 답은 어디서 갈라졌는가?
+          <span class="d">갈라진 그 지점이 오늘 배운 것의 전부입니다. 나머지는 이미 알던 것입니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <span class="q">그래서 다음 질문은 무엇인가?
+          <span class="d">여기서 다음 고리가 걸립니다. 안 걸리면 그 세션은 거기서 끝입니다.</span>
+        </span>
+      </li>
+    </ul>
+
+    <p>이 네 박자는 새로 만든 게 아니라 <a href="../framework.html">질문고리 학습</a>의 <b>질문 → 가설 → 탐구 → 델타</b>를 AI 대화 한 번에 그대로 축소해 놓은 것입니다. 03이 델타이고, 04가 다음 질문입니다.</p>
+
+    <h3>실제로 거는 장치</h3>
+
+    <ul>
+      <li><b>10초 규칙</b> — AI에게 묻기 전에 내 답을 먼저 적습니다. 완성이 아니라 한 줄이면 됩니다.</li>
+      <li><b>안개 걷기 질문</b> — “이 주제에서 초보가 <em>모르는지도 모르는</em> 개념들의 지도를 그려 줘.” 전이 A를 AI에게 시키는 유일하게 정당한 방법입니다.</li>
+      <li><b>튜터 모드 선언</b> — “답을 바로 주지 말고, 내가 스스로 찾도록 힌트와 질문만 줘.” 터키 실험에서 부작용을 지운 그 설정입니다.</li>
+      <li><b>회고 기록</b> — 세션이 끝나면 AI 없이 다섯 줄로 요약합니다. 못 쓰면 안 배운 겁니다. 서식은 <a href="../learning-design/yajang.html">야장</a>에 있습니다.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">한 번에 다 하지 않기</div>
+      모든 질문에 이걸 걸면 하루도 못 갑니다. <b>하루에 딱 하나의 질문만 수련으로 지정</b>하세요.
+      나머지는 평소대로 빠르게 물어도 됩니다.
+    </div>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        격차의 원인은 AI 사용량이 아니라 <b>전송 버튼 앞의 10초</b>에 있습니다.
+        AI가 싸게 만들어 준 건 빈칸을 채우는 일(전이 B)이고, 어디가 빈칸인지 알아내는 일(전이 A)은 여전히 내 몫입니다.
+        같은 도구를 쓰는 사람들 사이에서 1년 뒤 실력이 갈리는 이유가 여기 있다고 봅니다.
+      </div>
+    </div>
+
+    <div class="nt-origin">
+      <div class="nt-origin-label">원문</div>
+      <p>
+        이 노트는 Substack에 실은 글의 뼈대를 정리해 둔 것입니다.
+        연구 인용과 실제 대화 예시를 포함한 전체 글은 원문에 있습니다.
+      </p>
+      <a class="nt-origin-go" href="https://leeo25.substack.com/p/ai-a64" target="_blank" rel="noopener">Substack에서 전체 글 읽기 ↗</a>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-08</div>
+        <div class="what">Substack 원문을 쓰고, 사이트에는 링크만 걸어 두었음.</div>
+      </li>
+      <li>
+        <div class="when">2026-09</div>
+        <div class="what">밖으로 바로 내보내는 대신 노트를 따로 세움. 네 가지 질문을 <b>질문고리</b>의 축소판으로 다시 묶었습니다 — 별도의 학습법을 하나 더 두지 않기 위해서.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 고찰 목록으로</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

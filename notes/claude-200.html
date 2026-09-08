@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>클로드에 200만원 쏟아붓고 탕진하며 배운 것 — 리이오의 연습장</title>
+<meta name="description" content="7개월, 200만원, 앱 40개. 남은 건 앱 목록이 아니라 네 개의 문장이었습니다.">
+<meta property="og:title" content="클로드에 200만원 쏟아붓고 탕진하며 배운 것">
+<meta property="og:description" content="7개월, 200만원, 앱 40개. 남은 건 네 개의 문장이었습니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/claude-200.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-kicker .badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
+  .nt-h1 {
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 번호 목록 */
+  .les { list-style: none; padding: 0; margin: 1.2rem 0 1.4rem; }
+  .les li {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 0.9rem;
+    padding: 1.05rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .les li:last-child { border-bottom: none; }
+  .les .n { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.32rem; }
+  .les .t { display: block; font-size: 1rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.55; }
+  .les .d { display: block; font-size: 0.88rem; color: var(--ink-faint); line-height: 1.75; margin-top: 0.35rem; }
+
+  /* 카드 나열 */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.3rem 0 1.6rem; }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } }
+  .cards.is-two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 620px) { .cards.is-two { grid-template-columns: 1fr; } }
+  .card {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.2rem 1.25rem;
+  }
+  .card.is-mine { border-color: var(--ink); border-width: 2px; }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .card.is-mine .card-tag { color: var(--ink); }
+  .card-t { font-size: 0.96rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.45; margin-bottom: 0.45rem; }
+  .card-d { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.7; }
+
+  /* 원문으로 */
+  .nt-origin {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.7rem 1.8rem;
+    margin: 2.6rem 0 0;
+    background: var(--paper-warm);
+  }
+  .nt-origin-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.6rem;
+  }
+  .nt-origin p { font-size: 0.93rem; color: var(--ink-faint); line-height: 1.75; margin-bottom: 1.1rem; }
+  .nt-origin-go {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .nt-origin-go:hover { color: #fff; border: none; opacity: 0.85; }
+  .nt-origin-sub {
+    display: inline-block;
+    margin-left: 0.6rem;
+    font-size: 0.84rem;
+    color: var(--ink-faint);
+  }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>일에 대한 고찰</span>
+      <span class="badge">정리됨</span>
+      <span>2026-08</span>
+    </div>
+    <h1 class="nt-h1">클로드에 200만원 쏟아붓고<br>탕진하며 배운 것</h1>
+    <p class="nt-lede">
+      7개월 동안 Claude에 200만원을 쓰고 앱을 40개 만들었습니다.
+      남은 건 앱 목록이 아니라 <b>네 개의 문장</b>이었습니다.
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>40개쯤 만들면 뭔가 남을 줄 알았습니다. 실제로 남은 건 포트폴리오가 아니라 <b>같은 자리에서 반복해 틀렸다는 기록</b>이었습니다. 그 기록을 줄이면 네 줄이 됩니다.</p>
+
+    <ul class="les">
+      <li>
+        <span class="n">01</span>
+        <span>
+          <span class="t">목표와 방법이 어긋나는 순간, 아주 쉽게 길을 잃는다</span>
+          <span class="d">저는 축적형 성장을 목표로 걸어 두고, 부러워하는 건 늘 폭발적 성공이었습니다. 매일 쌓는 방식을 골랐다면 대볼 사람도 쌓아 온 사람이어야 합니다. 자를 잘못 들면 잘 가고 있어도 지는 기분이 듭니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span>
+          <span class="t">앱마다 사용자의 삶에서 앉는 자리가 다르다</span>
+          <span class="d">계산기는 지우지 않고 평생 쓰는 도구고, 한 철 즐기는 오락 앱은 즐기고 지우는 게 정상입니다. 생명주기도 성장 곡선도 처음부터 다릅니다. 그런데 저는 둘을 같은 자로 재고 둘 다 실패했다고 적었습니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <span>
+          <span class="t">누구를 위한 건지 나조차 모르겠다면, 손을 멈추라는 신호다</span>
+          <span class="d">막연한 대중은 사용자가 아닙니다. 대상이 흐린 채로 만드는 손만 빨라지면, 흐린 것이 더 빨리 많아질 뿐입니다. 40개는 그 속도의 증거였습니다.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <span>
+          <span class="t">구현은 전달의 아주 작은 일부다</span>
+          <span class="d">AI가 줄여 준 건 구현 시간이지 전달의 난이도가 아닙니다. 빨리 만들 수 있다는 사실은 닿을 수 있다는 뜻이 전혀 아니었습니다. 200만원으로 산 건 결국 이 문장 하나입니다.</span>
+        </span>
+      </li>
+    </ul>
+
+    <h2>그래서 방향을 바꿨습니다</h2>
+
+    <p>세상을 바꾸겠다고 출발하는 대신 <b>나에서 출발해 세상에 닿는</b> 쪽으로 바꿨습니다. 거창해서가 아니라, 내가 실제로 겪은 불편은 대상이 이미 정해져 있기 때문입니다. 03을 통과한 상태에서 시작하는 셈입니다.</p>
+
+    <p>대상을 판정 가능하게 세우는 절차는 <a href="../learning-design/malttuk.html">첫 말뚝</a>에, 어디서 멈출지를 미리 정해 두는 형식은 <a href="../no-fail.html#gate1">망하지 않기 Gate 1</a>에 적어 두었습니다. 둘 다 이 네 문장을 겪고 나서 형태가 굳은 것들입니다.</p>
+
+    <div class="callout">
+      <div class="callout-label">지금 붙들고 있는 질문</div>
+      지금 만들고 있는 것이 <b>누구의 시간 속에, 어떤 자리에</b> 들어가길 바라시나요?
+      이 질문에 한 문장으로 답이 안 나오면, 저는 이제 코드를 더 쓰지 않고 그 문장부터 씁니다.
+    </div>
+
+    <p>이 회고 다음에 붙은 게 <a href="carrying-capacity.html">나의 앱은 몇 명까지 담을 수 있었나</a>입니다. 04를 알고 나서 그럼 전달은 어떻게 재는가로 넘어간 자리예요.</p>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        200만원은 앱 40개를 산 값이 아니라 <b>네 문장을 산 값</b>입니다.
+        더 싸게 살 수 있었느냐고 물으면, 아마 아니라고 답하겠습니다 —
+        네 개 다 제가 직접 40번 틀리고 나서야 믿게 된 것들이라서요.
+        다만 다음 사람은 40번까지 갈 필요가 없기를 바라며 적어 둡니다.
+      </div>
+    </div>
+
+    <div class="nt-origin">
+      <div class="nt-origin-label">원문</div>
+      <p>
+        이 노트는 Substack에 실은 회고의 뼈대만 정리한 것입니다.
+        어떤 앱에서 무엇이 어떻게 어긋났는지, 비용을 어디에 얼마나 썼는지는 원문에 있습니다.
+      </p>
+      <a class="nt-origin-go" href="https://leeo25.substack.com/p/200?r=7dpffj" target="_blank" rel="noopener">Substack에서 전체 글 읽기 ↗</a>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-08</div>
+        <div class="what">Substack 원문을 씀.</div>
+      </li>
+      <li>
+        <div class="when">2026-09</div>
+        <div class="what">사이트에 노트로 옮기며 네 문장으로 줄임. <b>04(구현은 전달의 일부)</b>가 나머지 셋을 낳은 뿌리라는 걸 정리하면서 알았습니다.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 고찰 목록으로</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

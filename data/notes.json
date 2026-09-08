@@ -14,9 +14,47 @@
       "name": "학습과 성장에 대한 고찰",
       "icon": "🌱",
       "desc": "배우는 방식, 쌓이는 방식, 안 쌓이는 이유."
+    },
+    {
+      "id": "making",
+      "name": "만든 것에 대한 고찰",
+      "icon": "🧰",
+      "desc": "왜 이걸 만들었는가. 도구 하나가 생긴 이유와, 그 뒤에 남은 생각."
+    },
+    {
+      "id": "access",
+      "name": "접근성에 대한 고찰",
+      "icon": "🚪",
+      "desc": "혁신은 접근성을 높이는 데서 나온다고 생각합니다. 문턱을 없애면 누가 더 들어오는가."
     }
   ],
   "notes": [
+    {
+      "id": "carrying-capacity",
+      "title": "나의 앱은 몇 명까지 담을 수 있었나",
+      "category": "work",
+      "date": "2026.09",
+      "status": "thinking",
+      "summary": "광고는 성장 엔진을 세게 돌리는 일이고, 개선은 제약을 없애는 일입니다.",
+      "file": "notes/carrying-capacity.html",
+      "tags": [
+        "만들기",
+        "지표"
+      ]
+    },
+    {
+      "id": "claude-200",
+      "title": "클로드에 200만원 쏟아붓고 탕진하며 배운 것",
+      "category": "work",
+      "date": "2026.08",
+      "status": "settled",
+      "summary": "7개월, 200만원, 앱 40개. 남은 건 앱 목록이 아니라 네 개의 문장이었습니다.",
+      "file": "notes/claude-200.html",
+      "tags": [
+        "AI",
+        "만들기"
+      ]
+    },
     {
       "id": "failure-curriculum",
       "title": "실패를 공개하는 커리큘럼",
@@ -35,11 +73,37 @@
       "category": "growth",
       "date": "2026.08",
       "status": "settled",
-      "summary": "오늘 AI에게 몇 번이나 질문하셨나요?",
-      "file": "https://leeo25.substack.com/p/ai-a64",
-      "source": "Substack",
+      "summary": "오늘 AI에게 몇 번이나 질문하셨나요? 갈리는 자리는 사용량이 아니라 전송 버튼 앞의 10초였습니다.",
+      "file": "notes/ai-a64.html",
       "tags": [
-        "AI"
+        "AI",
+        "학습"
+      ]
+    },
+    {
+      "id": "clipkeyboard-system",
+      "title": "의지가 부족한 게 아니라 시스템이 없었다",
+      "category": "making",
+      "date": "2026.08",
+      "status": "settled",
+      "summary": "계좌번호 하나 보내는 데 42초. 그중 타이핑 시간은 거의 없었습니다.",
+      "file": "notes/clipkeyboard-system.html",
+      "tags": [
+        "도구",
+        "만들기"
+      ]
+    },
+    {
+      "id": "hands-free-metronome",
+      "title": "손을 쓰지 않는 메트로놈, 그리고 모두를 위한 앱",
+      "category": "access",
+      "date": "2026.06",
+      "status": "settled",
+      "summary": "접근성은 장애가 있는 사람을 위해 기능을 하나 더 붙이는 일이 아니었습니다.",
+      "file": "notes/hands-free-metronome.html",
+      "tags": [
+        "접근성",
+        "만들기"
       ]
     }
   ],

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>손을 쓰지 않는 메트로놈, 그리고 모두를 위한 앱 — 리이오의 연습장</title>
+<meta name="description" content="접근성은 장애가 있는 사람을 위해 기능을 하나 더 붙이는 일이 아니었습니다.">
+<meta property="og:title" content="손을 쓰지 않는 메트로놈, 그리고 모두를 위한 앱">
+<meta property="og:description" content="한 사람의 작은 불편을 파고들면 더 많은 사람을 위한 문이 열립니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/hands-free-metronome.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-kicker .badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
+  .nt-h1 {
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 번호 목록 */
+  .les { list-style: none; padding: 0; margin: 1.2rem 0 1.4rem; }
+  .les li {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 0.9rem;
+    padding: 1.05rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .les li:last-child { border-bottom: none; }
+  .les .n { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.32rem; }
+  .les .t { display: block; font-size: 1rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.55; }
+  .les .d { display: block; font-size: 0.88rem; color: var(--ink-faint); line-height: 1.75; margin-top: 0.35rem; }
+
+  /* 카드 나열 */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.3rem 0 1.6rem; }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } }
+  .cards.is-two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 620px) { .cards.is-two { grid-template-columns: 1fr; } }
+  .card {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.2rem 1.25rem;
+  }
+  .card.is-mine { border-color: var(--ink); border-width: 2px; }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .card.is-mine .card-tag { color: var(--ink); }
+  .card-t { font-size: 0.96rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.45; margin-bottom: 0.45rem; }
+  .card-d { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.7; }
+
+  /* 원문으로 */
+  .nt-origin {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.7rem 1.8rem;
+    margin: 2.6rem 0 0;
+    background: var(--paper-warm);
+  }
+  .nt-origin-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.6rem;
+  }
+  .nt-origin p { font-size: 0.93rem; color: var(--ink-faint); line-height: 1.75; margin-bottom: 1.1rem; }
+  .nt-origin-go {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .nt-origin-go:hover { color: #fff; border: none; opacity: 0.85; }
+  .nt-origin-sub {
+    display: inline-block;
+    margin-left: 0.6rem;
+    font-size: 0.84rem;
+    color: var(--ink-faint);
+  }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+  /* 문이 열리는 순서 */
+  .door { list-style: none; padding: 0; margin: 1.3rem 0 1.5rem; }
+  .door li {
+    position: relative;
+    padding: 0 0 1.4rem 1.7rem;
+    border-left: 2px solid var(--paper-deep);
+    margin-left: 0.35rem;
+  }
+  .door li:last-child { padding-bottom: 0; border-left-color: transparent; }
+  .door li::before {
+    content: '';
+    position: absolute;
+    left: -0.42rem;
+    top: 0.42rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--ink-mute);
+  }
+  .door li.is-mine::before { background: var(--ink); border-color: var(--ink); }
+  .door .who { font-size: 0.96rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+  .door .what { display: block; font-size: 0.88rem; color: var(--ink-faint); line-height: 1.75; margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>접근성에 대한 고찰</span>
+      <span class="badge">정리됨</span>
+      <span>2026-06</span>
+    </div>
+    <h1 class="nt-h1">손을 쓰지 않는 메트로놈,<br>그리고 모두를 위한 앱</h1>
+    <p class="nt-lede">
+      악기를 들고 있으면 메트로놈을 못 만집니다. 그래서 손을 안 대고 쓰는 메트로놈을 만들었습니다.
+      만들고 나서야 알았습니다 — <b>접근성은 기능을 하나 더 붙이는 일이 아니었습니다.</b>
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>연습하다가 템포를 바꾸려면 매번 악기를 내려놓아야 했습니다. 몇 초짜리 일인데, 그 몇 초에 흐름이 끊깁니다. 그래서 <b>손을 안 대고 쓰는 메트로놈</b>을 만들기로 하고, 모든 조작을 음성으로 하도록 설계했습니다.</p>
+
+    <p>여기까지는 제 불편이었습니다. 만드는 중에 질문이 하나 끼어들었습니다 — <b>한 팔이 불편한 사람은 지금 메트로놈을 어떻게 쓰고 있을까.</b></p>
+
+    <h2>접근성은 덧붙이는 게 아니었습니다</h2>
+
+    <p>그전까지 저에게 접근성은 <b>기능을 하나 더 붙이는 일</b>이었습니다. 다 만들어 놓고 마지막에 레이블을 달고 대비를 올리는, 체크리스트의 마지막 줄 같은 것.</p>
+
+    <p>그런데 이 앱에서는 순서가 반대였습니다. 손을 안 쓰게 만든 건 접근성을 위해서가 아니라 <b>제가 악기를 들고 있어서</b>였는데, 결과적으로 손을 못 쓰는 사람도 쓸 수 있는 앱이 됐습니다. 나중에 붙인 게 아니라 <b>설계가 단순해서 자동으로 그렇게 된 것</b>입니다.</p>
+
+    <ul class="door">
+      <li class="is-mine">
+        <span class="who">악기를 든 사람</span>
+        <span class="what">출발점. 한 사람의 작은 불편이었습니다.</span>
+      </li>
+      <li>
+        <span class="who">한 팔이 불편한 사람</span>
+        <span class="what">따로 만들지 않았는데 문이 열렸습니다.</span>
+      </li>
+      <li>
+        <span class="who">손이 젖어 있거나, 무언가를 들고 있거나, 거리가 먼 사람</span>
+        <span class="what">상황 때문에 잠깐 손을 못 쓰는 모든 경우.</span>
+      </li>
+    </ul>
+
+    <p>아래로 갈수록 사람이 늘어나는데, 제가 한 일은 맨 위 하나뿐입니다. <b>혁신은 대개 여기서 나온다고 생각합니다</b> — 새로운 걸 얹어서가 아니라, 문턱을 하나 없애서요. 문턱이 사라지면 그 문턱 때문에 안 들어오던 사람이 다 들어옵니다.</p>
+
+    <div class="callout">
+      <div class="callout-label">뒤집힌 순서</div>
+      다 만들고 나서 접근성을 붙이면 <b>비용</b>이 됩니다.
+      단순하게 만들려고 하다 보면 접근성은 <b>결과</b>로 따라옵니다.
+      제가 한 건 후자인데, 의도해서가 아니라 운이 좋아서였습니다. 다음엔 의도해서 하려고 이 노트를 적어 둡니다.
+    </div>
+
+    <h2>AI가 대신해 주지 않은 자리</h2>
+
+    <p>이 앱을 만드는 동안 생성형 AI는 제 손과 속도를 몇 배로 늘려 줬습니다. 그런데 <b>무엇을 만들지, 누구를 위해 만들지, 어디까지 품을지</b>를 정하는 일은 끝까지 제 몫이었습니다.</p>
+
+    <p>"한 팔이 불편한 사람은 어떻게 쓰지"라는 질문은 AI가 먼저 해 주지 않았습니다. 제가 묻기 전까지는 없는 질문이었어요. 이건 <a href="ai-a64.html">AI를 가지고 공부해도 아무것도 남지 않는 느낌</a>에서 적은 전이 A — 모르는지도 모르는 것을 찾아내는 일 — 와 같은 자리입니다. 만드는 일에서도 그 칸은 그대로 사람에게 남습니다.</p>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        <b>한 사람의 작은 불편을 진지하게 파고들면 더 많은 사람을 위한 문이 열립니다.</b>
+        접근성을 별도 기능으로 두는 대신 설계를 단순하게 미는 쪽이,
+        결과적으로 더 많은 사람을 품었습니다.
+        앞으로도 이 순서로 만들려고 합니다 — 모두를 위해 만들려 하기보다, 한 사람의 문턱을 정확히 없애는 쪽으로.
+      </div>
+    </div>
+
+    <div class="nt-origin">
+      <div class="nt-origin-label">원문</div>
+      <p>
+        이 노트는 Substack에 실은 글의 뼈대만 정리한 것입니다.
+        음성 조작을 실제로 어떻게 설계했는지와 앱 링크는 원문에 있습니다.
+      </p>
+      <a class="nt-origin-go" href="https://leeo25.substack.com/p/5e5?r=7dpffj" target="_blank" rel="noopener">Substack에서 전체 글 읽기 ↗</a>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-06</div>
+        <div class="what">Substack 원문을 씀.</div>
+      </li>
+      <li>
+        <div class="when">2026-09</div>
+        <div class="what">사이트 노트로 옮기며 <b>문이 열리는 순서</b>를 그림으로 정리했습니다. 접근성을 마지막에 붙이면 비용이고 처음부터 단순하게 밀면 결과라는 대비도 이때 적었습니다.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 고찰 목록으로</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>
