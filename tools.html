@@ -197,31 +197,42 @@
     line-height: 1.7;
   }
 
-  /* ── 앱 배지 (data/apps.json 에서 채운다) ───────── */
-  .tool-badges {
+  /* ── 앱 기록 (data/apps.json 에서 채운다) ───────────
+     알약이 아니라 숫자판이다. 알약은 이 사이트에서 '누를 수 있는 것'의
+     모양이라(생각 페이지의 태그 칩), 사실을 알약으로 그리면 필터로 읽힌다. */
+  .tool-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem;
-    margin: 0.75rem 0 0;
+    align-items: flex-end;
+    gap: 0 1.5rem;
+    margin: 0.9rem 0 0;
+    padding: 0.75rem 0 0.7rem;
+    border-top: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
   }
-  .tool-badges[hidden] { display: none; }
-  .badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.63rem;
-    letter-spacing: 0.05em;
-    line-height: 1;
-    padding: 0.32rem 0.6rem;
-    border-radius: 100px;
-    border: 1px solid var(--paper-deep);
-    color: var(--ink-faint);
+  .tool-stats[hidden] { display: none; }
+  .stat { line-height: 1.15; }
+  .stat-v {
+    font-size: 1.22rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    display: block;
     white-space: nowrap;
   }
-  .badge b { font-weight: 700; color: var(--ink-soft); }
-  /* 가장 세게 말할 수 있는 하나만 채운다 */
-  .badge.is-lead { background: var(--ink); border-color: var(--ink); color: rgba(255,255,255,0.72); }
-  .badge.is-lead b { color: #fff; }
-  .badge-star { color: var(--ink-mute); }
-  .badge.is-lead .badge-star { color: rgba(255,255,255,0.6); }
+  .stat-v .unit { font-size: 0.78rem; font-weight: 700; margin-left: 0.06em; }
+  .stat-v .star { color: var(--ink-soft); margin-right: 0.06em; }
+  .stat-k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    display: block;
+    margin-top: 0.3rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 420px) { .tool-stats { gap: 0.9rem 1.15rem; } }
+
 </style>
 </head>
 <body>
@@ -261,7 +272,7 @@
       <a href="#reduce">머리에서 덜어내기 <span>2</span></a>
       <a href="#plan">복잡한 계획 세우기 <span>1</span></a>
       <a href="#see">안 보이는 걸 보기 <span>1</span></a>
-      <a href="#catch">놓치지 않기 <span>1</span></a>
+      <a href="#catch">실제 시간 아끼기 <span>1</span></a>
       <a href="#start">처음 시작하기 <span>0</span></a>
       <a href="#check">내 상태 확인하기 <span>0</span></a>
       <a href="#play">딴짓할 자리 <span>0</span></a>
@@ -278,7 +289,7 @@
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">⌨️</span>ClipKeyboard</div>
           <div class="tool-desc">자주 쓰는 문구를 머리에 담아두지 않게. 키보드에서 바로 꺼내 쓰는 커스텀 키보드.</div>
-          <div class="tool-badges" data-app="clipkeyboard" hidden></div>
+          <div class="tool-stats" data-app="clipkeyboard" hidden></div>
 
           <div class="tool-read">
             <div class="tool-read-k">먼저 읽고 가세요</div>
@@ -306,7 +317,7 @@
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">🖥</span>탭클립키보드</div>
           <div class="tool-desc">같은 것을 맥에서. 아이폰에 담아 둔 문구가 메뉴바에 그대로 있습니다.</div>
-          <div class="tool-badges" data-app="tapclipkeyboard" hidden></div>
+          <div class="tool-stats" data-app="tapclipkeyboard" hidden></div>
 
           <div class="tool-read tool-read--inline">
             <div class="tool-read-k">같은 이유로 만들었습니다</div>
@@ -340,7 +351,7 @@
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">🌈</span>무지개 공방</div>
           <div class="tool-desc">한 주를 요일과 시간대로 짜는 작업대. 할 일을 끌어다 요일에 놓으면 계획 블록이 됩니다.</div>
-          <div class="tool-badges" data-app="weekblocks" hidden></div>
+          <div class="tool-stats" data-app="weekblocks" hidden></div>
 
           <div class="tool-read tool-read--inline">
             <div class="tool-read-k">왜 만들었냐면</div>
@@ -374,7 +385,7 @@
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">📊</span>욕망의 무지개</div>
           <div class="tool-desc">일정이 겹칠수록 색이 진해지는 주간 밀도 뷰. 5분이 났을 때 집을 수 있는 단계 하나를 위젯이 내밉니다.</div>
-          <div class="tool-badges" data-app="schedule-density" hidden></div>
+          <div class="tool-stats" data-app="schedule-density" hidden></div>
 
           <div class="tool-read tool-read--inline">
             <div class="tool-read-k">왜 만들었냐면</div>
@@ -402,15 +413,15 @@
     <div class="phase" id="catch">
       <div class="phase-head">
         <span class="phase-num">04</span>
-        <span class="phase-name">놓치지 않기</span>
-        <span class="phase-desc">기억력에 기대지 않게</span>
+        <span class="phase-name">실제 시간 아끼기</span>
+        <span class="phase-desc">발표 · 멘토링 세션 시간 아끼기</span>
       </div>
-      <p class="phase-intro">빠뜨리기 쉬운 것을 미리 앞에 놓아 둡니다. 잊어버리는 건 성격 문제가 아니라 구조 문제입니다.</p>
+      <p class="phase-intro">끝나는 시각이 정해진 자리에서 마무리할 여유를 남겨 둡니다. 발표와 멘토링 세션처럼 남의 시간까지 걸려 있는 자리일수록, 끝났다고 알려 주는 건 이미 늦은 알림입니다.</p>
       <div class="tool-grid">
         <div class="tool-card">
           <div class="tool-name"><span class="tool-icon">⏱</span>두번알림</div>
           <div class="tool-desc">끝나고 우는 타이머가 아니라 끝나기 전에 알려주는 타이머. 10분 전, 5분 전에 미리 옵니다.</div>
-          <div class="tool-badges" data-app="rereminder" hidden></div>
+          <div class="tool-stats" data-app="rereminder" hidden></div>
 
           <div class="tool-read tool-read--inline">
             <div class="tool-read-k">왜 만들었냐면</div>
@@ -484,11 +495,11 @@
 </main>
 
 <script>
-// 앱 배지 — data/apps.json 을 읽어 data-app 이 붙은 자리에 채운다.
+// 앱 기록 — data/apps.json 을 읽어 data-app 이 붙은 자리에 숫자판을 그린다.
 // 숫자는 scripts/update-app-stats.py 가 갱신하고, 이 파일은 손대지 않아도 된다.
-// 값이 없는 배지는 조용히 빠진다 — 없는 숫자를 지어내지 않기 위해서.
+// 값이 없는 칸은 조용히 빠진다 — 없는 숫자를 지어내지 않기 위해서.
 (function () {
-  var slots = document.querySelectorAll('.tool-badges[data-app]');
+  var slots = document.querySelectorAll('.tool-stats[data-app]');
   if (!slots.length) return;
 
   var esc = function (s) {
@@ -506,40 +517,42 @@
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  // '2020.12' → 몇 해째인지. 첫해에는 연도만 말한다.
+  // '2020.12' → 몇 해째인지. 두 해가 안 됐으면 출시 연도를 말한다.
   function yearsSince(since) {
     var m = /^(\d{4})[.-](\d{2})$/.exec(String(since || ''));
     if (!m) return null;
     var y = +m[1], mo = +m[2], now = new Date();
     var n = now.getFullYear() - y + (now.getMonth() + 1 >= mo ? 1 : 0);
-    return n >= 2 ? { year: y, nth: n } : { year: y, nth: null };
+    return { year: y, nth: n >= 2 ? n : null };
   }
 
   // 리뷰가 이만큼은 모여야 별점과 리뷰 수를 말한다.
   // 한 명이 준 ★5 는 평점이 아니라 우연이다.
   var MIN_REVIEWS = 5;
 
-  var BADGE = {
+  // 각 칸은 { v: 큰 숫자, u: 숫자에 붙는 단위, k: 밑에 적는 이름 }
+  var STAT = {
     downloads: function (a) {
       if (!a.downloads) return null;
-      return '<b>' + human(a.downloads) + '</b> 다운로드';
+      return { v: human(a.downloads), k: '다운로드' };
     },
     rating: function (a) {
       if (!a.rating || (a.reviews || 0) < MIN_REVIEWS) return null;
-      return '<span class="badge-star">★</span> <b>' + a.rating + '</b>';
+      return { v: '<span class="star">★</span>' + a.rating, k: '평점' };
     },
     reviews: function (a) {
       if (!a.reviews || a.reviews < MIN_REVIEWS) return null;
-      return '리뷰 <b>' + human(a.reviews) + '</b>';
+      return { v: human(a.reviews), k: '리뷰' };
     },
     countries: function (a) {
       if (!a.countries || a.countries < 2) return null;   // 한 나라뿐이면 자랑이 아니다
-      return '<b>' + a.countries + '</b>개국';
+      return { v: a.countries, u: '개국', k: '서비스' };
     },
     since: function (a) {
       var y = yearsSince(a.since);
       if (!y) return null;
-      return y.nth ? '<b>' + y.nth + '</b>년째' : y.year + '년부터';
+      return y.nth ? { v: y.nth, u: '년째', k: '운영' }
+                   : { v: y.year, u: '년', k: '출시' };
     }
   };
 
@@ -556,23 +569,26 @@
         var order = app.badges || ['downloads', 'rating', 'reviews', 'countries', 'since'];
         var made = [];
         order.forEach(function (k) {
-          var fn = BADGE[k];
-          var body = fn && fn(app);
-          if (body) made.push(body);
+          var fn = STAT[k];
+          var got = fn && fn(app);
+          if (got) made.push(got);
         });
         if (!made.length) return;   // 채울 게 하나도 없으면 줄 자체를 만들지 않는다
 
-        // 배지가 하나뿐이면 채우지 않는다 — 약한 사실 하나를 굵게 말하는 꼴이 되니까
-        var lead = made.length > 1;
-        el.innerHTML = made.map(function (b, i) {
-          return '<span class="badge' + (lead && i === 0 ? ' is-lead' : '') + '">' + b + '</span>';
+        el.innerHTML = made.map(function (st) {
+          return '<span class="stat">' +
+                   '<span class="stat-v">' + st.v +
+                     (st.u ? '<span class="unit">' + esc(st.u) + '</span>' : '') +
+                   '</span>' +
+                   '<span class="stat-k">' + esc(st.k) + '</span>' +
+                 '</span>';
         }).join('');
         el.hidden = false;
 
         if (app.name) el.setAttribute('aria-label', esc(app.name) + ' 스토어 기록');
       });
     })
-    .catch(function () { /* 못 읽으면 배지 없이 둔다 */ });
+    .catch(function () { /* 못 읽으면 기록 없이 둔다 */ });
 })();
 </script>
 
