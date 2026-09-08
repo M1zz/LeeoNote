@@ -2,7 +2,7 @@
   "_howto": "도구 페이지의 앱 배지가 읽는 곳입니다. 앱을 늘리려면 apps 에 한 덩어리를 추가하고, tools.html 의 카드에 data-app=\"<id>\" 를 달아 주세요.",
   "_update": "스토어에서 오는 값(rating·reviews·countries·since·version)은 `python3 scripts/update-app-stats.py` 로 갱신됩니다. 손으로 고치지 마세요.",
   "_downloads": "downloads 만 사람이 적습니다. App Store Connect ▸ 판매 및 동향의 누적 '최초 다운로드' 수치이고, 공개 API 에는 없습니다. 아직 없으면 null 로 두면 배지가 그려지지 않습니다.",
-  "_badges": "badges 배열의 순서대로 그립니다. downloads · rating · reviews · countries · since 중에서 고르세요. 값이 없는 배지는 조용히 빠집니다.",
+  "_badges": "badges 배열의 순서대로 그립니다. downloads · rating · reviews · countries · since 중에서 고르세요. 값이 없는 배지는 조용히 빠집니다. 별점과 리뷰 수는 리뷰가 5개는 모여야 나옵니다 (한 명이 준 ★5 는 평점이 아니라 우연이라서). 배지가 하나뿐이면 채우지 않고 테두리로만 그립니다.",
   "apps": [
     {
       "id": "clipkeyboard",
@@ -22,6 +22,80 @@
       "countries": 8,
       "since": "2020.12",
       "version": "5.0.8"
+    },
+    {
+      "id": "tapclipkeyboard",
+      "name": "탭클립키보드",
+      "storeId": "6756433372",
+      "bundleId": "com.ysoup.TokenMemo-tap",
+      "downloads": null,
+      "badges": [
+        "downloads",
+        "rating",
+        "reviews",
+        "countries",
+        "since"
+      ],
+      "reviews": 0,
+      "countries": 0,
+      "since": "2025.12",
+      "version": "5.0.5"
+    },
+    {
+      "id": "weekblocks",
+      "name": "무지개 공방",
+      "storeId": "6777737322",
+      "bundleId": "com.devkoan.ScheduleDensityApp",
+      "downloads": null,
+      "badges": [
+        "downloads",
+        "rating",
+        "reviews",
+        "countries",
+        "since"
+      ],
+      "reviews": 0,
+      "countries": 0,
+      "since": "2026.06",
+      "version": "1.1.0"
+    },
+    {
+      "id": "schedule-density",
+      "name": "욕망의 무지개",
+      "storeId": "6755280882",
+      "bundleId": "com.example.ScheduleDensityApp",
+      "downloads": null,
+      "badges": [
+        "downloads",
+        "rating",
+        "reviews",
+        "countries",
+        "since"
+      ],
+      "rating": 5.0,
+      "reviews": 1,
+      "countries": 1,
+      "since": "2025.11",
+      "version": "1.1.1"
+    },
+    {
+      "id": "rereminder",
+      "name": "두번알림",
+      "storeId": "6752551268",
+      "bundleId": "com.xa.toki",
+      "downloads": null,
+      "badges": [
+        "downloads",
+        "rating",
+        "reviews",
+        "countries",
+        "since"
+      ],
+      "rating": 4.5,
+      "reviews": 11,
+      "countries": 4,
+      "since": "2025.09",
+      "version": "2.2.5"
     }
   ],
   "_checkedAt": "2026-09-08"
