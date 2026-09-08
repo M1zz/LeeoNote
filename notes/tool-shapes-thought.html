@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나라는 개발자가 세상을 바라보는 방식 — 리이오의 연습장</title>
+<meta name="description" content="가장 오래 다룬 도구가 결국 자기 생각의 모양이 됩니다. 저는 사람을 볼 때도 프로토콜로 번역하고 있었습니다.">
+<meta property="og:title" content="나라는 개발자가 세상을 바라보는 방식">
+<meta property="og:description" content="개발자의 작은 비밀 — 세상이 자꾸 코드로 번역됩니다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://m1zz.github.io/LeeoNote/notes/tool-shapes-thought.html">
+<meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/notebook.css">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="../js/analytics.js"></script>
+<style>
+  /* note-only */
+  .nt-head { padding: 4rem 0 2rem; }
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .nt-kicker .badge {
+    border: 1px solid var(--paper-deep);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.08em;
+  }
+  .nt-kicker .badge.is-thinking { border-style: dashed; border-color: var(--ink-mute); }
+  .nt-h1 {
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .nt-lede { font-size: 1.05rem; color: var(--ink-faint); line-height: 1.8; max-width: 42rem; }
+
+  /* 본문 */
+  .nt-body { max-width: 42rem; padding-top: 1rem; }
+  .nt-body h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 2.8rem 0 0.9rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .nt-body h3 { font-size: 1.05rem; font-weight: 800; margin: 1.8rem 0 0.6rem; }
+  .nt-body p { margin-bottom: 1.15rem; line-height: 1.85; }
+  .nt-body ul, .nt-body ol { margin: 0 0 1.15rem 1.2rem; }
+  .nt-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+  /* 번호 목록 */
+  .les { list-style: none; padding: 0; margin: 1.2rem 0 1.4rem; }
+  .les li {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 0.9rem;
+    padding: 1.05rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .les li:last-child { border-bottom: none; }
+  .les .n { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.32rem; }
+  .les .t { display: block; font-size: 1rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.55; }
+  .les .d { display: block; font-size: 0.88rem; color: var(--ink-faint); line-height: 1.75; margin-top: 0.35rem; }
+
+  /* 카드 나열 */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.3rem 0 1.6rem; }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } }
+  .cards.is-two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 620px) { .cards.is-two { grid-template-columns: 1fr; } }
+  .card {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.2rem 1.25rem;
+  }
+  .card.is-mine { border-color: var(--ink); border-width: 2px; }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+  .card.is-mine .card-tag { color: var(--ink); }
+  .card-t { font-size: 0.96rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; line-height: 1.45; margin-bottom: 0.45rem; }
+  .card-d { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.7; }
+
+  /* 원문으로 */
+  .nt-origin {
+    border: 1px solid var(--paper-deep);
+    border-radius: 10px;
+    padding: 1.7rem 1.8rem;
+    margin: 2.6rem 0 0;
+    background: var(--paper-warm);
+  }
+  .nt-origin-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.6rem;
+  }
+  .nt-origin p { font-size: 0.93rem; color: var(--ink-faint); line-height: 1.75; margin-bottom: 1.1rem; }
+  .nt-origin-go {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .nt-origin-go:hover { color: #fff; border: none; opacity: 0.85; }
+  .nt-origin-sub {
+    display: inline-block;
+    margin-left: 0.6rem;
+    font-size: 0.84rem;
+    color: var(--ink-faint);
+  }
+
+  /* 지금 생각은 여기까지 */
+  .nt-sofar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.8rem 1.9rem;
+    margin: 3rem 0 0;
+  }
+  .nt-sofar-label {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.7rem;
+  }
+  .nt-sofar-body { font-size: 0.98rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+  .nt-sofar-body b { color: #fff; }
+
+  /* 갱신 이력 */
+  .nt-log { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .nt-log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9rem;
+  }
+  .nt-log li:last-child { border-bottom: none; }
+  .nt-log .when { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-mute); padding-top: 0.2rem; }
+  .nt-log .what { color: var(--ink-faint); line-height: 1.65; }
+  @media (max-width: 560px) { .nt-log li { grid-template-columns: 1fr; gap: 0.2rem 0; } }
+
+  .nt-back { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; }
+  /* 번역된 세상 */
+  .tr { list-style: none; padding: 0; margin: 1.3rem 0 1.5rem; }
+  .tr li {
+    display: grid;
+    grid-template-columns: 1fr auto 1.15fr;
+    gap: 0.35rem 0.9rem;
+    align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tr li:last-child { border-bottom: none; }
+  .tr .world { font-size: 0.94rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+  .tr .arrow { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-mute); }
+  .tr .code {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    background: var(--paper-warm);
+    border-radius: 5px;
+    padding: 0.3rem 0.55rem;
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+  .tr .why { grid-column: 1 / -1; font-size: 0.85rem; color: var(--ink-faint); line-height: 1.7; }
+  @media (max-width: 620px) {
+    .tr li { grid-template-columns: 1fr; }
+    .tr .arrow { display: none; }
+    .tr .code { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar container">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">
+      리이오의 연습장 <span class="brand-mark">리이오가 배우고 기록으로 발전시키는 곳</span>
+    </a>
+    <nav class="topnav">
+      <a href="../about.html">ABOUT</a>
+      <a href="../thoughts.html" class="active">생각</a>
+      <a href="../frameworks.html">성장 프레임워크</a>
+      <a href="../tools.html">도구</a>
+      <a href="../join.html">직접 만들기</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="container nt-head">
+    <div class="nt-kicker">
+      <span>Note</span>
+      <span>·</span>
+      <span>학습과 성장</span>
+      <span class="badge is-thinking">생각 중</span>
+      <span>2026-04</span>
+    </div>
+    <h1 class="nt-h1">나라는 개발자가<br>세상을 바라보는 방식</h1>
+    <p class="nt-lede">
+      코드를 오래 쓰다 보니, 사람을 볼 때도 자꾸 프로토콜과 열거형으로 번역하고 있었습니다.
+      <b>가장 오래 다룬 도구가 결국 자기 생각의 모양이 됩니다.</b> 개발자의 작은 비밀입니다.
+    </p>
+  </section>
+
+  <section class="container nt-body">
+
+    <p>어느 날부터 자각했습니다. 사람을 만나면 그 사람이 <b>무엇을 하는 존재인지</b>부터 추리고 있다는 걸요. 요리하는 사람을 보면 요리한다는 행위만 남기고 나머지를 지운 다음, 머릿속에서 조용히 타입 하나를 선언하고 있었습니다.</p>
+
+    <ul class="tr">
+      <li>
+        <span class="world">요리사</span>
+        <span class="arrow">→</span>
+        <span class="code">protocol Chef { func cook() }</span>
+        <span class="why">이 사람이 누구인지가 아니라, 무엇을 할 수 있는 존재인지로 줄여 버립니다.</span>
+      </li>
+      <li>
+        <span class="world">변덕스러운 기분</span>
+        <span class="arrow">→</span>
+        <span class="code">[Mood]</span>
+        <span class="why">연속된 감정이 아니라 정해진 경우의 수가 순서대로 늘어선 배열로 보입니다.</span>
+      </li>
+      <li>
+        <span class="world">늘 늦는 친구</span>
+        <span class="arrow">→</span>
+        <span class="code">let arrivalOffset</span>
+        <span class="why">농담의 핵심은 <b>var 가 아니라 let</b> 이라는 데 있습니다. 바뀌지 않으니까요.</span>
+      </li>
+      <li>
+        <span class="world">신뢰</span>
+        <span class="arrow">→</span>
+        <span class="code">(Input) -&gt; Output</span>
+        <span class="why">무엇을 넣으면 무엇이 나오는가. 같은 걸 넣으면 같은 게 나오는가.</span>
+      </li>
+    </ul>
+
+    <h2>도구가 생각의 모양을 만듭니다</h2>
+
+    <p>이게 개발자만의 일은 아닐 겁니다. 오래 요리한 사람은 사람을 재료와 불 조절로 볼 테고, 오래 편집한 사람은 대화를 자를 자리로 볼 겁니다. <b>자기가 가장 오래 다룬 도구가 결국 자기 생각의 모양이 됩니다.</b></p>
+
+    <p>쓸모는 분명합니다. 복잡하게 얽힌 상황에서 반복되는 패턴이 빨리 잡힙니다. 처음 보는 조직도 몇 번 겪으면 어떤 신호가 들어갈 때 어떤 결과가 나오는지가 함수처럼 보이고, 그 예측이 자주 맞습니다.</p>
+
+    <div class="callout">
+      <div class="callout-label">그런데 추상화는</div>
+      남기는 기술이 아니라 <b>지우는 기술</b>입니다.
+      <code>Chef</code> 로 줄이는 순간 그 사람이 왜 요리를 시작했는지, 어떤 날 손이 떨리는지는 타입 밖으로 나갑니다.
+      코드에서는 그게 이득인데, 사람에게 쓰면 <b>지워진 쪽이 대개 중요한 쪽</b>입니다.
+    </div>
+
+    <h2>도구가 나를 바꾸는 두 가지 방향</h2>
+
+    <p>이 노트는 <a href="ai-a64.html">AI를 가지고 공부해도 아무것도 남지 않는 느낌</a>과 정확히 짝입니다. 같은 축의 양 끝이에요.</p>
+
+    <div class="cards is-two">
+      <div class="card">
+        <div class="card-tag">한쪽 끝</div>
+        <div class="card-t">아무것도 안 쌓일 때</div>
+        <div class="card-d">도구가 너무 잘 대답해 줘서 내 안에 아무것도 남지 않는 경우. AI가 그렇습니다.</div>
+      </div>
+      <div class="card is-mine">
+        <div class="card-tag">다른 쪽 끝</div>
+        <div class="card-t">너무 잘 쌓였을 때</div>
+        <div class="card-d">도구가 너무 오래 쌓여서 도구 밖을 못 보게 되는 경우. 코드가 그렇습니다.</div>
+      </div>
+    </div>
+
+    <p>안 쌓이는 것만 문제인 줄 알았는데, 한쪽으로만 쌓이는 것도 같은 종류의 문제였습니다. 둘 다 <b>도구가 나를 어떻게 바꾸는지 안 보고 있었다</b>는 점에서 같습니다.</p>
+
+    <div class="nt-sofar">
+      <div class="nt-sofar-label">지금 생각은 여기까지</div>
+      <div class="nt-sofar-body">
+        번역하는 습관 자체를 버릴 생각은 없습니다. 실제로 잘 맞고, 이걸로 밥을 벌고 있으니까요.
+        다만 <b>번역이 끝난 자리에 무엇이 남았는지를 한 번 더 보려고</b> 합니다.
+        타입으로 줄여 놓고 그게 그 사람의 전부라고 착각하는 순간이 문제인 거지, 줄이는 것 자체가 문제는 아니라고 —
+        지금은 거기까지 왔습니다. 이 문단은 아직 확신이 없어서 <b>생각 중</b>으로 둡니다.
+      </div>
+    </div>
+
+    <div class="nt-origin">
+      <div class="nt-origin-label">원문</div>
+      <p>
+        이 노트는 Substack에 실은 글의 뼈대만 정리한 것입니다.
+        실제로 어떤 순간에 어떻게 번역됐는지, 코드 예시 전체는 원문에 있습니다.
+      </p>
+      <a class="nt-origin-go" href="https://leeo25.substack.com/p/ff5?r=7dpffj" target="_blank" rel="noopener">Substack에서 전체 글 읽기 ↗</a>
+    </div>
+
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
+
+  <section class="container">
+    <div class="section-tag">Changelog</div>
+    <h2 class="section-title">고친 자리</h2>
+    <p class="section-desc">생각이 바뀐 지점만 적습니다. 오타 수정은 남기지 않습니다.</p>
+    <ul class="nt-log">
+      <li>
+        <div class="when">2026-04</div>
+        <div class="what">Substack 원문을 씀.</div>
+      </li>
+      <li>
+        <div class="when">2026-09</div>
+        <div class="what">사이트 노트로 옮기며 <b>도구가 나를 바꾸는 두 방향</b>을 덧붙였습니다 — 안 쌓이는 것과 한쪽으로만 쌓이는 것이 같은 문제라는 건 ai-a64 옆에 놓고서야 보였습니다.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container center">
+    <p class="nt-back"><a href="../thoughts.html#notes">← 다른 생각들</a></p>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-copy">© 2026 Leeo · 개발자리</div>
+</footer>
+
+</body>
+</html>

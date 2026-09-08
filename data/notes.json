@@ -105,6 +105,19 @@
         "접근성",
         "만들기"
       ]
+    },
+    {
+      "id": "tool-shapes-thought",
+      "title": "나라는 개발자가 세상을 바라보는 방식",
+      "category": "growth",
+      "date": "2026.04",
+      "status": "thinking",
+      "summary": "가장 오래 다룬 도구가 결국 자기 생각의 모양이 됩니다.",
+      "file": "notes/tool-shapes-thought.html",
+      "tags": [
+        "도구",
+        "학습"
+      ]
     }
   ],
   "_tags": "각 글의 tags 배열에 적으면 목록 위에 필터 칩이 자동으로 생깁니다. 태그가 하나도 없으면 필터 바는 숨겨집니다.",
