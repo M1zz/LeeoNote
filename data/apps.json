@@ -9,7 +9,7 @@
       "name": "클립키보드",
       "storeId": "1543660502",
       "bundleId": "com.Ysoup.TokenMemo",
-      "downloads": null,
+      "downloads": 8207,
       "badges": [
         "downloads",
         "rating",
@@ -28,7 +28,7 @@
       "name": "탭클립키보드",
       "storeId": "6756433372",
       "bundleId": "com.ysoup.TokenMemo-tap",
-      "downloads": null,
+      "downloads": 44,
       "badges": [
         "downloads",
         "rating",
@@ -46,7 +46,7 @@
       "name": "무지개 공방",
       "storeId": "6777737322",
       "bundleId": "com.devkoan.ScheduleDensityApp",
-      "downloads": null,
+      "downloads": 5,
       "badges": [
         "downloads",
         "rating",
@@ -64,7 +64,7 @@
       "name": "욕망의 무지개",
       "storeId": "6755280882",
       "bundleId": "com.example.ScheduleDensityApp",
-      "downloads": null,
+      "downloads": 55,
       "badges": [
         "downloads",
         "rating",
@@ -83,7 +83,7 @@
       "name": "두번알림",
       "storeId": "6752551268",
       "bundleId": "com.xa.toki",
-      "downloads": null,
+      "downloads": 3796,
       "badges": [
         "downloads",
         "rating",
@@ -98,5 +98,6 @@
       "version": "2.2.6"
     }
   ],
-  "_checkedAt": "2026-09-09"
+  "_checkedAt": "2026-09-09",
+  "_downloadsCheckedAt": "2026-09-09"
 }

@@ -7,9 +7,11 @@
 update-app-stats.py 가 채우는 값(평점·평가·나라·출시·버전)은 스토어 공개 API 에
 있지만, 다운로드 수는 거기 없다. App Store Connect 를 봐야 나온다.
 
-세는 것 : 최초 다운로드 (Product Type Identifier 가 1 로 시작하는 줄의 Units 합)
-안 세는 것 : 업데이트(7*), 인앱결제(IA*·FI*), 재다운로드
+세는 것 : 최초 다운로드 — Product Type Identifier 가
+            iOS 는 1 로 시작하는 것(1 · 1F · 1T · 1E …), 맥은 F1.
+안 세는 것 : 업데이트(7 · 7F · F7), 인앱결제(3 · 3F · F3 · IA* · FI*), 재다운로드.
             App Store Connect ▸ 판매 및 동향의 '최초 다운로드' 와 같은 정의다.
+            맥 앱이 F1 이라는 것을 놓치면 맥 앱만 조용히 리포트에서 사라진다.
 
 필요한 것 (셋 다 레포 밖에 둔다. 여기에 적지 않는다):
   ASC_KEY_ID · ASC_ISSUER_ID · ASC_KEY_PATH
@@ -89,7 +91,9 @@ def make_token(env):
 
 # ── 리포트 ──────────────────────────────────────────────
 
-FIRST_DOWNLOAD = re.compile(r'^1')      # 1 · 1F · 1T · 1E …  업데이트(7*)와 인앱(IA*)은 뺀다
+# iOS 는 1 로 시작하고, 맥은 F1 하나다.
+# 업데이트(7 · 7F · F7)와 인앱(3 · 3F · F3 · IA* · FI*)은 여기 걸리지 않는다.
+FIRST_DOWNLOAD = re.compile(r'^(?:1[A-Z]*|F1)$')
 
 
 def fetch(token, vendor, frequency, report_date):
