@@ -12,10 +12,10 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 
 | 페이지 | 무엇이 적혀 있는지 |
 | --- | --- |
-| [프레임워크](https://m1zz.github.io/LeeoNote/framework.html) | 질문고리 학습 — 혼자서도 팀에서도, 학습을 우연이 아니라 의도로 설계하는 프레임워크 |
-| [AI학습](https://m1zz.github.io/LeeoNote/ai-learning.html) | 지형 · 경로 · 장비 — AI를 마지막에 배치하는 학습 설계 (본편 + 부록 2편) |
+| [프레임워크](https://m1zz.github.io/LeeoNote/framework.html) | 질문고리 학습, 혼자서도 팀에서도, 학습을 우연이 아니라 의도로 설계하는 프레임워크 |
+| [AI학습](https://m1zz.github.io/LeeoNote/ai-learning.html) | 지형 · 경로 · 장비, AI를 마지막에 배치하는 학습 설계 (본편 + 부록 2편) |
 | [학습설계](https://m1zz.github.io/LeeoNote/solo-learning.html) | 혼자 배우는 사람을 위한 4주 학습 경험 설계도 |
-| [철학](https://m1zz.github.io/LeeoNote/philosophy.html) | 가르치는 일에 대해 오래 생각해온 글 — 여는 글과 6편의 짧은 글 |
+| [철학](https://m1zz.github.io/LeeoNote/philosophy.html) | 가르치는 일에 대해 오래 생각해온 글, 여는 글과 6편의 짧은 글 |
 | [서재](https://m1zz.github.io/LeeoNote/library.html) | 주제별로 정리한 책꽂이 8개와 추천 도서 |
 | [생각](https://m1zz.github.io/LeeoNote/thoughts.html) | 블로그 글 모음과 컨퍼런스 발표 영상 |
 | [아카데미](https://m1zz.github.io/LeeoNote/academy.html) | 무료 강의 · 커리큘럼 지도 · YouTube 재생목록 |
@@ -30,9 +30,9 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 
 종이/노트북 결. 베이지 톤 종이 배경 위에 손글씨 느낌 헤딩과 줄노트 분위기로, 빠르게 읽고 닫는 페이지가 아니라 천천히 펴 보는 노트가 되기를 바랐어요.
 
-- 본문 폰트 — Gowun Batang · Noto Serif KR
-- 손글씨 — Caveat · Gaegu
-- 코드 — JetBrains Mono
+- 본문 폰트, Gowun Batang · Noto Serif KR
+- 손글씨, Caveat · Gaegu
+- 코드, JetBrains Mono
 
 ---
 
@@ -52,7 +52,7 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 ├─ mentoring.html          편지함
 ├─ join.html               혼자 만들기
 ├─ learning-design/        지형 · 경로 · 장비 원문 3종
-│   ├─ index.html              본편 — 세 단계 + 60분 워크시트
+│   ├─ index.html              본편, 세 단계 + 60분 워크시트
 │   ├─ triangulation.html      부록 A · 삼각측량 (우선순위 · AI 위임 경계)
 │   └─ yajang.html             부록 B · 야장 (템플릿 6 · 액티비티 10 · 워크숍)
 ├─ solo-builders/
@@ -79,11 +79,11 @@ python3 -m http.server 8000
 
 ## 어디서 찾을 수 있나요
 
-- 🌐 사이트 — <https://m1zz.github.io/LeeoNote/>
-- ✉️ 이메일 — leeo@kakao.com
-- 📺 YouTube — [@Leeo25](https://www.youtube.com/@Leeo25)
-- 📝 블로그 — [leeo25.substack.com](https://leeo25.substack.com)
-- 🐙 GitHub — [@M1zz](https://github.com/M1zz)
+- 🌐 사이트: <https://m1zz.github.io/LeeoNote/>
+- ✉️ 이메일: leeo@kakao.com
+- 📺 YouTube: [@Leeo25](https://www.youtube.com/@Leeo25)
+- 📝 블로그: [leeo25.substack.com](https://leeo25.substack.com)
+- 🐙 GitHub: [@M1zz](https://github.com/M1zz)
 
 ---
 

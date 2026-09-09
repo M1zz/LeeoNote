@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>첫 말뚝 — 문제를 세우는 법과 질문을 만드는 법</title>
-<meta name="description" content="부록 C · 첫 말뚝 — 막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문을 만들어 내는 절차.">
-<meta property="og:title" content="첫 말뚝 — 문제를 세우는 법과 질문을 만드는 법">
+<title>첫 말뚝 · 문제를 세우는 법과 질문을 만드는 법</title>
+<meta name="description" content="부록 C · 첫 말뚝: 막연한 관심을 판정 가능한 문제로 바꾸고, 백지에서 관문 질문을 만들어 내는 절차.">
+<meta property="og:title" content="첫 말뚝 · 문제를 세우는 법과 질문을 만드는 법">
 <meta property="og:description" content="측량은 첫 말뚝을 박는 데서 시작한다. 그 점이 틀리면 이후의 모든 측정이 정확하게 틀린다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/malttuk.html">
@@ -42,7 +42,7 @@ body{
 .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
 
 /* ─────────────────────────────────────────────
-   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   SITE CHROME, 리이오의 연습장 공통 (notebook.css 톤)
    ───────────────────────────────────────────── */
 .sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
   background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
@@ -65,7 +65,17 @@ body{
 .docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
 
-.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+.foot-contact{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem 1.2rem}
+.foot-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--ink-40)}
+.foot-mail{font-family:var(--mono);font-size:1rem;color:var(--ink);
+  border-bottom:1px solid var(--rule-strong);padding-bottom:2px}
+.foot-mail:hover{border-bottom-color:var(--ink)}
+.foot-more{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.82rem}
+.foot-more a{color:var(--ink-60)}
+.foot-more a:hover{color:var(--ink)}
+.site-foot{margin-top:26px;
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
 .site-foot a{color:var(--ink-40)}
 .site-foot a:hover{color:var(--ink)}
@@ -124,7 +134,7 @@ section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44
 .card{background:var(--card);border:1px solid var(--rule-strong);padding:20px 19px;margin-top:26px}
 .card h4{margin-bottom:.4em}
 
-/* 전제 — 두 프레임워크의 빈칸 */
+/* 전제, 두 프레임워크의 빈칸 */
 .gapgrid{display:grid;grid-template-columns:1fr;border:1px solid var(--ink);margin-top:26px}
 @media(min-width:760px){.gapgrid{grid-template-columns:1fr 1fr}}
 .gapgrid > div{background:var(--card);padding:19px 18px;border-top:1px solid var(--rule-strong)}
@@ -343,7 +353,7 @@ section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44
 .two ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
 .two li{margin-bottom:6px}
 
-footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+footer{margin-top:72px;border-top:1px solid var(--rule-strong);padding:40px 0 76px}
 .foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
 footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
@@ -387,7 +397,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 <header class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <span class="eyebrow">부록 C · Station 01 확장 — 문제 정의와 질문 생성</span>
+      <span class="eyebrow">부록 C · Station 01 확장, 문제 정의와 질문 생성</span>
       <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
     </div>
 
@@ -442,7 +452,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <line x1="430" y1="200" x2="424" y2="252"/><line x1="474" y1="200" x2="486" y2="246"/>
           <line x1="518" y1="200" x2="510" y2="258"/><line x1="562" y1="200" x2="574" y2="248"/>
         </g>
-        <text x="430" y="112" font-family="JetBrains Mono, monospace" font-size="12.5" letter-spacing="1.2" fill="#6E6E6E">질문 다발 — 15개 이상</text>
+        <text x="430" y="112" font-family="JetBrains Mono, monospace" font-size="12.5" letter-spacing="1.2" fill="#6E6E6E">질문 다발, 15개 이상</text>
         <text x="430" y="284" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="1" fill="#9A9A9A">판단 없이, 답 없이, 말한 그대로</text>
 
         <!-- 검문소 -->
@@ -483,7 +493,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         </div>
         <div>
           <span class="k">질문고리 학습 · 5단계</span>
-          <div class="said">“동료가 한 가지 질문을 던집니다 — 이 가설이 깨지면 너는 뭘 알게 되는데?”</div>
+          <div class="said">“동료가 한 가지 질문을 던집니다. 이 가설이 깨지면 너는 뭘 알게 되는데?”</div>
           <div class="miss"><b>말하지 않은 것</b>좋은 질문 하나는 주어졌다. 나머지는? 그 하나가 안 통할 때 꺼낼 다음 질문은?</div>
         </div>
         <div>
@@ -500,7 +510,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 
       <div class="card reveal">
         <h4>그래서 이 문서는 목록이 아니다</h4>
-        <p class="small muted" style="margin:0">“좋은 질문 10가지” 같은 목록을 붙이면 이 연습장이 스스로 부정한 방식이 된다. 앞의 문서들이 이미 못박아 뒀다 — <strong>판단형은 설명을 읽어서 늘지 않는다. 예측 → 대조로만 자란다.</strong> 문제 정의와 질문 생성은 전형적인 판단형이다. 그래서 여기 실린 것도 전부 같은 모양이다. 먼저 내 것을 쓰고, 기준에 대보고, 차이를 규칙 한 줄로 남긴다.</p>
+        <p class="small muted" style="margin:0">“좋은 질문 10가지” 같은 목록을 붙이면 이 연습장이 스스로 부정한 방식이 된다. 앞의 문서들이 이미 못박아 뒀다: <strong>판단형은 설명을 읽어서 늘지 않는다. 예측 → 대조로만 자란다.</strong> 문제 정의와 질문 생성은 전형적인 판단형이다. 그래서 여기 실린 것도 전부 같은 모양이다. 먼저 내 것을 쓰고, 기준에 대보고, 차이를 규칙 한 줄로 남긴다.</p>
       </div>
     </div>
   </div>
@@ -539,28 +549,28 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <div class="stmt-row">
             <span class="q">01 · 누가</span>
             <div class="g">역할 말고 <strong>구체적인 한 사람</strong>. “사용자”, “학습자”라고 쓰면 다시 쓴다.</div>
-            <div class="blank" contenteditable="true" data-ph="예 — 부트캠프 3개월차, 첫 취업 준비 중인 김OO" data-k="누가"></div>
+            <div class="blank" contenteditable="true" data-ph="예, 부트캠프 3개월차, 첫 취업 준비 중인 김OO" data-k="누가"></div>
           </div>
           <div class="stmt-row">
             <span class="q">02 · 지금 무엇을 하고 있는가</span>
             <div class="g">그 사람이 이미 쓰고 있는 <strong>우회 방법</strong>. 아무것도 안 하고 있다면 그건 문제가 아닐 가능성이 높다.</div>
-            <div class="blank" contenteditable="true" data-ph="예 — 막히면 AI에 붙여 넣고 나온 코드를 그대로 쓴다" data-k="지금"></div>
+            <div class="blank" contenteditable="true" data-ph="예, 막히면 AI에 붙여 넣고 나온 코드를 그대로 쓴다" data-k="지금"></div>
           </div>
           <div class="stmt-row">
             <span class="q">03 · 무엇이 막히는가</span>
             <div class="g"><strong>관찰된</strong> 증상과 빈도. 추측이면 앞에 “추정”이라고 표시하고, 이번 주 안에 확인한다.</div>
-            <div class="blank" contenteditable="true" data-ph="예 — 같은 개념을 다음 과제에서 또 못 쓴다. 최근 4개 과제 중 3개" data-k="막힘"></div>
+            <div class="blank" contenteditable="true" data-ph="예, 같은 개념을 다음 과제에서 또 못 쓴다. 최근 4개 과제 중 3개" data-k="막힘"></div>
           </div>
           <div class="stmt-row">
             <span class="q">04 · 풀렸다면 무엇이 달라져 있는가</span>
             <div class="g"><strong>판정 조건.</strong> 이 줄을 남이 읽고 “풀렸다/안 풀렸다”를 말할 수 없으면 다시 쓴다.</div>
-            <div class="blank" contenteditable="true" data-ph="예 — 자료를 덮고 그 개념을 쓴 코드를 처음부터 작성할 수 있다" data-k="판정"></div>
+            <div class="blank" contenteditable="true" data-ph="예, 자료를 덮고 그 개념을 쓴 코드를 처음부터 작성할 수 있다" data-k="판정"></div>
           </div>
         </div>
         <div class="stmt-foot">04를 먼저 쓰고 01~03을 채우는 것도 좋다. 백워드 디자인과 같은 순서다.</div>
       </div>
 
-      <h3 style="margin-top:44px">경계 그리기 — is / is-not</h3>
+      <h3 style="margin-top:44px">경계 그리기: is / is-not</h3>
       <p class="muted small">문제를 좁히는 가장 싼 방법은 <strong>어디까지가 아닌지</strong>를 적는 것이다. 나타나는 곳만 보면 원인이 과잉 추정된다.</p>
 
       <table class="isnot reveal">
@@ -574,7 +584,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </table>
       <p class="small muted" style="margin-top:12px">오른쪽 열이 채워지는 순간 문제가 절반으로 줄어든다. “스터디에 속하면 안 나타난다”가 사실이라면, 이건 학습 능력 문제가 아니라 <strong>대조 상대의 부재</strong> 문제다. 말뚝을 옮겨야 한다.</p>
 
-      <h3 style="margin-top:44px">리프레이밍 — 더 나은 문제가 있는가</h3>
+      <h3 style="margin-top:44px">리프레이밍: 더 나은 문제가 있는가</h3>
       <p class="muted small">목적은 “진짜 문제”를 찾는 게 아니다. <strong>지금 것보다 나은 문제가 있는지 보는 것</strong>이다. 한 바퀴에 10분이면 된다.</p>
 
       <ul class="moves reveal">
@@ -607,12 +617,12 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="card reveal">
-        <h4>좋은 분해의 테스트 — 챌린지 트리에 얹는 세 질문</h4>
+        <h4>좋은 분해의 테스트: 챌린지 트리에 얹는 세 질문</h4>
         <p class="small muted">「질문고리 학습」의 <strong>챌린지 계층 트리</strong>가 이미 분해 도구다. 여기서는 도구를 다시 만들지 않고, 잘 쪼갰는지 판정하는 기준만 얹는다. 세 개 다 통과해야 한다.</p>
         <ol class="small muted" style="margin:12px 0 0;padding-left:1.15em;line-height:1.75">
-          <li><strong>겹치지 않는가</strong> — 두 가지가 같은 것을 다른 말로 부르고 있지 않은가</li>
-          <li><strong>빠진 게 없는가</strong> — 자식들을 다 풀면 부모가 풀리는가. 안 풀리면 빠진 가지가 있다</li>
-          <li><strong>각 가지가 검증 가능한가</strong> — 리프마다 “풀렸다”를 판정할 수 있는가. 못 하면 그 리프는 아직 문제가 아니다</li>
+          <li><strong>겹치지 않는가</strong>: 두 가지가 같은 것을 다른 말로 부르고 있지 않은가</li>
+          <li><strong>빠진 게 없는가</strong>: 자식들을 다 풀면 부모가 풀리는가. 안 풀리면 빠진 가지가 있다</li>
+          <li><strong>각 가지가 검증 가능한가</strong>: 리프마다 “풀렸다”를 판정할 수 있는가. 못 하면 그 리프는 아직 문제가 아니다</li>
         </ol>
       </div>
     </div>
@@ -629,20 +639,20 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <p class="lede muted">사람들이 질문을 못 한다고 느끼는 이유는 대개 <strong>생성과 판정을 동시에</strong> 하기 때문이다. 머릿속에서 질문이 떠오르는 즉시 “이건 멍청한 질문 같은데”가 따라붙고, 그 자리에서 지워진다.</p>
       </div>
 
-      <p>그래서 두 동작을 <strong>물리적으로 분리</strong>한다. 먼저 판단 없이 많이 만들고, 다 만든 뒤에 기준에 대본다. 이 순서를 지키는 것만으로 질문의 개수와 질이 같이 올라간다 — 개수가 늘어야 고를 것이 생기기 때문이다.</p>
+      <p>그래서 두 동작을 <strong>물리적으로 분리</strong>한다. 먼저 판단 없이 많이 만들고, 다 만든 뒤에 기준에 대본다. 이 순서를 지키는 것만으로 질문의 개수와 질이 같이 올라간다. 개수가 늘어야 고를 것이 생기기 때문이다.</p>
 
       <ul class="drills reveal">
         <li>
           <div class="spec">혼자 또는 둘이 · 4분 · 새 주제 진입 시</div>
           <h4>질문 폭발</h4>
-          <p>목적 — <strong>답하려는 충동을 시간으로 눌러 끈다.</strong> 4분이라는 압박이 질문에 붙는 서문과 정당화를 제거한다.</p>
+          <p>목적: <strong>답하려는 충동을 시간으로 눌러 끈다.</strong> 4분이라는 압박이 질문에 붙는 서문과 정당화를 제거한다.</p>
           <ol>
             <li>문제 진술 4줄을 눈에 보이게 놓는다. 이것이 과녁이다.</li>
             <li>타이머 4분. <strong>최소 15개</strong>를 목표로 질문만 적는다.</li>
             <li>답하지 않는다. 설명하지 않는다. “왜 이걸 묻냐면”도 쓰지 않는다.</li>
             <li>3분 30초쯤 손이 멈춘다. <strong>거기서 짜낸 것이 이 훈련의 수확이다.</strong> 쉽게 나온 앞쪽 열 개는 대개 이미 알던 것이다.</li>
           </ol>
-          <div class="ex">규칙 위반 신호 — 질문 옆에 괄호가 붙기 시작하면 답하고 있는 것이다. 괄호를 지우고 계속 적는다.</div>
+          <div class="ex">규칙 위반 신호, 질문 옆에 괄호가 붙기 시작하면 답하고 있는 것이다. 괄호를 지우고 계속 적는다.</div>
           <div class="act-foot"><span class="timer" data-min="4">04:00</span>
             <button class="tbtn" type="button" data-act="start">시작</button>
             <button class="tbtn" type="button" data-act="reset">되돌리기</button></div>
@@ -650,15 +660,15 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <li>
           <div class="spec">혼자 또는 스터디 · 20분 · 관문 질문을 만들 때</div>
           <h4>질문 한 바퀴</h4>
-          <p>목적 — 폭발로 얻은 <strong>날것의 다발을 관문 질문으로 승격</strong>시킨다. 생산 · 전환 · 선별 · 회고의 네 동작을 끊어서 한다.</p>
+          <p>목적, 폭발로 얻은 <strong>날것의 다발을 관문 질문으로 승격</strong>시킨다. 생산 · 전환 · 선별 · 회고의 네 동작을 끊어서 한다.</p>
           <ol>
-            <li><strong>초점 하나를 놓는다</strong>(4분) — 질문이 아닌 것으로. 문장, 그림, 코드 한 조각, 에러 메시지. 질문을 초점으로 쓰면 답이 유도된다.</li>
-            <li><strong>규칙 넷으로 생산</strong>(6분) — ⓐ 최대한 많이 ⓑ 멈춰서 토론·판단·대답하지 않기 ⓒ 말한 그대로 적기 ⓓ 진술문이 나오면 질문으로 바꾸기</li>
-            <li><strong>열고 닫기</strong>(4분) — 각 질문에 개방형/폐쇄형을 표시하고, <strong>폐쇄형 하나를 개방형으로, 개방형 하나를 폐쇄형으로</strong> 바꿔 본다. 같은 궁금증이 형태에 따라 어떻게 달라지는지 몸으로 겪는 구간이다.</li>
-            <li><strong>세 개 선별</strong>(4분) — 뒤의 판정 4기준에 대고 세 개만 남긴다. 나머지는 지우지 말고 보관한다.</li>
-            <li><strong>회고</strong>(2분) — 내가 처음에 못 떠올린 종류가 무엇이었는지 한 줄. 이 한 줄이 다음 바퀴의 재료다.</li>
+            <li><strong>초점 하나를 놓는다</strong>(4분), 질문이 아닌 것으로. 문장, 그림, 코드 한 조각, 에러 메시지. 질문을 초점으로 쓰면 답이 유도된다.</li>
+            <li><strong>규칙 넷으로 생산</strong>(6분), ⓐ 최대한 많이 ⓑ 멈춰서 토론·판단·대답하지 않기 ⓒ 말한 그대로 적기 ⓓ 진술문이 나오면 질문으로 바꾸기</li>
+            <li><strong>열고 닫기</strong>(4분), 각 질문에 개방형/폐쇄형을 표시하고, <strong>폐쇄형 하나를 개방형으로, 개방형 하나를 폐쇄형으로</strong> 바꿔 본다. 같은 궁금증이 형태에 따라 어떻게 달라지는지 몸으로 겪는 구간이다.</li>
+            <li><strong>세 개 선별</strong>(4분), 뒤의 판정 4기준에 대고 세 개만 남긴다. 나머지는 지우지 말고 보관한다.</li>
+            <li><strong>회고</strong>(2분), 내가 처음에 못 떠올린 종류가 무엇이었는지 한 줄. 이 한 줄이 다음 바퀴의 재료다.</li>
           </ol>
-          <div class="ex">폐쇄형 → 개방형 — “이 라이브러리 써도 되나요?” → “어떤 조건에서 이 라이브러리가 손해가 되나요?”<br>개방형 → 폐쇄형 — “상태 관리를 어떻게 해야 하나요?” → “이 화면에 전역 상태가 필요한가요?”</div>
+          <div class="ex">폐쇄형 → 개방형, “이 라이브러리 써도 되나요?” → “어떤 조건에서 이 라이브러리가 손해가 되나요?”<br>개방형 → 폐쇄형, “상태 관리를 어떻게 해야 하나요?” → “이 화면에 전역 상태가 필요한가요?”</div>
           <div class="act-foot"><span class="timer" data-min="20">20:00</span>
             <button class="tbtn" type="button" data-act="start">시작</button>
             <button class="tbtn" type="button" data-act="reset">되돌리기</button></div>
@@ -671,7 +681,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="crit reveal">
         <div class="crit-row">
           <div class="n">답이 갈리는가<small>Judgment</small></div>
-          <div class="d">검색하면 답이 하나로 나오는가, 상황에 따라 달라지는가. 지식형 질문은 관문 질문이 될 수 없다 — 참조하면 되는 것을 시험할 이유가 없다.</div>
+          <div class="d">검색하면 답이 하나로 나오는가, 상황에 따라 달라지는가. 지식형 질문은 관문 질문이 될 수 없다. 참조하면 되는 것을 시험할 이유가 없다.</div>
           <div class="w">Station 02<br>지식형 / 판단형</div>
         </div>
         <div class="crit-row">
@@ -699,10 +709,10 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div class="gh-body">
           <input type="text" id="ghQ" placeholder="검사할 질문을 적어 보세요" aria-label="검사할 질문">
           <ul class="gh-checks">
-            <li><input type="checkbox" id="gh1" class="gh-c"><label for="gh1"><b>답이 갈린다</b> — 검색으로 하나의 답이 나오지 않는다</label></li>
-            <li><input type="checkbox" id="gh2" class="gh-c"><label for="gh2"><b>틀릴 수 있다</b> — 내 답이 틀렸음을 보일 방법이 있다</label></li>
-            <li><input type="checkbox" id="gh3" class="gh-c"><label for="gh3"><b>한 자리에서 확인된다</b> — 25~50분 안에 드러난다</label></li>
-            <li><input type="checkbox" id="gh4" class="gh-c"><label for="gh4"><b>계획을 바꾼다</b> — 답에 따라 다음 할 일이 달라진다</label></li>
+            <li><input type="checkbox" id="gh1" class="gh-c"><label for="gh1"><b>답이 갈린다</b>: 검색으로 하나의 답이 나오지 않는다</label></li>
+            <li><input type="checkbox" id="gh2" class="gh-c"><label for="gh2"><b>틀릴 수 있다</b>: 내 답이 틀렸음을 보일 방법이 있다</label></li>
+            <li><input type="checkbox" id="gh3" class="gh-c"><label for="gh3"><b>한 자리에서 확인된다</b>: 25~50분 안에 드러난다</label></li>
+            <li><input type="checkbox" id="gh4" class="gh-c"><label for="gh4"><b>계획을 바꾼다</b>: 답에 따라 다음 할 일이 달라진다</label></li>
           </ul>
           <div class="gh-verdict">
             <span class="gh-score" id="ghScore">0 / 4</span>
@@ -750,7 +760,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
     <div class="body-col">
       <div class="sec-head">
         <h2>말뚝은 내가 박는다</h2>
-        <p class="lede muted">본편의 게이트 규칙이 여기서도 그대로 적용된다. 다만 이 단계에서는 지킬 것이 하나 더 있다 — <strong>질문 목록을 AI에게 먼저 받으면, 내가 못 떠올리는 질문의 종류를 영영 알 수 없게 된다.</strong></p>
+        <p class="lede muted">본편의 게이트 규칙이 여기서도 그대로 적용된다. 다만 이 단계에서는 지킬 것이 하나 더 있다: <strong>질문 목록을 AI에게 먼저 받으면, 내가 못 떠올리는 질문의 종류를 영영 알 수 없게 된다.</strong></p>
       </div>
 
       <div class="gate reveal">
@@ -774,7 +784,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div class="drow">
           <div class="task">내 질문을 개방형/폐쇄형으로 분류</div>
           <div><span class="badge b-full">전면 위임</span></div>
-          <div class="why">형식 판정이라 기계적이다. 다만 전환은 내가 한다 — 전환하면서 배우는 것이 이 동작의 목적이다.</div>
+          <div class="why">형식 판정이라 기계적이다. 다만 전환은 내가 한다. 전환하면서 배우는 것이 이 동작의 목적이다.</div>
         </div>
         <div class="drow">
           <div class="task">리프레이밍 후보 제시</div>
@@ -796,15 +806,15 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="forbid reveal">
         <h4>금지 목록</h4>
         <ul>
-          <li><strong>“뭘 물어봐야 할까?”로 대화를 시작하기</strong> — 내 다발이 없으면 그 대화는 훈련이 아니라 열람이다.</li>
-          <li><strong>질문을 적자마자 답 받기</strong> — 생성과 판정을 분리한 이유가 사라진다. 15개를 다 적고 연다.</li>
-          <li><strong>AI가 준 질문을 그대로 관문 질문에 올리기</strong> — 최소한 하나는 내 상황에 맞게 고쳐 쓴다. 고친 이유를 한 줄 적는다.</li>
-          <li><strong>“이 문제 정의 괜찮나요?”라고 묻기</strong> — 괜찮은지는 04번 칸으로 판정된다. AI의 “좋습니다”는 근거가 아니다.</li>
+          <li><strong>“뭘 물어봐야 할까?”로 대화를 시작하기</strong>, 내 다발이 없으면 그 대화는 훈련이 아니라 열람이다.</li>
+          <li><strong>질문을 적자마자 답 받기</strong>: 생성과 판정을 분리한 이유가 사라진다. 15개를 다 적고 연다.</li>
+          <li><strong>AI가 준 질문을 그대로 관문 질문에 올리기</strong>, 최소한 하나는 내 상황에 맞게 고쳐 쓴다. 고친 이유를 한 줄 적는다.</li>
+          <li><strong>“이 문제 정의 괜찮나요?”라고 묻기</strong>, 괜찮은지는 04번 칸으로 판정된다. AI의 “좋습니다”는 근거가 아니다.</li>
         </ul>
       </div>
 
       <div class="prompt reveal">
-        <div class="prompt-head"><span class="t">01 · 진술 검문 — 내 4줄을 쓴 뒤</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">01 · 진술 검문: 내 4줄을 쓴 뒤</span><button class="copy" type="button">복사</button></div>
 <pre>내 문제 진술이다.
 """
 누가: [01]
@@ -815,12 +825,12 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 평가하거나 개선안을 쓰지 마라. 다음만 지목하라.
 · 판정 불가능한 표현 (읽는 사람마다 다르게 해석될 단어)
 · 관찰이 아니라 추측인 문장
-· 04번 칸만 읽고 "풀렸다/안 풀렸다"를 말할 수 있는가 — 예/아니오와 그 이유 한 줄
+· 04번 칸만 읽고 "풀렸다/안 풀렸다"를 말할 수 있는가, 예/아니오와 그 이유 한 줄
 "그래도 좋은 시작입니다" 같은 말은 쓰지 마라.</pre>
       </div>
 
       <div class="prompt reveal">
-        <div class="prompt-head"><span class="t">02 · 다발 대조 — 내 질문 15개를 적은 뒤</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">02 · 다발 대조: 내 질문 15개를 적은 뒤</span><button class="copy" type="button">복사</button></div>
 <pre>[영역]에서 [문제 진술 한 줄]을 풀려고 한다.
 아래는 내가 먼저 만든 질문 목록이다.
 """
@@ -834,7 +844,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="prompt reveal">
-        <div class="prompt-head"><span class="t">03 · 리프레이밍 반론 — 내 말뚝을 옮겨야 하는지</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">03 · 리프레이밍 반론: 내 말뚝을 옮겨야 하는지</span><button class="copy" type="button">복사</button></div>
 <pre>내가 세운 문제다: "[문제 진술]"
 이 문제가 나타나지 않는 조건은 다음과 같다: "[is-not 목록]"
 
@@ -930,9 +940,9 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <span class="k">끝났을 때 손에 남는 것</span>
           <ul>
             <li>판정 가능한 문제 진술 한 장</li>
-            <li>관문 질문 3개 — Station 02로 바로 넘어간다</li>
-            <li>보관된 질문 다발 — 나중에 다시 꺼낸다</li>
-            <li>규칙 한 줄 — “나는 ___ 종류의 질문을 잘 못 떠올린다”</li>
+            <li>관문 질문 3개, Station 02로 바로 넘어간다</li>
+            <li>보관된 질문 다발, 나중에 다시 꺼낸다</li>
+            <li>규칙 한 줄, “나는 ___ 종류의 질문을 잘 못 떠올린다”</li>
           </ul>
         </div>
         <div>
@@ -969,7 +979,17 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         Rev. 2026.08
       </div>
     </div>
-    <div class="site-foot">© 2026 Leeo · <a href="../index.html">리이오의 연습장</a></div>
+    <div class="foot-contact">
+      <span class="foot-label">연락</span>
+      <a class="foot-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+      <span class="foot-more">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+        <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+        <a href="../index.html">리이오의 연습장</a>
+      </span>
+    </div>
+    <div class="site-foot">© 2026 Leeo</div>
   </div>
 </footer>
 
@@ -1084,7 +1104,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
   });
 
   document.getElementById("dl").addEventListener("click", function(){
-    var lines = ["첫 말뚝 — 문제 진술 4줄", "리이오의 연습장 · 부록 C", ""];
+    var lines = ["첫 말뚝, 문제 진술 4줄", "리이오의 연습장 · 부록 C", ""];
     blanks.forEach(function(b){
       lines.push("[" + (b.getAttribute("data-k") || "") + "]");
       lines.push((b.textContent || "").trim() || "(비어 있음)");

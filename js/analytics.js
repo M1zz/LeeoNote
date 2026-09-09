@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-//  Leeo Sites — Unified Google Analytics 4
+//  Leeo Sites, Unified Google Analytics 4
 //  Measurement ID: G-FG0Q3EQFWM
 //
 //  같은 파일을 세 레포에 복사해 사용합니다.
@@ -79,7 +79,7 @@
   function classifyLeeoNote(p) {
     if (p === '/' || p === '') return mk('LeeoNote', { l1: '홈', depth: 0, parent: null });
 
-    // L1 — 상단 내비게이션과 같은 층
+    // L1, 상단 내비게이션과 같은 층
     var topMap = {
       '/about.html':         { l1: 'ABOUT',          parent: '홈' },
       '/thoughts.html':      { l1: '생각',            parent: '홈' },
@@ -94,7 +94,7 @@
     };
     if (topMap[p]) return mk('LeeoNote', Object.assign({ depth: 1 }, topMap[p]));
 
-    // ABOUT 하위 — 여는 글
+    // ABOUT 하위, 여는 글
     if (p === '/philosophy.html') return mk('LeeoNote',
       { l1: 'ABOUT', l2: '여는 글', depth: 2, parent: 'ABOUT' });
 
@@ -126,12 +126,12 @@
     if (annex[p]) return mk('LeeoNote',
       { l1: '성장 프레임워크', l2: '필드 매뉴얼', l3: annex[p], depth: 3, parent: '필드 매뉴얼' });
 
-    // 생각 하위 — 고찰 노트
+    // 생각 하위, 고찰 노트
     var mn = p.match(/^\/notes\/([^/]+)\.html$/);
     if (mn && mn[1].charAt(0) !== '_') return mk('LeeoNote',
       { l1: '생각', l2: '고찰', l3: mn[1], depth: 3, parent: '고찰' });
 
-    // 직접 만들기 하위 — 솔로 빌딩 노트
+    // 직접 만들기 하위, 솔로 빌딩 노트
     if (p === '/solo-builders/') return mk('LeeoNote',
       { l1: '직접 만들기', l2: '솔로 빌딩 노트', depth: 2, parent: '직접 만들기' });
     var sb = {
@@ -161,7 +161,7 @@
     if (pages[p]) return mk('sds',
       { l1: '아카데미', l2: 'Swift 자료구조', l3: pages[p], depth: 3, parent: 'Swift 자료구조' });
 
-    // /products/* — 자료
+    // /products/*, 자료
     var m = p.match(/^\/products\/([^/]+)\.html$/);
     if (m) return mk('sds',
       { l1: '아카데미', l2: 'Swift 자료구조', l3: '자료', l4: m[1], depth: 4, parent: '자료' });
@@ -289,7 +289,7 @@
     });
   });
 
-  // 내부 네비게이션 — 같은 호스트(형제 프로젝트 포함)
+  // 내부 네비게이션, 같은 호스트(형제 프로젝트 포함)
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
@@ -315,7 +315,7 @@
   });
 
   // ─────────────────────────────────────────────────────────────
-  //  LeeoNote 전용 — 개편된 구조에 맞춘 상호작용
+  //  LeeoNote 전용, 개편된 구조에 맞춘 상호작용
   //  (다른 프로젝트에서는 선택자가 없어 아무 일도 일어나지 않는다)
   // ─────────────────────────────────────────────────────────────
 
@@ -328,7 +328,7 @@
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
 
-    // ① 홈 라우터 — 어떤 트랙 탭을 여는가
+    // ① 홈 라우터, 어떤 트랙 탭을 여는가
     var tab = e.target.closest('.track-tab');
     if (tab) {
       gtag('event', 'router_tab', {
@@ -339,7 +339,7 @@
       return;
     }
 
-    // ② 홈 라우터 — 15개 증상 문장 중 무엇이 눌리는가 (안 눌리는 문장 = 잘못 쓴 문장)
+    // ② 홈 라우터, 15개 증상 문장 중 무엇이 눌리는가 (안 눌리는 문장 = 잘못 쓴 문장)
     var sym = e.target.closest('.symptom');
     if (sym) {
       var panel = sym.closest('[data-track]');
@@ -353,7 +353,7 @@
       return;
     }
 
-    // ③ 도구 — 읽고 가는가, 바로 받으러 가는가
+    // ③ 도구, 읽고 가는가, 바로 받으러 가는가
     var btn = e.target.closest('.tool-btn');
     if (btn) {
       var card = btn.closest('.tool-card');
@@ -366,7 +366,7 @@
       return;
     }
 
-    // ④ 프레임워크 — 세 축 중 무엇을 여는가
+    // ④ 프레임워크, 세 축 중 무엇을 여는가
     var card = e.target.closest('.fw-card, .fw-core, .fw-index');
     if (card) {
       gtag('event', 'framework_open', {
@@ -379,7 +379,7 @@
       return;
     }
 
-    // ⑤ 고찰 — 어떤 글이 열리고, 어떤 태그로 걸러 보는가
+    // ⑤ 고찰, 어떤 글이 열리고, 어떤 태그로 걸러 보는가
     var row = e.target.closest('.nt-row');
     if (row) {
       gtag('event', 'note_open', {
@@ -396,7 +396,7 @@
       return;
     }
 
-    // ⑥ 같은 페이지 안의 칸 이동 — 로드맵 일곱 칸 · 도구 카테고리 · 프레임워크 층
+    // ⑥ 같은 페이지 안의 칸 이동, 로드맵 일곱 칸 · 도구 카테고리 · 프레임워크 층
     var jump = e.target.closest('.map-nav a, .kit-nav a, .fw-stack .go a, a[href^="#"]');
     if (jump) {
       var hash = (jump.getAttribute('href') || '').replace(/^.*#/, '');

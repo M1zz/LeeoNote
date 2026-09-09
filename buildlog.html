@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>빌드로그 — 리이오의 연습장</title>
+<title>빌드로그 · 리이오의 연습장</title>
 <meta name="description" content="만든 도구가 어떻게 바뀌어 왔는지. 무엇을 바꿨는지보다 왜 바꿨는지를 남기는 기록.">
-<meta property="og:title" content="빌드로그 — 리이오의 연습장">
+<meta property="og:title" content="빌드로그 · 리이오의 연습장">
 <meta property="og:description" content="무엇을 바꿨는지보다 왜 바꿨는지를 남깁니다. 도구가 자라온 시간표.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/buildlog.html">
@@ -226,7 +226,7 @@
     <h1 class="page-title">빌드로그</h1>
     <p class="page-sub">
       <a href="tools.html">도구</a>들이 어떻게 바뀌어 왔는지 남기는 자리입니다.
-      <b>무엇을 바꿨는지보다 왜 바꿨는지</b>를 적습니다 — 바꾼 것은 앱스토어에도 있지만,
+      <b>무엇을 바꿨는지보다 왜 바꿨는지</b>를 적습니다. 바꾼 것은 앱스토어에도 있지만,
       그때 무엇을 보고 그렇게 정했는지는 여기 말고는 남지 않으니까요.
     </p>
   </section>
@@ -251,12 +251,36 @@
 </main>
 
 <footer class="container">
-  <div class="footer-quote">— 고친 것보다, 고치기로 한 이유가 오래 남는다.</div>
+  <div class="footer-quote">고친 것보다, 고치기로 한 이유가 오래 남는다.</div>
+
+  <nav class="footer-nav" aria-label="사이트 안내">
+    <a href="index.html">홈</a>
+    <a href="about.html">ABOUT</a>
+    <a href="thoughts.html">생각</a>
+    <a href="frameworks.html">성장 프레임워크</a>
+    <a href="tools.html">도구</a>
+    <a href="join.html">직접 만들기</a>
+    <a href="academy.html">아카데미</a>
+    <a href="buildlog.html">빌드로그</a>
+  </nav>
+
+  <div class="footer-contact">
+    <span class="footer-label">연락</span>
+    <a class="footer-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+    <div class="footer-links">
+      <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+      <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+      <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" rel="noopener">인프런</a>
+      <a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
   <div class="footer-copy">© 2026 Leeo</div>
 </footer>
 
 <script>
-// 빌드로그 — data/buildlog.json 을 읽어 위에서부터(최신 순) 타임라인으로 그린다.
+// 빌드로그, data/buildlog.json 을 읽어 위에서부터(최신 순) 타임라인으로 그린다.
 // 릴리즈를 올리려면 JSON 의 entries 맨 앞에 한 덩어리를 추가하면 된다. 이 파일은 손대지 않아도 된다.
 (function () {
   var box = document.getElementById('blList');
@@ -308,7 +332,7 @@
                   (e.title ? '<div class="bl-title">' + esc(e.title) + '</div>' : '') +
                   '<dl class="bl-rows">' +
                     row('바꾼 것', e.changed) +
-                    row('왜 — 본 신호', e.signal, 'bl-row--why') +
+                    row('왜 · 본 신호', e.signal, 'bl-row--why') +
                     row('배운 것', e.learned) +
                     row('다음에 볼 것', e.next) +
                   '</dl>' +

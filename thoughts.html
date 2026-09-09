@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>생각 — 리이오의 연습장</title>
+<title>생각 · 리이오의 연습장</title>
 <meta name="description" content="한 주제를 오래 붙들고 적어 둔 고찰들. 일, 학습과 성장, 만든 것, 접근성.">
-<meta property="og:title" content="생각 — 리이오의 연습장">
+<meta property="og:title" content="생각 · 리이오의 연습장">
 <meta property="og:description" content="한 주제를 오래 붙들고 적어 둔 고찰들.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/thoughts.html">
@@ -232,12 +232,36 @@
 </main>
 
 <footer class="container">
-  <div class="footer-quote">— 적어둔 생각만이 다음 생각으로 이어진다.</div>
+  <div class="footer-quote">적어둔 생각만이 다음 생각으로 이어진다.</div>
+
+  <nav class="footer-nav" aria-label="사이트 안내">
+    <a href="index.html">홈</a>
+    <a href="about.html">ABOUT</a>
+    <a href="thoughts.html">생각</a>
+    <a href="frameworks.html">성장 프레임워크</a>
+    <a href="tools.html">도구</a>
+    <a href="join.html">직접 만들기</a>
+    <a href="academy.html">아카데미</a>
+    <a href="buildlog.html">빌드로그</a>
+  </nav>
+
+  <div class="footer-contact">
+    <span class="footer-label">연락</span>
+    <a class="footer-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+    <div class="footer-links">
+      <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+      <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+      <a href="https://www.inflearn.com/users/604991/@leeo" target="_blank" rel="noopener">인프런</a>
+      <a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
   <div class="footer-copy">© 2026 Leeo</div>
 </footer>
 
 <script>
-// 생각 목록 — data/notes.json 을 읽어 그린다.
+// 생각 목록, data/notes.json 을 읽어 그린다.
 // 카테고리를 늘리려면 JSON 의 categories 에, 태그는 각 글의 tags 배열에 적으면 된다.
 // 글 순서는 date 내림차순으로 자동 정렬되니 JSON 안에서 손으로 맞출 필요가 없다.
 // 이 파일은 손대지 않아도 된다.
@@ -265,7 +289,7 @@
   function hrefOf(n) { return n.file || ('notes/' + n.id + '.html'); }
   function isExt(h)  { return /^https?:/.test(h); }      // 사이트 밖에 쓴 글은 새 탭으로
 
-  // '2026.09' → '20260900' — 자리를 채워서 문자열로 비교한다
+  // '2026.09' → '20260900', 자리를 채워서 문자열로 비교한다
   function keyOf(n) {
     var d = String(n.date || '').replace(/[^0-9]/g, '');
     while (d.length < 8) d += '0';
@@ -300,7 +324,7 @@
            '</a>';
   }
 
-  // 맨 위 '요즘' — 최근 몇 편만. 태그를 고른 동안엔 감춘다 (최신과 상관없는 목록이 되니까)
+  // 맨 위 '요즘', 최근 몇 편만. 태그를 고른 동안엔 감춘다 (최신과 상관없는 목록이 되니까)
   function renderRecent() {
     if (!rec) return;
     if (active || notes.length < MIN) { rec.hidden = true; return; }

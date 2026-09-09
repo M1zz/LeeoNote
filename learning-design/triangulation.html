@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>삼각측량 — 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계</title>
-<meta name="description" content="부록 A · 삼각측량 — 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
-<meta property="og:title" content="삼각측량 — 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계">
-<meta property="og:description" content="부록 A · 삼각측량 — 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
+<title>삼각측량 · 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계</title>
+<meta name="description" content="부록 A · 삼각측량: 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
+<meta property="og:title" content="삼각측량 · 무엇부터 배울지 정하는 능력, 그리고 AI 위임의 경계">
+<meta property="og:description" content="부록 A · 삼각측량: 무엇부터 배울지 정하는 능력의 훈련 드릴과 AI 위임의 경계선.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/triangulation.html">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -48,7 +48,7 @@ body::before{
 }
 .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
 /* ─────────────────────────────────────────────
-   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   SITE CHROME, 리이오의 연습장 공통 (notebook.css 톤)
    ───────────────────────────────────────────── */
 .sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
   background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
@@ -71,7 +71,17 @@ body::before{
 .docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
 
-.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+.foot-contact{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem 1.2rem}
+.foot-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--ink-40)}
+.foot-mail{font-family:var(--mono);font-size:1rem;color:var(--ink);
+  border-bottom:1px solid var(--rule-strong);padding-bottom:2px}
+.foot-mail:hover{border-bottom-color:var(--ink)}
+.foot-more{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.82rem}
+.foot-more a{color:var(--ink-60)}
+.foot-more a:hover{color:var(--ink)}
+.site-foot{margin-top:26px;
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
 .site-foot a{color:var(--ink-40)}
 .site-foot a:hover{color:var(--ink)}
@@ -85,7 +95,7 @@ body::before{
 }
 @media print{.sitebar,.docbar{display:none}}
 
-/* 리소 오버프린트(색 어긋남) 효과 해제 — 모노크롬에서는 번짐으로 보임 */
+/* 리소 오버프린트(색 어긋남) 효과 해제, 모노크롬에서는 번짐으로 보임 */
 .op::before,.op::after{content:none!important}
 /* 형광 마커 → 연습장 반전 마커 */
 mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
@@ -295,7 +305,7 @@ table.scg th small{display:block;color:var(--fluoro);letter-spacing:.06em}
 
 .caveat{margin-top:26px;border-left:3px solid var(--blue);padding:4px 0 4px 16px;font-size:14.5px;line-height:1.7;color:var(--ink-60)}
 
-footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+footer{margin-top:72px;border-top:1px solid var(--rule-strong);padding:40px 0 76px}
 .foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
 footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
@@ -341,7 +351,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 <header class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <span class="eyebrow">부록 A · Station 01 확장 — 우선순위 판단</span>
+      <span class="eyebrow">부록 A · Station 01 확장, 우선순위 판단</span>
       <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
     </div>
 
@@ -414,7 +424,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <circle cx="824" cy="292" r="7" fill="#0A0A0A"/>
         </g>
 
-        <text x="500" y="286" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="2" fill="rgba(10,10,10,.45)">BASELINE — 관측점 사이의 거리를 내가 알고 있어야 한다</text>
+        <text x="500" y="286" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="2" fill="rgba(10,10,10,.45)">BASELINE, 관측점 사이의 거리를 내가 알고 있어야 한다</text>
       </svg>
       <figcaption>관측점 하나로는 방향만 나오고 거리가 나오지 않는다. AI에게 전면 위임한다는 것은 관측점 하나로 좌표를 찍는 일이다.</figcaption>
     </figure>
@@ -436,25 +446,25 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="subs">
         <div>
           <span class="k">SUB 1</span>
-          <h4>좁히기 — 목표를 판정 가능하게 만들기</h4>
+          <h4>좁히기: 목표를 판정 가능하게 만들기</h4>
           <p>"잘하고 싶다"를 "이걸 만들어 배포한다"로 바꾸는 능력. 이게 안 되면 나머지 셋이 전부 작동하지 않는다.</p>
           <div class="fail">고장 신호: 목표가 계속 형용사로 끝난다</div>
         </div>
         <div>
           <span class="k">SUB 2</span>
-          <h4>재기 — 내가 어디까지 모르는지 아는 것</h4>
+          <h4>재기 · 내가 어디까지 모르는지 아는 것</h4>
           <p>메타인지 보정. 스스로 "안다"고 느끼는 감각과 실제 인출 가능성 사이의 오차를 줄이는 능력.</p>
           <div class="fail">고장 신호: 읽을 땐 쉬웠는데 막상 못 쓴다</div>
         </div>
         <div>
           <span class="k">SUB 3</span>
-          <h4>고르기 — 지금의 병목을 지목하기</h4>
+          <h4>고르기: 지금의 병목을 지목하기</h4>
           <p>후보 20개 중 지금 나를 실제로 막고 있는 하나를 고르는 능력. 순위 매기기의 본체.</p>
           <div class="fail">고장 신호: 목록만 늘어나고 착수가 안 된다</div>
         </div>
         <div>
           <span class="k">SUB 4</span>
-          <h4>멈추기 — 충분하다고 판정하기</h4>
+          <h4>멈추기: 충분하다고 판정하기</h4>
           <p>어디까지 파고 어디서 다음으로 넘어갈지 정하는 능력. 가장 훈련이 안 되어 있는 항목.</p>
           <div class="fail">고장 신호: 한 주제에서 몇 주씩 머무른다</div>
         </div>
@@ -489,7 +499,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 
         <li>
           <div class="spec">핵심 · 30분 타임박스 · SUB 3</div>
-          <h4>병목 탐침 — 배우기 전에 먼저 부딪히기</h4>
+          <h4>병목 탐침: 배우기 전에 먼저 부딪히기</h4>
           <p>학습 계획을 세우기 전에 <strong>준비 없이 30분간 만들어 본다.</strong> 목적은 완성이 아니라 <strong>실제로 막히는 지점을 채집하는 것</strong>이다. 그 다음 상상으로 만든 목록과 실제로 막힌 목록을 나란히 놓는다. 이 두 목록의 차이가 훈련 신호 전부다.</p>
           <div class="ex">상상한 병목: 상태 관리, 애니메이션<br>실제 병목: 빌드 설정, 데이터 모델 이름 짓기<br>→ 나는 화려한 항목을 병목으로 착각하는 경향이 있다</div>
           <p class="small" style="margin-top:11px;color:var(--ink-60)">이 드릴이 강력한 이유는 우선순위 판단의 근본 문제가 <strong>정보 부족</strong>이기 때문이다. 지형을 상상으로 그리는 대신 30분 걸어보고 그린다.</p>
@@ -497,27 +507,27 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 
         <li>
           <div class="spec">주 1회 · SUB 3·4</div>
-          <h4>버림 훈련 — 강제로 70% 자르기</h4>
+          <h4>버림 훈련: 강제로 70% 자르기</h4>
           <p>후보 목록에서 <strong>반드시 70%를 지운다.</strong> 남길 수 있는 것은 30%뿐이라는 제약을 먼저 걸고 고른다. 그리고 지운 항목 중 나중에 실제로 필요해진 것을 표시해 둔다. 이것이 <strong>버림 정확도</strong>이고, 대부분의 사람은 이 지표를 평생 한 번도 재보지 않는다.</p>
           <p class="small" style="margin-top:10px;color:var(--ink-60)">실제로 재보면 버린 것 중 다시 필요해지는 비율은 생각보다 훨씬 낮다. 이 사실을 데이터로 확인하는 것 자체가 다음번 버림을 과감하게 만든다.</p>
         </li>
 
         <li>
           <div class="spec">1회 60분 · SUB 1·3</div>
-          <h4>역사 복기 — 끝난 학습을 다시 설계하기</h4>
+          <h4>역사 복기: 끝난 학습을 다시 설계하기</h4>
           <p>이미 끝난 학습 세 개를 골라, <strong>지금 아는 것을 가지고 다시 순서를 짠다면</strong> 어떻게 할지 적는다. 결과를 이미 알고 있으므로 정답이 확보된 상태에서의 훈련이고, 그래서 가장 값싸다. 새 학습을 기다릴 필요 없이 오늘 바로 열 번을 돌릴 수 있다.</p>
           <div class="ex">각 항목: 실제로 쓴 순서 / 지금이라면 바꿀 순서 / 바꾸는 이유 한 줄</div>
         </li>
 
         <li>
           <div class="spec">목차를 볼 때마다 · SUB 3</div>
-          <h4>순서 훔치기 — 목차에서 내용 말고 순서를 읽기</h4>
+          <h4>순서 훔치기: 목차에서 내용 말고 순서를 읽기</h4>
           <p>잘 만들어진 커리큘럼을 볼 때 <strong>"왜 B가 A 다음인가"를 먼저 추측하고</strong> 그다음 확인한다. 대부분의 좋은 순서에는 이유가 있다. 의존성일 수도, 동기 부여일 수도, 실패 비용일 수도 있다. 이유를 맞히는 연습이 곧 순서 설계 연습이다.</p>
         </li>
 
         <li>
           <div class="spec">착수 직전 5분 · SUB 1·3</div>
-          <h4>5분 변론 — 왜 이것부터인지 말로 하기</h4>
+          <h4>5분 변론: 왜 이것부터인지 말로 하기</h4>
           <p>학습을 시작하기 직전, 누군가에게 <strong>"왜 하필 이것부터 하는가"</strong>를 소리 내어 설명한다. 30초 안에 근거가 안 나오면 우선순위가 아니라 그냥 눈에 먼저 띈 항목을 고른 것이다. 말이 막히는 지점이 판단이 비어 있는 지점이다.</p>
         </li>
       </ol>
@@ -627,7 +637,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <button class="btn" type="button" id="scSort">순위 계산</button>
           <button class="btn ghost" type="button" id="scReset">초기화</button>
         </div>
-        <p class="sc-note">점수를 매기는 행위 자체가 훈련이다. 합계가 비슷하게 나온다면 후보를 너무 추상적으로 잡은 것이므로 더 작게 쪼갠다. 계산 결과가 직관과 어긋나면 계산을 믿지 말고 <strong>왜 어긋났는지</strong>를 적는다 — 그 문장이 이 표보다 값지다.</p>
+        <p class="sc-note">점수를 매기는 행위 자체가 훈련이다. 합계가 비슷하게 나온다면 후보를 너무 추상적으로 잡은 것이므로 더 작게 쪼갠다. 계산 결과가 직관과 어긋나면 계산을 믿지 말고 <strong>왜 어긋났는지</strong>를 적는다. 그 문장이 이 표보다 값지다.</p>
       </div>
     </div>
   </div>
@@ -672,7 +682,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="card">
-        <h4>레벨은 도메인마다 따로 매겨진다 — 다만 완전히 따로는 아니다</h4>
+        <h4>레벨은 도메인마다 따로 매겨진다: 다만 완전히 따로는 아니다</h4>
         <p class="small muted" style="margin:0">iOS 개발에서 L3인 사람이 언어 학습에서는 L1일 수 있다. 영역 지식이 판단의 재료이기 때문이다. 하지만 <strong>예측 장부를 쓰는 습관, 버림에 대한 감각, 불확실성 축소를 먼저 보는 시선</strong>은 도메인을 건너 이동한다. 그래서 이 능력의 훈련은 몇 번째 도메인부터 눈에 띄게 빨라진다. 이 <strong>전이성</strong>이 다음 절의 위임 문제에서 결정적인 변수가 된다.</p>
       </div>
     </div>
@@ -689,13 +699,13 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <p class="lede">짧은 답: <mark>후보를 만드는 일은 넘겨도 되고, 순위를 정하고 버리는 일은 넘기면 안 된다.</mark> 긴 답은 세 가지 축으로 갈린다.</p>
       </div>
 
-      <h3>축 1 — 맥락이 어디에 있는가</h3>
+      <h3>축 1: 맥락이 어디에 있는가</h3>
       <p>우선순위는 <strong>지형 × 내 위치</strong>의 함수다. AI는 지형 쪽에서 압도적으로 강하다. 영역의 용어, 표준적 학습 순서, 흔한 함정을 나보다 훨씬 넓게 알고 있다. 그러나 <strong>내 위치</strong>는 원리적으로 모른다. 내가 이미 무엇을 몸으로 익혔는지, 어떤 설명 방식에서 막히는지, 이번 학습에 실제로 쓸 수 있는 시간이 얼마인지, 3년 뒤 무엇이 되려는지. 이 정보가 없으면 방위 하나로 좌표를 찍는 셈이 된다.</p>
 
-      <h3 style="margin-top:32px">축 2 — 오판이 조용한가 시끄러운가</h3>
+      <h3 style="margin-top:32px">축 2: 오판이 조용한가 시끄러운가</h3>
       <p>순서를 잘못 정하면 시간이 낭비되지만 <strong>금방 드러나고 복구된다.</strong> 반면 <strong>무엇을 버릴지</strong>를 잘못 정하면 아무 일도 일어나지 않는다. 배우지 않은 것은 존재를 알리지 않기 때문이다. 이 오판은 몇 년 뒤에야 "그때 그걸 배웠어야 했는데"로 드러난다. <strong>조용한 오판일수록 위임 위험이 크다.</strong></p>
 
-      <h3 style="margin-top:32px">축 3 — 그 판단이 내가 기르려는 능력 자체인가</h3>
+      <h3 style="margin-top:32px">축 3: 그 판단이 내가 기르려는 능력 자체인가</h3>
       <p>여기가 진짜 문제다. 우선순위 판단은 <strong>전이성이 가장 높은 메타 능력</strong>이다. 도메인 지식은 영역이 바뀌면 대부분 버려지지만, 무엇부터 배울지 정하는 감각은 남는다. 이걸 위임하면 매번 새 도메인에 들어갈 때마다 다시 위임해야 한다. <strong>도메인 지식은 축적되는데 학습 설계 능력은 제자리에 머무는 상태</strong>가 되고, 이 상태는 스스로 감지되지 않는다. 학습은 계속 진행되고 있으니까.</p>
 
       <div class="gate">
@@ -738,7 +748,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div class="drow">
           <div class="task">무엇을 버릴지 결정</div>
           <div><span class="badge b-none">위임 불가</span></div>
-          <div class="why">기회비용은 내 삶의 함수다. 게다가 AI는 구조적으로 버림을 잘 제안하지 않는다 — 포괄적인 답이 더 안전한 답이기 때문이다. 목록은 늘려주지만 줄여주지는 않는다.</div>
+          <div class="why">기회비용은 내 삶의 함수다. 게다가 AI는 구조적으로 버림을 잘 제안하지 않는다. 포괄적인 답이 더 안전한 답이기 때문이다. 목록은 늘려주지만 줄여주지는 않는다.</div>
         </div>
         <div class="drow">
           <div class="task">충분히 배웠는지 판정</div>
@@ -775,7 +785,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         </div>
       </div>
 
-      <h3 style="margin-top:40px">그래서 어떻게 쓰는가 — 위임의 안전한 형태</h3>
+      <h3 style="margin-top:40px">그래서 어떻게 쓰는가: 위임의 안전한 형태</h3>
       <p>답을 받는 위임 대신 <strong>재료를 받는 위임</strong>으로 바꾼다. 세 단계면 된다.</p>
 
       <ol class="safeuse">
@@ -797,19 +807,19 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div>
           <span class="k" style="color:var(--teal)">위임해도 되는 상황</span>
           <ul>
-            <li>완전 초입 — 판단할 재료 자체가 없을 때. 첫 지도는 받아도 된다</li>
-            <li>일회성·저가치 주제 — 능력 훈련 대상이 아닌 학습</li>
-            <li>마감이 걸린 실무 — 지금 필요한 건 학습이 아니라 완수다</li>
-            <li>L0 구간 — 이 시기에는 좋은 순서를 <strong>경험하는 것</strong>이 훈련이다</li>
+            <li>완전 초입, 판단할 재료 자체가 없을 때. 첫 지도는 받아도 된다</li>
+            <li>일회성·저가치 주제, 능력 훈련 대상이 아닌 학습</li>
+            <li>마감이 걸린 실무, 지금 필요한 건 학습이 아니라 완수다</li>
+            <li>L0 구간, 이 시기에는 좋은 순서를 <strong>경험하는 것</strong>이 훈련이다</li>
           </ul>
         </div>
         <div>
           <span class="k" style="color:var(--fluoro)">위임하면 안 되는 상황</span>
           <ul>
-            <li>앞으로 반복해서 들어갈 도메인 — 매번 위임하게 된다</li>
-            <li>그 영역의 판단자가 되어야 할 때 — 멘토, 리드, 교육자</li>
-            <li>이미 L1 이상 — 위임은 여기서부터 퇴행으로 작동한다</li>
-            <li>버림을 결정할 때 — 어느 레벨에서도 예외 없음</li>
+            <li>앞으로 반복해서 들어갈 도메인, 매번 위임하게 된다</li>
+            <li>그 영역의 판단자가 되어야 할 때, 멘토, 리드, 교육자</li>
+            <li>이미 L1 이상, 위임은 여기서부터 퇴행으로 작동한다</li>
+            <li>버림을 결정할 때, 어느 레벨에서도 예외 없음</li>
           </ul>
         </div>
       </div>
@@ -817,10 +827,10 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="forbid">
         <h4>이 절의 금지 목록</h4>
         <ul>
-          <li><strong>"뭐부터 배워야 해?"로 대화를 시작하기</strong> — 내 후보 목록을 먼저 쓴 뒤에 묻는다.</li>
-          <li><strong>받은 순서를 그대로 채택하기</strong> — 최소한 항목 하나는 옮기거나 지운다. 그 이유를 한 줄 적는다.</li>
-          <li><strong>버릴 항목을 AI에게 고르게 하기</strong> — 구조적으로 못 하는 일을 시키는 것이다.</li>
-          <li><strong>예측 없이 물어보기</strong> — 내 예측이 없으면 그 대화는 훈련이 아니라 소비다.</li>
+          <li><strong>"뭐부터 배워야 해?"로 대화를 시작하기</strong>, 내 후보 목록을 먼저 쓴 뒤에 묻는다.</li>
+          <li><strong>받은 순서를 그대로 채택하기</strong>: 최소한 항목 하나는 옮기거나 지운다. 그 이유를 한 줄 적는다.</li>
+          <li><strong>버릴 항목을 AI에게 고르게 하기</strong>: 구조적으로 못 하는 일을 시키는 것이다.</li>
+          <li><strong>예측 없이 물어보기</strong>: 내 예측이 없으면 그 대화는 훈련이 아니라 소비다.</li>
         </ul>
       </div>
 
@@ -841,9 +851,9 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="prompt">
         <div class="prompt-head"><span class="t">02 · 내 순서에 대한 반론 요청</span><button class="copy" type="button">복사</button></div>
         <pre>내가 정한 학습 순서다:
-1. [항목] — 이유: [내 근거]
-2. [항목] — 이유: [내 근거]
-3. [항목] — 이유: [내 근거]
+1. [항목], 이유: [내 근거]
+2. [항목], 이유: [내 근거]
+3. [항목], 이유: [내 근거]
 
 동의하지 말고 반론만 하라.
 · 이 순서가 실패하는 구체적 시나리오 2개
@@ -923,7 +933,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="caveat">
-        <strong>범위에 대해.</strong> 여기 실린 훈련법들은 예측-피드백 기반 판단 학습, 메타인지 보정, 사전 시험 효과 같은 확립된 원리에서 도출한 것이지만, 이 4주 프로그램 자체가 실험으로 검증된 것은 아니다. AI 위임에 대한 판단도 마찬가지로 확정된 연구 결과가 아니라 — 도구 접근이 수행은 올리되 미지원 상태의 수행은 떨어뜨릴 수 있다는 관찰과, 위 세 축의 추론에 근거한 <strong>설계상의 권고</strong>다. 자기 장부의 데이터가 쌓이면 그쪽을 우선한다.
+        <strong>범위에 대해.</strong> 여기 실린 훈련법들은 예측-피드백 기반 판단 학습, 메타인지 보정, 사전 시험 효과 같은 확립된 원리에서 도출한 것이지만, 이 4주 프로그램 자체가 실험으로 검증된 것은 아니다. AI 위임에 대한 판단도 마찬가지로 확정된 연구 결과가 아니라, 도구 접근이 수행은 올리되 미지원 상태의 수행은 떨어뜨릴 수 있다는 관찰과, 위 세 축의 추론에 근거한 <strong>설계상의 권고</strong>다. 자기 장부의 데이터가 쌓이면 그쪽을 우선한다.
       </div>
     </div>
   </div>
@@ -934,11 +944,21 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
     <div class="foot-grid">
       <div>
         <h3 style="max-width:26ch">방위 하나로는 방향밖에 나오지 않는다.</h3>
-        <p class="small muted" style="max-width:56ch;margin-top:10px">AI는 지형을 안다. 내 위치는 나만 안다. 두 관측점 사이의 거리를 재는 일 — 그것이 훈련의 이름이다.</p>
+        <p class="small muted" style="max-width:56ch;margin-top:10px">AI는 지형을 안다. 내 위치는 나만 안다. 두 관측점 사이의 거리를 재는 일, 그것이 훈련의 이름이다.</p>
       </div>
       <div class="sig">삼각측량 · 부록 A<br>Prioritization &amp; Delegation<br>Rev. 2026.08</div>
     </div>
-    <div class="site-foot">© 2026 Leeo · <a href="../index.html">리이오의 연습장</a></div>
+    <div class="foot-contact">
+      <span class="foot-label">연락</span>
+      <a class="foot-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+      <span class="foot-more">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+        <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+        <a href="../index.html">리이오의 연습장</a>
+      </span>
+    </div>
+    <div class="site-foot">© 2026 Leeo</div>
   </div>
 </footer>
 

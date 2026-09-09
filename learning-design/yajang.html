@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>야장 — AI 활용 학습을 위한 템플릿과 액티비티</title>
-<meta name="description" content="부록 B · 야장 — AI 활용 학습을 위한 템플릿 6종, 액티비티 10종, 워크숍 진행표.">
-<meta property="og:title" content="야장 — AI 활용 학습을 위한 템플릿과 액티비티">
-<meta property="og:description" content="부록 B · 야장 — AI 활용 학습을 위한 템플릿 6종, 액티비티 10종, 워크숍 진행표.">
+<title>야장 · AI 활용 학습을 위한 템플릿과 액티비티</title>
+<meta name="description" content="부록 B · 야장: AI 활용 학습을 위한 템플릿 6종, 액티비티 10종, 워크숍 진행표.">
+<meta property="og:title" content="야장 · AI 활용 학습을 위한 템플릿과 액티비티">
+<meta property="og:description" content="부록 B · 야장: AI 활용 학습을 위한 템플릿 6종, 액티비티 10종, 워크숍 진행표.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/yajang.html">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -35,7 +35,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-size:34px 34px}
 .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
 /* ─────────────────────────────────────────────
-   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   SITE CHROME, 리이오의 연습장 공통 (notebook.css 톤)
    ───────────────────────────────────────────── */
 .sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
   background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
@@ -58,7 +58,17 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 .docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
 
-.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+.foot-contact{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem 1.2rem}
+.foot-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--ink-40)}
+.foot-mail{font-family:var(--mono);font-size:1rem;color:var(--ink);
+  border-bottom:1px solid var(--rule-strong);padding-bottom:2px}
+.foot-mail:hover{border-bottom-color:var(--ink)}
+.foot-more{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.82rem}
+.foot-more a{color:var(--ink-60)}
+.foot-more a:hover{color:var(--ink)}
+.site-foot{margin-top:26px;
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
 .site-foot a{color:var(--ink-40)}
 .site-foot a:hover{color:var(--ink)}
@@ -72,7 +82,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 }
 @media print{.sitebar,.docbar{display:none}}
 
-/* 리소 오버프린트(색 어긋남) 효과 해제 — 모노크롬에서는 번짐으로 보임 */
+/* 리소 오버프린트(색 어긋남) 효과 해제, 모노크롬에서는 번짐으로 보임 */
 .op::before,.op::after{content:none!important}
 /* 형광 마커 → 연습장 반전 마커 */
 mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
@@ -232,7 +242,7 @@ table.tips td:last-child{color:var(--ink-60)}
 .two ul{margin:12px 0 0;padding-left:1.05em;font-size:14.5px;line-height:1.66;color:var(--ink-60)}
 .two li{margin-bottom:6px}
 
-footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+footer{margin-top:72px;border-top:1px solid var(--rule-strong);padding:40px 0 76px}
 .foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
 footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
@@ -280,7 +290,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 <header class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <span class="eyebrow">부록 B · 실습 키트 — 템플릿 &amp; 액티비티</span>
+      <span class="eyebrow">부록 B · 실습 키트, 템플릿 &amp; 액티비티</span>
       <span class="eyebrow" style="color:var(--ink-40)">Rev. 2026.08</span>
     </div>
 
@@ -401,21 +411,21 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         </div></div>
         <div class="row two-col">
           <div class="cell">
-            <span class="q">① 예측 — 자료 보기 전 내 답</span>
+            <span class="q">① 예측, 자료 보기 전 내 답</span>
             <div class="blank tall" contenteditable="true" data-ph="틀려도 된다. 비어 있으면 이 루프는 무효"></div>
           </div>
           <div class="cell">
-            <span class="q">② 시도 — 실제로 해본 것과 결과</span>
+            <span class="q">② 시도, 실제로 해본 것과 결과</span>
             <div class="blank tall" contenteditable="true" data-ph="가장 작은 검증 단위로"></div>
           </div>
         </div>
         <div class="row two-col">
           <div class="cell">
-            <span class="q">③ 대조 — 내 답과 실제의 차이</span>
+            <span class="q">③ 대조, 내 답과 실제의 차이</span>
             <div class="blank tall" contenteditable="true" data-ph="맞은 것 / 빠진 것 / 틀린 것"></div>
           </div>
           <div class="cell">
-            <span class="q">④ 승격 — 다음에 쓸 규칙 한 줄</span>
+            <span class="q">④ 승격, 다음에 쓸 규칙 한 줄</span>
             <div class="blank tall" contenteditable="true" data-ph="다음에 ___할 때는 ___한다"></div>
             <div class="hint">이 칸이 이 카드의 유일한 산출물이다.</div>
           </div>
@@ -428,7 +438,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <div class="cell"><span class="q">다음 인출일</span>
             <div class="blank" contenteditable="true" data-ph="D+1 / D+3 / D+7 / D+21"></div></div>
         </div>
-        <div class="tpl-foot">체크 — ① 칸을 마지막에 채우지 않았는가?</div>
+        <div class="tpl-foot">체크, ① 칸을 마지막에 채우지 않았는가?</div>
       </div>
 
       <!-- T2 -->
@@ -443,7 +453,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="blank tall" contenteditable="true" data-ph="예: 용어 목록 뽑기, 내 답 채점, 반례 3개 요구"></div>
           </div>
           <div class="cell">
-            <span class="q">금지하는 것 — 내가 하기 쉬운 것 위주로</span>
+            <span class="q">금지하는 것, 내가 하기 쉬운 것 위주로</span>
             <div class="blank tall" contenteditable="true" data-ph="예: 코드 통째로 받기, 막히면 3분 만에 물어보기"></div>
           </div>
         </div>
@@ -500,7 +510,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="blank tall" contenteditable="true" data-ph="이 규칙이 없어서 겪은 구체적 사건"></div></div>
         </div>
         <div class="row"><div class="cell">
-          <span class="q">폐기한 규칙 — 더 이상 맞지 않게 된 것</span>
+          <span class="q">폐기한 규칙, 더 이상 맞지 않게 된 것</span>
           <div class="blank" contenteditable="true" data-ph="숙련도가 올라가면 초심자용 규칙은 방해가 된다"></div>
         </div></div>
         <div class="tpl-foot">규칙이 20줄을 넘으면 통합하거나 버린다</div>
@@ -587,7 +597,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">혼자</span><span class="tag time">5분</span><span class="tag">매일</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 대조의 재료를 만든다. 이 활동 하나가 나머지 아홉 개의 전제다.</p>
+            <p class="goal"><b>목적</b>: 대조의 재료를 만든다. 이 활동 하나가 나머지 아홉 개의 전제다.</p>
             <ol>
               <li>학습을 시작하기 <b>전에</b> 종이에 세 줄을 적는다. "가장 오래 걸릴 항목 / 배웠지만 안 쓸 항목 / 첫 번째로 막힐 지점".</li>
               <li>종이를 뒤집어 놓고 학습을 진행한다. 중간에 보지 않는다.</li>
@@ -608,14 +618,14 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">혼자</span><span class="tag time">30분</span><span class="tag">새 주제 진입 시</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 상상한 병목과 실제 병목의 차이를 채집한다. 계획을 세우기 <b>전에</b> 한다.</p>
+            <p class="goal"><b>목적</b>: 상상한 병목과 실제 병목의 차이를 채집한다. 계획을 세우기 <b>전에</b> 한다.</p>
             <ol>
               <li>먼저 5분간, 준비 없이 만들 때 <b>막힐 것 같은 지점 5개</b>를 예측해 적는다.</li>
               <li>25분간 아무 준비 없이 실제로 만들어 본다. 완성이 목적이 아니다.</li>
               <li>막힐 때마다 <b>멈추지 말고 한 줄씩만 기록</b>하고 우회한다. 해결하려 들지 않는다.</li>
               <li>두 목록을 나란히 놓는다. 실제 목록에만 있는 항목이 이번 학습의 1순위다.</li>
             </ol>
-            <div class="debrief"><span class="k">회고 질문</span><p>내가 상상한 병목은 어떤 종류였나 — 화려한 쪽인가, 지루한 쪽인가?</p></div>
+            <div class="debrief"><span class="k">회고 질문</span><p>내가 상상한 병목은 어떤 종류였나, 화려한 쪽인가, 지루한 쪽인가?</p></div>
             <div class="fnote"><b>진행자 노트</b>25분 안에 아무것도 못 만들어도 성공이다. "어디서 막혔는지 목록"이 산출물이라고 시작 전에 명확히 말해 준다.</div>
           </div>
           <div class="act-foot"><span class="timer" data-min="30">30:00</span>
@@ -630,7 +640,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">혼자</span><span class="tag time">15분</span><span class="tag">주 1회</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 내 AI 사용 습관을 실측한다. 감각이 아니라 개수로.</p>
+            <p class="goal"><b>목적</b>: 내 AI 사용 습관을 실측한다. 감각이 아니라 개수로.</p>
             <ol>
               <li>지난주 AI 대화 기록을 연다. 학습 목적의 대화만 고른다.</li>
               <li>각 대화의 <b>첫 메시지</b>만 본다. 그 시점에 내 답이 존재했는지 O/X로 표시한다.</li>
@@ -651,7 +661,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">혼자</span><span class="tag time">25분</span><span class="tag">D+7 / D+21</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 진도를 실제로 측정한다. 유일하게 신뢰할 수 있는 지표를 만드는 시간.</p>
+            <p class="goal"><b>목적</b>: 진도를 실제로 측정한다. 유일하게 신뢰할 수 있는 지표를 만드는 시간.</p>
             <ol>
               <li>자료·AI·검색을 전부 닫는다. 관문 질문 목록만 남긴다.</li>
               <li>20분간 <b>백지에 답을 쓴다.</b> 막히면 그 질문에 표시만 하고 넘어간다.</li>
@@ -673,7 +683,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">둘이서</span><span class="tag time">15분</span><span class="tag">아이스브레이커</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 3열 대조를 몸으로 겪게 한다. 워크숍 첫 활동으로 가장 좋다.</p>
+            <p class="goal"><b>목적</b>: 3열 대조를 몸으로 겪게 한다. 워크숍 첫 활동으로 가장 좋다.</p>
             <ol>
               <li>둘이 같은 질문 하나를 고른다. 답이 갈릴 만한 판단형 질문이어야 한다.</li>
               <li>3분간 <b>서로 보지 않고</b> 각자 답을 쓴다. 대화 금지.</li>
@@ -696,7 +706,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">둘이서</span><span class="tag time">20분</span><span class="tag">이해 점검</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — "맞았다"고 판정된 직후가 가장 위험하다. 경계 조건을 강제로 노출시킨다.</p>
+            <p class="goal"><b>목적</b>: "맞았다"고 판정된 직후가 가장 위험하다. 경계 조건을 강제로 노출시킨다.</p>
             <ol>
               <li>A가 개념 하나를 3문장으로 설명한다. B는 받아 적는다.</li>
               <li>B가 그 설명을 AI에 붙여 넣고 <b>반례 3개</b>를 받는다. 정답은 받지 않는다.</li>
@@ -724,11 +734,11 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <!-- ACT 07 -->
         <article class="act" data-mode="pair">
           <div class="act-head">
-            <div><span class="id">ACT 07</span><h3>튜터 뒤집기 — AI를 학생으로</h3></div>
+            <div><span class="id">ACT 07</span><h3>튜터 뒤집기: AI를 학생으로</h3></div>
             <div class="meta"><span class="tag mode">둘이서</span><span class="tag time">20분</span><span class="tag">혼자도 가능</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 설명은 인출의 가장 강한 형태다. AI를 교사가 아니라 <b>질문하는 학생</b>으로 세운다.</p>
+            <p class="goal"><b>목적</b>: 설명은 인출의 가장 강한 형태다. AI를 교사가 아니라 <b>질문하는 학생</b>으로 세운다.</p>
             <ol>
               <li>AI에게 학생 역할을 지정한다(아래 프롬프트). 이때 내가 자료를 보고 있으면 안 된다.</li>
               <li>10분간 개념을 가르친다. AI가 되묻는 질문에 계속 답한다.</li>
@@ -761,7 +771,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">팀 3~5인</span><span class="tag time">35분</span><span class="tag">버림 훈련</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — AI가 만든 계획을 <b>잘라내는 연습</b>. 우선순위의 본질은 추가가 아니라 삭제다.</p>
+            <p class="goal"><b>목적</b>: AI가 만든 계획을 <b>잘라내는 연습</b>. 우선순위의 본질은 추가가 아니라 삭제다.</p>
             <ol>
               <li>팀이 하나의 학습 목표를 정한다. AI에게 커리큘럼을 받는다(보통 15~25항목).</li>
               <li>각자 <b>혼자서</b> 7분간 70%를 지운다. 남길 수 있는 건 30%뿐이다. 서로 상의 금지.</li>
@@ -770,7 +780,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
               <li>팀 최종안을 만들고, 버린 항목 목록을 <b>지우지 말고 보관</b>한다. 나중에 버림 정확도를 잰다.</li>
             </ol>
             <div class="debrief"><span class="k">회고 질문</span><p>AI가 준 목록에 "버려도 되는 것"이라는 표시가 있었는가? 없었다면, 왜 없었을까?</p></div>
-            <div class="fnote"><b>진행자 노트</b>3단계에서 "전원이 남긴 항목"이 3개 이하로 나오는 경우가 많다. 그 사실 자체가 강력한 디브리핑 소재다 — 같은 목표라도 각자의 위치에 따라 순서가 다르다는 증거.</div>
+            <div class="fnote"><b>진행자 노트</b>3단계에서 "전원이 남긴 항목"이 3개 이하로 나오는 경우가 많다. 그 사실 자체가 강력한 디브리핑 소재다. 같은 목표라도 각자의 위치에 따라 순서가 다르다는 증거.</div>
           </div>
           <div class="act-foot"><span class="timer" data-min="35">35:00</span>
             <button class="tbtn" type="button" data-act="start">시작</button>
@@ -784,7 +794,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">팀 2~6인</span><span class="tag time">25분</span><span class="tag">검증 훈련</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — AI 답을 원문으로 되돌리는 습관을 만든다. 확신의 어조와 근거의 강도를 분리해서 보는 훈련.</p>
+            <p class="goal"><b>목적</b>: AI 답을 원문으로 되돌리는 습관을 만든다. 확신의 어조와 근거의 강도를 분리해서 보는 훈련.</p>
             <ol>
               <li>공통 질문 하나에 대한 AI 답변을 팀 전체가 공유한다.</li>
               <li>각자 5분간 답변의 문장들을 <b>[문서] [통념] [추정]</b> 세 가지로 분류한다.</li>
@@ -816,7 +826,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
             <div class="meta"><span class="tag mode">팀 4~12인</span><span class="tag time">30분</span><span class="tag">누적 후</span></div>
           </div>
           <div class="act-body">
-            <p class="goal"><b>목적</b> — 개인의 예측 편향을 공개해 서로의 사각지대를 메운다. 장부가 3건 이상 쌓인 뒤에 한다.</p>
+            <p class="goal"><b>목적</b>: 개인의 예측 편향을 공개해 서로의 사각지대를 메운다. 장부가 3건 이상 쌓인 뒤에 한다.</p>
             <ol>
               <li>각자 예측 장부(T3)에서 <b>가장 크게 빗나간 3건</b>을 골라 종이 한 장에 옮긴다.</li>
               <li>벽에 붙인다. 이름은 쓰지 않는다.</li>
@@ -899,11 +909,11 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div>
           <span class="k" style="color:var(--blue)">4주 스터디 운영</span>
           <ul>
-            <li>1주 — ACT 02 탐침 + T2 계약서 작성</li>
-            <li>2주 — ACT 08 커리큘럼 부검 (버림 목록 보관)</li>
-            <li>3주 — ACT 04 AI 없는 방 + ACT 07 튜터 뒤집기</li>
-            <li>4주 — ACT 10 갤러리 워크 + 팀 규칙 장부 확정</li>
-            <li>매주 — ACT 01 예측 3줄, T5 검침표 10분</li>
+            <li>1주, ACT 02 탐침 + T2 계약서 작성</li>
+            <li>2주, ACT 08 커리큘럼 부검 (버림 목록 보관)</li>
+            <li>3주, ACT 04 AI 없는 방 + ACT 07 튜터 뒤집기</li>
+            <li>4주, ACT 10 갤러리 워크 + 팀 규칙 장부 확정</li>
+            <li>매주, ACT 01 예측 3줄, T5 검침표 10분</li>
           </ul>
         </div>
       </div>
@@ -944,7 +954,17 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
       <div class="sig">야장 · 부록 B<br>Templates &amp; Activities<br>Rev. 2026.08</div>
     </div>
-    <div class="site-foot">© 2026 Leeo · <a href="../index.html">리이오의 연습장</a></div>
+    <div class="foot-contact">
+      <span class="foot-label">연락</span>
+      <a class="foot-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+      <span class="foot-more">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+        <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+        <a href="../index.html">리이오의 연습장</a>
+      </span>
+    </div>
+    <div class="site-foot">© 2026 Leeo</div>
   </div>
 </footer>
 
@@ -1052,7 +1072,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 
   var dl = document.getElementById("dlAll");
   if (dl) dl.addEventListener("click", function(){
-    var lines = ["야장 — 템플릿 기록", ""];
+    var lines = ["야장, 템플릿 기록", ""];
     document.querySelectorAll(".tpl").forEach(function(tpl){
       var title = tpl.querySelector(".tpl-head .t").textContent.trim();
       lines.push("──────────────────────────────");

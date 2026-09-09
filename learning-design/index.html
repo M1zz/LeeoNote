@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>지형 · 경로 · 장비 — 스스로 설계하는 학습</title>
-<meta name="description" content="지형 · 경로 · 장비 — 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
-<meta property="og:title" content="지형 · 경로 · 장비 — 스스로 설계하는 학습">
-<meta property="og:description" content="지형 · 경로 · 장비 — 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
+<title>지형 · 경로 · 장비: 스스로 설계하는 학습</title>
+<meta name="description" content="지형 · 경로 · 장비: 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
+<meta property="og:title" content="지형 · 경로 · 장비: 스스로 설계하는 학습">
+<meta property="og:description" content="지형 · 경로 · 장비: 무엇을 배울지 정하고, 어떻게 배울지 정한 다음 AI를 배치하는 학습 설계 필드 매뉴얼.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://m1zz.github.io/LeeoNote/learning-design/">
 <meta property="og:image" content="https://m1zz.github.io/LeeoNote/images/og-image.png">
@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ─────────────────────────────────────────────
-   TOKENS — riso survey / field-manual palette
+   TOKENS, riso survey / field-manual palette
    ───────────────────────────────────────────── */
 :root{
   --paper:#FFFFFF;
@@ -61,7 +61,7 @@ body::before{
 }
 .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding:0 22px}
 /* ─────────────────────────────────────────────
-   SITE CHROME — 리이오의 연습장 공통 (notebook.css 톤)
+   SITE CHROME, 리이오의 연습장 공통 (notebook.css 톤)
    ───────────────────────────────────────────── */
 .sitebar{position:sticky;top:0;z-index:100;padding:1.1rem 0;
   background:rgba(255,255,255,.85);border-bottom:1px solid var(--rule);
@@ -84,7 +84,17 @@ body::before{
 .docbar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .docbar a.is-current{color:var(--ink);border-bottom-color:var(--ink)}
 
-.site-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--rule);
+.foot-contact{margin-top:40px;padding-top:24px;border-top:1px solid var(--rule);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem 1.2rem}
+.foot-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--ink-40)}
+.foot-mail{font-family:var(--mono);font-size:1rem;color:var(--ink);
+  border-bottom:1px solid var(--rule-strong);padding-bottom:2px}
+.foot-mail:hover{border-bottom-color:var(--ink)}
+.foot-more{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.82rem}
+.foot-more a{color:var(--ink-60)}
+.foot-more a:hover{color:var(--ink)}
+.site-foot{margin-top:26px;
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-40)}
 .site-foot a{color:var(--ink-40)}
 .site-foot a:hover{color:var(--ink)}
@@ -98,7 +108,7 @@ body::before{
 }
 @media print{.sitebar,.docbar{display:none}}
 
-/* 리소 오버프린트(색 어긋남) 효과 해제 — 모노크롬에서는 번짐으로 보임 */
+/* 리소 오버프린트(색 어긋남) 효과 해제, 모노크롬에서는 번짐으로 보임 */
 .op::before,.op::after{content:none!important}
 /* 형광 마커 → 연습장 반전 마커 */
 mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
@@ -106,7 +116,7 @@ mark{background:var(--ink);color:#fff;padding:.02em .22em;border-radius:2px;
 
 
 /* ─────────────────────────────────────────────
-   SIGNATURE — misregistration overprint
+   SIGNATURE, misregistration overprint
    ───────────────────────────────────────────── */
 .op{position:relative;display:inline-block;z-index:0}
 .op::before,.op::after{
@@ -193,7 +203,7 @@ a{color:var(--blue);text-underline-offset:3px}
 .station-card p{margin:0;font-size:14.5px;line-height:1.62;color:var(--ink-60)}
 
 /* ─────────────────────────────────────────────
-   SECTION SHELL — field-book margin rail
+   SECTION SHELL, field-book margin rail
    ───────────────────────────────────────────── */
 section{padding:56px 0 8px;border-top:1px solid var(--rule-strong);margin-top:44px}
 section:first-of-type{border-top:0}
@@ -368,7 +378,7 @@ table.fail td:last-child{color:var(--ink-60)}
 .btn:hover{opacity:.82}
 .btn:focus-visible{outline:2px solid var(--fluoro);outline-offset:2px}
 
-footer{margin-top:56px;border-top:1px solid var(--rule-strong);padding:26px 0 60px}
+footer{margin-top:72px;border-top:1px solid var(--rule-strong);padding:40px 0 76px}
 .foot-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:760px){.foot-grid{grid-template-columns:1.4fr .6fr;align-items:end}}
 footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-40)}
@@ -688,7 +698,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <p class="small muted" style="margin:0">답이 하나로 고정되고 검색으로 확인된다. API 이름, 문법, 옵션, 절차, 용어 정의.</p>
           <ul>
             <li>연습 방법: 무자료 인출 + 간격 반복</li>
-            <li>도구 대체 가능성: 높음 — 참조하면 된다</li>
+            <li>도구 대체 가능성: 높음, 참조하면 된다</li>
             <li>암기 기준: <strong>"막혔을 때 검색어를 떠올릴 수 있을 만큼"</strong>만</li>
           </ul>
           <div class="ratio" style="color:var(--blue)">20%</div>
@@ -700,7 +710,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
           <p class="small muted" style="margin:0">상황에 따라 정답이 바뀐다. 언제 이 구조를 쓰는가, 어디까지 추상화하는가, 무엇을 포기하는가.</p>
           <ul>
             <li>연습 방법: 사례 대조 + 조건을 바꾼 변이 연습</li>
-            <li>도구 대체 가능성: 낮음 — 맥락이 내 쪽에 있다</li>
+            <li>도구 대체 가능성: 낮음, 맥락이 내 쪽에 있다</li>
             <li>숙달 기준: <strong>"왜 다른 선택지를 버렸는지"</strong> 말할 수 있을 때</li>
           </ul>
           <div class="ratio" style="color:var(--fluoro)">80%</div>
@@ -923,18 +933,18 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       <div class="forbid">
         <h4>금지 목록</h4>
         <ul>
-          <li><strong>첫 답을 AI에게 시키기</strong> — 예측이 사라지면 루프가 성립하지 않는다.</li>
-          <li><strong>요약본으로 원문 대체하기</strong> — 요약은 색인이지 자료가 아니다.</li>
-          <li><strong>코드를 통째로 받고 통과시키기</strong> — 동작하는 것과 배운 것은 별개다. 한 줄씩 왜 필요한지 말할 수 없으면 아직 안 배운 것이다.</li>
-          <li><strong>"내가 이해한 게 맞아?"라고 묻기</strong> — 이해 여부는 인출로만 판정된다. AI의 "맞습니다"는 근거가 아니다.</li>
-          <li><strong>진도를 AI 대화량으로 재기</strong> — 진도는 관문 질문 중 무자료로 답한 개수로만 잰다.</li>
+          <li><strong>첫 답을 AI에게 시키기</strong>: 예측이 사라지면 루프가 성립하지 않는다.</li>
+          <li><strong>요약본으로 원문 대체하기</strong>: 요약은 색인이지 자료가 아니다.</li>
+          <li><strong>코드를 통째로 받고 통과시키기</strong>: 동작하는 것과 배운 것은 별개다. 한 줄씩 왜 필요한지 말할 수 없으면 아직 안 배운 것이다.</li>
+          <li><strong>"내가 이해한 게 맞아?"라고 묻기</strong>, 이해 여부는 인출로만 판정된다. AI의 "맞습니다"는 근거가 아니다.</li>
+          <li><strong>진도를 AI 대화량으로 재기</strong>: 진도는 관문 질문 중 무자료로 답한 개수로만 잰다.</li>
         </ul>
       </div>
 
       <h3 style="margin-top:40px">그대로 쓰는 프롬프트</h3>
 
       <div class="prompt">
-        <div class="prompt-head"><span class="t">01 · 지도 제작자 — 단계 01</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">01 · 지도 제작자: 단계 01</span><button class="copy" type="button">복사</button></div>
         <pre>나는 [영역]을 처음 배운다. 최종 목표는 [종착 산출물]을 직접 만드는 것이다.
 
 설명하지 말고 목록만 달라.
@@ -947,7 +957,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="prompt">
-        <div class="prompt-head"><span class="t">02 · 시험관 — 대조 단계</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">02 · 시험관: 대조 단계</span><button class="copy" type="button">복사</button></div>
         <pre>[관문 질문]에 대한 내 답이다:
 """
 [내가 자료 없이 쓴 답]
@@ -963,7 +973,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="prompt">
-        <div class="prompt-head"><span class="t">03 · 반례 생성기 — 통과 직후</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">03 · 반례 생성기: 통과 직후</span><button class="copy" type="button">복사</button></div>
         <pre>내 이해는 이렇다: "[내 설명]"
 
 이 설명이 무너지는 상황 3개를 만들어라.
@@ -975,7 +985,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
       </div>
 
       <div class="prompt">
-        <div class="prompt-head"><span class="t">04 · 접지기 — 상시</span><button class="copy" type="button">복사</button></div>
+        <div class="prompt-head"><span class="t">04 · 접지기: 상시</span><button class="copy" type="button">복사</button></div>
         <pre>방금 설명에서 사실 주장만 분리해서 나열하라.
 각 주장마다 다음을 표시하라.
 
@@ -1076,20 +1086,20 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         <div>
           <span class="k eyebrow" style="color:var(--teal)">잘 맞는 경우</span>
           <ul>
-            <li>정해진 커리큘럼이 없는 주제 — 새 도메인, 신기술, 비주류 분야</li>
+            <li>정해진 커리큘럼이 없는 주제, 새 도메인, 신기술, 비주류 분야</li>
             <li>직무 전환이나 역할 확장처럼 목표는 뚜렷한데 경로가 없는 경우</li>
             <li>이미 여러 번 읽었는데 계속 못 쓰겠는 개념 (D 유형이 쌓인 상태)</li>
-            <li>혼자 하고 피드백 줄 사람이 없는 상황 — AI가 시험관 역할을 대신할 수 있다</li>
+            <li>혼자 하고 피드백 줄 사람이 없는 상황, AI가 시험관 역할을 대신할 수 있다</li>
             <li>외국어처럼 지식형과 판단형이 뚜렷이 섞여 있는 학습</li>
           </ul>
         </div>
         <div>
           <span class="k eyebrow" style="color:var(--fluoro)">안 맞는 경우</span>
           <ul>
-            <li>범위가 확정된 시험 — 기출 반복이 더 빠르다</li>
-            <li>30분이면 끝날 단발성 궁금증 — 그냥 찾아보면 된다</li>
-            <li>완전 초심자의 첫 1~2주 — 잘 만들어진 강의를 순서대로 따라가는 편이 낫다</li>
-            <li>마감이 임박한 실무 과제 — 이때 필요한 건 학습이 아니라 완수다. AI를 마음껏 쓰고, 학습은 마감 후에 되돌아와서 한다</li>
+            <li>범위가 확정된 시험, 기출 반복이 더 빠르다</li>
+            <li>30분이면 끝날 단발성 궁금증, 그냥 찾아보면 된다</li>
+            <li>완전 초심자의 첫 1~2주, 잘 만들어진 강의를 순서대로 따라가는 편이 낫다</li>
+            <li>마감이 임박한 실무 과제, 이때 필요한 건 학습이 아니라 완수다. AI를 마음껏 쓰고, 학습은 마감 후에 되돌아와서 한다</li>
           </ul>
         </div>
       </div>
@@ -1175,7 +1185,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         </div>
 
         <div class="field">
-          <span class="q">01-C · 무지의 분류 — 지금 / 나중 / 버림</span>
+          <span class="q">01-C · 무지의 분류, 지금 / 나중 / 버림</span>
           <div class="blank" contenteditable="true" data-ph="지금: … / 나중: … / 버림: …"></div>
           <div class="hint">버림 항목을 적는 것이 이 칸의 진짜 목적이다.</div>
         </div>
@@ -1243,7 +1253,17 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
         Rev. 2026.08
       </div>
     </div>
-    <div class="site-foot">© 2026 Leeo · <a href="../index.html">리이오의 연습장</a></div>
+    <div class="foot-contact">
+      <span class="foot-label">연락</span>
+      <a class="foot-mail" href="mailto:leeo@kakao.com">leeo@kakao.com</a>
+      <span class="foot-more">
+        <a href="https://open.kakao.com/o/pkdN2Oli" target="_blank" rel="noopener">카카오톡 오픈채팅</a>
+        <a href="https://www.youtube.com/@Leeo25" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://leeo25.substack.com" target="_blank" rel="noopener">블로그</a>
+        <a href="../index.html">리이오의 연습장</a>
+      </span>
+    </div>
+    <div class="site-foot">© 2026 Leeo</div>
   </div>
 </footer>
 
@@ -1318,7 +1338,7 @@ footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-tra
 
   var dl = document.getElementById("download");
   if (dl) dl.addEventListener("click", function(){
-    var lines = ["학습 설계표 — 지형·경로·장비", ""];
+    var lines = ["학습 설계표, 지형·경로·장비", ""];
     document.querySelectorAll("#worksheet .field").forEach(function(f){
       var label = f.querySelector(".q").textContent.trim();
       var value = f.querySelector(".blank").textContent.trim();

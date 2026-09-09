@@ -1,5 +1,5 @@
 /* ============================================================
-   리이오의 연습장 — 모던 블랙 앤 화이트
+   리이오의 연습장, 모던 블랙 앤 화이트
    리이오가 배우고 기록하는 곳
    고대비 · 큰 타이포 · 절제된 그리드
    ============================================================ */
@@ -115,13 +115,13 @@ em { font-style: normal; font-weight: 700; color: var(--ink); }
 .container {
   max-width: 760px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.75rem;
   position: relative;
   z-index: 1;
 }
 .container--wide { max-width: 1080px; }
 
-main { position: relative; z-index: 1; }
+main { position: relative; z-index: 1; padding-bottom: 1.5rem; }
 
 /* ============================================================
    상단 네비게이션
@@ -197,6 +197,8 @@ main { position: relative; z-index: 1; }
 }
 
 @media (max-width: 600px) {
+  .container { padding: 0 1.25rem; }
+  section { padding: 2.6rem 0; }
   .topbar-inner { flex-direction: column; align-items: flex-start; gap: 0.9rem; flex-wrap: wrap; }
   .topnav { flex-wrap: wrap; margin-left: 0; gap: 0.9rem; }
   .topnav a { font-size: 0.66rem; }
@@ -250,7 +252,7 @@ main { position: relative; z-index: 1; }
    섹션
    ============================================================ */
 
-section { padding: 2.75rem 0; }
+section { padding: 3.25rem 0; }
 
 .section-tag {
   font-family: var(--mono);
@@ -452,7 +454,6 @@ a.note:hover { border-bottom: none; }
   color: var(--ink-faint);
   letter-spacing: 0;
 }
-.quote-cite::before { content: '— '; }
 
 /* ============================================================
    콜아웃
@@ -588,8 +589,8 @@ a.note:hover { border-bottom: none; }
    ============================================================ */
 
 footer {
-  margin-top: 5rem;
-  padding: 3.5rem 0 3rem;
+  margin-top: 6.5rem;
+  padding: 4rem 0 5rem;
   border-top: 1px solid var(--ink);
   text-align: center;
   position: relative;
@@ -600,11 +601,61 @@ footer {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.03em;
+  line-height: 1.5;
   color: var(--ink);
-  margin-bottom: 0.8rem;
-  display: inline-block;
+  max-width: 32ch;
+  margin: 0 auto 2.6rem;
 }
+
+/* 푸터 안내 링크 */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem 1.6rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--rule);
+}
+.footer-nav a {
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+  border-bottom-color: transparent;
+}
+.footer-nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* 연락처 */
+.footer-contact { margin-top: 2.8rem; }
+.footer-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 0.8rem;
+}
+.footer-mail {
+  font-family: var(--mono);
+  font-size: clamp(1rem, 2.6vw, 1.22rem);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  padding-bottom: 3px;
+}
+.footer-mail:hover { border-bottom-color: var(--ink); }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.2rem;
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+}
+.footer-links a { color: var(--ink-faint); border-bottom-color: transparent; }
+.footer-links a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
 .footer-copy {
+  margin-top: 3rem;
   font-family: var(--mono);
   font-size: 0.68rem;
   color: var(--ink-mute);
@@ -612,6 +663,14 @@ footer {
 }
 .footer-copy a { color: var(--ink-mute); border-bottom: none; }
 .footer-copy a:hover { color: var(--ink); }
+
+@media (max-width: 600px) {
+  footer { margin-top: 4.5rem; padding: 3rem 0 3.5rem; }
+  .footer-quote { font-size: 1.02rem; margin-bottom: 2rem; }
+  .footer-nav { gap: 0.6rem 1.1rem; padding-top: 1.8rem; }
+  .footer-contact { margin-top: 2.2rem; }
+  .footer-copy { margin-top: 2.2rem; }
+}
 
 /* ============================================================
    유틸리티
@@ -634,7 +693,7 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 구분선 — 손그림 → 얇은 라인 */
+/* 구분선, 손그림 → 얇은 라인 */
 .scribble-divider {
   margin: 3.25rem auto;
   position: relative;
