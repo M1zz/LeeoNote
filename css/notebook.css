@@ -625,14 +625,20 @@ footer {
 
 /* 연락처 */
 .footer-contact { margin-top: 2.8rem; }
-.footer-label {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 0.8rem;
+/* 눈썹 라벨이 아니라 말을 거는 자리다. 읽고 지나가지 말고 답장하시라고. */
+.footer-invite {
+  font-family: var(--sans);
+  font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+}
+.footer-invite-sub {
+  font-size: 0.86rem;
+  color: var(--ink-faint);
+  margin-top: 1rem;
 }
 .footer-mail {
   font-family: var(--mono);
