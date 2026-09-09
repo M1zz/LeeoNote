@@ -87,4 +87,4 @@ python3 -m http.server 8000
 
 ---
 
-© 2026 Leeo · 개발자리
+© 2026 Leeo
