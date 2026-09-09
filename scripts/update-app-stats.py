@@ -7,8 +7,15 @@
 건드리는 값 : rating · reviews · countries · since · version  (스토어가 아는 것)
 건드리지 않는 값 : downloads  (App Store Connect 에만 있는 값이라 사람이 손으로 적는다)
 
-리뷰 수는 스토어(국가)마다 따로 세므로 아래 목록을 다 돌아 합칩니다.
-평점은 그 리뷰 수로 가중평균을 냅니다.
+평가 수는 스토어(국가)마다 따로 세므로 아래 목록을 다 돌아 합칩니다.
+평점은 그 평가 수로 가중평균을 냅니다.
+
+주의 — 이름이 헷갈리기 쉬운 두 가지:
+  reviews   API 의 userRatingCount 다. 별점 수이지, 글로 쓴 리뷰 수가 아니다.
+  countries 평가가 하나라도 온 나라 수다. **판매 국가 수가 아니다.**
+            앱은 보통 이 목록보다 훨씬 많은 스토어에서 팔린다.
+            (2026-09 확인: 클립키보드는 확인한 44곳 전부에서 판매 중이었고,
+             평가가 온 곳은 그중 8곳이었다.)
 """
 import json, os, sys, urllib.request, urllib.error
 from datetime import date
@@ -48,7 +55,7 @@ def collect(store_id):
     return {
         'reviews': total,
         'rating': round(weighted / total, 1) if total else None,
-        'countries': len(hits),
+        'countries': len(hits),          # 판매국 아님. 평가가 온 나라 수.
         'since': (first.get('releaseDate') or '')[:7].replace('-', '.'),
         'version': first.get('version'),
         'name': first.get('trackName'),
@@ -71,7 +78,7 @@ def main():
         for k in ('rating', 'reviews', 'countries', 'since', 'version'):
             if got.get(k) is not None:
                 app[k] = got[k]
-        print('  %-14s ★%-4s 리뷰 %-4s %s개국  %s부터  v%s' % (
+        print('  %-14s ★%-4s 평가 %-4s %s개국에서 평가  %s부터  v%s' % (
             app.get('name'), app.get('rating'), app.get('reviews'),
             app.get('countries'), app.get('since'), app.get('version')))
 

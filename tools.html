@@ -714,11 +714,11 @@
     },
     reviews: function (a) {
       if (!a.reviews || a.reviews < MIN_REVIEWS) return null;
-      return { v: human(a.reviews), k: '리뷰' };
+      return { v: human(a.reviews), k: '평가' };
     },
     countries: function (a) {
       if (!a.countries || a.countries < 2) return null;   // 한 나라뿐이면 자랑이 아니다
-      return { v: a.countries, u: '개국', k: '서비스' };
+      return { v: a.countries, u: '개국', k: '평가한 나라' };
     },
     since: function (a) {
       var y = yearsSince(a.since);
@@ -733,6 +733,12 @@
     .then(function (data) {
       var by = {};
       ((data && data.apps) || []).forEach(function (a) { by[a.id] = a; });
+
+      // 숫자가 어디서 왔는지. 평점은 나라별 평가 수로 가중평균한 값이고,
+      // 나라 수는 판매국이 아니라 평가가 하나라도 온 곳이다.
+      var source = '스토어 공개 API 에서 모은 값입니다. 평점은 나라별 평가 수로 ' +
+                   '가중평균했고, 나라 수는 평가가 온 곳입니다. 판매는 그보다 넓습니다.' +
+                   (data && data._checkedAt ? ' ' + data._checkedAt + ' 확인.' : '');
 
       Array.prototype.forEach.call(slots, function (el) {
         var app = by[el.getAttribute('data-app')];
@@ -758,6 +764,7 @@
         el.hidden = false;
 
         if (app.name) el.setAttribute('aria-label', esc(app.name) + ' 스토어 기록');
+        el.setAttribute('title', source);
       });
     })
     .catch(function () { /* 못 읽으면 기록 없이 둔다 */ });
