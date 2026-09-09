@@ -233,6 +233,30 @@
   }
   @media (max-width: 420px) { .tool-stats { gap: 0.9rem 1.15rem; } }
 
+
+  /* ── 도구 관계도 ────────────────────────────────
+     다섯 앱이 어디서 데이터를 나누고, 어디서 앞의 문제를 물려받았는지. */
+  .syn-scroll { overflow-x: auto; margin-top: 1.8rem; padding-bottom: 0.5rem; }
+  .syn-fig { min-width: 680px; }
+  .syn-fig svg { display: block; width: 100%; height: auto; }
+  .syn-fig a { border-bottom: none; }
+  .syn-fig a:hover .syn-card { fill: var(--paper-warm); }
+  .syn-fig a:focus-visible .syn-card { fill: var(--paper-warm); }
+
+  .syn-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.7rem;
+    margin: 1.3rem 0 0;
+    padding: 0;
+    font-size: 0.84rem;
+    color: var(--ink-faint);
+  }
+  .syn-legend li { display: flex; align-items: center; gap: 0.55rem; }
+  .syn-key { flex: none; width: 30px; height: 0; border-top: 2.4px solid var(--ink); }
+  .syn-key--soft { border-top: 2.4px dashed var(--ink-faint); }
+  .syn-key--box { height: 15px; border: 1.6px dashed var(--ink-faint); border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -265,6 +289,149 @@
       이 도구들이 어떻게 바뀌어 왔는지는 → <a href="buildlog.html">빌드로그</a>에 남깁니다.
     </p>
   </section>
+
+  <section class="container" id="synergy">
+    <div class="section-tag">Map</div>
+    <h2 class="section-title">다섯이 어떻게 이어지는가</h2>
+    <p class="section-desc">
+      따로 만든 앱들이지만 한 줄로 이어져 있습니다. 굵은 선은 데이터가 실제로 오가는 자리,
+      점선은 앞의 도구가 남긴 문제 때문에 다음 도구를 만든 자리입니다. 카드를 누르면 그 도구로 갑니다.
+    </p>
+
+    <div class="syn-scroll">
+      <div class="syn-fig">
+        <svg viewBox="0 0 960 510" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="도구 다섯의 관계도. 위 줄은 macOS, 아래 줄은 iPhone. 클립키보드와 탭클립키보드는 같은 창고를 써서 문구가 그대로 따라오고, 무지개 공방과 욕망의 무지개는 같은 계정으로 이어져 주는 맥에서 짜고 그날은 아이폰에서 집습니다. 클립키보드로 번 시간이 조각으로 남은 문제에서 욕망의 무지개가 나왔습니다. 두번알림은 아직 다른 도구와 잇지 않았습니다.">
+          <defs>
+            <marker id="synArrow" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#0A0A0A"/>
+            </marker>
+            <marker id="synArrowSoft" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#6E6E6E"/>
+            </marker>
+          </defs>
+
+          <!-- 칸 이름 -->
+          <g font-family="'Noto Sans KR', sans-serif" font-size="14.5" fill="#6E6E6E" text-anchor="middle">
+            <text x="188" y="54">01 덜어내기</text>
+            <text x="388" y="54">02 계획 세우기</text>
+            <text x="588" y="54">03 보이게 하기</text>
+            <text x="788" y="54">04 시간 아끼기</text>
+          </g>
+          <line x1="100" y1="72" x2="876" y2="72" stroke="#EAEAEA" stroke-width="1"/>
+
+          <!-- 어느 기기에서 도는가 -->
+          <g font-family="'JetBrains Mono', monospace" font-size="13" letter-spacing="1.4"
+             fill="#9A9A9A" text-anchor="end">
+            <text x="88" y="151">macOS</text>
+            <text x="88" y="363">iPhone</text>
+          </g>
+
+          <!-- 이어진 자리: 같은 창고 -->
+          <line x1="188" y1="198" x2="188" y2="306" stroke="#0A0A0A" stroke-width="2.6"
+                marker-start="url(#synArrow)" marker-end="url(#synArrow)"/>
+          <rect x="136" y="232" width="104" height="26" fill="#FFFFFF"/>
+          <text x="188" y="250" font-family="'JetBrains Mono', monospace" font-size="13.5"
+                fill="#0A0A0A" text-anchor="middle">같은 창고</text>
+          <rect x="102" y="258" width="172" height="27" fill="#FFFFFF"/>
+          <text x="188" y="280" font-family="'Noto Sans KR', sans-serif" font-size="13"
+                fill="#6E6E6E" text-anchor="middle">문구가 그대로 따라옵니다</text>
+
+          <!-- 이어진 자리: 같은 계정 -->
+          <path d="M388 198 C 388 250, 588 250, 588 306" fill="none" stroke="#0A0A0A"
+                stroke-width="2.6" marker-end="url(#synArrow)"/>
+          <rect x="408" y="238" width="104" height="26" fill="#FFFFFF"/>
+          <text x="460" y="256" font-family="'JetBrains Mono', monospace" font-size="13.5"
+                fill="#0A0A0A" text-anchor="middle">같은 계정</text>
+          <text x="440" y="292" font-family="'Noto Sans KR', sans-serif" font-size="13"
+                fill="#6E6E6E" text-anchor="middle">주는 맥에서, 그날은 아이폰에서</text>
+
+          <!-- 물려받은 자리: 번 시간이 조각으로 남았다 -->
+          <path d="M188 410 C 188 474, 588 474, 588 410" fill="none" stroke="#6E6E6E"
+                stroke-width="2.4" stroke-dasharray="7 6" marker-end="url(#synArrowSoft)"/>
+          <text x="388" y="492" font-family="'Noto Sans KR', sans-serif" font-size="14"
+                fill="#6E6E6E" text-anchor="middle">여기서 번 시간이 조각으로만 남았습니다</text>
+
+          <!-- 카드 -->
+          <a href="#reduce">
+            <rect class="syn-card" x="100" y="100" width="176" height="92" rx="3"
+                  fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+            <text x="188" y="136" font-family="'Noto Sans KR', sans-serif" font-size="19"
+                  font-weight="700" fill="#0A0A0A" text-anchor="middle">탭클립키보드</text>
+            <text x="188" y="160" font-family="'Noto Sans KR', sans-serif" font-size="14.5"
+                  fill="#6E6E6E" text-anchor="middle">맥에서 같은 문구</text>
+            <text x="188" y="180" font-family="'JetBrains Mono', monospace" font-size="12"
+                  letter-spacing="0.6" fill="#9A9A9A" text-anchor="middle">2025.12</text>
+          </a>
+
+          <a href="#plan">
+            <rect class="syn-card" x="300" y="100" width="176" height="92" rx="3"
+                  fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+            <text x="388" y="136" font-family="'Noto Sans KR', sans-serif" font-size="19"
+                  font-weight="700" fill="#0A0A0A" text-anchor="middle">무지개 공방</text>
+            <text x="388" y="160" font-family="'Noto Sans KR', sans-serif" font-size="14.5"
+                  fill="#6E6E6E" text-anchor="middle">한 주를 짠다</text>
+            <text x="388" y="180" font-family="'JetBrains Mono', monospace" font-size="12"
+                  letter-spacing="0.6" fill="#9A9A9A" text-anchor="middle">2026.06</text>
+          </a>
+
+          <a href="#reduce">
+            <rect class="syn-card" x="100" y="312" width="176" height="92" rx="3"
+                  fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+            <text x="188" y="348" font-family="'Noto Sans KR', sans-serif" font-size="19"
+                  font-weight="700" fill="#0A0A0A" text-anchor="middle">클립키보드</text>
+            <text x="188" y="372" font-family="'Noto Sans KR', sans-serif" font-size="14.5"
+                  fill="#6E6E6E" text-anchor="middle">문구를 꺼낸다</text>
+            <text x="188" y="392" font-family="'JetBrains Mono', monospace" font-size="12"
+                  letter-spacing="0.6" fill="#9A9A9A" text-anchor="middle">2020.12</text>
+          </a>
+
+          <a href="#see">
+            <rect class="syn-card" x="500" y="312" width="176" height="92" rx="3"
+                  fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
+            <text x="588" y="348" font-family="'Noto Sans KR', sans-serif" font-size="19"
+                  font-weight="700" fill="#0A0A0A" text-anchor="middle">욕망의 무지개</text>
+            <text x="588" y="372" font-family="'Noto Sans KR', sans-serif" font-size="14.5"
+                  fill="#6E6E6E" text-anchor="middle">시간의 모양을 본다</text>
+            <text x="588" y="392" font-family="'JetBrains Mono', monospace" font-size="12"
+                  letter-spacing="0.6" fill="#9A9A9A" text-anchor="middle">2025.11</text>
+          </a>
+
+          <a href="#catch">
+            <rect class="syn-card" x="700" y="312" width="176" height="92" rx="3"
+                  fill="#FFFFFF" stroke="#6E6E6E" stroke-width="1.8" stroke-dasharray="6 5"/>
+            <text x="788" y="348" font-family="'Noto Sans KR', sans-serif" font-size="19"
+                  font-weight="700" fill="#0A0A0A" text-anchor="middle">두번알림</text>
+            <text x="788" y="372" font-family="'Noto Sans KR', sans-serif" font-size="14.5"
+                  fill="#6E6E6E" text-anchor="middle">끝나기 전에 알린다</text>
+            <text x="788" y="392" font-family="'JetBrains Mono', monospace" font-size="12"
+                  letter-spacing="0.6" fill="#9A9A9A" text-anchor="middle">2025.09</text>
+          </a>
+          <text x="788" y="428" font-family="'Noto Sans KR', sans-serif" font-size="13"
+                fill="#9A9A9A" text-anchor="middle">아직 잇지 않았습니다</text>
+        </svg>
+      </div>
+    </div>
+
+    <ul class="syn-legend">
+      <li><span class="syn-key"></span>같은 데이터가 오갑니다</li>
+      <li><span class="syn-key syn-key--soft"></span>앞의 도구가 남긴 문제에서 나왔습니다</li>
+      <li><span class="syn-key syn-key--box"></span>아직 어디에도 잇지 않았습니다</li>
+    </ul>
+
+    <p class="small muted" style="margin-top:1.1rem;">
+      클립키보드가 5년 먼저 있었고, 나머지 넷은 그 앱이 남긴 문제에서 한 해 안에 나왔습니다.
+      반복을 덜어내 시간을 벌었더니 그 시간이 조각으로만 남았고, 조각의 모양을 보려고 욕망의 무지개를,
+      조각을 미리 배치하려고 무지개 공방을 만들었습니다.
+      순서대로 받으실 필요는 없습니다. 지금 막힌 칸 하나만 집으셔도 됩니다.
+    </p>
+  </section>
+
+  <div class="scribble-divider container">
+    <svg viewBox="0 0 80 14"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 78 7" /></svg>
+  </div>
 
   <section class="container">
 
