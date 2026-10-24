@@ -20,6 +20,7 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 | [생각](https://m1zz.github.io/LeeoNote/thoughts.html) | 블로그 글 모음과 컨퍼런스 발표 영상 |
 | [아카데미](https://m1zz.github.io/LeeoNote/academy.html) | 무료 강의 · 커리큘럼 지도 · YouTube 재생목록 |
 | [도구](https://m1zz.github.io/LeeoNote/tools.html) | 직접 만든 웹 도구, iOS / macOS 앱들 |
+| [코칭](https://m1zz.github.io/LeeoNote/coaching.html) | 1인 개발자를 위한 8주 완주 코칭, 멘토를 위한 멘토 코칭 |
 | [편지함](https://m1zz.github.io/LeeoNote/mentoring.html) | 막혔을 때 가볍게 인사를 보내는 곳 |
 | [혼자 만들기](https://m1zz.github.io/LeeoNote/join.html) | 첫 앱을 출시하려는 분을 위한 작은 길잡이 |
 | [솔로 빌딩 노트](https://m1zz.github.io/LeeoNote/solo-builders/) | App Store 출시 체크리스트와 오래 만드는 일에 대한 메모 |
@@ -49,6 +50,9 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 ├─ thoughts.html           블로그 + 컨퍼런스
 ├─ academy.html            커리큘럼 + 무료 강의
 ├─ tools.html              만든 도구들
+├─ coaching.html           코칭 (완주 코칭 · 멘토 코칭 고르기)
+├─ coaching-finish.html    완주 코칭, 1인 개발자 8주
+├─ coaching-mentor.html    멘토 코칭, 멘토 1:1 · 운영사 워크숍
 ├─ mentoring.html          편지함
 ├─ join.html               혼자 만들기
 ├─ learning-design/        지형 · 경로 · 장비 원문 3종
@@ -60,6 +64,8 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 │   ├─ app-store-checklist.html  App Store 출시 가이드
 │   └─ monetization-worksheet.html  오래 만드는 일
 ├─ css/notebook.css        공통 스타일
+├─ css/coaching.css        코칭 탭 스타일
+├─ js/coaching-form.js     코칭 신청 폼 (메일 앱으로 보냄)
 ├─ sitemap.xml
 └─ robots.txt
 ```

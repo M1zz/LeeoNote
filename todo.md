@@ -1,5 +1,21 @@
 # todo
 
+## 코칭 탭 추가 (2026-10-24)
+
+- [x] 탭 이름 "코칭", topnav 도구 다음 자리 (전 페이지 + learning-design 4종 + footer-nav)
+- [x] `coaching.html` 허브, 두 프로그램 고르기 + 코칭/멘토링 두 모드
+- [x] `coaching-finish.html` 완주 코칭 (1인 개발자 8주)
+- [x] `coaching-mentor.html` 멘토 코칭 (멘토 1:1 · 운영사 워크숍)
+- [x] 원본의 보라/청록 팔레트 → 연습장 모노크롬, `css/coaching.css`
+- [x] 폼 메일 수신처 hello@example.com → leeo@kakao.com (mailto)
+- [x] 편지함에 완주 코칭 라우트 한 줄, sitemap · README 갱신
+- [ ] 폼 수신 서비스(Formspree 등) 붙이기, 지금은 메일 앱이 열림
+- [x] 비공개 신청·결제 페이지 `s/f22dc54e.html`, 링크의 ?k= 키로만 열림 (공개 페이지·sitemap 에서 링크 안 함)
+- [ ] 비공개 페이지에 입금 계좌(data-bank) 또는 결제 링크(data-pay-*) 넣기, 지금은 "계좌는 메일로 안내"
+- [ ] 공개 페이지에 가격 표기 여부 결정 (지금은 비공개 페이지에만 있음)
+
+---
+
 ## AI 시대 학습 프레임워크 사이트 반영 (2026-08-11)
 
 ### 콘텐츠 추가

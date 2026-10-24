@@ -86,6 +86,21 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://m1zz.github.io/LeeoNote/coaching.html</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/coaching-finish.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://m1zz.github.io/LeeoNote/coaching-mentor.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://m1zz.github.io/LeeoNote/mentoring.html</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
