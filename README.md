@@ -53,6 +53,7 @@ iOS 개발자 Leeo의 작은 연습장입니다. 가르치는 일에 대해 오�
 ├─ coaching.html           코칭 (완주 코칭 · 멘토 코칭 고르기)
 ├─ coaching-finish.html    완주 코칭, 1인 개발자 8주
 ├─ coaching-mentor.html    멘토 코칭, 멘토 1:1 · 운영사 워크숍
+├─ coaching-org.html       운영사 소개서 (인쇄 · PDF 저장용)
 ├─ mentoring.html          편지함
 ├─ join.html               혼자 만들기
 ├─ learning-design/        지형 · 경로 · 장비 원문 3종

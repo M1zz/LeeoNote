@@ -206,3 +206,15 @@ main > section.container:not(.page-head) + section.container { border-top: 1px s
 main > section.page-head + section.container { padding-top: 0; }
 .coach-pick a.note, .coach-pick a.note:hover { border-bottom: 1px solid var(--paper-deep); }
 .coach-pick a.note:hover { border-color: var(--ink); }
+.coach-form .ok-booking { display: block; margin-top: 0.7rem; color: var(--paper); border-bottom: 1px solid var(--paper); width: max-content; max-width: 100%; }
+
+/* 운영사 소개서, 인쇄하면 사이트 크롬을 지운다 */
+.print-btn { margin-top: 1.4rem; }
+@media print {
+  .topbar, footer, .print-btn, .no-print { display: none !important; }
+  body { font-size: 12pt; }
+  .page-head { padding-top: 0; }
+  main > section.container:not(.page-head) { padding-top: 1.2rem; padding-bottom: 1.2rem; break-inside: avoid; }
+  a { border-bottom: 0; }
+}
+.sessions--steps li::before { content: counter(s); }

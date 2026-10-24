@@ -20,6 +20,7 @@
 //    │    ├─ L2 성장 기술 열둘 · 학습 설계 · AI 학습 · 배움의 프로세스
 //    │    └─ L2 필드 매뉴얼 ─ L3 삼각측량 · 야장 · 첫 말뚝
 //    ├─ L1 도구
+//    ├─ L1 코칭 ─ L2 완주 코칭 · 멘토 코칭 · 운영사 소개서
 //    ├─ L1 직접 만들기 ─ L2 솔로 빌딩 노트 ─ L3 각 노트
 //    ├─ L1 서재 · 편지함
 //    └─ L1 아카데미
@@ -90,9 +91,19 @@
       '/join-launcher.html': { l1: '직접 만들기',      parent: '홈' },
       '/academy.html':       { l1: '아카데미',        parent: '홈' },
       '/library.html':       { l1: '서재',            parent: '홈' },
-      '/mentoring.html':     { l1: '편지함',          parent: '홈' }
+      '/mentoring.html':     { l1: '편지함',          parent: '홈' },
+      '/coaching.html':      { l1: '코칭',            parent: '홈' }
     };
     if (topMap[p]) return mk('LeeoNote', Object.assign({ depth: 1 }, topMap[p]));
+
+    // 코칭 하위
+    var coach = {
+      '/coaching-finish.html': '완주 코칭',
+      '/coaching-mentor.html': '멘토 코칭',
+      '/coaching-org.html':    '운영사 소개서'
+    };
+    if (coach[p]) return mk('LeeoNote',
+      { l1: '코칭', l2: coach[p], depth: 2, parent: '코칭' });
 
     // ABOUT 하위, 여는 글
     if (p === '/philosophy.html') return mk('LeeoNote',

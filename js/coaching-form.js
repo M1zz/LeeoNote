@@ -32,10 +32,25 @@
     fetch(action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
       .then(function (r) {
         if (!r.ok) throw 0;
+        // 예약 링크가 있으면 메일을 기다리지 않고 바로 시간을 고르게 한다
+        if (f.dataset.booking) {
+          var go = document.createElement('a');
+          go.href = f.dataset.booking;
+          go.target = '_blank';
+          go.rel = 'noopener';
+          go.className = 'ok-booking';
+          go.textContent = '기다리지 않고 지금 바로 시간 고르기 →';
+          ok.appendChild(go);
+        }
         ok.style.display = 'block';
         err.style.display = 'none';
         f.querySelector('button[type="submit"]').disabled = true;
+        // GA4 전환, 신청 수를 센다
+        if (window.gtag) gtag('event', 'generate_lead', { form: f.dataset.lead || '(none)', transport_type: 'beacon' });
       })
-      .catch(function () { err.style.display = 'block'; });
+      .catch(function () {
+        err.style.display = 'block';
+        if (window.gtag) gtag('event', 'form_error', { form: f.dataset.lead || '(none)', transport_type: 'beacon' });
+      });
   });
 })();
