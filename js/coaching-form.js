@@ -28,6 +28,7 @@
       return;
     }
 
+    fd.append('_subject', f.dataset.subject + ' - ' + fd.get('name'));
     fetch(action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
       .then(function (r) {
         if (!r.ok) throw 0;

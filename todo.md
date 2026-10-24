@@ -9,7 +9,7 @@
 - [x] 원본의 보라/청록 팔레트 → 연습장 모노크롬, `css/coaching.css`
 - [x] 폼 메일 수신처 hello@example.com → leeo@kakao.com (mailto)
 - [x] 편지함에 완주 코칭 라우트 한 줄, sitemap · README 갱신
-- [ ] 폼 수신 서비스(Formspree 등) 붙이기, 지금은 메일 앱이 열림
+- [x] 폼 세 곳을 Formspree(xgonqgnl)로 받는다, 메일 앱 안 열림
 - [x] 비공개 신청·결제 페이지 `s/f22dc54e.html`, 링크의 ?k= 키로만 열림 (공개 페이지·sitemap 에서 링크 안 함)
 - [ ] 비공개 페이지에 입금 계좌(data-bank) 또는 결제 링크(data-pay-*) 넣기, 지금은 "계좌는 메일로 안내"
 - [ ] 공개 페이지에 가격 표기 여부 결정 (지금은 비공개 페이지에만 있음)

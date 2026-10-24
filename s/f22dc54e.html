@@ -120,7 +120,7 @@
          f22dc54e.html?k=<키>&track=ship&name=홍길동&email=a@b.c&goal=11월%2030일%20심사%20제출&plan=beta
          track: ship | mentor      plan: full | beta
     -->
-    <form class="coach-form enroll" id="f" action="" method="POST" novalidate
+    <form class="coach-form enroll" id="f" action="https://formspree.io/f/xgonqgnl" method="POST" novalidate
           data-mailto="leeo@kakao.com"
           data-pay-ship-full="" data-pay-ship-beta=""
           data-pay-mentor-full="" data-pay-mentor-beta=""
@@ -271,6 +271,7 @@
       done();
       return;
     }
+    fd.append('_subject', '[코칭 신청] ' + TRACK[el('track').value] + ' - ' + fd.get('name'));
     fetch(action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
       .then(function (r) { if (!r.ok) throw 0; done(); })
       .catch(function () { err.style.display = 'block'; });
