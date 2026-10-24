@@ -18,7 +18,7 @@
 - [x] GA 분류기(js/analytics.js)에 코칭 L1 · L2 넣기 (다른 두 레포 사본은 LeeoNote 분류라 안 바꿔도 됨)
 - [x] 폼 접수 성공 시 generate_lead, 실패 시 form_error 이벤트 (form=finish|mentor)
 - [x] 접수 화면 예약 링크 자리 마련, form 의 data-booking 에 URL 만 넣으면 뜸
-- [ ] 예약 페이지(Cal.com 또는 구글 캘린더) 만들어 data-booking 채우기
+- [x] 예약 페이지 Cal.com leeo-is-back/리이오코칭 을 두 폼 data-booking 에 연결
 - [x] 접수 화면에 스팸함 확인 안내
 - [x] 홈 라우터 "만들다" 패널 끝에 완주 코칭 무료 세션 줄
 - [x] 운영사 소개서 `coaching-org.html` (인쇄 · PDF 저장, 가격 없이 "견적" 단계로)
